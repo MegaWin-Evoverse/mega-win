@@ -1,12 +1,7 @@
 import { create } from "zustand";
+import type { CounterState } from "./types";
 
-interface AppState {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
-}
-
-export const useAppStore = create<AppState>((set) => ({
+export const useCounterStore = create<CounterState>((set) => ({
   count: 0,
   increment: () => set((state) => ({ count: state.count + 1 })),
   decrement: () => set((state) => ({ count: state.count - 1 })),
