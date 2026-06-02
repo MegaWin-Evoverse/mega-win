@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import type { Metadata } from "next";
 import {
   Anek_Bangla,
@@ -7,7 +8,7 @@ import {
 } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Toaster } from "sonner";
+import { Toaster } from "@/shared/ui/sonner";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html
@@ -52,7 +53,7 @@ export default function RootLayout({
     >
       <body className="h-full">
         <Providers>{children}</Providers>
-        <Toaster richColors />
+        <Toaster />
       </body>
     </html>
   );

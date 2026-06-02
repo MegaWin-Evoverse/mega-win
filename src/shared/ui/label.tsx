@@ -1,10 +1,10 @@
 "use client"
+import { type ComponentProps } from "react"
 
-import * as React from "react"
 
-import { cn } from "@/shared/lib/utils"
+import { cn } from "@/shared/lib/cn"
 
-function Label({ className, ...props }: React.ComponentProps<"label">) {
+function Label({ className, ...props }: ComponentProps<"label">) {
   return (
     <label
       data-slot="label"

@@ -1,9 +1,9 @@
 "use client"
+import { type ComponentProps } from "react"
 
-import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
-import { cn } from "@/shared/lib/utils"
+import { cn } from "@/shared/lib/cn"
 import { Button } from "@/shared/ui/button"
 import { XIcon } from "lucide-react"
 
@@ -80,7 +80,7 @@ function DialogContent({
   )
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+function DialogHeader({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
@@ -95,7 +95,7 @@ function DialogFooter({
   showCloseButton = false,
   children,
   ...props
-}: React.ComponentProps<"div"> & {
+}: ComponentProps<"div"> & {
   showCloseButton?: boolean
 }) {
   return (
