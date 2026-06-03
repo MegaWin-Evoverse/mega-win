@@ -9,6 +9,7 @@ First read `package.json`, `tsconfig.json`, `eslint.config.*`, `CLAUDE.md`/`AGEN
 # 1. Architecture (FSD)
 
 Check EVERY import for layer compliance `app → pages → widgets → features → entities → shared`:
+
 - `shared` MUST NOT import from `entities`/`features`/`widgets`
 - `entities` MUST NOT import from other `entities`
 - `widgets` can pull from `entities`/`features`/`shared`, but not from other `widgets`
@@ -18,6 +19,7 @@ Check EVERY import for layer compliance `app → pages → widgets → features 
 # 2. State management (critical)
 
 Hierarchy of correct patterns (best to worst):
+
 1. **Derive** — compute derived value directly in render or in a selector
 2. **Render-phase setState** — `if (x !== prevRef.current) { prevRef.current = x; setState(...) }`
 3. **`useEffect` for external systems** — WebSocket, RAF, timers, DOM events — OK
@@ -25,6 +27,7 @@ Hierarchy of correct patterns (best to worst):
 5. **Module-level mutable `let`** — WORST — Flag
 
 For Zustand:
+
 - Computed/derived values — via selectors, NOT getters in the store
 - `useStore()` without selector subscribes to ENTIRE store → re-render on every setState — Flag
 - Persisted store — type as `PersistedX = Pick<State, ...>`, no `any`
@@ -39,6 +42,7 @@ For Zustand:
 # 4. DRY
 
 Look for duplicate patterns ≥ 3 repetitions:
+
 - Same query/mutation pattern in multiple hooks → single shared api hook
 - Same `if/else` status mapping → constant `Record<From, To>`
 - Same effect handlers with one extra parameter → shared function
@@ -51,6 +55,7 @@ Look for duplicate patterns ≥ 3 repetitions:
 # 6. Hardcoded values
 
 Flag (unless marked "manual override by user"):
+
 - HEX (`#22c55e`), `rgb()`, `rgba()`, `hsl()` in `.ts`/`.tsx`
 - Tailwind palette classes (`text-zinc-400`) — use semantic tokens
 - Magic numbers: `1.1`, `10000`, `40` etc — extract to `shared/config/<domain>.ts`
@@ -70,6 +75,7 @@ Flag (unless marked "manual override by user"):
 # 9. ESLint compliance
 
 Read the real `eslint.config.*` and check:
+
 - `react-hooks/exhaustive-deps` — inline expression in dep array
 - `jsx-a11y/*` — `<div onClick>` without role → replace with `<button type="button">`
 - `no-console` (only warn/error allowed)
@@ -108,18 +114,19 @@ Exception: event handlers, `useCallback(() => …)`, zustand selectors `(s) => s
 # 13. Data layer
 
 Flag any usage of BFF patterns, Server Actions, or `getValidAccessToken`. All data fetching must go through:
+
 - axios instance `api` from `@/shared/api/client`
 - TanStack Query `useQuery` / `useMutation`
 
 ```ts
 // ❌ Flag — BFF / Server Action
-const data = await bffApi.getUser()
+const data = await bffApi.getUser();
 
 // ✅ Correct — axios + TanStack Query
 const { data } = useQuery({
   queryKey: ['me'],
   queryFn: () => api.get<User>('/me').then((r) => r.data),
-})
+});
 ```
 
 # Output format

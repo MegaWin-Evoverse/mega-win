@@ -1,34 +1,34 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Regular.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Medium.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-SemiBold.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Bold.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@
   --font-heading: var(--font-nekst);
   --font-anek-bangla: var(--font-anek-bangla-font);
   --font-space-grotesk: var(--font-space-grotesk-font);
-  --font-nekst: "Nekst", sans-serif;
+  --font-nekst: 'Nekst', sans-serif;
   --font-geist: var(--font-geist-sans);
   --font-figtree: var(--font-figtree-font);
   --font-outfit: var(--font-outfit-font);
@@ -103,24 +103,24 @@
 }
 
 :root {
-  --bg-page: #0A0D19;
-  --bg-primary: #0E121C;
-  --border-default: #1B1F26;
-  --brand-green-from: #4ADE80;
-  --brand-green-to: #22C55E;
-  --brand-dark: #07111A;
-  --brand-border: #1B1F26;
-  --brand-bg: #0E121C;
+  --bg-page: #0a0d19;
+  --bg-primary: #0e121c;
+  --border-default: #1b1f26;
+  --brand-green-from: #4ade80;
+  --brand-green-to: #22c55e;
+  --brand-dark: #07111a;
+  --brand-border: #1b1f26;
+  --brand-bg: #0e121c;
   --brand-ellipse: rgba(27, 209, 103, 0.24);
   --brand-black: #000000;
-  --brand-text-light: #C7CBD4;
+  --brand-text-light: #c7cbd4;
   --brand-text-muted: #566374;
-  --brand-text-white: #FDFDFD;
-  --daily-claimer-bg: #09110E;
-  --daily-claimer-shadow-color: #08923A;
+  --brand-text-white: #fdfdfd;
+  --daily-claimer-bg: #09110e;
+  --daily-claimer-shadow-color: #08923a;
   --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
-  --daily-claimer-glow: #1DBA4B;
-  --daily-claimer-overlay-from: #0E3C1E;
+  --daily-claimer-glow: #1dba4b;
+  --daily-claimer-overlay-from: #0e3c1e;
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -157,21 +157,21 @@
 }
 
 .dark {
-  --bg-page: #0A0D19;
-  --bg-primary: #0E121C;
-  --border-default: #1B1F26;
-  --brand-green-from: #4ADE80;
-  --brand-green-to: #22C55E;
-  --brand-dark: #07111A;
-  --brand-border: #1B1F26;
-  --brand-bg: #0E121C;
+  --bg-page: #0a0d19;
+  --bg-primary: #0e121c;
+  --border-default: #1b1f26;
+  --brand-green-from: #4ade80;
+  --brand-green-to: #22c55e;
+  --brand-dark: #07111a;
+  --brand-border: #1b1f26;
+  --brand-bg: #0e121c;
   --brand-ellipse: rgba(27, 209, 103, 0.24);
   --brand-black: #000000;
-  --daily-claimer-bg: #09110E;
-  --daily-claimer-shadow-color: #08923A;
+  --daily-claimer-bg: #09110e;
+  --daily-claimer-shadow-color: #08923a;
   --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
-  --daily-claimer-glow: #1DBA4B;
-  --daily-claimer-overlay-from: #0E3C1E;
+  --daily-claimer-glow: #1dba4b;
+  --daily-claimer-overlay-from: #0e3c1e;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -211,13 +211,13 @@
   }
   body {
     @apply text-foreground;
-    background: var(--bg-page, #0A0D19);
+    background: var(--bg-page, #0a0d19);
   }
   html {
     @apply font-sans;
   }
   button,
-  [role="button"] {
+  [role='button'] {
     cursor: pointer;
   }
 }
@@ -239,28 +239,39 @@
   box-sizing: border-box;
   border-radius: 8px;
   border: 2px solid transparent;
-  background: 
+  background:
     linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
-  transition: background 0.15s ease-in-out, border 0.15s ease-in-out;
+  transition:
+    background 0.15s ease-in-out,
+    border 0.15s ease-in-out;
 }
 
 .sidebar-menu-btn-custom:hover {
-  background: 
+  background:
     linear-gradient(180deg, rgba(37, 42, 53, 0.6) 0%, rgba(58, 65, 80, 0.6) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 100%) border-box;
 }
 
 .hero-banner-bg {
-  background: linear-gradient(84.47deg, rgba(15, 22, 26, 0.94) 2.15%, rgba(19, 21, 23, 0.94) 98.56%);
+  background: linear-gradient(
+    84.47deg,
+    rgba(15, 22, 26, 0.94) 2.15%,
+    rgba(19, 21, 23, 0.94) 98.56%
+  );
 }
 
 .hero-radial-glow {
-  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%, rgba(48, 223, 140, 0.15) 0%, rgba(33, 173, 107, 0.03) 50%, rgba(13, 110, 64, 0) 91.23%);
+  background: radial-gradient(
+    78.35% 190.25% at 64.43% 30.64%,
+    rgba(48, 223, 140, 0.15) 0%,
+    rgba(33, 173, 107, 0.03) 50%,
+    rgba(13, 110, 64, 0) 91.23%
+  );
 }
 
 .hero-ellipse-glow {
-  background: #1DBA4B;
+  background: #1dba4b;
   filter: blur(157.78px);
 }
 
@@ -280,10 +291,3 @@
 .hero-chip-large-blur {
   transform: rotate(13.21deg);
 }
-
-
-
-
-
-
-

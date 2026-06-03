@@ -1,6 +1,6 @@
-import { type ComponentProps } from "react";
+import { type ComponentProps } from 'react';
 
-interface Props extends ComponentProps<"svg"> {
+interface Props extends ComponentProps<'svg'> {
   className?: string;
 }
 

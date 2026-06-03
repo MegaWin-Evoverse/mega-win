@@ -1,4 +1,4 @@
-import { type ComponentProps } from "react";
+import { type ComponentProps } from 'react';
 import {
   ShoppingCart,
   Trophy,
@@ -9,14 +9,14 @@ import {
   Dices,
   Disc,
   type LucideProps,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { type IconName } from "../model/menu";
-import { PlinkoIcon } from "./PlinkoIcon";
-import { RouletteIcon } from "./RouletteIcon";
-import { KenoIcon } from "./KenoIcon";
+import { type IconName } from '../model/menu';
+import { PlinkoIcon } from './PlinkoIcon';
+import { RouletteIcon } from './RouletteIcon';
+import { KenoIcon } from './KenoIcon';
 
-interface Props extends ComponentProps<"svg"> {
+interface Props extends ComponentProps<'svg'> {
   name: IconName;
 }
 
@@ -27,27 +27,27 @@ export function MenuIcon({ name, ...props }: Props) {
   };
 
   switch (name) {
-    case "pointshop":
+    case 'pointshop':
       return <ShoppingCart {...iconProps} />;
-    case "leaderboard":
+    case 'leaderboard':
       return <Trophy {...iconProps} />;
-    case "games":
+    case 'games':
       return <Gamepad2 {...iconProps} />;
-    case "rewards":
+    case 'rewards':
       return <Star {...iconProps} />;
-    case "bonuses":
+    case 'bonuses':
       return <Gift {...iconProps} />;
-    case "wheel":
+    case 'wheel':
       return <Disc {...iconProps} />;
-    case "winners":
+    case 'winners':
       return <Crown {...iconProps} />;
-    case "roulette":
+    case 'roulette':
       return <RouletteIcon {...props} />;
-    case "keno":
+    case 'keno':
       return <KenoIcon {...props} />;
-    case "plinko":
+    case 'plinko':
       return <PlinkoIcon {...props} />;
-    case "dice":
+    case 'dice':
       return <Dices {...iconProps} />;
   }
 }

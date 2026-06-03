@@ -1,6 +1,6 @@
-import { type ComponentProps } from "react";
+import { type ComponentProps } from 'react';
 
-export function RouletteIcon(props: ComponentProps<"svg">) {
+export function RouletteIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="20"

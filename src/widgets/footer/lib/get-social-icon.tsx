@@ -1,26 +1,20 @@
-import { type ReactNode } from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaXTwitter,
-  FaTelegram,
-  FaDiscord,
-} from "react-icons/fa6";
-import { SOCIAL_LINKS } from "@/shared/config";
+import { type ReactNode } from 'react';
+import { FaFacebookF, FaInstagram, FaXTwitter, FaTelegram, FaDiscord } from 'react-icons/fa6';
+import { SOCIAL_LINKS } from '@/shared/config';
 
-type SocialIconName = (typeof SOCIAL_LINKS)[number]["icon"];
+type SocialIconName = (typeof SOCIAL_LINKS)[number]['icon'];
 
 export function getSocialIcon(iconName: SocialIconName): ReactNode {
   switch (iconName) {
-    case "facebook":
+    case 'facebook':
       return <FaFacebookF className="size-5" />;
-    case "instagram":
+    case 'instagram':
       return <FaInstagram className="size-5" />;
-    case "twitter":
+    case 'twitter':
       return <FaXTwitter className="size-5" />;
-    case "telegram":
+    case 'telegram':
       return <FaTelegram className="size-5" />;
-    case "discord":
+    case 'discord':
       return <FaDiscord className="size-5" />;
     default:
       return null;

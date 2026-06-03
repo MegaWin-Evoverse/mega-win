@@ -1,6 +1,7 @@
 ---
-paths: ["src/**"]
+paths: ['src/**']
 ---
+
 # Naming Conventions
 
 ## Core principle
@@ -12,16 +13,16 @@ A reader should understand the business domain from the name alone — without r
 
 ## Conventions
 
-| Category | Convention | Example |
-|----------|-----------|---------|
-| Folders | kebab-case | `user-profile/`, `product-list/` |
-| Components | PascalCase | `UserCard`, `ProductList` |
-| Hooks | `useSomething` | `useUserProfile`, `useProductList` |
-| Constants | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT`, `DEFAULT_PAGE_SIZE` |
-| Boolean props/state | positive form | `canSubmit`, `isVisible`, `hasError` |
-| Event handlers (DOM/library) | `handle*` | `handleSubmit`, `handleKeyDown` |
-| Event callbacks (props/business) | `on*` | `onEmailChange`, `onFormSubmit` |
-| Prop callback names | subject + verb | `handleEmailChange` not `handleChange` |
+| Category                         | Convention       | Example                                |
+| -------------------------------- | ---------------- | -------------------------------------- |
+| Folders                          | kebab-case       | `user-profile/`, `product-list/`       |
+| Components                       | PascalCase       | `UserCard`, `ProductList`              |
+| Hooks                            | `useSomething`   | `useUserProfile`, `useProductList`     |
+| Constants                        | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT`, `DEFAULT_PAGE_SIZE` |
+| Boolean props/state              | positive form    | `canSubmit`, `isVisible`, `hasError`   |
+| Event handlers (DOM/library)     | `handle*`        | `handleSubmit`, `handleKeyDown`        |
+| Event callbacks (props/business) | `on*`            | `onEmailChange`, `onFormSubmit`        |
+| Prop callback names              | subject + verb   | `handleEmailChange` not `handleChange` |
 
 ---
 
@@ -58,22 +59,24 @@ items               → products / results / entries
 ## Patterns to follow
 
 ### Hooks
+
 ```ts
 // ✅ Name = what the hook manages, not what it does
-useUserProfile()       // manages the user profile state
-useProductList()       // orchestrates product listing with filters
-useContactForm()       // form for contact/email submission
-useInfiniteScroll()    // infinite scroll pagination
+useUserProfile(); // manages the user profile state
+useProductList(); // orchestrates product listing with filters
+useContactForm(); // form for contact/email submission
+useInfiniteScroll(); // infinite scroll pagination
 ```
 
 ### Event handlers
+
 ```ts
 // ✅ on + specific noun + specific verb (if needed)
-onEmailChange(email)       // user edits email input
-onCategorySelect(cat)      // user picks a category
-onPageChange(page)         // user navigates pages
-onFormSubmit()             // user submits the form
-onDrawerClose()            // user closes a drawer
+onEmailChange(email); // user edits email input
+onCategorySelect(cat); // user picks a category
+onPageChange(page); // user navigates pages
+onFormSubmit(); // user submits the form
+onDrawerClose(); // user closes a drawer
 ```
 
 ### `handle*` vs `on*`
@@ -83,31 +86,35 @@ onDrawerClose()            // user closes a drawer
 
 ```ts
 // ✅ handleSubmit — react-hook-form returns this method, keep as-is
-form.handleSubmit(onFormSubmit)
+form.handleSubmit(onFormSubmit);
 
 // ✅ onFormSubmit — business callback in props
-interface Props { onFormSubmit: () => void }
+interface Props {
+  onFormSubmit: () => void;
+}
 ```
 
 ### State variables
+
 ```ts
 // ✅ Precise, affirmative, domain-rooted
-isSubmitting           // form submission in progress
-isFetchingUser         // not isLoading (for user query)
-selectedCategory       // currently active category
-emailInput             // not inputValue
-pageCount              // not count
+isSubmitting; // form submission in progress
+isFetchingUser; // not isLoading (for user query)
+selectedCategory; // currently active category
+emailInput; // not inputValue
+pageCount; // not count
 ```
 
 ### Props interfaces
+
 ```ts
 // ✅ Specific, never generic
 interface Props {
-  minPrice: number
-  maxPrice: number
-  onCategorySelect: (category: Category) => void
-  onPageChange: (page: number) => void
-  email: string
+  minPrice: number;
+  maxPrice: number;
+  onCategorySelect: (category: Category) => void;
+  onPageChange: (page: number) => void;
+  email: string;
 }
 ```
 

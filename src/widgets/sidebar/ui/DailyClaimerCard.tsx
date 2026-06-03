@@ -28,7 +28,6 @@ export function DailyClaimerCard() {
         DAILY CLAIMER!
       </p>
 
-
       <Button
         variant="main"
         className="absolute bottom-3 left-3 h-8 w-24 gap-1 px-3 text-sm"

@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { buttonVariants } from "@/shared/ui/button";
-import { cn } from "@/shared/lib/cn";
-import { SOCIAL_LINKS, FOOTER_HEADERS, FOOTER_ARIA } from "@/shared/config";
-import { getSocialIcon } from "../lib/get-social-icon";
+import Link from 'next/link';
+import { buttonVariants } from '@/shared/ui/button';
+import { cn } from '@/shared/lib/cn';
+import { SOCIAL_LINKS, FOOTER_HEADERS, FOOTER_ARIA } from '@/shared/config';
+import { getSocialIcon } from '../lib/get-social-icon';
 
 interface Props {
   className?: string;
@@ -23,8 +23,8 @@ export function FooterSocials({ className }: Props) {
             rel="noopener noreferrer"
             aria-label={`${FOOTER_ARIA.SOCIAL_LINK_PREFIX}${social.label}`}
             className={cn(
-              buttonVariants({ size: "icon" }),
-              "w-9 h-9 bg-brand-border hover:bg-brand-border/80 border-0 rounded-lg text-brand-text-light hover:text-brand-text-white transition-all flex items-center justify-center p-2"
+              buttonVariants({ size: 'icon' }),
+              'w-9 h-9 bg-brand-border hover:bg-brand-border/80 border-0 rounded-lg text-brand-text-light hover:text-brand-text-white transition-all flex items-center justify-center p-2'
             )}
           >
             {getSocialIcon(social.icon)}

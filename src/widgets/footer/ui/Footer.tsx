@@ -1,9 +1,9 @@
-import { cn } from "@/shared/lib/cn";
-import { FOOTER_ARIA } from "@/shared/config";
-import { FooterBrand } from "./FooterBrand";
-import { FooterNav } from "./FooterNav";
-import { FooterSocials } from "./FooterSocials";
-import { FooterCopyright } from "./FooterCopyright";
+import { cn } from '@/shared/lib/cn';
+import { FOOTER_ARIA } from '@/shared/config';
+import { FooterBrand } from './FooterBrand';
+import { FooterNav } from './FooterNav';
+import { FooterSocials } from './FooterSocials';
+import { FooterCopyright } from './FooterCopyright';
 
 interface Props {
   className?: string;
@@ -15,7 +15,7 @@ export function Footer({ className }: Props) {
       role="contentinfo"
       aria-label={FOOTER_ARIA.FOOTER}
       className={cn(
-        "w-full bg-brand-bg border-t border-brand-border py-[28px] px-[32px] flex flex-col items-center justify-center shrink-0",
+        'w-full bg-brand-bg border-t border-brand-border py-[28px] px-[32px] flex flex-col items-center justify-center shrink-0',
         className
       )}
     >

@@ -1,4 +1,4 @@
-export { ROUTES } from "./routes";
+export { ROUTES } from './routes';
 export {
   BUTTON_LABELS,
   FOOTER_ABOUT_LINKS,
@@ -6,4 +6,4 @@ export {
   COPYRIGHT_TEXT,
   FOOTER_HEADERS,
   FOOTER_ARIA,
-} from "./constants";
+} from './constants';

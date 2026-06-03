@@ -1,23 +1,22 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Button } from "@/shared/ui/button";
-import { BUTTON_LABELS } from "@/shared/config";
-import { useIsMobile } from "@/shared/lib/hooks/use-mobile";
+import Image from 'next/image';
+import { Button } from '@/shared/ui/button';
+import { BUTTON_LABELS } from '@/shared/config';
+import { useIsMobile } from '@/shared/lib/hooks/use-mobile';
 
 interface Props {
   onRegisterClick?: () => void;
 }
 
-const HERO_TITLE = "WELCOME TO THE MEGA WIN";
-const HERO_DESCRIPTION = "Discover exciting games, earn rewards, and enjoy exclusive bonuses!";
+const HERO_TITLE = 'WELCOME TO THE MEGA WIN';
+const HERO_DESCRIPTION = 'Discover exciting games, earn rewards, and enjoy exclusive bonuses!';
 
-
-const ARIA_HERO_SECTION = "Hero banner";
-const ARIA_REGISTER_BUTTON = "Register for an account";
+const ARIA_HERO_SECTION = 'Hero banner';
+const ARIA_REGISTER_BUTTON = 'Register for an account';
 
 export function Hero({ onRegisterClick }: Props) {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
   return (
     <section
       role="region"
@@ -129,6 +128,5 @@ export function Hero({ onRegisterClick }: Props) {
         />
       </div>
     </section>
-
   );
 }

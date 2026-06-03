@@ -1,4 +1,4 @@
-import { COPYRIGHT_TEXT } from "@/shared/config";
+import { COPYRIGHT_TEXT } from '@/shared/config';
 
 interface Props {
   className?: string;

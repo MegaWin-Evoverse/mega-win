@@ -20,7 +20,7 @@ requested) plus its config and scripts.
 
 **Out of scope (other branches):** the FSD scaffold (`feat/setup-project`) and the
 ESLint/Prettier/Husky setup (`chore/linting-formatting-setup`) already exist. We only
-*align with* them — we do not redo them.
+_align with_ them — we do not redo them.
 
 ## Source of truth: the real project
 
@@ -28,6 +28,7 @@ Rules/docs are written against the **actual** structure from `feat/setup-project
 `chore/linting-formatting-setup`, NOT plinko's domain.
 
 ### Stack (already installed in the project branches)
+
 - Next.js 16.2.7, React 19.2.4, TypeScript 5, Tailwind v4 (OKLCH tokens)
 - **axios** + **@tanstack/react-query** (+ devtools) — client-side data (NOT plinko's BFF/Server Actions)
 - react-hook-form + zod, sonner, zustand, shadcn (on `@base-ui/react`), geist
@@ -37,6 +38,7 @@ Rules/docs are written against the **actual** structure from `feat/setup-project
 - **No test framework yet** → we add Jest in this branch.
 
 ### FSD structure (real, `src/`-based)
+
 ```
 src/
   app/        routing, layout, providers, global styles
@@ -48,6 +50,7 @@ src/
 ```
 
 ## Key conventions (project ground truth)
+
 - **Components:** `export function ComponentName(props: Props) {}` — named function
   declaration, never `export default` (exception: Next.js `page.tsx`/`layout.tsx`/etc.).
 - **Hooks:** `export function useThing(props: Props): Result {}` — also regular functions.
@@ -63,7 +66,9 @@ src/
 ## Deliverables
 
 ### 1. `AGENTS.md` (project root)
+
 Port plinko's AGENTS.md, adapted:
+
 - Keep `nextjs-agent-rules` block.
 - Communication rules (Ukrainian replies, English code).
 - FSD architecture: 6 layers incl. `pages`.
@@ -73,6 +78,7 @@ Port plinko's AGENTS.md, adapted:
 - Keep under 200 lines. `CLAUDE.md` stays `@AGENTS.md`.
 
 ### 2. Project-local skills (`.claude/skills/`, override globals of same name)
+
 - `component` — regular-function template, shadcn-first, clean JSX, `Props`, React 19 `ref` as prop, generic examples (no bet/game vocabulary).
 - `hook` — regular-function `model/` hook, explicit return interface, `useCallback` for handlers, no `useEffect` state-mirroring.
 - `slice` — full FSD slice with regular-function `ui/` + `model/`, optional `api/`, `index.ts`.
@@ -81,7 +87,9 @@ Port plinko's AGENTS.md, adapted:
 - Global skills left untouched: `naming`, `perf`, `explain`.
 
 ### 3. `.claude/rules/`
+
 Generic scaffold (no plinko domain):
+
 - `app.md` — Next.js App Router, providers, server vs client, layout/route handlers.
 - `components.md` — regular functions, server/client, export style, `Props`, React 19 `ref`, no inline styles, shadcn-first, a11y, size limit.
 - `naming.md` — project naming conventions, generic (no plinko vocabulary), anti-patterns.
@@ -98,32 +106,39 @@ Generic scaffold (no plinko domain):
 - **Skipped:** plinko `game.md`, `auth.md`, `bff.md`.
 
 ### 4. `.claude/docs/` + `doc-mapping.json`
+
 - Docs: `app.md`, `shared.md`, `entities.md`, `features.md`, `widgets.md`, `pages.md` — generic architecture descriptions of mega-win's real layout.
 - `doc-mapping.json`: map `src/**` patterns → matching rules + docs (no plinko entities/features); include `api`, `git`, `testing`, `naming`, `pitfalls` mappings.
 
 ### 5a. `.claude/settings.json` (permissions)
+
 - `permissions.ask` for `Bash(git commit:*)` and `Bash(git push:*)` — Claude must never commit or push without explicit user approval (team-wide, committed). **Already created.**
 
 ### 5. `.claude/commands/`
+
 - `pre-commit.md` — **skill/command like plinko**: check staged diff → `npm run lint` → forbid native `<button>`/`<img>` → run related tests (`npm run test:related`) → `npm run doc:check` → Conventional Commit. Aligned with Husky's `lint-staged` (no duplication).
 - `naming-review.md` — generic naming audit against `naming.md` (no plinko vocabulary).
 - `deploy.md` — `git status` → lint → build → push (Ukrainian, as in plinko).
 
 ### 6. `.claude/hooks/` + `scripts/`
+
 - `.claude/hooks/check-inline-styles.sh` — ported.
 - `scripts/audit-docs.sh`, `scripts/check-doc-freshness.sh` — doc integrity/freshness (framework-agnostic); wired as `doc:audit` / `doc:check` npm scripts.
 - `scripts/run-related-tests.sh`, `scripts/check-test-coverage.sh` — ported (now active because Jest is added).
 
 ### 7. Jest test toolchain (explicitly requested)
+
 - Dev deps: `jest`, `jest-environment-jsdom`, `@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`, `@types/jest`, and a TS transform (`ts-jest` or `@swc/jest`).
 - Config: `jest.config.ts`, `jest.setup.ts`.
 - Scripts: `test`, `test:watch`, `test:related`, `test:coverage` in `package.json`.
 
 ## Non-goals
+
 - No redo of FSD scaffold, ESLint/Prettier/Husky config, or dependency install for the app stack.
 - No plinko domain content (ball/peg/bucket/drop, auth Server Actions, BFF proxy).
 - No app feature code.
 
 ## Notes / open alignment
+
 - `pre-commit` command coexists with Husky: Husky handles mechanical git-level lint/format; the command drives the AI-assisted flow (lint + native-element check + doc:check + conventional commit + tests). No settings.json PreToolUse agent-hook (avoids triple redundancy).
 - All new workflow files land on `chore/setup-ai-workflow`; they describe `src/**` which is fully present once `feat/setup-project` / `chore/linting-formatting-setup` merge into the integration branch.

@@ -1,6 +1,7 @@
 ---
-paths: ["src/shared/**"]
+paths: ['src/shared/**']
 ---
+
 # Layer: shared
 
 Generic, reusable building blocks with zero domain knowledge.

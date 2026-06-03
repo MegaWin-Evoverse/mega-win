@@ -7,12 +7,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 <!-- END:nextjs-agent-rules -->
 
 # Coding Style Rules
+
 - NO magic strings or hardcoded string/number literals in code (e.g., `'auto'`, `'manual'`, `'HIGH'`, `12`). Use constants, enums, or configuration files instead.
 - NO need to run a production build or typecheck (tsc) after minor edits (pre-commit checks remain mandatory).
 
 ---
 
 # Rules & Documentation Synchronization
+
 - We use a documentation mapping in `.claude/doc-mapping.json`.
 - BEFORE analyzing or modifying code, look up the target path in `.claude/doc-mapping.json` to find its corresponding rules (in `.claude/rules/...`) and docs (in `.claude/docs/...`).
 - You MUST open and read these matched rules/docs files to ensure you follow project-specific conventions and avoid context drift.
@@ -21,6 +23,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Communication Rules
+
 - Відповідай українською мовою.
 - Код пиши англійською.
 - Пояснюй коротко і по суті.
@@ -33,14 +36,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Architecture (FSD)
+
 - Follow Feature-Sliced Design STRICTLY.
 - Layers (top → bottom, imports go downward only):
-  - `app`       → routing, layout, global styles
-  - `pages`     → page-level compositions
-  - `widgets`   → complex UI blocks
-  - `features`  → interactive features
-  - `entities`  → business entities and stores
-  - `shared`    → generic UI, utils, API clients
+  - `app` → routing, layout, global styles
+  - `pages` → page-level compositions
+  - `widgets` → complex UI blocks
+  - `features` → interactive features
+  - `entities` → business entities and stores
+  - `shared` → generic UI, utils, API clients
 - DO NOT mix layers. DO NOT import across layers incorrectly.
 - Business logic MUST NOT be inside UI components. Move logic to hooks or models.
 - **Layer Isolation**: Entities MUST NOT import from other entities.
@@ -50,6 +54,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Styling & UI/UX
+
 - Use Tailwind CSS ONLY. No inline styles.
 - Colors use **OKLCH** via CSS variables — use semantic classes (`bg-primary`, `text-foreground`), not raw `oklch(...)` values or hex/rgb/hsl.
 - NEVER hardcode hex/rgb/hsl/oklch in components UNLESS manually added by the USER.
@@ -59,6 +64,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Strict TypeScript Rules
+
 - NEVER use `any`. ALWAYS explicitly type everything.
 - NO implicit types.
 - Use `interface` instead of `type`.
@@ -67,6 +73,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Components & State
+
 - **Regular function declarations ONLY** for components AND hooks (`export function Component()` / `export function useThing()`). NO arrow-function components or hooks.
 - No `export default` except Next.js file conventions (page/layout/loading/error).
 - Keep components small and focused. Extract logic into hooks.
@@ -78,6 +85,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Naming Conventions
+
 - Folders: `kebab-case`
 - Components: `PascalCase`
 - Hooks: `useSomething`
@@ -86,12 +94,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Public API
+
 - Every slice MUST expose a public `index.ts` file.
 - Never import internal paths directly (e.g., `features/auth/model/`, `entities/user/ui/`). Always go through `index.ts`.
 
 ---
 
 # Tooling
+
 - **Prettier**: single quotes, semi, printWidth 100, arrowParens always, trailingComma es5.
 - **ESLint**: `eslint-plugin-boundaries` enforces FSD layer import rules.
 - **Husky**: `lint-staged` runs on pre-commit; full `lint` runs on pre-push.
@@ -99,6 +109,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Git Strategy
+
 - Commit messages follow Conventional Commits: `type(scope): description`.
 - Branch naming: `type/kebab-words` — valid prefixes: `feature/`, `fix/`, `refactor/`, `documentation/`, `test/`, `chore/`.
 - See `.claude/rules/git.md` for full details and examples.
