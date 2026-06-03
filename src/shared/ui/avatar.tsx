@@ -1,9 +1,10 @@
 'use client';
 
-import * as React from 'react';
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar';
 
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
+
+import { ComponentProps } from 'react';
 
 function Avatar({
   className,
@@ -48,7 +49,7 @@ function AvatarFallback({ className, ...props }: AvatarPrimitive.Fallback.Props)
   );
 }
 
-function AvatarBadge({ className, ...props }: React.ComponentProps<'span'>) {
+function AvatarBadge({ className, ...props }: ComponentProps<'span'>) {
   return (
     <span
       data-slot="avatar-badge"
