@@ -108,8 +108,10 @@ export const UserCard = () => { ... }
 In React 19, `ref` is a plain prop — no `forwardRef` wrapper needed:
 
 ```tsx
+import { type Ref } from 'react'
+
 interface Props {
-  ref?: React.Ref<HTMLDivElement>
+  ref?: Ref<HTMLDivElement>
 }
 
 export function MyComponent({ ref, ...props }: Props) {
