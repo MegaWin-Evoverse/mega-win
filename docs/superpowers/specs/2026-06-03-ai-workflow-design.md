@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-03
 **Branch:** `chore/setup-ai-workflow`
-**Status:** Approved design — ready for implementation plan
+**Status:** Implemented on `chore/setup-ai-workflow` (plan: `docs/superpowers/plans/2026-06-03-ai-workflow.md`)
 
 ## Goal
 
@@ -77,7 +77,8 @@ Port plinko's AGENTS.md, adapted:
 - `hook` — regular-function `model/` hook, explicit return interface, `useCallback` for handlers, no `useEffect` state-mirroring.
 - `slice` — full FSD slice with regular-function `ui/` + `model/`, optional `api/`, `index.ts`.
 - `commit` — Conventional Commits with scope + the project's branch-naming convention.
-- Global skills left untouched: `naming`, `perf`, `review`, `explain`.
+- `review` — Senior Frontend Reviewer (like plinko): reads real stack from `package.json`/`tsconfig`/`eslint.config`/`AGENTS.md`, then audits FSD layer compliance, state anti-patterns, strict TS (flag every `any`/`as any`), DRY (≥3 repetitions), CSS (`!important`, inline `style`), hardcoded values, dead code, performance, ESLint (incl. `eslint-plugin-boundaries`), Next.js App Router, security. Writes findings to `REVIEW.md`. Adapted to mega-win: axios/TanStack (not socket), regular-function components, no plinko domain.
+- Global skills left untouched: `naming`, `perf`, `explain`.
 
 ### 3. `.claude/rules/`
 Generic scaffold (no plinko domain):
@@ -90,6 +91,7 @@ Generic scaffold (no plinko domain):
 - `widgets.md` — composed page blocks.
 - `pages.md` — page-level compositions.
 - `pitfalls.md` — project gotchas (axios/query keys, server-only, zustand selectors).
+- `code-quality.md` — the reviewer's checklist as enforceable rules: **no `any`/`as any`**, props interface named `Props`, **no inline `style={{}}`** (except dynamic CSS vars), **no `!important`**, no hardcoded hex/rgb/hsl or magic numbers (use semantic tokens / `shared/config`), **no dead code** (unused imports/vars/exports), DRY ≥3 repetitions, state anti-patterns (no `useEffect` mirroring props/store, no store subscription without selector), FSD layer compliance.
 - `git.md` — branch naming + Conventional Commits convention (from team doc).
 - `api.md` — axios instance + interceptors, TanStack Query (`shared/api/query-keys.ts`, invalidation), error handling (401 / refresh token / global errors / Sonner toasts), forms data flow.
 - `testing.md` — Jest + Testing Library conventions (renderHook, store mocks, pure-function tests).
@@ -98,6 +100,9 @@ Generic scaffold (no plinko domain):
 ### 4. `.claude/docs/` + `doc-mapping.json`
 - Docs: `app.md`, `shared.md`, `entities.md`, `features.md`, `widgets.md`, `pages.md` — generic architecture descriptions of mega-win's real layout.
 - `doc-mapping.json`: map `src/**` patterns → matching rules + docs (no plinko entities/features); include `api`, `git`, `testing`, `naming`, `pitfalls` mappings.
+
+### 5a. `.claude/settings.json` (permissions)
+- `permissions.ask` for `Bash(git commit:*)` and `Bash(git push:*)` — Claude must never commit or push without explicit user approval (team-wide, committed). **Already created.**
 
 ### 5. `.claude/commands/`
 - `pre-commit.md` — **skill/command like plinko**: check staged diff → `npm run lint` → forbid native `<button>`/`<img>` → run related tests (`npm run test:related`) → `npm run doc:check` → Conventional Commit. Aligned with Husky's `lint-staged` (no duplication).

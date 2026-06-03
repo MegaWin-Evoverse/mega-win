@@ -9,6 +9,7 @@
     { "pattern": "src/entities/**",  "doc": ".claude/docs/entities.md",  "rules": ".claude/rules/entities.md",  "layer": "entities" },
     { "pattern": "src/shared/**",    "doc": ".claude/docs/shared.md",    "rules": ".claude/rules/shared.md",    "layer": "shared" },
     { "pattern": "src/shared/api/**","doc": ".claude/docs/shared.md",    "rules": ".claude/rules/api.md",       "layer": "shared/api" },
+    { "pattern": "src/**/*.tsx",     "doc": null, "rules": ".claude/rules/components.md",   "layer": "components" },
     { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/naming.md",       "layer": "global" },
     { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/pitfalls.md",     "layer": "global" },
     { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/code-quality.md", "layer": "global" },
