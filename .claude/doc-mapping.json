@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "description": "Maps file path patterns to FSD layer rules and docs.",
+  "mappings": [
+    { "pattern": "src/app/**",       "doc": ".claude/docs/app.md",       "rules": ".claude/rules/app.md",       "layer": "app" },
+    { "pattern": "src/pages/**",     "doc": ".claude/docs/pages.md",     "rules": ".claude/rules/pages.md",     "layer": "pages" },
+    { "pattern": "src/widgets/**",   "doc": ".claude/docs/widgets.md",   "rules": ".claude/rules/widgets.md",   "layer": "widgets" },
+    { "pattern": "src/features/**",  "doc": ".claude/docs/features.md",  "rules": ".claude/rules/features.md",  "layer": "features" },
+    { "pattern": "src/entities/**",  "doc": ".claude/docs/entities.md",  "rules": ".claude/rules/entities.md",  "layer": "entities" },
+    { "pattern": "src/shared/**",    "doc": ".claude/docs/shared.md",    "rules": ".claude/rules/shared.md",    "layer": "shared" },
+    { "pattern": "src/shared/api/**","doc": ".claude/docs/shared.md",    "rules": ".claude/rules/api.md",       "layer": "shared/api" },
+    { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/naming.md",       "layer": "global" },
+    { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/pitfalls.md",     "layer": "global" },
+    { "pattern": "src/**",           "doc": null, "rules": ".claude/rules/code-quality.md", "layer": "global" },
+    { "pattern": "src/**/*.test.ts", "doc": null, "rules": ".claude/rules/testing.md",      "layer": "tests" },
+    { "pattern": "src/**/*.test.tsx","doc": null, "rules": ".claude/rules/testing.md",      "layer": "tests" }
+  ]
+}
