@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "doc:check": "bash scripts/check-doc-freshness.sh",
+    "doc:audit": "bash scripts/audit-docs.sh"
   },
   "dependencies": {
     "next": "16.2.7",
