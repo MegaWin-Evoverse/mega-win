@@ -8,7 +8,8 @@ import {
 } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Header, Footer } from "@/widgets";
+import { Header, Footer, Sidebar } from "@/widgets";
+import { SidebarProvider } from "@/shared/ui/sidebar";
 import { Toaster } from "@/shared/ui/sonner";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -54,9 +55,20 @@ export default function RootLayout({
     >
       <body className="h-full flex flex-col">
         <Providers>
-          <Header />
-          <div className="flex-1 flex flex-col">{children}</div>
-          <Footer />
+          <SidebarProvider>
+            <div className="w-full flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-1 flex flex-row relative w-full pt-16">
+                <Sidebar />
+                <div className="flex-1 flex flex-col">
+                  <div className="flex-1 flex flex-col">
+                    {children}
+                  </div>
+                  <Footer />
+                </div>
+              </div>
+            </div>
+          </SidebarProvider>
           <Toaster />
         </Providers>
       </body>

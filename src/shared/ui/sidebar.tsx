@@ -23,13 +23,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/shared/ui/tooltip"
-import { PanelLeftIcon } from "lucide-react"
+import { ChevronLeftIcon } from "@/shared/ui/ChevronLeftIcon"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH = "227px"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
-const SIDEBAR_WIDTH_ICON = "3rem"
+const SIDEBAR_WIDTH_ICON = "84px"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 type SidebarContextProps = {
@@ -256,22 +256,26 @@ function SidebarTrigger({
   onClick,
   ...props
 }: ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, state } = useSidebar()
+  const isCollapsed = state === "collapsed"
 
   return (
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
-      size="icon-sm"
-      className={cn(className)}
+      size="none"
+      className={cn(
+        "sidebar-menu-btn-custom flex items-center justify-center w-10 h-10 rounded-lg text-brand-text-white hover:text-brand-text-white/80 transition-all duration-200 cursor-pointer shadow-md",
+        className
+      )}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <ChevronLeftIcon className={cn("w-5 h-5 transition-transform duration-200", isCollapsed ? "rotate-180" : "rotate-0")} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -373,7 +377,7 @@ function SidebarContent({ className, ...props }: ComponentProps<"div">) {
       data-slot="sidebar-content"
       data-sidebar="content"
       className={cn(
-        "no-scrollbar flex min-h-0 flex-1 flex-col gap-0 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+        "no-scrollbar flex min-h-0 flex-1 flex-col gap-0 overflow-auto [overflow-anchor:none] group-data-[collapsible=icon]:overflow-hidden",
         className
       )}
       {...props}
