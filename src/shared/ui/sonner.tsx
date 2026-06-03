@@ -1,8 +1,14 @@
-"use client"
-import { type CSSProperties } from "react"
+'use client';
+import { type CSSProperties } from 'react';
 
-import { Toaster as Sonner, type ToasterProps } from "sonner"
-import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
+import { Toaster as Sonner, type ToasterProps } from 'sonner';
+import {
+  CircleCheckIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+  OctagonXIcon,
+  Loader2Icon,
+} from 'lucide-react';
 
 const Toaster = ({ ...props }: ToasterProps) => (
   <Sonner
@@ -16,14 +22,14 @@ const Toaster = ({ ...props }: ToasterProps) => (
     }}
     style={
       {
-        "--normal-bg": "var(--popover)",
-        "--normal-text": "var(--popover-foreground)",
-        "--normal-border": "var(--border)",
-        "--border-radius": "var(--radius)",
+        '--normal-bg': 'var(--popover)',
+        '--normal-text': 'var(--popover-foreground)',
+        '--normal-border': 'var(--border)',
+        '--border-radius': 'var(--radius)',
       } as CSSProperties
     }
     {...props}
   />
-)
+);
 
-export { Toaster }
+export { Toaster };
