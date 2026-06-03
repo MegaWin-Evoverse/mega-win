@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full ${anekBangla.variable} ${spaceGrotesk.variable} ${figtree.variable} ${outfit.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`dark h-full ${anekBangla.variable} ${spaceGrotesk.variable} ${figtree.variable} ${outfit.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="h-full flex flex-col">
         <Providers>
