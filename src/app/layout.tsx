@@ -8,7 +8,7 @@ import {
 } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Header } from "@/widgets";
+import { Header, Footer } from "@/widgets";
 import { Toaster } from "@/shared/ui/sonner";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -53,11 +53,12 @@ export default function RootLayout({
       className={`h-full ${anekBangla.variable} ${spaceGrotesk.variable} ${figtree.variable} ${outfit.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="h-full flex flex-col">
-        <Header />
         <Providers>
+          <Header />
           <div className="flex-1 flex flex-col">{children}</div>
+          <Footer />
+          <Toaster />
         </Providers>
-        <Toaster />
       </body>
     </html>
   );

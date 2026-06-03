@@ -91,11 +91,14 @@
   --color-brand-border: var(--brand-border);
   --color-brand-bg: var(--brand-bg);
   --color-brand-ellipse: var(--brand-ellipse);
+  --color-brand-text-light: var(--brand-text-light);
+  --color-brand-text-muted: var(--brand-text-muted);
+  --color-brand-text-white: var(--brand-text-white);
+  --color-page-bg: var(--bg-page);
 }
 
 :root {
   --bg-page: #0A0D19;
-  --bg-primary: #0E121C;
   --brand-green-from: #4ADE80;
   --brand-green-to: #22C55E;
   --brand-dark: #07111A;
@@ -103,6 +106,10 @@
   --brand-bg: #0E121C;
   --brand-ellipse: rgba(27, 209, 103, 0.24);
   --brand-black: #000000;
+  --brand-text-light: #C7CBD4;
+  --brand-text-muted: #566374;
+  --brand-text-white: #FDFDFD;
+  --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -197,8 +204,8 @@
 }
 
 .logo-text {
-  color: #ffffff;
+  color: var(--brand-text-white);
   -webkit-text-stroke: 2px var(--brand-green-to);
   paint-order: stroke fill;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0px 2px 4px var(--logo-shadow);
 }

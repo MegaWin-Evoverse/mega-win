@@ -5,7 +5,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { ReactNode, useState } from "react";
 
-export function Providers({ children }: { children: ReactNode }) {
+interface Props {
+  children: ReactNode;
+}
+
+export function Providers({ children }: Props) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
