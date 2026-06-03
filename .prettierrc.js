@@ -11,7 +11,6 @@ const config = {
   bracketSpacing: true,
   bracketSameLine: false,
   arrowParens: "always",
-  jsxSingleQuote: false,
   endOfLine: "lf",
   htmlWhitespaceSensitivity: "css",
   proseWrap: "preserve",

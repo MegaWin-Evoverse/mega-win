@@ -1,6 +1,7 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextTs from "eslint-config-next/typescript";
 import nextVitals from "eslint-config-next/core-web-vitals";
+import prettierConfig from "eslint-config-prettier";
 import prettier from "eslint-plugin-prettier";
 import reactCompiler from "eslint-plugin-react-compiler";
 import boundaries from "eslint-plugin-boundaries";
@@ -8,6 +9,7 @@ import boundaries from "eslint-plugin-boundaries";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  prettierConfig,
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
