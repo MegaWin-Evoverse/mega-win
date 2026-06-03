@@ -251,4 +251,39 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 100%) border-box;
 }
 
+.hero-banner-bg {
+  background: linear-gradient(84.47deg, rgba(15, 22, 26, 0.94) 2.15%, rgba(19, 21, 23, 0.94) 98.56%);
+}
+
+.hero-radial-glow {
+  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%, rgba(48, 223, 140, 0.15) 0%, rgba(33, 173, 107, 0.03) 50%, rgba(13, 110, 64, 0) 91.23%);
+}
+
+.hero-ellipse-glow {
+  background: #1DBA4B;
+  filter: blur(157.78px);
+}
+
+.hero-dolar-clean {
+  transform: rotate(0.51deg);
+}
+
+.hero-dolar-blur {
+  filter: blur(5.36642px);
+}
+
+.hero-chip-small-blur {
+  filter: blur(1.855px);
+  transform: matrix(-0.99, 0.12, 0.12, 0.99, 0, 0);
+}
+
+.hero-chip-large-blur {
+  transform: rotate(13.21deg);
+}
+
+
+
+
+
+
 
