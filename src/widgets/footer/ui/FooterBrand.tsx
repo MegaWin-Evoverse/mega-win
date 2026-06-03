@@ -13,9 +13,9 @@ export function FooterBrand({ className }: Props) {
       <Link
         href={ROUTES.HOME}
         aria-label={FOOTER_ARIA.LOGO_LINK}
-        className="w-[140px] aspect-[140/74] flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+        className="w-[150px] h-[79px] flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
       >
-        <Logo size="lg" />
+        <Logo size="lg" className="w-full h-full" />
       </Link>
 
       <Image

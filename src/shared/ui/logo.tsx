@@ -2,17 +2,19 @@ import { cn } from "@/shared/lib/cn";
 
 interface Props {
   className?: string;
+  size?: "sm" | "lg";
 }
 
 const BRAND_NAME = "MEGA WIN";
 
-export function Logo({ className }: Props) {
-  return (
-    <div className={cn("flex flex-col items-center justify-center gap-0.5 select-none", className)}>
+export function Logo({ className, size = "sm" }: Props) {
+  const isLarge = size === "lg";
 
+  return (
+    <div className={cn("flex flex-col items-center justify-center gap-0 select-none", className)}>
       <svg
         viewBox="0 0 100 100"
-        className="w-7 h-7 shrink-0"
+        className={cn("shrink-0", isLarge ? "w-[60px] h-[60px]" : "w-8 h-8")}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -34,7 +36,7 @@ export function Logo({ className }: Props) {
           fill="var(--brand-green-from)"
         />
       </svg>
-      <span className="logo-text font-nekst font-black text-[12px] leading-none tracking-wider uppercase">
+      <span className={cn("logo-text font-nekst font-black leading-none uppercase relative z-10", isLarge ? "text-lg tracking-[0.1em] -mt-[18px]" : "text-[12px] tracking-wider -mt-[10px]")}>
         {BRAND_NAME}
       </span>
     </div>
