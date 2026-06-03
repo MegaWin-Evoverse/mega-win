@@ -1,34 +1,34 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Regular.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Medium.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-SemiBold.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nekst";
-  src: url("/fonts/nekst/Nekst-Bold.woff2") format("woff2");
+  font-family: 'Nekst';
+  src: url('/fonts/nekst/Nekst-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@
   --font-heading: var(--font-nekst);
   --font-anek-bangla: var(--font-anek-bangla-font);
   --font-space-grotesk: var(--font-space-grotesk-font);
-  --font-nekst: "Nekst", sans-serif;
+  --font-nekst: 'Nekst', sans-serif;
   --font-geist: var(--font-geist-sans);
   --font-figtree: var(--font-figtree-font);
   --font-outfit: var(--font-outfit-font);
@@ -87,7 +87,7 @@
 }
 
 :root {
-  --bg-primary: #0E121C;
+  --bg-primary: #0e121c;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
