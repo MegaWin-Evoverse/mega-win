@@ -67,7 +67,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - NEVER use `any`. ALWAYS explicitly type everything.
 - NO implicit types.
-- Use `interface` instead of `type`.
+- Component props MUST use `interface`. Elsewhere choose by situation: `interface` for describing object/data structures, `type` for unions, intersections, and aliases.
 - All component props MUST be typed and named `Props`.
 
 ---
@@ -89,6 +89,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Folders: `kebab-case`
 - Components: `PascalCase`
 - Hooks: `useSomething`
+- Zustand stores: `use<Domain>Store` (e.g. `useAuthStore`)
 - Constants: `UPPER_SNAKE_CASE`
 
 ---
