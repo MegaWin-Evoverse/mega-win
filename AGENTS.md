@@ -81,6 +81,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Folders: `kebab-case`
 - Components: `PascalCase`
 - Hooks: `useSomething`
+- Zustand stores: `use<Domain>Store` (e.g. `useAuthStore`)
 - Constants: `UPPER_SNAKE_CASE`
 
 ---

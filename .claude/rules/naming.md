@@ -17,6 +17,7 @@ A reader should understand the business domain from the name alone — without r
 | Folders | kebab-case | `user-profile/`, `product-list/` |
 | Components | PascalCase | `UserCard`, `ProductList` |
 | Hooks | `useSomething` | `useUserProfile`, `useProductList` |
+| Zustand stores | `use<Domain>Store` | `useAuthStore`, `useCounterStore` |
 | Constants | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT`, `DEFAULT_PAGE_SIZE` |
 | Boolean props/state | positive form | `canSubmit`, `isVisible`, `hasError` |
 | Event handlers (DOM/library) | `handle*` | `handleSubmit`, `handleKeyDown` |
