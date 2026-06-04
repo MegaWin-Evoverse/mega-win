@@ -59,7 +59,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 # Strict TypeScript Rules
 - NEVER use `any`. ALWAYS explicitly type everything.
 - NO implicit types.
-- Use `interface` instead of `type`.
+- Component props MUST use `interface`. Elsewhere choose by situation: `interface` for describing object/data structures, `type` for unions, intersections, and aliases.
 - All component props MUST be typed and named `Props`.
 
 ---

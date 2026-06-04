@@ -3,7 +3,7 @@
   "description": "Maps file path patterns to FSD layer rules and docs.",
   "mappings": [
     { "pattern": "src/app/**",       "doc": ".claude/docs/app.md",       "rules": ".claude/rules/app.md",       "layer": "app" },
-    { "pattern": "src/pages/**",     "doc": ".claude/docs/pages.md",     "rules": ".claude/rules/pages.md",     "layer": "pages" },
+    { "pattern": "src/pages/**",     "doc": null, "rules": ".claude/rules/pages.md",     "layer": "pages" },
     { "pattern": "src/widgets/**",   "doc": ".claude/docs/widgets.md",   "rules": ".claude/rules/widgets.md",   "layer": "widgets" },
     { "pattern": "src/features/**",  "doc": ".claude/docs/features.md",  "rules": ".claude/rules/features.md",  "layer": "features" },
     { "pattern": "src/entities/**",  "doc": ".claude/docs/entities.md",  "rules": ".claude/rules/entities.md",  "layer": "entities" },
