@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Checks whether documentation is stale relative to changed source files.
-# Auto-updates docs via the Claude CLI and stages them for the current commit.
-# Runs automatically as a git pre-commit hook.
+# WARN-ONLY by default: it reports stale docs but never edits or stages files,
+# so AI-flow files don't leak into feature commits/PRs.
+# Opt in to auto-update (Claude CLI rewrites docs + stages them) with DOC_AUTO_UPDATE=1.
 #
 # Usage:
-#   bash scripts/check-doc-freshness.sh          # staged files + diff vs main
-#   SKIP_AI_UPDATE=1 bash scripts/check-doc-freshness.sh  # dry-run, no AI calls
+#   bash scripts/check-doc-freshness.sh                    # warn-only (default)
+#   DOC_AUTO_UPDATE=1 bash scripts/check-doc-freshness.sh  # auto-update via Claude + git add
 
 set -euo pipefail
 
@@ -14,7 +15,9 @@ export DOC_MAPPING=".claude/doc-mapping.json"
 export CLAUDE_MD="CLAUDE.md"
 export BASE_BRANCH="main"
 export MAX_CLAUDE_MD_LINES=200
-readonly SKIP_AI_UPDATE="${SKIP_AI_UPDATE:-0}"
+# Warn-only by default; set DOC_AUTO_UPDATE=1 to let Claude rewrite & stage docs.
+# Back-compat: SKIP_AI_UPDATE=1 still forces a dry-run (warn-only is now the default anyway).
+readonly DOC_AUTO_UPDATE="${DOC_AUTO_UPDATE:-0}"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 log_info()  { echo "  $*"; }
@@ -108,8 +111,8 @@ else
 
     log_warn "Stale: $DOC_PATH  (trigger: $SRC_FILE)"
 
-    if [[ "$SKIP_AI_UPDATE" == "1" ]]; then
-      log_info "  SKIP_AI_UPDATE=1 — skipping Claude call."
+    if [[ "$DOC_AUTO_UPDATE" != "1" ]]; then
+      log_info "  warn-only — leaving $DOC_PATH unchanged (run DOC_AUTO_UPDATE=1 npm run doc:check to update)."
       continue
     fi
 
@@ -145,8 +148,8 @@ log_info "$CLAUDE_MD: $LINE_COUNT lines (limit: $MAX_CLAUDE_MD_LINES)"
 if (( LINE_COUNT > MAX_CLAUDE_MD_LINES )); then
   log_warn "$CLAUDE_MD exceeds $MAX_CLAUDE_MD_LINES lines ($LINE_COUNT found)."
 
-  if [[ "$SKIP_AI_UPDATE" == "1" ]]; then
-    log_info "SKIP_AI_UPDATE=1 — skipping Claude call."
+  if [[ "$DOC_AUTO_UPDATE" != "1" ]]; then
+    log_info "warn-only — leaving $CLAUDE_MD unchanged (run DOC_AUTO_UPDATE=1 npm run doc:check to shorten)."
   elif has_claude; then
     log_info "Calling Claude CLI to shorten $CLAUDE_MD ..."
     claude "Shorten and optimize $CLAUDE_MD so it contains at most $MAX_CLAUDE_MD_LINES lines without losing critical instructions. Edit the file in place."

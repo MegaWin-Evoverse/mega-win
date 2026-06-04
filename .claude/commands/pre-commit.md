@@ -39,19 +39,20 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
    ```
    If tests fail — stop and explain which ones and why.
 
-5. **Check doc freshness** (automated)
+5. **Check doc freshness** (warn-only)
+
    ```bash
    npm run doc:check
    ```
-   This script automatically:
-   - Compares changed `src/` files against `.claude/doc-mapping.json`
-   - Calls `claude "Update file [doc] based on [src]"` for any stale doc or rules file
-   - Stages updated documentation files via `git add`
-   - Checks that `CLAUDE.md` does not exceed 200 lines; shortens it via Claude CLI if needed
 
-   **Environment flags:**
-   - `SKIP_DOC_CHECK=1 git commit` — bypass the hook entirely for one commit
-   - `SKIP_AI_UPDATE=1 npm run doc:check` — dry-run: reports stale docs without calling Claude
+   This script is **warn-only by default** — it never edits or stages files, so AI-flow
+   docs never leak into feature commits/PRs. It:
+   - Compares changed `src/` files against `.claude/doc-mapping.json`
+   - Reports any stale doc/rules file (and whether `CLAUDE.md` exceeds 200 lines)
+
+   Refreshing docs is a **separate, deliberate step** — not part of feature commits:
+   - `DOC_AUTO_UPDATE=1 npm run doc:check` — let Claude rewrite stale docs and `git add` them.
+     Run this on its own and commit the result as a dedicated `chore(docs)` change.
 
 6. **Commit**
 
@@ -63,11 +64,12 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 
 ---
 
-## Automatic git hook
+## Doc freshness is not a git hook
 
-`.git/hooks/pre-commit` calls `scripts/check-doc-freshness.sh` before every commit.
-
-The hook is **non-blocking for missing claude CLI** — it warns but does not abort the commit. It only aborts if the script itself crashes.
+Only `lint-staged` runs on the git pre-commit hook (`.husky/pre-commit`). Doc freshness
+runs **only when invoked** — via this command's step 5 or `npm run doc:check` — and is
+**warn-only**, so it never mutates files behind a commit. Auto-update is opt-in via
+`DOC_AUTO_UPDATE=1` and should be committed separately as `chore(docs)`.
 
 ---
 
