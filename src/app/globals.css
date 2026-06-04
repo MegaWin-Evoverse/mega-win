@@ -77,6 +77,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-feature: var(--card-feature);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -104,11 +105,14 @@
   --color-text-brand: var(--text-brand);
   --color-text-secondary: var(--text-secondary);
   --color-total-rewards-glow: var(--total-rewards-glow);
+  --color-feature-overlay: var(--feature-overlay);
+  --color-brand-btn-gradient-to: var(--brand-btn-gradient-to);
 }
 
 :root {
   --bg-page: #0a0d19;
   --bg-primary: #0e121c;
+  --card-feature: #0e1519;
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
@@ -129,6 +133,9 @@
   --daily-claimer-glow: #1dba4b;
   --daily-claimer-overlay-from: #0e3c1e;
   --total-rewards-glow: #040f06;
+  --feature-overlay: #131517;
+  --brand-btn-gradient-to: #2b303b;
+  --feature-btn-glow: rgba(34, 197, 94, 0.3);
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -167,6 +174,7 @@
 .dark {
   --bg-page: #0a0d19;
   --bg-primary: #0e121c;
+  --card-feature: #0e1519;
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
@@ -184,6 +192,9 @@
   --daily-claimer-glow: #1dba4b;
   --daily-claimer-overlay-from: #0e3c1e;
   --total-rewards-glow: #040f06;
+  --feature-overlay: #131517;
+  --brand-btn-gradient-to: #2b303b;
+  --feature-btn-glow: rgba(34, 197, 94, 0.3);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -315,4 +326,22 @@
   background-repeat: no-repeat;
   background-position: left center;
   background-size: auto, cover, cover;
+}
+
+.feature-glow-outer {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.28) 0%,
+    rgba(49, 255, 76, 0.08) 50%,
+    transparent 85%
+  );
+}
+
+.feature-glow-inner {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.58) 0%,
+    rgba(49, 255, 76, 0.18) 45%,
+    transparent 75%
+  );
 }
