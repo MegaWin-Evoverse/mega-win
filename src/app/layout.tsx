@@ -55,7 +55,7 @@ export default function RootLayout({
               <Header />
               <div className="flex-1 flex flex-row relative w-full pt-16">
                 <Sidebar />
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1 min-w-0 flex flex-col">
                   <div className="flex-1 flex flex-col">{children}</div>
                   <Footer />
                 </div>

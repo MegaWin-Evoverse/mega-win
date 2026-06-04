@@ -1,19 +1,31 @@
 import { useState, useEffect } from 'react';
 
 const MOBILE_BREAKPOINT = 768;
+const TABLET_BREAKPOINT = 1024;
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isTablet, setIsTablet] = useState<boolean>(false);
 
   useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const mobileMql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const tabletMql = window.matchMedia(`(max-width: ${TABLET_BREAKPOINT - 1}px)`);
+
     const onChange = () => {
-      setIsMobile(mql.matches);
+      const mobileMatches = mobileMql.matches;
+      setIsMobile(mobileMatches);
+      setIsTablet(tabletMql.matches && !mobileMatches);
     };
-    mql.addEventListener('change', onChange);
+
+    mobileMql.addEventListener('change', onChange);
+    tabletMql.addEventListener('change', onChange);
     onChange();
-    return () => mql.removeEventListener('change', onChange);
+
+    return () => {
+      mobileMql.removeEventListener('change', onChange);
+      tabletMql.removeEventListener('change', onChange);
+    };
   }, []);
 
-  return !!isMobile;
+  return { isMobile, isTablet };
 }

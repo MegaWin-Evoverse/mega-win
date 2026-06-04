@@ -87,6 +87,7 @@
 
   --color-brand-green-from: var(--brand-green-from);
   --color-brand-green-to: var(--brand-green-to);
+  --color-brand-green-rewards: var(--brand-green-rewards);
   --color-brand-dark: var(--brand-dark);
   --color-brand-border: var(--brand-border);
   --color-brand-bg: var(--brand-bg);
@@ -100,6 +101,9 @@
   --color-daily-claimer-bg: var(--daily-claimer-bg);
   --color-daily-claimer-glow: var(--daily-claimer-glow);
   --color-daily-claimer-overlay: var(--daily-claimer-overlay-from);
+  --color-text-brand: var(--text-brand);
+  --color-text-secondary: var(--text-secondary);
+  --color-total-rewards-glow: var(--total-rewards-glow);
 }
 
 :root {
@@ -108,6 +112,7 @@
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
+  --brand-green-rewards: #1bd167;
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
@@ -116,11 +121,14 @@
   --brand-text-light: #c7cbd4;
   --brand-text-muted: #566374;
   --brand-text-white: #fdfdfd;
+  --text-brand: var(--brand-green-to);
+  --text-secondary: var(--brand-text-light);
   --daily-claimer-bg: #09110e;
   --daily-claimer-shadow-color: #08923a;
   --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
   --daily-claimer-glow: #1dba4b;
   --daily-claimer-overlay-from: #0e3c1e;
+  --total-rewards-glow: #040f06;
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -162,6 +170,9 @@
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
+  --brand-green-rewards: #1bd167;
+  --text-brand: var(--brand-green-to);
+  --text-secondary: var(--brand-text-light);
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
@@ -172,6 +183,7 @@
   --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
   --daily-claimer-glow: #1dba4b;
   --daily-claimer-overlay-from: #0e3c1e;
+  --total-rewards-glow: #040f06;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -209,13 +221,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply text-foreground;
     background: var(--bg-page, #0a0d19);
   }
+
   html {
     @apply font-sans;
   }
+
   button,
   [role='button'] {
     cursor: pointer;
@@ -254,20 +269,16 @@
 }
 
 .hero-banner-bg {
-  background: linear-gradient(
-    84.47deg,
-    rgba(15, 22, 26, 0.94) 2.15%,
-    rgba(19, 21, 23, 0.94) 98.56%
-  );
+  background: linear-gradient(84.47deg,
+      rgba(15, 22, 26, 0.94) 2.15%,
+      rgba(19, 21, 23, 0.94) 98.56%);
 }
 
 .hero-radial-glow {
-  background: radial-gradient(
-    78.35% 190.25% at 64.43% 30.64%,
-    rgba(48, 223, 140, 0.15) 0%,
-    rgba(33, 173, 107, 0.03) 50%,
-    rgba(13, 110, 64, 0) 91.23%
-  );
+  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%,
+      rgba(48, 223, 140, 0.15) 0%,
+      rgba(33, 173, 107, 0.03) 50%,
+      rgba(13, 110, 64, 0) 91.23%);
 }
 
 .hero-ellipse-glow {
@@ -290,4 +301,14 @@
 
 .hero-chip-large-blur {
   transform: rotate(13.21deg);
+}
+
+.bg-total-rewards {
+  background-image:
+    url('/total-rewards/dollar-coins%201.png'),
+    linear-gradient(90.95deg, rgba(27, 209, 103, 0.1) 0%, rgba(0, 0, 0, 0) 53.02%),
+    linear-gradient(0deg, #11121A, #11121A);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: auto, cover, cover;
 }

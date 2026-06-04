@@ -27,9 +27,10 @@ export function Sidebar({
   onSupportClick,
   ...props
 }: Props) {
-  const { state, isMobile } = useSidebar();
+  const { state, isMobile, isTablet } = useSidebar();
   const isCollapsed = state === 'collapsed';
   const { isGamesOpen, onGamesToggle } = useSidebarMenu();
+  const isMobileOrTablet = isMobile || isTablet;
 
   return (
     <BaseSidebar
@@ -40,7 +41,7 @@ export function Sidebar({
       )}
       {...props}
     >
-      {!isMobile && <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />}
+      {!isMobileOrTablet && <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />}
       <SidebarContent>
         <SidebarHeaderSection />
         <SidebarMenuSection

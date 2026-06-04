@@ -16,7 +16,7 @@ const ARIA_HERO_SECTION = 'Hero banner';
 const ARIA_REGISTER_BUTTON = 'Register for an account';
 
 export function Hero({ onRegisterClick }: Props) {
-  const isMobile = useIsMobile();
+  const { isMobile } = useIsMobile();
   return (
     <section
       role="region"
