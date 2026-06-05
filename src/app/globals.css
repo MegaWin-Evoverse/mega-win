@@ -107,6 +107,8 @@
   --color-total-rewards-glow: var(--total-rewards-glow);
   --color-feature-overlay: var(--feature-overlay);
   --color-brand-btn-gradient-to: var(--brand-btn-gradient-to);
+  --color-promo-purple: var(--promo-purple);
+  --color-promo-red: var(--promo-red);
 }
 
 :root {
@@ -136,6 +138,8 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --promo-purple: #7e22ce;
+  --promo-red: #dc2626;
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -195,6 +199,8 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --promo-purple: #7e22ce;
+  --promo-red: #dc2626;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -344,4 +350,82 @@
     rgba(49, 255, 76, 0.18) 45%,
     transparent 75%
   );
+}
+
+/* Promo Cards & Campaigns Section */
+.bg-promo-gradient {
+  background: linear-gradient(162.65deg, #201e25 13.56%, #09080a 79.73%);
+}
+
+.border-promo-purple {
+  border-bottom: 1.5px solid var(--promo-purple);
+}
+
+.border-promo-red {
+  border-bottom: 1.5px solid var(--promo-red);
+}
+
+.shadow-promo-inset {
+  box-shadow: inset 0px 0.802416px 0px rgba(195, 255, 239, 0.2);
+}
+
+.promo-ellipse-6743-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.7) 4.92%,
+    rgba(36, 166, 199, 0.7) 34.46%,
+    rgba(106, 0, 255, 0.7) 91.82%
+  );
+  filter: blur(124.719px);
+}
+
+.promo-ellipse-6744-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(43, 6, 162, 0.3) 4.92%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
+  filter: blur(116.555px);
+}
+
+.promo-ellipse-6742-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.3) 4.92%,
+    rgba(36, 166, 199, 0.3) 34.46%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
+  filter: blur(100px);
+}
+
+.promo-ellipse-6742-yellow {
+  background: rgba(254, 241, 0, 0.62);
+  filter: blur(82.7px);
+}
+
+.promo-ellipse-6743-red {
+  background: #f42727;
+  filter: blur(165.4px);
+}
+
+.promo-ellipse-red-overlay {
+  background: rgba(255, 7, 11, 0.15);
+  filter: blur(100px);
+}
+
+.promo-ellipse-red-overlay-small {
+  background: rgba(255, 7, 11, 0.12);
+  filter: blur(40px);
+}
+
+.text-promo-purple {
+  color: var(--promo-purple);
+}
+
+.text-promo-red {
+  color: var(--promo-red);
+}
+
+.promo-cup-filter {
+  filter: hue-rotate(180deg);
 }

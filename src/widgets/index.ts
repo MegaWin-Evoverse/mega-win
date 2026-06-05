@@ -4,3 +4,4 @@ export { Sidebar } from './sidebar';
 export { Hero } from './hero';
 export { TotalRewards } from './total-rewards';
 export { Features } from './feature-section';
+export { ActiveCampaigns } from './active-campaigns';

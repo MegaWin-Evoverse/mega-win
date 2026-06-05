@@ -9,6 +9,10 @@ const cardVariants = cva('', {
       default:
         'group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl',
       feature: 'rounded-xl bg-card-feature border border-border-default/50 p-5',
+      promoPurple:
+        'rounded-xl bg-promo-gradient border-promo-purple shadow-promo-inset opacity-85 p-5 relative overflow-hidden select-none isolate',
+      promoRed:
+        'rounded-xl bg-promo-gradient border-promo-red shadow-promo-inset opacity-85 p-5 relative overflow-hidden select-none isolate',
     },
   },
   defaultVariants: {
