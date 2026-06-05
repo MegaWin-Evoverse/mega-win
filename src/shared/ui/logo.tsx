@@ -1,15 +1,14 @@
-import { cn } from "@/shared/lib/cn";
+import { cn } from '@/shared/lib/cn';
 
 interface Props {
   className?: string;
 }
 
-const BRAND_NAME = "MEGA WIN";
+const BRAND_NAME = 'MEGA WIN';
 
 export function Logo({ className }: Props) {
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-0.5 select-none", className)}>
-
+    <div className={cn('flex flex-col items-center justify-center gap-0.5 select-none', className)}>
       <svg
         viewBox="0 0 100 100"
         className="w-7 h-7 shrink-0"
@@ -17,7 +16,14 @@ export function Logo({ className }: Props) {
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <circle cx="50" cy="50" r="46" fill="var(--brand-black)" stroke="var(--brand-green-to)" strokeWidth="3" />
+        <circle
+          cx="50"
+          cy="50"
+          r="46"
+          fill="var(--brand-black)"
+          stroke="var(--brand-green-to)"
+          strokeWidth="3"
+        />
         <circle
           cx="50"
           cy="50"
