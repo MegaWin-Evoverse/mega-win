@@ -5,7 +5,6 @@ description: Creates a complete FSD slice — ui/ component, model/ hook, option
 ## Input
 
 If not provided — ask before creating:
-
 - Slice name (e.g. `user-profile`, `product-list`, `auth`)
 - Layer: `features/` | `entities/` | `widgets/` | `shared/`
 - What it does (one sentence)
@@ -18,7 +17,6 @@ If not provided — ask before creating:
 ### 1. Determine layer and structure
 
 **`features/<name>/`** — user-facing feature with logic:
-
 ```
 features/<name>/
   ui/
@@ -31,7 +29,6 @@ features/<name>/
 ```
 
 **`entities/<name>/`** — isolated state/types, no cross-entity deps:
-
 ```
 entities/<name>/
   model/
@@ -41,7 +38,6 @@ entities/<name>/
 ```
 
 **`widgets/<name>/`** — composed UI block:
-
 ```
 widgets/<name>/
   ui/
@@ -63,8 +59,8 @@ widgets/<name>/
 
 ```ts
 // features/user-profile/index.ts
-export { UserProfile } from './ui/UserProfile';
-export { useProfileForm } from './model/useProfileForm';
+export { UserProfile }    from './ui/UserProfile'
+export { useProfileForm } from './model/useProfileForm'
 // do NOT export internal helpers
 ```
 

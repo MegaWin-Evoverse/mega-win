@@ -1,7 +1,6 @@
 ---
-paths: ['src/features/**']
+paths: ["src/features/**"]
 ---
-
 # Layer: features
 
 Interactive features — user actions that involve business logic and may coordinate multiple entities.
@@ -9,7 +8,6 @@ Interactive features — user actions that involve business logic and may coordi
 ## Structure
 
 Each feature lives in its own slice:
-
 ```
 features/
   user-profile/

@@ -5,17 +5,16 @@ Audit naming in the current diff or specified files against `.claude/rules/namin
 ## Steps
 
 1. **Identify scope**
-
    ```bash
    git diff --staged --name-only
    git diff --name-only
    ```
-
    If no args — review the diff. If a path is given — review that file.
 
 2. **Check each file against naming rules**
 
    Flag any of these (driven by `.claude/rules/naming.md`):
+
    - **Generic handlers without subject** — `handleChange`, `handleClick` (no noun indicating what changes/is clicked)
    - **Vague state** — `data`, `result`, `value`, `items`, `isLoading` used without domain context (e.g. `isLoading` instead of `isFetchingUser`)
    - **Negative boolean flags** — `isDisabled`, `isNotVisible`, `isManualDisabled` (flip to affirmative: `canSubmit`, `isVisible`, `canManualSubmit`)
@@ -27,7 +26,6 @@ Audit naming in the current diff or specified files against `.claude/rules/namin
 3. **Report findings**
 
    Format:
-
    ```
    file.ts:42  handleChange → handleEmailChange   (generic handler — missing subject)
    store.ts:8  isLoading → isFetchingUser         (vague — loading what?)

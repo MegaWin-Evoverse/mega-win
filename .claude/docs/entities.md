@@ -34,18 +34,18 @@ Typical store shape:
 
 ```ts
 interface CounterState {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
-  reset: () => void;
+  count: number
+  increment: () => void
+  decrement: () => void
+  reset: () => void
 }
 ```
 
 **`index.ts`** re-exports only what downstream layers need:
 
 ```ts
-export { useCounterStore } from './model/store';
-export type { CounterState } from './model/types';
+export { useCounterStore } from './model/store'
+export type { CounterState } from './model/types'
 ```
 
 ---

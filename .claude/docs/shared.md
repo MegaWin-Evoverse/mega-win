@@ -21,13 +21,13 @@ src/shared/
 
 Components are built on `@base-ui/react` and follow shadcn conventions.
 
-| Component                  | File         | Notes                         |
-| -------------------------- | ------------ | ----------------------------- |
-| `Button`                   | `button.tsx` | Variants: default, icon, etc. |
-| `Input`                    | `input.tsx`  | Text input field              |
-| `Card`                     | `card.tsx`   | Container card                |
-| `Dialog` / `DialogTrigger` | `dialog.tsx` | Modal dialog                  |
-| `Select`                   | `select.tsx` | Dropdown select               |
+| Component | File | Notes |
+|-----------|------|-------|
+| `Button` | `button.tsx` | Variants: default, icon, etc. |
+| `Input` | `input.tsx` | Text input field |
+| `Card` | `card.tsx` | Container card |
+| `Dialog` / `DialogTrigger` | `dialog.tsx` | Modal dialog |
+| `Select` | `select.tsx` | Dropdown select |
 
 All imported via barrel: `import { Button, Input } from '@/shared/ui'`
 
@@ -35,10 +35,10 @@ All imported via barrel: `import { Button, Input } from '@/shared/ui'`
 
 ## lib/
 
-| File                  | Exports       | Purpose                                                   |
-| --------------------- | ------------- | --------------------------------------------------------- |
-| `cn.ts`               | `cn()`        | clsx + tailwind-merge utility for conditional class names |
-| `hooks/use-mobile.ts` | `useMobile()` | Detects mobile viewport via media query                   |
+| File | Exports | Purpose |
+|------|---------|---------|
+| `cn.ts` | `cn()` | clsx + tailwind-merge utility for conditional class names |
+| `hooks/use-mobile.ts` | `useMobile()` | Detects mobile viewport via media query |
 
 ---
 
@@ -47,11 +47,10 @@ All imported via barrel: `import { Button, Input } from '@/shared/ui'`
 ### `client.ts` — axios instance
 
 ```ts
-import api from '@/shared/api/client';
+import api from '@/shared/api/client'
 ```
 
 Exports a configured `axios` instance (`api`) with:
-
 - Base URL from environment config
 - Request/response interceptors (auth headers, error normalization)
 
