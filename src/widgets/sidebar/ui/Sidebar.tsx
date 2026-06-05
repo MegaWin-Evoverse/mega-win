@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { type ComponentProps } from "react";
+import { type ComponentProps } from 'react';
 
-import { cn } from "@/shared/lib/cn";
+import { cn } from '@/shared/lib/cn';
 import {
   Sidebar as BaseSidebar,
   SidebarContent,
   SidebarRail,
   SidebarTrigger,
   useSidebar,
-} from "@/shared/ui/sidebar";
-import { useSidebarMenu } from "../model/useSidebarMenu";
+} from '@/shared/ui/sidebar';
+import { useSidebarMenu } from '../model/useSidebarMenu';
 
-import { SidebarHeaderSection } from "./SidebarHeaderSection";
-import { SidebarMenuSection } from "./SidebarMenuSection";
-import { SidebarFooterSection } from "./SidebarFooterSection";
+import { SidebarHeaderSection } from './SidebarHeaderSection';
+import { SidebarMenuSection } from './SidebarMenuSection';
+import { SidebarFooterSection } from './SidebarFooterSection';
 
 interface Props extends ComponentProps<typeof BaseSidebar> {
   onSupportClick?: () => void;
@@ -23,7 +23,7 @@ interface Props extends ComponentProps<typeof BaseSidebar> {
 export function Sidebar({
   className,
   children,
-  collapsible = "icon",
+  collapsible = 'icon',
   onSupportClick,
   ...props
 }: Props) {
@@ -34,12 +34,13 @@ export function Sidebar({
   return (
     <BaseSidebar
       collapsible={collapsible}
-      className={cn("border-r border-border-default md:fixed md:top-16 md:bottom-0 md:h-auto", className)}
+      className={cn(
+        'border-r border-border-default md:fixed md:top-16 md:bottom-0 md:h-auto',
+        className
+      )}
       {...props}
     >
-      {!isMobile && (
-        <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />
-      )}
+      {!isMobile && <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />}
       <SidebarContent>
         <SidebarHeaderSection />
         <SidebarMenuSection
@@ -49,10 +50,7 @@ export function Sidebar({
         />
         {children}
       </SidebarContent>
-      <SidebarFooterSection
-        isCollapsed={isCollapsed}
-        onSupportClick={onSupportClick}
-      />
+      <SidebarFooterSection isCollapsed={isCollapsed} onSupportClick={onSupportClick} />
       <SidebarRail />
     </BaseSidebar>
   );

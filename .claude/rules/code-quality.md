@@ -7,7 +7,7 @@ These are hard rules; the `review` skill audits against them.
 
 ## TypeScript
 - NEVER `any` or `as any`. Type everything explicitly. Props interface named `Props`.
-- Prefer `interface`; empty `interface X extends Y {}` → `type X = Y`.
+- Props MUST use `interface`. Elsewhere pick by situation: `interface` for object/data structures, `type` for unions/intersections/aliases; empty `interface X extends Y {}` → `type X = Y`.
 
 ## Styling
 - NEVER inline `style={{}}` (exception: a dynamic CSS variable via `var()`).

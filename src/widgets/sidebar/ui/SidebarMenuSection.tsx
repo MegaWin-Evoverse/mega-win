@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { cn } from "@/shared/lib/cn";
+import Link from 'next/link';
+import { cn } from '@/shared/lib/cn';
 import {
   SidebarGroup,
   SidebarMenu,
@@ -8,10 +8,10 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
-} from "@/shared/ui/sidebar";
-import { SIDEBAR_MENU_ITEMS } from "../model/menu";
-import { MenuIcon } from "./MenuIcon";
-import { CaretIcon } from "./CaretIcon";
+} from '@/shared/ui/sidebar';
+import { SIDEBAR_MENU_ITEMS } from '../model/menu';
+import { MenuIcon } from './MenuIcon';
+import { CaretIcon } from './CaretIcon';
 
 interface Props {
   isCollapsed: boolean;
@@ -53,8 +53,8 @@ export function SidebarMenuSection({ isCollapsed, isGamesOpen, onGamesToggle }: 
                 {!isCollapsed && (
                   <div
                     className={cn(
-                      "grid transition-[grid-template-rows,opacity] duration-200 ease-in-out",
-                      isGamesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      'grid transition-[grid-template-rows,opacity] duration-200 ease-in-out',
+                      isGamesOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                     )}
                   >
                     <div className="overflow-hidden">
@@ -91,9 +91,7 @@ export function SidebarMenuSection({ isCollapsed, isGamesOpen, onGamesToggle }: 
                 render={<Link href={item.href} className="flex items-center gap-2" />}
                 className={cn(
                   MENU_BTN_BASE,
-                  isCollapsed
-                    ? MENU_BTN_COLLAPSED
-                    : 'h-11 px-4 py-3 flex items-center gap-2'
+                  isCollapsed ? MENU_BTN_COLLAPSED : 'h-11 px-4 py-3 flex items-center gap-2'
                 )}
               >
                 <MenuIcon name={item.iconName} className="flex-shrink-0" />

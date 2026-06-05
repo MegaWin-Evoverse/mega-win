@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Logo } from "@/shared/ui/logo";
-import { ROUTES, FOOTER_ARIA } from "@/shared/config";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Logo } from '@/shared/ui/logo';
+import { ROUTES, FOOTER_ARIA } from '@/shared/config';
 
 interface Props {
   className?: string;

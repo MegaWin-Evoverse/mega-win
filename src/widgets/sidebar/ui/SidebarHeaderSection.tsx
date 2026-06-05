@@ -1,6 +1,6 @@
-import { SidebarGroup } from "@/shared/ui/sidebar";
-import { DailyClaimerCard } from "./DailyClaimerCard";
-import { DailyClaimerCardCollapsed } from "./DailyClaimerCardCollapsed";
+import { SidebarGroup } from '@/shared/ui/sidebar';
+import { DailyClaimerCard } from './DailyClaimerCard';
+import { DailyClaimerCardCollapsed } from './DailyClaimerCardCollapsed';
 
 export function SidebarHeaderSection() {
   return (

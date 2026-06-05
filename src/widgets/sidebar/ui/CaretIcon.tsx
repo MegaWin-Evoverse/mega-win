@@ -1,7 +1,7 @@
-import { type ComponentProps } from "react";
-import { cn } from "@/shared/lib/cn";
+import { type ComponentProps } from 'react';
+import { cn } from '@/shared/lib/cn';
 
-interface Props extends ComponentProps<"svg"> {
+interface Props extends ComponentProps<'svg'> {
   isOpen: boolean;
 }
 
@@ -13,8 +13,8 @@ export function CaretIcon({ isOpen, className, ...props }: Props) {
       viewBox="0 0 20 20"
       fill="currentColor"
       className={cn(
-        "transition-transform duration-200 ease-in-out shrink-0",
-        isOpen ? "rotate-180" : "rotate-0",
+        'transition-transform duration-200 ease-in-out shrink-0',
+        isOpen ? 'rotate-180' : 'rotate-0',
         className
       )}
       {...props}

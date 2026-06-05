@@ -1,7 +1,7 @@
-import { Headset } from "lucide-react";
-import { cn } from "@/shared/lib/cn";
-import { Button } from "@/shared/ui/button";
-import { SidebarFooter } from "@/shared/ui/sidebar";
+import { Headset } from 'lucide-react';
+import { cn } from '@/shared/lib/cn';
+import { Button } from '@/shared/ui/button';
+import { SidebarFooter } from '@/shared/ui/sidebar';
 
 interface Props {
   isCollapsed: boolean;
@@ -17,8 +17,8 @@ export function SidebarFooterSection({ isCollapsed, onSupportClick }: Props) {
         onClick={onSupportClick}
         aria-label="Help & Support"
         className={cn(
-          "flex flex-row items-center gap-2 text-brand-text-white transition-all duration-200 hover:bg-border-default/60 w-full h-20 rounded-none",
-          isCollapsed ? "justify-center" : "justify-start px-4"
+          'flex flex-row items-center gap-2 text-brand-text-white transition-all duration-200 hover:bg-border-default/60 w-full h-20 rounded-none',
+          isCollapsed ? 'justify-center' : 'justify-start px-4'
         )}
       >
         <Headset className="w-5 h-5 flex-shrink-0 text-brand-text-white" />

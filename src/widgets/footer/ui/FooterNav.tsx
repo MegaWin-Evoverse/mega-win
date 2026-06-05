@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { FOOTER_ABOUT_LINKS, FOOTER_HEADERS } from "@/shared/config";
+import Link from 'next/link';
+import { FOOTER_ABOUT_LINKS, FOOTER_HEADERS } from '@/shared/config';
 
 interface Props {
   className?: string;
