@@ -107,9 +107,9 @@
   --brand-bg: #0e121c;
   --brand-ellipse: rgba(27, 209, 103, 0.24);
   --brand-black: #000000;
-  --brand-text-light: #C7CBD4;
+  --brand-text-light: #c7cbd4;
   --brand-text-muted: #566374;
-  --brand-text-white: #FDFDFD;
+  --brand-text-white: #fdfdfd;
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
