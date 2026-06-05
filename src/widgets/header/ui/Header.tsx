@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { Button } from "@/shared/ui/button";
-import { Logo } from "@/shared/ui/logo";
-import { ROUTES, BUTTON_LABELS } from "@/shared/config";
+import Link from 'next/link';
+import { Button } from '@/shared/ui/button';
+import { Logo } from '@/shared/ui/logo';
+import { ROUTES, BUTTON_LABELS } from '@/shared/config';
 
 interface Props {
   onButtonClick?: () => void;
 }
 
-const ARIA_LABEL_HEADER = "Main header";
-const ARIA_LABEL_BUTTON = "Play game";
-const ARIA_LABEL_LOGO_LINK = "Go to homepage";
+const ARIA_LABEL_HEADER = 'Main header';
+const ARIA_LABEL_BUTTON = 'Play game';
+const ARIA_LABEL_LOGO_LINK = 'Go to homepage';
 
 export function Header({ onButtonClick }: Props) {
   return (
