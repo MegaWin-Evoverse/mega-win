@@ -16,7 +16,7 @@ export function Header({ onButtonClick }: Props) {
     <header
       role="banner"
       aria-label={ARIA_LABEL_HEADER}
-      className="w-full h-16 bg-brand-bg border-b border-brand-border px-8 py-3 flex items-center justify-between z-50 shrink-0"
+      className="fixed top-0 left-0 w-full h-16 bg-brand-bg border-b border-brand-border px-8 py-3 flex items-center justify-between z-50 shrink-0"
     >
       <Link href={ROUTES.HOME} aria-label={ARIA_LABEL_LOGO_LINK} className="flex shrink-0">
         <Logo />
