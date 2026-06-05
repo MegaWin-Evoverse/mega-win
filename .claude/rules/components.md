@@ -1,13 +1,11 @@
 ---
-paths: ['src/**/*.tsx', 'src/**/*.ts']
+paths: ["src/**/*.tsx", "src/**/*.ts"]
 ---
-
 # Component Rules
 
 ## Server vs Client — Next.js App Router
 
 Every component is a **Server Component by default**. Add `'use client'` only when you need:
-
 - React hooks (`useState`, `useEffect`, `useRef`, etc.)
 - Browser APIs (`window`, `document`, etc.)
 - Event handlers (`onClick`, `onChange`, etc.)
@@ -16,18 +14,14 @@ Every component is a **Server Component by default**. Add `'use client'` only wh
 ```tsx
 // ✅ Server Component — no directive needed
 export function UserCard({ user }: Props) {
-  return <div>{user.name}</div>;
+  return <div>{user.name}</div>
 }
 
 // ✅ Client Component — directive required
-('use client');
+'use client'
 export function SubmitButton({ onSubmit }: Props) {
-  const isPending = useUserStore((s) => s.isPending);
-  return (
-    <Button disabled={isPending} onClick={onSubmit}>
-      Submit
-    </Button>
-  );
+  const isPending = useUserStore((s) => s.isPending)
+  return <Button disabled={isPending} onClick={onSubmit}>Submit</Button>
 }
 ```
 
@@ -54,8 +48,8 @@ Interface is always named `Props`, all fields explicitly typed:
 
 ```ts
 interface Props {
-  value: number;
-  onClick: () => void;
+  value: number
+  onClick: () => void
 }
 ```
 
@@ -79,12 +73,12 @@ function Input({ ref, ...props }: Props & { ref?: Ref<HTMLInputElement> }) {
 
 Components render only. Logic lives elsewhere:
 
-| What                        | Where                                         |
-| --------------------------- | --------------------------------------------- |
+| What | Where |
+|------|-------|
 | State, effects, store reads | `model/useComponentName.ts` in the same slice |
-| Data transformations        | `shared/lib/` utils                           |
-| API calls                   | `api/` in the slice                           |
-| Constants                   | top of file or `shared/config/constants.ts`   |
+| Data transformations | `shared/lib/` utils |
+| API calls | `api/` in the slice |
+| Constants | top of file or `shared/config/constants.ts` |
 
 ## No inline styles
 
@@ -116,7 +110,6 @@ NEVER use native HTML elements when a shadcn component exists:
 ```
 
 **`<button>` → `Button` mapping:**
-
 - Icon-only action → `variant="icon"`, `size="icon-xs"` / `size="icon"`
 - Toggle/tab option → `variant="ghost"`, `size="none"` + `className`
 - Drop zone / custom shape → `variant="ghost"`, `size="none"` + `className`

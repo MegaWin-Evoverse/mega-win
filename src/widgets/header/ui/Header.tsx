@@ -12,7 +12,7 @@ interface Props {
 }
 
 const ARIA_LABEL_HEADER = 'Main header';
-const ARIA_LABEL_BUTTON = 'Log in';
+const ARIA_LABEL_BUTTON = 'Play game';
 const ARIA_LABEL_LOGO_LINK = 'Go to homepage';
 const ARIA_LABEL_MENU_BUTTON = 'Toggle navigation menu';
 

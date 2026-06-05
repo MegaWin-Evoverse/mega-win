@@ -1,7 +1,6 @@
 ---
-paths: ['src/entities/**']
+paths: ["src/entities/**"]
 ---
-
 # Layer: entities
 
 Business entities — data shapes and their isolated state.
@@ -9,7 +8,6 @@ Business entities — data shapes and their isolated state.
 ## Structure
 
 Each entity lives in its own slice:
-
 ```
 entities/
   user/

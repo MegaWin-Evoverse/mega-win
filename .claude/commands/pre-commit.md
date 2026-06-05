@@ -8,18 +8,15 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 ## Steps
 
 1. **Check what changed**
-
    ```bash
    git diff --staged --name-only
    git diff --name-only
    ```
 
 2. **Run lint**
-
    ```bash
    npm run lint
    ```
-
    If errors — fix them before continuing.
 
 3. **Forbidden native elements check**
@@ -37,19 +34,15 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
    If any matches are found — list each `file:line` and **stop**. Do not proceed to commit.
 
 4. **Run tests** (if any exist)
-
    ```bash
    npm run test:related
    ```
-
    If tests fail — stop and explain which ones and why.
 
 5. **Check doc freshness** (automated)
-
    ```bash
    npm run doc:check
    ```
-
    This script automatically:
    - Compares changed `src/` files against `.claude/doc-mapping.json`
    - Calls `claude "Update file [doc] based on [src]"` for any stale doc or rules file
@@ -63,11 +56,9 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 6. **Commit**
 
    Only after lint, element checks, and tests pass:
-
    ```bash
    git commit -m "<type(scope): description>"
    ```
-
    Message describes WHAT and WHY, not HOW. Follow Conventional Commits.
 
 ---
@@ -89,7 +80,6 @@ npm run doc:audit
 ```
 
 Reports:
-
 - Missing doc/rules files listed in `doc-mapping.json`
 - `src/` directories not covered by any mapping pattern
 - Orphan rule files in `.claude/rules/` not referenced in the mapping
