@@ -9,7 +9,8 @@
 ```
 src/shared/
   ui/             ← shadcn components (built on @base-ui/react)
-  lib/            ← utilities and custom hooks
+  lib/            ← utilities (cn, etc.)
+  hooks/          ← generic custom hooks
   api/            ← axios instance and interceptors
   config/         ← constants and app-wide configuration
   types/          ← shared TypeScript types
@@ -38,7 +39,14 @@ All imported via barrel: `import { Button, Input } from '@/shared/ui'`
 | File | Exports | Purpose |
 |------|---------|---------|
 | `cn.ts` | `cn()` | clsx + tailwind-merge utility for conditional class names |
-| `hooks/use-mobile.ts` | `useMobile()` | Detects mobile viewport via media query |
+
+---
+
+## hooks/
+
+| File | Exports | Purpose |
+|------|---------|---------|
+| `use-mobile.ts` | `useIsMobile()` | Detects mobile viewport via media query |
 
 ---
 
