@@ -1,4 +1,4 @@
-import { Hero, TotalRewards, Features, ActiveCampaigns } from '@/widgets';
+import { Hero, TotalRewards, Features, ActiveCampaigns, GettingStarted } from '@/widgets';
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
         <ActiveCampaigns />
         <TotalRewards />
         <Features />
+        <GettingStarted />
       </div>
       <div className="flex-1 flex flex-col gap-6 p-6"></div>
     </main>
