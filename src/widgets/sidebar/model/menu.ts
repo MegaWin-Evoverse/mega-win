@@ -13,13 +13,13 @@ export type IconName =
   | 'plinko'
   | 'dice';
 
-export interface SidebarSubItem {
+interface SidebarSubItem {
   label: string;
   href: string;
   iconName: IconName;
 }
 
-export interface SidebarMenuItemConfig {
+interface SidebarMenuItemConfig {
   label: string;
   href: string;
   iconName: IconName;

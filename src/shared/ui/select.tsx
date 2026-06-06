@@ -1,5 +1,5 @@
 'use client';
-import { type ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { Select as SelectPrimitive } from '@base-ui/react/select';
 

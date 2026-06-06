@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { FaFacebookF, FaInstagram, FaXTwitter, FaTelegram, FaDiscord } from 'react-icons/fa6';
 import { SOCIAL_LINKS } from '@/shared/config';
 
