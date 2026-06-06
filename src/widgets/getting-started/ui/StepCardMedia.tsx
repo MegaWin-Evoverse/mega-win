@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { type StepCardData, GETTING_STARTED_CONSTANTS } from '../config/constants';
+import type { StepCardData } from '../model/types';
+import { GETTING_STARTED_CONSTANTS } from '../config/constants';
 import { MediaGlows } from './MediaGlows';
 
 interface Props {

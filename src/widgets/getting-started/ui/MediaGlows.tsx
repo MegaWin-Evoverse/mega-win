@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/cn';
-import { type StepCardData } from '../config/constants';
+import type { StepCardData } from '../model/types';
 
 interface Props {
   mediaVariant: StepCardData['mediaVariant'];
