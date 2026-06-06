@@ -5,18 +5,19 @@ import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { signInSchema, signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { ERROR_MESSAGE, ERROR_STATUS, PATHS } from './constants';
+import { ERROR_MESSAGE, PATHS } from './constants';
 import { useRecaptcha } from './useRecaptcha';
 import { authApi } from '@/shared/api/client';
 import type { AuthResponse, SignUpSchema } from './types';
 
-interface Props {
+interface UseAuthParams {
   type: 'sign-in' | 'sign-up';
 }
 
-export function useAuth({ type }: Props) {
+export function useAuth({ type }: UseAuthParams) {
   const { recaptchaToken, setRecaptchaToken, recaptchaKey, resetRecaptcha } = useRecaptcha();
-  const { setTokens, setVerificationToken } = useAuthStore();
+  const setVerificationToken = useAuthStore((state) => state.setVerificationToken);
+  const setEmail = useAuthStore((state) => state.setEmail);
   const schema = type === 'sign-in' ? signInSchema : signUpSchema;
 
   const {
@@ -46,18 +47,19 @@ export function useAuth({ type }: Props) {
 
       return response.data;
     },
-    onSuccess: (result) => {
-      if (type === 'sign-up' && result.verificationToken) {
-        setVerificationToken(result.verificationToken);
+    onSuccess: (result, data) => {
+      if (type === 'sign-in') {
+        toast.success('Welcome back!');
       }
 
-      if (result.accessToken && result.refreshToken) {
-        setTokens(result.accessToken, result.refreshToken);
+      if (type === 'sign-up' && result.verificationToken) {
+        setVerificationToken(result.verificationToken);
+        setEmail(data.email);
       }
     },
     onError: (error) => {
-      if (isAxiosError(error) && error.response?.status === ERROR_STATUS[type]) {
-        toast.error(ERROR_MESSAGE[type]);
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data?.error ?? ERROR_MESSAGE[type]);
       }
 
       resetRecaptcha();

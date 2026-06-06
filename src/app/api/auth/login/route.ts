@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { applyAuthCookies } from '@/features/auth/server';
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -13,10 +14,15 @@ export async function POST(request: Request) {
     body: JSON.stringify({ email: body.email, password: body.password }),
   });
 
-  if (response.status === 401) {
-    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+  if (!response.ok) {
+    const errorData = await response.json();
+
+    return NextResponse.json({ error: errorData.message }, { status: response.status });
   }
 
-  const data = await response.json();
-  return NextResponse.json(data, { status: response.status });
+  const nextResponse = NextResponse.json({ success: true }, { status: response.status });
+
+  applyAuthCookies(nextResponse, response.headers);
+
+  return nextResponse;
 }

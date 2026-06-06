@@ -1,52 +1,59 @@
+import { useCallback } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { verifyEmailSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { PATHS } from './constants';
-import { VerifyEmailSchema } from './types';
+import { PATHS, VERIFY_EMAIL_ERROR } from './constants';
+import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
 import { authApi } from '@/shared/api/client';
 
 export function useVerifyEmail() {
-  const { verificationToken, setTokens, clearVerificationToken } = useAuthStore();
+  const verificationToken = useAuthStore((state) => state.verificationToken);
+  const clearVerificationToken = useAuthStore((state) => state.clearVerificationToken);
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm<VerifyEmailSchema>({
     resolver: zodResolver(verifyEmailSchema),
     defaultValues: { code: '' },
   });
 
+  const code = watch('code');
+  const handleCodeChange = useCallback((value: string) => setValue('code', value), [setValue]);
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: VerifyEmailSchema) => {
-      const response = await authApi.post<{ accessToken: string; refreshToken: string }>(
-        PATHS['verify-email'],
-        {
-          verificationToken,
-          code: data.code,
-        }
-      );
+      const response = await authApi.post<{ success: boolean }>(PATHS['verify-email'], {
+        verificationToken,
+        code: data.code,
+      });
       return response.data;
     },
-    onSuccess: (result) => {
-      setTokens(result.accessToken, result.refreshToken);
+    onSuccess: () => {
+      clearVerificationToken();
     },
     onError: () => {
-      toast.error('Invalid or expired verification code');
+      toast.error(VERIFY_EMAIL_ERROR);
     },
   });
 
   const onSubmit = handleSubmit((data) => {
-    if (!verificationToken) return;
+    if (!verificationToken) {
+      return;
+    }
+
     mutate(data);
   });
 
   return {
     errors,
-    register,
+    code,
+    handleCodeChange,
     onSubmit,
     isPending,
     clearVerificationToken,

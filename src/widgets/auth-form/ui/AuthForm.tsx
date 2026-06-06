@@ -1,69 +1,43 @@
 'use client';
 
-import { useAuth, useAuthStore } from '@/features/auth';
-import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
-import { Recaptcha } from '@/shared/ui/recaptcha';
-import { BUTTON_TEXT } from '../model/constants';
-import { Error } from '@/shared/ui/error';
+import { useState } from 'react';
+import { useAuthStore } from '@/features/auth';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
+import { TAB_LABELS } from '../model/constants';
+import { AuthFormBody } from './AuthFormBody';
 import { VerifyEmailForm } from './VerifyEmailForm';
+import type { AuthTab } from '../model/types';
 
-interface Props {
-  type: 'sign-in' | 'sign-up';
-}
+export function AuthForm() {
+  const [activeTab, setActiveTab] = useState<AuthTab>('sign-in');
+  const { verificationToken, email } = useAuthStore();
 
-export function AuthForm({ type }: Props) {
-  const { errors, register, onSubmit, isPending, recaptchaKey, setRecaptchaToken } = useAuth({
-    type,
-  });
-
-  const verificationToken = useAuthStore((state) => state.verificationToken);
-
-  if (type === 'sign-up' && verificationToken) {
-    return <VerifyEmailForm />;
+  if (verificationToken) {
+    return <VerifyEmailForm email={email} />;
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      {type === 'sign-up' && (
-        <div className="flex flex-col gap-[8px] mb-[16px]">
-          <label className="text-background" htmlFor="username">
-            Username
-          </label>
-          <Input
-            id="username"
-            placeholder="Enter your username"
-            type="text"
-            {...register('username')}
-          />
-          {errors.username && <Error message={errors.username.message} />}
-        </div>
-      )}
-
-      <div className="flex flex-col gap-[8px] mb-[16px]">
-        <label className="text-background" htmlFor="email">
-          Email
-        </label>
-        <Input id="email" placeholder="your@email.com" type="email" {...register('email')} />
-
-        {errors.email && <Error message={errors.email.message} />}
-      </div>
-
-      <div className="flex flex-col gap-[8px] mb-[16px]">
-        <label className="text-background" htmlFor="password">
-          Password
-        </label>
-        <Input id="password" placeholder="******" type="password" {...register('password')} />
-        {errors.password && <Error message={errors.password.message} />}
-      </div>
-
-      <div className="mb-[16px]">
-        <Recaptcha key={recaptchaKey} onChange={setRecaptchaToken} />
-      </div>
-
-      <Button className="mb-[30px]" type="submit" disabled={isPending}>
-        {BUTTON_TEXT[type]}
-      </Button>
-    </form>
+    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as AuthTab)}>
+      <TabsList className="w-full mb-6 h-[60px] gap-1 rounded-[12px] bg-background/10 p-1">
+        <TabsTrigger
+          value="sign-in"
+          className="h-[52px] flex-1 rounded-[10px] text-base font-medium"
+        >
+          {TAB_LABELS['sign-in']}
+        </TabsTrigger>
+        <TabsTrigger
+          value="sign-up"
+          className="h-[52px] flex-1 rounded-[10px] text-base font-medium"
+        >
+          {TAB_LABELS['sign-up']}
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="sign-in">
+        <AuthFormBody type="sign-in" />
+      </TabsContent>
+      <TabsContent value="sign-up">
+        <AuthFormBody type="sign-up" />
+      </TabsContent>
+    </Tabs>
   );
 }
