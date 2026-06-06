@@ -9,7 +9,7 @@ Generic, reusable building blocks with zero domain knowledge.
 
 - `ui/` — shadcn/ui components (Button, Input, etc.)
 - `lib/cn.ts` — `cn()` helper (clsx + tailwind-merge)
-- `lib/hooks/` — generic hooks (useDebounce, useMediaQuery, etc.)
+- `hooks/` — generic hooks (useMobile, useDebounce, etc.) — kept directly under `shared/`, not nested in `lib/`
 - `api/client.ts` — base axios API client
 
 ## Rules
