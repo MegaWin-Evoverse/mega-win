@@ -1,21 +1,4 @@
-export interface CampaignDecoration {
-  src: string;
-  width: number;
-  height: number;
-  className: string;
-}
-
-export interface CampaignCardData {
-  id: string;
-  variant: 'promoPurple' | 'promoRed';
-  subtitle: string;
-  title: string;
-  promoCode?: string;
-  useCodeLabel?: string;
-  endTimeString: string;
-  logoSrc?: string;
-  decorations: readonly CampaignDecoration[];
-}
+import type { CampaignCardData } from '../model/types';
 
 export const CAMPAIGN_IDS = {
   FORTUNE_BONUS: 'fortune-bonus',

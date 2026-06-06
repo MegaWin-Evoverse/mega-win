@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import { Card } from '@/shared/ui/card';
 import { useCampaignCard } from '../model/useCampaignCard';
-import { type CampaignCardData, CAMPAIGN_CONSTANTS, CAMPAIGN_IDS } from '../config/constants';
+import type { CampaignCardData } from '../model/types';
+import { CAMPAIGN_CONSTANTS, CAMPAIGN_IDS } from '../config/constants';
 import { cn } from '@/shared/lib/cn';
 import { CampaignGlows } from './CampaignGlows';
 import { CampaignPromoBlock } from './CampaignPromoBlock';

@@ -35,6 +35,7 @@ These are hard rules; the `review` skill audits against them.
 ## Architecture
 
 - FSD layer imports downward only; entities never import entities; import slices via their public `index.ts`.
+- Slice `type`/`interface` definitions live in `model/types.ts`, not in `config/`. `config/` holds only static values (constants, IDs, data arrays) and imports any types it needs from `model/types`.
 
 ## Components/hooks
 
