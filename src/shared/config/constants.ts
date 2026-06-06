@@ -1,6 +1,8 @@
 export const BUTTON_LABELS = {
   LOG: 'Log In',
   PLAY: 'Play',
+  REG: 'Register',
+  CLAIM: 'Claim',
 } as const;
 
 export const FOOTER_ABOUT_LINKS = [

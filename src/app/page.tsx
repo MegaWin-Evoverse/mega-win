@@ -1,9 +1,10 @@
+import { Hero } from '@/widgets';
+
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-6">
-      <h1 className="font-outfit text-[48px] font-black uppercase leading-[100%] tracking-[0px] text-white">
-        Main Page
-      </h1>
+    <main className="flex-1 flex flex-col w-full">
+      <Hero />
+      <div className="flex-1 flex flex-col gap-6 p-6"></div>
     </main>
   );
 }
