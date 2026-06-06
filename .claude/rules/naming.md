@@ -15,6 +15,8 @@ A reader should understand the business domain from the name alone — without r
 | Category | Convention | Example |
 |----------|-----------|---------|
 | Folders | kebab-case | `user-profile/`, `product-list/` |
+| Files (non-component) | camelCase | `useUserProfile.ts`, `getSocialIcon.ts`, `constants.ts` |
+| Component files | PascalCase | `UserCard.tsx`, `ProductList.tsx` |
 | Components | PascalCase | `UserCard`, `ProductList` |
 | Hooks | `useSomething` | `useUserProfile`, `useProductList` |
 | Zustand stores | `use<Domain>Store` | `useAuthStore`, `useCounterStore` |

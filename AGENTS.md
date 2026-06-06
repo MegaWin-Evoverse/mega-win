@@ -78,7 +78,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ---
 
 # Naming Conventions
-- Folders: `kebab-case`
+- Folders: `kebab-case` (kebab-case is for folders ONLY)
+- Files: `camelCase` (e.g. `useAuth.ts`, `getSocialIcon.ts`, `constants.ts`) — except component files, which are `PascalCase` (e.g. `UserCard.tsx`)
 - Components: `PascalCase`
 - Hooks: `useSomething`
 - Zustand stores: `use<Domain>Store` (e.g. `useAuthStore`)
