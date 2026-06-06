@@ -1,6 +1,6 @@
 import { ROUTES } from '@/shared/config';
 
-export interface FeatureDecoration {
+interface FeatureDecoration {
   src: string;
   width: number;
   height: number;

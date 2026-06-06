@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Anek_Bangla, Space_Grotesk, Figtree, Outfit } from 'next/font/google';
 import { GeistSans } from 'geist/font/sans';

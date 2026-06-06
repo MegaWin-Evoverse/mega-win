@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib/cn';
 import { ChevronLeftIcon } from '@/shared/ui/ChevronLeftIcon';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
-import { type FeatureCardData } from '../config/constants';
+import type { FeatureCardData } from '../config/constants';
 
 interface Props {
   card: FeatureCardData;
