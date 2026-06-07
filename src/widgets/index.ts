@@ -7,3 +7,4 @@ export { Features } from './feature-section';
 export { ActiveCampaigns } from './active-campaigns';
 export { GettingStarted } from './getting-started';
 export { GameCards } from './games-cards';
+export { MonthlyLeaderboard } from './monthly-leaderboard';
