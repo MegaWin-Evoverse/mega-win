@@ -1,4 +1,4 @@
-import { SectionHeader } from '@/shared/ui/section-header';
+import { SectionTitle } from '@/shared/ui/section-title';
 import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../config/constants';
 import { GameCard } from './GameCard';
 
@@ -8,7 +8,7 @@ export function GameCards() {
       aria-label={GAME_CARDS_CONSTANTS.SECTION_ARIA_LABEL}
       className="flex w-full flex-col gap-4"
     >
-      <SectionHeader
+      <SectionTitle
         title={GAME_CARDS_CONSTANTS.SECTION_TITLE}
         iconSrc={GAME_CARDS_CONSTANTS.ICON_SRC}
         iconWidth={GAME_CARDS_CONSTANTS.ICON_WIDTH}

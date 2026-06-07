@@ -6,6 +6,7 @@ import {
   GettingStarted,
   GameCards,
   MonthlyLeaderboard,
+  FAQ,
 } from '@/widgets';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <GettingStarted />
         <GameCards />
         <MonthlyLeaderboard />
+        <FAQ />
       </div>
       <div className="flex-1 flex flex-col gap-6 p-6"></div>
     </main>
