@@ -1,13 +1,11 @@
-import {
-  Hero,
-  TotalRewards,
-  Features,
-  ActiveCampaigns,
-  GettingStarted,
-  GameCards,
-  MonthlyLeaderboard,
-  FAQ,
-} from '@/widgets';
+import { Hero } from '@/widgets/hero';
+import { TotalRewards } from '@/widgets/total-rewards';
+import { Features } from '@/widgets/feature-section';
+import { ActiveCampaigns } from '@/widgets/active-campaigns';
+import { GettingStarted } from '@/widgets/getting-started';
+import { GameCards } from '@/widgets/games-cards';
+import { MonthlyLeaderboard } from '@/widgets/monthly-leaderboard';
+import { FAQ } from '@/widgets/faq';
 
 export default function Home() {
   return (
