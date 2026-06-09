@@ -22,13 +22,13 @@ import { Separator } from '@/shared/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip';
-import { PanelLeftIcon } from 'lucide-react';
+import { ChevronLeftIcon } from '@/shared/ui/ChevronLeftIcon';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '16rem';
+const SIDEBAR_WIDTH = '227px';
 const SIDEBAR_WIDTH_MOBILE = '18rem';
-const SIDEBAR_WIDTH_ICON = '3rem';
+const SIDEBAR_WIDTH_ICON = '84px';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
 type SidebarContextProps = {
@@ -38,6 +38,7 @@ type SidebarContextProps = {
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
+  isTablet: boolean;
   toggleSidebar: () => void;
 };
 
@@ -65,7 +66,7 @@ function SidebarProvider({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
-  const isMobile = useIsMobile();
+  const { isMobile, isTablet } = useIsMobile();
   const [openMobile, setOpenMobile] = useState(false);
 
   // This is the internal state of the sidebar.
@@ -90,8 +91,9 @@ function SidebarProvider({
 
   // Helper to toggle the sidebar.
   const toggleSidebar = useCallback(() => {
-    return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
-  }, [isMobile, setOpen, setOpenMobile]);
+    const isMobileOrTablet = isMobile || isTablet;
+    return isMobileOrTablet ? setOpenMobile((open) => !open) : setOpen((open) => !open);
+  }, [isMobile, isTablet, setOpen, setOpenMobile]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   useEffect(() => {
@@ -116,11 +118,12 @@ function SidebarProvider({
       open,
       setOpen,
       isMobile,
+      isTablet,
       openMobile,
       setOpenMobile,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [state, open, setOpen, isMobile, isTablet, openMobile, setOpenMobile, toggleSidebar]
   );
 
   return (
@@ -159,7 +162,7 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, isTablet, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === 'none') {
     return (
@@ -176,7 +179,7 @@ function Sidebar({
     );
   }
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         <SheetContent
@@ -249,22 +252,31 @@ function Sidebar({
 }
 
 function SidebarTrigger({ className, onClick, ...props }: ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, state } = useSidebar();
+  const isCollapsed = state === 'collapsed';
 
   return (
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
-      size="icon-sm"
-      className={cn(className)}
+      size="none"
+      className={cn(
+        'sidebar-menu-btn-custom flex items-center justify-center w-10 h-10 rounded-lg text-brand-text-white hover:text-brand-text-white/80 transition-all duration-200 cursor-pointer shadow-md',
+        className
+      )}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <ChevronLeftIcon
+        className={cn(
+          'w-5 h-5 transition-transform duration-200',
+          isCollapsed ? 'rotate-180' : 'rotate-0'
+        )}
+      />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
@@ -360,7 +372,7 @@ function SidebarContent({ className, ...props }: ComponentProps<'div'>) {
       data-slot="sidebar-content"
       data-sidebar="content"
       className={cn(
-        'no-scrollbar flex min-h-0 flex-1 flex-col gap-0 overflow-auto group-data-[collapsible=icon]:overflow-hidden',
+        'no-scrollbar flex min-h-0 flex-1 flex-col gap-0 overflow-auto [overflow-anchor:none] group-data-[collapsible=icon]:overflow-hidden',
         className
       )}
       {...props}

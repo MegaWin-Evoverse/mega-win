@@ -22,6 +22,7 @@ description: Prepares and makes a git commit. Analyzes changes, writes a correct
 ```
 
 **Types:**
+
 - `feat` — new feature or behavior
 - `fix` — bug fix
 - `refactor` — restructuring without behavior change
@@ -30,6 +31,7 @@ description: Prepares and makes a git commit. Analyzes changes, writes a correct
 - `chore` — tooling, config, dependencies
 
 **Examples:**
+
 ```
 feat(auth): add Google login support
 fix(shared): handle expired access token
@@ -43,14 +45,14 @@ chore: configure eslint rules
 
 Branches must follow the pattern `type/kebab-words`:
 
-| Prefix          | When to use                    |
-|-----------------|-------------------------------|
-| `feature/`      | new feature work               |
-| `fix/`          | bug fix                        |
-| `refactor/`     | code restructuring             |
-| `documentation/`| docs only                      |
-| `test/`         | test additions/changes         |
-| `chore/`        | tooling, config, dependencies  |
+| Prefix           | When to use                   |
+| ---------------- | ----------------------------- |
+| `feature/`       | new feature work              |
+| `fix/`           | bug fix                       |
+| `refactor/`      | code restructuring            |
+| `documentation/` | docs only                     |
+| `test/`          | test additions/changes        |
+| `chore/`         | tooling, config, dependencies |
 
 Examples: `feature/google-auth`, `fix/token-refresh`, `chore/eslint-setup`
 
