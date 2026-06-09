@@ -9,16 +9,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/80',
-        main: 'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm',
+        main: 'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
         outline:
           'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
         ghost:
           'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
+        tab: 'bg-transparent hover:bg-transparent dark:hover:bg-transparent',
         destructive:
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
+        chip: 'game-chip h-7 min-w-7 rounded-[6.4px] px-1.5 font-outfit text-xs font-semibold hover:opacity-80 transition-all',
+        action:
+          'bg-border-default hover:bg-border-default/80 border-0 active:not-aria-[haspopup]:translate-y-px transition-all font-outfit text-base font-semibold text-brand-text-white rounded-lg',
+        'action-muted':
+          'btn-action-secondary hover:brightness-110 active:not-aria-[haspopup]:translate-y-px transition-all font-outfit text-lg font-medium text-brand-text-white rounded-lg',
       },
       size: {
         default:
@@ -33,6 +39,8 @@ const buttonVariants = cva(
           'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
         'icon-lg': 'size-9',
         none: '',
+        play: 'h-12 w-full px-6 text-lg font-bold rounded-lg',
+        action: 'h-12 px-6 text-base font-semibold rounded-lg',
       },
     },
     defaultVariants: {

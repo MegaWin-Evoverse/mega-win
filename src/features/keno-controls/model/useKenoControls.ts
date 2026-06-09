@@ -2,68 +2,65 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { GAME_PANEL_TAB } from '@/shared/config';
 import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
-import { PLINKO_DEFAULTS, PLINKO_LABELS } from '../config/constants';
-import { usePlinkoStore } from './plinkoStore';
+import { KENO_DEFAULTS } from '../config/constants';
+import { useKenoStore } from './kenoStore';
 
-export function usePlinkoControls() {
+export function useKenoControls() {
   const {
     activeTab,
     betAmount,
     balance,
     risk,
-    rows,
     numberOfBets,
+    isBetActive,
     setTab,
     setBetAmount,
     setRisk,
-    setRows,
     setNumberOfBets,
     betHalf,
     betDouble,
     betMax,
+    clearTable,
+    autoPick,
     normalizeBetAmount,
-  } = usePlinkoStore(
+  } = useKenoStore(
     useShallow((state) => ({
       activeTab: state.activeTab,
       betAmount: state.betAmount,
       balance: state.balance,
       risk: state.risk,
-      rows: state.rows,
       numberOfBets: state.numberOfBets,
+      isBetActive: state.isBetActive,
       setTab: state.setTab,
       setBetAmount: state.setBetAmount,
       setRisk: state.setRisk,
-      setRows: state.setRows,
       setNumberOfBets: state.setNumberOfBets,
       betHalf: state.betHalf,
       betDouble: state.betDouble,
       betMax: state.betMax,
+      clearTable: state.clearTable,
+      autoPick: state.autoPick,
       normalizeBetAmount: state.normalizeBetAmount,
     }))
   );
 
-  function handleRowsChange(value: number | readonly number[]) {
-    setRows(typeof value === 'number' ? value : value[0]);
-  }
-
   const { handleNumberOfBetsChange, handleInfinityClick } = useNumberOfBets(
     setNumberOfBets,
-    PLINKO_DEFAULTS.NUMBER_OF_BETS
+    KENO_DEFAULTS.NUMBER_OF_BETS
   );
 
   const isAutoMode = activeTab === GAME_PANEL_TAB.AUTO;
-  const actionButtonLabel = isAutoMode ? PLINKO_LABELS.START_AUTOBET : PLINKO_LABELS.BET;
-  const isActionButtonDisabled = parseFloat(betAmount) <= 0 || isNaN(parseFloat(betAmount));
+  const isActionButtonDisabled =
+    !isBetActive || parseFloat(betAmount) <= 0 || isNaN(parseFloat(betAmount));
 
   return {
     activeTab,
     betAmount,
     balance,
     risk,
-    rows,
     numberOfBets,
+    isBetActive,
     isAutoMode,
-    actionButtonLabel,
     isActionButtonDisabled,
     setTab,
     setBetAmount,
@@ -71,7 +68,8 @@ export function usePlinkoControls() {
     betHalf,
     betDouble,
     betMax,
-    handleRowsChange,
+    clearTable,
+    autoPick,
     handleNumberOfBetsChange,
     handleInfinityClick,
     onBetBlur: normalizeBetAmount,

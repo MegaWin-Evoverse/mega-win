@@ -1,5 +1,6 @@
-import { UnderConstruction } from '@/shared/ui/under-construction';
+import { GameLayout } from '@/widgets/game-layout';
+import { RouletteControls } from '@/widgets/roulette-game';
 
 export default function RoulettePage() {
-  return <UnderConstruction title="Roulette" />;
+  return <GameLayout controls={<RouletteControls />} />;
 }

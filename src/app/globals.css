@@ -112,6 +112,15 @@
   --color-gs-media: var(--gs-media);
   --color-gs-content: var(--gs-content);
   --color-gs-card-border: var(--gs-card-border);
+  --color-button-brand-bg-dark: var(--button-brand-bg-dark);
+  --color-surface-inset: var(--surface-inset);
+  --color-chip-text-muted: var(--chip-text-muted);
+  --color-btn-disabled-bg: var(--btn-disabled-bg);
+  --color-risk-classic: var(--risk-classic);
+  --color-risk-low: var(--risk-low);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-high: var(--risk-high);
+  --color-chip-active-glow: var(--chip-active-glow);
 }
 
 :root {
@@ -179,6 +188,15 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.708 0 0);
+  --button-brand-bg-dark: oklch(0.38 0.12 155);
+  --surface-inset: oklch(0.16 0.02 263);
+  --chip-text-muted: oklch(0.50 0.02 265);
+  --btn-disabled-bg: oklch(0.34 0.03 255);
+  --risk-classic: oklch(0.62 0.20 255);
+  --risk-low: oklch(0.62 0.16 145);
+  --risk-medium: oklch(0.87 0.17 92);
+  --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.70 0.15 162);
 }
 
 .dark {
@@ -241,6 +259,15 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.556 0 0);
+  --button-brand-bg-dark: oklch(0.38 0.12 155);
+  --surface-inset: oklch(0.16 0.02 263);
+  --chip-text-muted: oklch(0.50 0.02 265);
+  --btn-disabled-bg: oklch(0.34 0.03 255);
+  --risk-classic: oklch(0.62 0.20 255);
+  --risk-low: oklch(0.62 0.16 145);
+  --risk-medium: oklch(0.87 0.17 92);
+  --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.70 0.15 162);
 }
 
 @layer base {
@@ -295,20 +322,16 @@
 }
 
 .hero-banner-bg {
-  background: linear-gradient(
-    84.47deg,
-    rgba(15, 22, 26, 0.94) 2.15%,
-    rgba(19, 21, 23, 0.94) 98.56%
-  );
+  background: linear-gradient(84.47deg,
+      rgba(15, 22, 26, 0.94) 2.15%,
+      rgba(19, 21, 23, 0.94) 98.56%);
 }
 
 .hero-radial-glow {
-  background: radial-gradient(
-    78.35% 190.25% at 64.43% 30.64%,
-    rgba(48, 223, 140, 0.15) 0%,
-    rgba(33, 173, 107, 0.03) 50%,
-    rgba(13, 110, 64, 0) 91.23%
-  );
+  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%,
+      rgba(48, 223, 140, 0.15) 0%,
+      rgba(33, 173, 107, 0.03) 50%,
+      rgba(13, 110, 64, 0) 91.23%);
 }
 
 .hero-ellipse-glow {
@@ -344,21 +367,17 @@
 }
 
 .feature-glow-outer {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.28) 0%,
-    rgba(49, 255, 76, 0.08) 50%,
-    transparent 85%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.28) 0%,
+      rgba(49, 255, 76, 0.08) 50%,
+      transparent 85%);
 }
 
 .feature-glow-inner {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.58) 0%,
-    rgba(49, 255, 76, 0.18) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.58) 0%,
+      rgba(49, 255, 76, 0.18) 45%,
+      transparent 75%);
 }
 
 /* Promo Cards & Campaigns Section */
@@ -379,31 +398,25 @@
 }
 
 .promo-ellipse-6743-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.7) 4.92%,
-    rgba(36, 166, 199, 0.7) 34.46%,
-    rgba(106, 0, 255, 0.7) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.7) 4.92%,
+      rgba(36, 166, 199, 0.7) 34.46%,
+      rgba(106, 0, 255, 0.7) 91.82%);
   filter: blur(124.719px);
 }
 
 .promo-ellipse-6744-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(43, 6, 162, 0.3) 4.92%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(43, 6, 162, 0.3) 4.92%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(116.555px);
 }
 
 .promo-ellipse-6742-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.3) 4.92%,
-    rgba(36, 166, 199, 0.3) 34.46%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.3) 4.92%,
+      rgba(36, 166, 199, 0.3) 34.46%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(100px);
 }
 
@@ -466,33 +479,40 @@
 }
 
 .gs-sparkle {
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(214, 189, 255, 0.5) 0%,
-    rgba(80, 91, 229, 0.5) 100%
-  );
+  background: radial-gradient(50% 50% at 50% 50%,
+      rgba(214, 189, 255, 0.5) 0%,
+      rgba(80, 91, 229, 0.5) 100%);
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
 }
 
 /* Game Control Panel */
+.btn-action-secondary {
+  background: linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%);
+  border: 1px solid var(--border-default);
+}
+
 .game-tab-active {
   background: linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%);
 }
 
 .game-chip {
-  background: #1b1f26;
-  border: 0.8px solid rgba(63, 74, 89, 0.5);
-  color: #6b7280;
+  background: var(--border-default);
+  border: 0.8px solid color-mix(in oklch, var(--btn-disabled-bg) 50%, transparent);
+  color: var(--chip-text-muted);
+}
+
+.text-risk-classic {
+  color: var(--risk-classic);
 }
 
 .text-risk-low {
-  color: #16a34a;
+  color: var(--risk-low);
 }
 
 .text-risk-medium {
-  color: #facc15;
+  color: var(--risk-medium);
 }
 
 .text-risk-high {
-  color: #dc2626;
+  color: var(--risk-high);
 }

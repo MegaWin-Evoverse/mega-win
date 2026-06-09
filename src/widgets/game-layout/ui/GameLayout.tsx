@@ -1,7 +1,6 @@
 import { type ReactNode } from 'react';
 
 import { cn } from '@/shared/lib/cn';
-import { GamePanel } from './GamePanel';
 
 interface Props {
   controls: ReactNode;
@@ -13,11 +12,11 @@ export function GameLayout({ controls, gameField, className }: Props) {
   return (
     <div
       className={cn(
-        'mx-auto flex w-full max-w-[1017px] flex-col overflow-hidden lg:h-[668px] lg:flex-row lg:rounded-[16px]',
+        ' mx-auto flex w-full max-w-[1017px] flex-col overflow-hidden lg:h-[668px] lg:flex-row lg:rounded-[16px]',
         className
       )}
     >
-      <GamePanel controls={controls} />
+      {controls}
       <div className="order-first min-h-[320px] w-full flex-1 bg-bg-primary lg:order-none lg:min-h-0">
         {gameField}
       </div>

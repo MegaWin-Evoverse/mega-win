@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { formatAmount } from '@/shared/lib/format-amount';
-import { COIN_ICON } from '../config/constants';
+import { COIN_ICON } from '@/shared/config';
 
 interface Props {
   balance: number;

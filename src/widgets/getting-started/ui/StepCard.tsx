@@ -63,6 +63,7 @@ export function StepCard({ card }: Props) {
         <Button
           variant="main"
           size="none"
+          nativeButton={false}
           render={<Link href={href} />}
           className="flex h-12 w-full items-center justify-center rounded-lg font-outfit text-lg font-medium"
         >

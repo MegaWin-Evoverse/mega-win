@@ -1,3 +1,5 @@
+import { GAME_BALANCE } from '@/shared/config';
+
 export const PLINKO_RISK = {
   LOW: 'low',
   MEDIUM: 'medium',
@@ -22,4 +24,14 @@ export const PLINKO_ROWS = {
 export const PLINKO_LABELS = {
   RISK: 'Risk',
   ROWS: 'Rows',
+  START_AUTOBET: 'Start autobet',
+  BET: 'Bet',
 } as const;
+
+export const PLINKO_DEFAULTS = {
+  BALANCE: GAME_BALANCE,
+  BET_AMOUNT_TEXT: '0.00',
+  NUMBER_OF_BETS: '0',
+} as const;
+
+export { BET_AMOUNT_DECIMALS, BET_AMOUNT_STEP } from '@/shared/config';

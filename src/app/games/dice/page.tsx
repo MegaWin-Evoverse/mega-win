@@ -1,5 +1,6 @@
-import { UnderConstruction } from '@/shared/ui/under-construction';
+import { GameLayout } from '@/widgets/game-layout';
+import { DiceControls } from '@/widgets/dice-game';
 
 export default function DicePage() {
-  return <UnderConstruction title="Dice" />;
+  return <GameLayout controls={<DiceControls />} />;
 }
