@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { useState } from 'react';
 import { BetsList } from './BetsList';
-import { useBetsStoryQuery } from '@/entity/bets-story/model/useBetsStoryQuery';
+import { useBetsStoryQuery } from '@/entities/bets-story/model/useBetsStoryQuery';
 import { TAB_LABELS, TAB_PATHS } from '../model/constants';
 import type { Path } from '../model/types';
 
