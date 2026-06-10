@@ -15,5 +15,4 @@ export const COLUMN_HEADERS = {
   BET: 'Bet',
   MULTIPLIER: 'Multiplier',
   PRIZE: 'Prize',
-  TIME: 'Time',
 } as const;

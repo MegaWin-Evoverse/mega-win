@@ -12,25 +12,23 @@ export function BetsStory() {
   const { data: bets = [] } = useBetsStoryQuery(activePath);
 
   return (
-    <>
-      <Tabs
-        className="w-full max-w-[1000px]"
-        value={activePath}
-        onValueChange={(value) => setActivePath(value as Path)}
-      >
-        <TabsList variant="bets">
-          {TAB_PATHS.map((path) => (
-            <TabsTrigger key={path} value={path}>
-              {TAB_LABELS[path]}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+    <Tabs
+      className="w-full max-w-[1000px]"
+      value={activePath}
+      onValueChange={(value) => setActivePath(value as Path)}
+    >
+      <TabsList variant="bets">
         {TAB_PATHS.map((path) => (
-          <TabsContent key={path} value={path}>
-            <BetsList bets={bets} />
-          </TabsContent>
+          <TabsTrigger key={path} value={path}>
+            {TAB_LABELS[path]}
+          </TabsTrigger>
         ))}
-      </Tabs>
-    </>
+      </TabsList>
+      {TAB_PATHS.map((path) => (
+        <TabsContent key={path} value={path}>
+          <BetsList bets={bets} />
+        </TabsContent>
+      ))}
+    </Tabs>
   );
 }
