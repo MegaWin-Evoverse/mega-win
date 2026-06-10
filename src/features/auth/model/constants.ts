@@ -11,6 +11,10 @@ export const ERROR_MESSAGE = {
 
 export const VERIFY_EMAIL_ERROR = 'Invalid or expired verification code';
 
+export const VERIFY_EMAIL_FIELDS = {
+  code: 'code',
+} as const;
+
 export const ACCESS_TOKEN_MAX_AGE = 600;
 
 export const REFRESH_TOKEN_MAX_AGE = 259_200;

@@ -1,10 +1,9 @@
-import { useCallback } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { verifyEmailSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { PATHS, VERIFY_EMAIL_ERROR } from './constants';
+import { PATHS, VERIFY_EMAIL_ERROR, VERIFY_EMAIL_FIELDS } from './constants';
 import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
@@ -16,15 +15,13 @@ export function useVerifyEmail() {
   const {
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
+    control,
   } = useForm<VerifyEmailSchema>({
     resolver: zodResolver(verifyEmailSchema),
     defaultValues: { code: '' },
   });
 
-  const code = watch('code');
-  const handleCodeChange = useCallback((value: string) => setValue('code', value), [setValue]);
+  const { field } = useController({ name: VERIFY_EMAIL_FIELDS.code, control });
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: VerifyEmailSchema) => {
@@ -52,10 +49,10 @@ export function useVerifyEmail() {
 
   return {
     errors,
-    code,
-    handleCodeChange,
-    onSubmit,
+    code: field.value,
     isPending,
+    handleCodeChange: field.onChange,
+    onSubmit,
     clearVerificationToken,
   };
 }
