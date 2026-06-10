@@ -1,57 +1,17 @@
-import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type AxiosInstance } from 'axios';
+import createAuthRefresh from 'axios-auth-refresh';
+import { AUTH_PATHS, REFRESH_PATH } from './constants';
 
-const REFRESH_PATH = '/api/auth/refresh';
+function refreshTokens() {
+  return axios.post(REFRESH_PATH, null, { withCredentials: true });
+}
 
-type QueueItem = {
-  resolve: () => void;
-  reject: (error: unknown) => void;
-};
+function shouldRefresh(error: AxiosError): boolean {
+  const url = error.config?.url ?? '';
 
-let isRefreshing = false;
-let pendingQueue: QueueItem[] = [];
-
-function flushQueue(error: unknown): void {
-  for (const item of pendingQueue) {
-    if (error) {
-      item.reject(error);
-    } else {
-      item.resolve();
-    }
-  }
-  pendingQueue = [];
+  return !AUTH_PATHS.some((path) => url.startsWith(path));
 }
 
 export function applyInterceptors(instance: AxiosInstance): void {
-  instance.interceptors.response.use(
-    (response) => response,
-    async (error: unknown) => {
-      if (!axios.isAxiosError(error)) return Promise.reject(error);
-
-      const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
-
-      if (error.response?.status !== 401 || originalRequest._retry) {
-        return Promise.reject(error);
-      }
-
-      if (isRefreshing) {
-        return new Promise<void>((resolve, reject) => {
-          pendingQueue.push({ resolve, reject });
-        }).then(() => instance(originalRequest));
-      }
-
-      originalRequest._retry = true;
-      isRefreshing = true;
-
-      try {
-        await axios.post(REFRESH_PATH, null, { withCredentials: true });
-        flushQueue(null);
-        return instance(originalRequest);
-      } catch (refreshError) {
-        flushQueue(refreshError);
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
-      }
-    }
-  );
+  createAuthRefresh(instance, refreshTokens, { shouldRefresh });
 }
