@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { applyAuthCookies } from '@/features/auth/server';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const refreshToken = request.cookies.get('refresh_token')?.value;
 
   if (!refreshToken) {
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
   }
 
   const nextResponse = NextResponse.json({ success: true });
+
   applyAuthCookies(nextResponse, response.headers);
 
   return nextResponse;
