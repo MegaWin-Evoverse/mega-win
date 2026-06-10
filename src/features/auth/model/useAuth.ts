@@ -7,7 +7,7 @@ import { signInSchema, signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
 import { ERROR_MESSAGE, PATHS } from './constants';
 import { useRecaptcha } from './useRecaptcha';
-import { authApi } from '@/shared/api/client';
+import { api } from '@/shared/api/client';
 import type { AuthResponse, SignUpSchema } from './types';
 
 interface UseAuthParams {
@@ -35,7 +35,7 @@ export function useAuth({ type }: UseAuthParams) {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: SignUpSchema) => {
-      const response = await authApi.post<AuthResponse>(
+      const response = await api.post<AuthResponse>(
         PATHS[type],
         {
           ...(type === 'sign-up' && { username: data.username }),

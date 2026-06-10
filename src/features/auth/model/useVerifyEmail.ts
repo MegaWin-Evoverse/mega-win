@@ -7,7 +7,7 @@ import { useAuthStore } from './authStore';
 import { PATHS, VERIFY_EMAIL_ERROR } from './constants';
 import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
-import { authApi } from '@/shared/api/client';
+import { api } from '@/shared/api/client';
 
 export function useVerifyEmail() {
   const verificationToken = useAuthStore((state) => state.verificationToken);
@@ -28,7 +28,7 @@ export function useVerifyEmail() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: VerifyEmailSchema) => {
-      const response = await authApi.post<{ success: boolean }>(PATHS['verify-email'], {
+      const response = await api.post<{ success: boolean }>(PATHS['verify-email'], {
         verificationToken,
         code: data.code,
       });
