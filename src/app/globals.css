@@ -84,6 +84,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-feature: var(--card-feature);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -91,9 +92,37 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-brand-green-from: var(--brand-green-from);
+  --color-brand-green-to: var(--brand-green-to);
+  --color-brand-green-rewards: var(--brand-green-rewards);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-border: var(--brand-border);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-ellipse: var(--brand-ellipse);
+  --color-brand-text-light: var(--brand-text-light);
+  --color-brand-text-muted: var(--brand-text-muted);
+  --color-brand-text-white: var(--brand-text-white);
+  --color-page-bg: var(--bg-page);
+  --color-bg-primary: var(--bg-primary);
+  --color-border-default: var(--border-default);
+  --color-daily-claimer-bg: var(--daily-claimer-bg);
+  --color-daily-claimer-glow: var(--daily-claimer-glow);
+  --color-daily-claimer-overlay: var(--daily-claimer-overlay-from);
+  --color-text-brand: var(--text-brand);
+  --color-text-secondary: var(--text-secondary);
+  --color-total-rewards-glow: var(--total-rewards-glow);
+  --color-feature-overlay: var(--feature-overlay);
+  --color-brand-btn-gradient-to: var(--brand-btn-gradient-to);
+  --color-promo-purple: var(--promo-purple);
+  --color-promo-red: var(--promo-red);
+  --color-gs-media: var(--gs-media);
+  --color-gs-content: var(--gs-content);
+  --color-gs-card-border: var(--gs-card-border);
 }
 
 :root {
+  --bg-page: #0a0d19;
   --bg-primary: #0e121c;
   --auth-surface: #1b1f26;
   --auth-surface-light: #2b303b;
@@ -104,6 +133,36 @@
   --auth-green-from: #4ade80;
   --auth-green-to: #22c55e;
   --auth-checkbox-border: rgba(10, 13, 25, 0.5);
+  --card-feature: #0e1519;
+  --border-default: #1b1f26;
+  --brand-green-from: #4ade80;
+  --brand-green-to: #22c55e;
+  --brand-green-rewards: #1bd167;
+  --brand-dark: #07111a;
+  --brand-border: #1b1f26;
+  --brand-bg: #0e121c;
+  --brand-ellipse: rgba(27, 209, 103, 0.24);
+  --brand-black: #000000;
+  --brand-text-light: #c7cbd4;
+  --brand-text-muted: #566374;
+  --brand-text-white: #fdfdfd;
+  --text-brand: var(--brand-green-to);
+  --text-secondary: var(--brand-text-light);
+  --daily-claimer-bg: #09110e;
+  --daily-claimer-shadow-color: #08923a;
+  --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
+  --daily-claimer-glow: #1dba4b;
+  --daily-claimer-overlay-from: #0e3c1e;
+  --total-rewards-glow: #040f06;
+  --feature-overlay: #131517;
+  --brand-btn-gradient-to: #2b303b;
+  --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --promo-purple: #7e22ce;
+  --promo-red: #dc2626;
+  --gs-media: #09051a;
+  --gs-content: #1b1f26;
+  --gs-card-border: #1f2123;
+  --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -128,17 +187,45 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: var(--bg-primary);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
+  --bg-page: #0a0d19;
+  --bg-primary: #0e121c;
+  --card-feature: #0e1519;
+  --border-default: #1b1f26;
+  --brand-green-from: #4ade80;
+  --brand-green-to: #22c55e;
+  --brand-green-rewards: #1bd167;
+  --text-brand: var(--brand-green-to);
+  --text-secondary: var(--brand-text-light);
+  --brand-dark: #07111a;
+  --brand-border: #1b1f26;
+  --brand-bg: #0e121c;
+  --brand-ellipse: rgba(27, 209, 103, 0.24);
+  --brand-black: #000000;
+  --daily-claimer-bg: #09110e;
+  --daily-claimer-shadow-color: #08923a;
+  --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
+  --daily-claimer-glow: #1dba4b;
+  --daily-claimer-overlay-from: #0e3c1e;
+  --total-rewards-glow: #040f06;
+  --feature-overlay: #131517;
+  --brand-btn-gradient-to: #2b303b;
+  --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --promo-purple: #7e22ce;
+  --promo-red: #dc2626;
+  --gs-media: #09051a;
+  --gs-content: #1b1f26;
+  --gs-card-border: #1f2123;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -162,13 +249,13 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
+  --sidebar: var(--bg-primary);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.556 0 0);
 }
 
@@ -196,11 +283,229 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply text-foreground;
-    background: var(--bg-primary);
+    background: var(--bg-page, #0a0d19);
   }
+
   html {
     @apply font-sans;
   }
+
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+}
+
+.daily-claimer-card {
+  box-shadow:
+    0px 0.861604px 0px var(--daily-claimer-shadow-color),
+    inset 0px 0.802416px 0px var(--daily-claimer-inset-light);
+}
+
+.logo-text {
+  color: var(--brand-text-white);
+  -webkit-text-stroke: 2px var(--brand-green-to);
+  paint-order: stroke fill;
+  text-shadow: 0px 2px 4px var(--logo-shadow);
+}
+
+.sidebar-menu-btn-custom {
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
+  transition:
+    background 0.15s ease-in-out,
+    border 0.15s ease-in-out;
+}
+
+.sidebar-menu-btn-custom:hover {
+  background:
+    linear-gradient(180deg, rgba(37, 42, 53, 0.6) 0%, rgba(58, 65, 80, 0.6) 100%) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 100%) border-box;
+}
+
+.hero-banner-bg {
+  background: linear-gradient(
+    84.47deg,
+    rgba(15, 22, 26, 0.94) 2.15%,
+    rgba(19, 21, 23, 0.94) 98.56%
+  );
+}
+
+.hero-radial-glow {
+  background: radial-gradient(
+    78.35% 190.25% at 64.43% 30.64%,
+    rgba(48, 223, 140, 0.15) 0%,
+    rgba(33, 173, 107, 0.03) 50%,
+    rgba(13, 110, 64, 0) 91.23%
+  );
+}
+
+.hero-ellipse-glow {
+  background: #1dba4b;
+  filter: blur(157.78px);
+}
+
+.hero-dolar-clean {
+  transform: rotate(0.51deg);
+}
+
+.hero-dolar-blur {
+  filter: blur(5.36642px);
+}
+
+.hero-chip-small-blur {
+  filter: blur(1.855px);
+  transform: matrix(-0.99, 0.12, 0.12, 0.99, 0, 0);
+}
+
+.hero-chip-large-blur {
+  transform: rotate(13.21deg);
+}
+
+.bg-total-rewards {
+  background-image:
+    url('/total-rewards/dollar-coins%201.png'),
+    linear-gradient(90.95deg, rgba(27, 209, 103, 0.1) 0%, rgba(0, 0, 0, 0) 53.02%),
+    linear-gradient(0deg, #11121a, #11121a);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: auto, cover, cover;
+}
+
+.feature-glow-outer {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.28) 0%,
+    rgba(49, 255, 76, 0.08) 50%,
+    transparent 85%
+  );
+}
+
+.feature-glow-inner {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.58) 0%,
+    rgba(49, 255, 76, 0.18) 45%,
+    transparent 75%
+  );
+}
+
+/* Promo Cards & Campaigns Section */
+.bg-promo-gradient {
+  background: linear-gradient(162.65deg, #201e25 13.56%, #09080a 79.73%);
+}
+
+.border-promo-purple {
+  border-bottom: 1.5px solid var(--promo-purple);
+}
+
+.border-promo-red {
+  border-bottom: 1.5px solid var(--promo-red);
+}
+
+.shadow-promo-inset {
+  box-shadow: inset 0px 0.802416px 0px rgba(195, 255, 239, 0.2);
+}
+
+.promo-ellipse-6743-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.7) 4.92%,
+    rgba(36, 166, 199, 0.7) 34.46%,
+    rgba(106, 0, 255, 0.7) 91.82%
+  );
+  filter: blur(124.719px);
+}
+
+.promo-ellipse-6744-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(43, 6, 162, 0.3) 4.92%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
+  filter: blur(116.555px);
+}
+
+.promo-ellipse-6742-purple {
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.3) 4.92%,
+    rgba(36, 166, 199, 0.3) 34.46%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
+  filter: blur(100px);
+}
+
+.promo-ellipse-6742-yellow {
+  background: rgba(254, 241, 0, 0.62);
+  filter: blur(82.7px);
+}
+
+.promo-ellipse-6743-red {
+  background: #f42727;
+  filter: blur(165.4px);
+}
+
+.promo-ellipse-red-overlay {
+  background: rgba(255, 7, 11, 0.15);
+  filter: blur(100px);
+}
+
+.promo-ellipse-red-overlay-small {
+  background: rgba(255, 7, 11, 0.12);
+  filter: blur(40px);
+}
+
+.text-promo-purple {
+  color: var(--promo-purple);
+}
+
+.text-promo-red {
+  color: var(--promo-red);
+}
+
+.promo-cup-filter {
+  filter: hue-rotate(180deg);
+}
+
+/* Getting Started Section */
+.gs-glow-purple-top {
+  background: #53526e;
+  filter: blur(120px);
+}
+
+.gs-glow-green {
+  background: rgba(27, 209, 103, 0.24);
+  filter: blur(100px);
+}
+
+.gs-glow-rect-purple {
+  background: linear-gradient(135deg, rgba(97, 66, 161, 0.4) 31.06%, rgba(14, 26, 255, 0.4) 91.76%);
+  filter: blur(150px);
+}
+
+.gs-glow-blue {
+  background: rgba(51, 65, 245, 0.4);
+  filter: blur(100px);
+}
+
+.gs-glow-violet {
+  background: rgba(135, 51, 245, 0.4);
+  filter: blur(100px);
+}
+
+.gs-sparkle {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(214, 189, 255, 0.5) 0%,
+    rgba(80, 91, 229, 0.5) 100%
+  );
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
 }

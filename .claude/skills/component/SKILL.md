@@ -5,6 +5,7 @@ description: Creates a React component following FSD architecture. Clean JSX, lo
 ## Input
 
 If not provided — ask before creating:
+
 - Component name
 - Layer and slice (e.g. `features/user-profile/ui/`, `widgets/product-list/`, `shared/ui/`)
 - What props it receives and what it renders
@@ -21,6 +22,7 @@ If not provided — ask before creating:
 ### 2. Check shadcn/ui first
 
 Before writing any JSX — check `src/shared/ui/` for existing components:
+
 - Button → `Button`
 - Input → `Input`
 - Card → `Card`
@@ -53,12 +55,14 @@ export function ComponentName({ prop1, prop2 }: Props) {
 ### 4. Component purity
 
 **Must NOT be in JSX:**
+
 - `fetch`, `async/await`
 - Computations or data transformations
 - Complex conditional logic (simple `condition ? A : B` is ok; complex → extract to hook)
 - Direct store calls (if in `shared/ui` — forbidden entirely)
 
 **Where it lives instead:**
+
 - Business logic → `model/useComponentName.ts` in the same slice
 - Data transformations → utils in `shared/lib/`
 - Store reads → in the hook, not in the component (except simple `store((s) => s.value)`)
@@ -108,14 +112,14 @@ export const UserCard = () => { ... }
 In React 19, `ref` is a plain prop — no `forwardRef` wrapper needed:
 
 ```tsx
-import { type Ref } from 'react'
+import { type Ref } from 'react';
 
 interface Props {
-  ref?: Ref<HTMLDivElement>
+  ref?: Ref<HTMLDivElement>;
 }
 
 export function MyComponent({ ref, ...props }: Props) {
-  return <div ref={ref} {...props} />
+  return <div ref={ref} {...props} />;
 }
 ```
 

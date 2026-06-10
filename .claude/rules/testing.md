@@ -1,17 +1,19 @@
 ---
-paths: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/__tests__/**"]
+paths: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/__tests__/**']
 ---
+
 # Testing Patterns (Jest + Testing Library)
 
 ## What to test
-| Layer | Test target | Skip |
-|-------|-------------|------|
-| `shared/lib` | Pure functions | shadcn wrappers |
-| `entities/*/model` | Zustand store actions | state shape |
-| `features/*/model` | Hooks via `renderHook` | internal state details |
-| `features/*/api` | Query/mutation hooks (mock `api`) | response shapes |
-| `features/*/ui` | User interactions | visual layout |
-| `widgets` | Integration smoke tests | CSS, exact text |
+
+| Layer              | Test target                       | Skip                   |
+| ------------------ | --------------------------------- | ---------------------- |
+| `shared/lib`       | Pure functions                    | shadcn wrappers        |
+| `entities/*/model` | Zustand store actions             | state shape            |
+| `features/*/model` | Hooks via `renderHook`            | internal state details |
+| `features/*/api`   | Query/mutation hooks (mock `api`) | response shapes        |
+| `features/*/ui`    | User interactions                 | visual layout          |
+| `widgets`          | Integration smoke tests           | CSS, exact text        |
 
 Do NOT test `shared/ui`, `app/` layout, or `index.ts` barrels.
 
@@ -58,9 +60,11 @@ beforeEach(() => mockStore.mockReturnValue({ count: 0, increment: jest.fn() }));
 ```
 
 ## File placement
+
 Co-locate `*.test.ts(x)` next to the unit. Use `__tests__/` only when a slice has more than 3 test files.
 
 ## Rules
+
 - One `describe` per file, one `it` per behaviour.
 - Mock at the module boundary (`jest.mock('@/shared/api/client')`) — never mock internal helpers.
 - `act()` around every state mutation in `renderHook`.
