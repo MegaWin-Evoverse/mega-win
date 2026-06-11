@@ -112,6 +112,18 @@
   --color-gs-media: var(--gs-media);
   --color-gs-content: var(--gs-content);
   --color-gs-card-border: var(--gs-card-border);
+  --color-button-brand-bg-dark: var(--button-brand-bg-dark);
+  --color-surface-inset: var(--surface-inset);
+  --color-chip-text-muted: var(--chip-text-muted);
+  --color-btn-disabled-bg: var(--btn-disabled-bg);
+  --color-risk-classic: var(--risk-classic);
+  --color-risk-low: var(--risk-low);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-high: var(--risk-high);
+  --color-chip-active-glow: var(--chip-active-glow);
+  --color-keno-cell-border: var(--keno-cell-border);
+  --color-keno-payout-top-from: var(--keno-payout-top-from);
+  --color-keno-payout-top-to: var(--keno-payout-top-to);
 }
 
 :root {
@@ -179,6 +191,18 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.708 0 0);
+  --button-brand-bg-dark: oklch(0.38 0.12 155);
+  --surface-inset: oklch(0.16 0.02 263);
+  --chip-text-muted: oklch(0.5 0.02 265);
+  --btn-disabled-bg: oklch(0.34 0.03 255);
+  --risk-classic: oklch(0.62 0.2 255);
+  --risk-low: oklch(0.62 0.16 145);
+  --risk-medium: oklch(0.87 0.17 92);
+  --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-top-from: #0a271a;
+  --keno-payout-top-to: #39b17d;
 }
 
 .dark {
@@ -241,6 +265,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: var(--border-default);
   --sidebar-ring: oklch(0.556 0 0);
+  --button-brand-bg-dark: oklch(0.38 0.12 155);
+  --surface-inset: oklch(0.16 0.02 263);
+  --chip-text-muted: oklch(0.5 0.02 265);
+  --btn-disabled-bg: oklch(0.34 0.03 255);
+  --risk-classic: oklch(0.62 0.2 255);
+  --risk-low: oklch(0.62 0.16 145);
+  --risk-medium: oklch(0.87 0.17 92);
+  --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-top-from: #0a271a;
+  --keno-payout-top-to: #39b17d;
 }
 
 @layer base {
@@ -472,4 +508,47 @@
     rgba(80, 91, 229, 0.5) 100%
   );
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
+}
+
+/* Game Control Panel */
+.btn-action-secondary {
+  background: linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%);
+  border: 1px solid var(--border-default);
+}
+
+.game-tab-active {
+  background: linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%);
+}
+
+.game-chip {
+  background: var(--border-default);
+  border: 0.8px solid color-mix(in oklch, var(--btn-disabled-bg) 50%, transparent);
+  color: var(--chip-text-muted);
+}
+
+.text-risk-classic {
+  color: var(--risk-classic);
+}
+
+.text-risk-low {
+  color: var(--risk-low);
+}
+
+.text-risk-medium {
+  color: var(--risk-medium);
+}
+
+.text-risk-high {
+  color: var(--risk-high);
+}
+
+.keno-gem {
+  background: radial-gradient(
+    circle at 40% 30%,
+    color-mix(in oklch, var(--brand-green-from) 40%, white) 0%,
+    var(--brand-green-from) 35%,
+    var(--brand-green-to) 65%,
+    color-mix(in oklch, var(--brand-green-to) 60%, black) 100%
+  );
+  border-radius: 50%;
 }
