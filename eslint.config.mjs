@@ -49,7 +49,7 @@ const eslintConfig = defineConfig([
                   { type: 'app' },
                   {
                     type: ['widgets', 'features', 'entities'],
-                    internalPath: 'index.ts',
+                    internalPath: ['index.ts', 'server.ts'],
                   },
                   { type: 'shared' },
                 ],
@@ -67,7 +67,11 @@ const eslintConfig = defineConfig([
             {
               from: { type: 'features' },
               allow: {
-                to: [{ type: 'entities', internalPath: 'index.ts' }, { type: 'shared' }],
+                to: [
+                  { type: 'features', internalPath: 'index.ts' },
+                  { type: 'entities', internalPath: 'index.ts' },
+                  { type: 'shared' },
+                ],
               },
             },
             { from: { type: 'entities' }, allow: { to: { type: 'shared' } } },
