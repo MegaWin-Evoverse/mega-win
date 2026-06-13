@@ -1,17 +1,18 @@
 'use client';
 
 import { cn } from '@/shared/lib/cn';
-import { CHIP_NOMINALS } from '@/features/roulette-controls';
+import { CHIP_NOMINALS, parseChipValue } from '@/features/roulette-controls';
 
 import { ChipIcon } from './ChipIcon';
 
 interface Props {
   selectedChip: string | null;
+  balance: number;
   onChipSelect: (chip: string) => void;
   className?: string;
 }
 
-export function ChipsGrid({ selectedChip, onChipSelect, className }: Props) {
+export function ChipsGrid({ selectedChip, balance, onChipSelect, className }: Props) {
   return (
     <div
       className={cn(
@@ -24,6 +25,7 @@ export function ChipsGrid({ selectedChip, onChipSelect, className }: Props) {
           key={nominal}
           valueText={nominal}
           isActive={selectedChip === nominal}
+          canSelect={parseChipValue(nominal) <= balance}
           onClick={() => onChipSelect(nominal)}
         />
       ))}

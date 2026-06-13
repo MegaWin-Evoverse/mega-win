@@ -1,6 +1,7 @@
 'use client';
 
-import { useRouletteControls, ROULETTE_LABELS } from '@/features/roulette-controls';
+import { useRouletteControls, useRouletteBet, ROULETTE_LABELS } from '@/features/roulette-controls';
+import { useUser } from '@/entities/user';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { GamePanel, NumberOfBetsField } from '@/features/game-panel';
 
@@ -13,9 +14,9 @@ export function RouletteControls() {
     activeTab,
     selectedChip,
     placedBet,
-    balance,
     numberOfBets,
     isBetActive,
+    isSpinning,
     isAutoMode,
     setTab,
     selectChip,
@@ -25,14 +26,39 @@ export function RouletteControls() {
     handleInfinityClick,
   } = useRouletteControls();
 
+  const { gamePointsBalance } = useUser();
+  const { placeBet, startAuto, stopAuto, isAutoRunning } = useRouletteBet();
+
+  const canAffordBet = placedBet <= gamePointsBalance;
+  const autoBetCount = Math.max(1, parseInt(numberOfBets, 10) || 1);
+
+  function handleAction() {
+    if (!isAutoMode) {
+      placeBet();
+      return;
+    }
+    if (isAutoRunning) {
+      stopAuto();
+    } else {
+      startAuto(autoBetCount);
+    }
+  }
+
+  function resolveActionText() {
+    if (!isAutoMode) return ROULETTE_LABELS.BET;
+    return isAutoRunning ? ROULETTE_LABELS.STOP_AUTOBET : ROULETTE_LABELS.START_AUTOBET;
+  }
+
+  const isActionDisabled = isAutoRunning ? false : !isBetActive || isSpinning || !canAffordBet;
+
   return (
     <GamePanel
       activeTab={activeTab}
       onTabChange={setTab}
-      balance={balance}
-      actionButtonText={ROULETTE_LABELS.BET}
-      onAction={() => {}}
-      isActionDisabled={!isBetActive}
+      balance={gamePointsBalance}
+      actionButtonText={resolveActionText()}
+      onAction={handleAction}
+      isActionDisabled={isActionDisabled}
       hideBetAmountField={true}
       actionButtonClassName="lg:mt-3"
     >
@@ -44,6 +70,7 @@ export function RouletteControls() {
 
       <ChipsGrid
         selectedChip={selectedChip}
+        balance={gamePointsBalance}
         onChipSelect={selectChip}
         className="order-4 lg:order-none lg:mt-6"
       />
@@ -60,7 +87,7 @@ export function RouletteControls() {
       </CollapsibleSection>
       <CollapsibleSection
         isOpen={!isAutoMode}
-        className="order-2 lg:order-none"
+        className="order-2 hidden lg:order-none lg:grid"
         openClassName="lg:mt-6"
       >
         <ChooseActions onClearTable={clearTable} onUndo={undo} />
