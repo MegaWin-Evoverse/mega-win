@@ -121,6 +121,12 @@
   --color-risk-medium: var(--risk-medium);
   --color-risk-high: var(--risk-high);
   --color-chip-active-glow: var(--chip-active-glow);
+  --color-button-brand-bg-disabled: var(--button-brand-bg-disabled);
+  --color-bg-cell: var(--bg-cell);
+  --color-brand-red: var(--brand-red);
+  --color-roulette-red: var(--roulette-red);
+  --color-roulette-cell-border: var(--roulette-cell-border);
+  --color-roulette-chip-glow: var(--roulette-chip-glow);
 }
 
 :root {
@@ -197,6 +203,13 @@
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
   --chip-active-glow: oklch(0.70 0.15 162);
+  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
+  --bg-cell: var(--button-brand-bg-disabled);
+  --brand-red: oklch(0.55 0.22 25);
+  /* Roulette betting table */
+  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
 .dark {
@@ -268,6 +281,9 @@
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
   --chip-active-glow: oklch(0.70 0.15 162);
+  --roulette-red: oklch(0.577 0.245 27.325);
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
 @layer base {
@@ -516,3 +532,46 @@
 .text-risk-high {
   color: var(--risk-high);
 }
+
+/* Game Result Overlay */
+.result-header-win {
+  background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+}
+
+.result-header-loss {
+  background: linear-gradient(135.15deg, #f13636 -3.15%, #891111 100.75%);
+}
+
+.result-surface-neutral {
+  background: linear-gradient(180deg, #1b1f26 0%, #2b303b 100%);
+}
+
+/* Roulette Vector Glow */
+.roulette-vector-glow {
+  position: absolute;
+  width: 3212.88px;
+  height: 512.16px;
+  left: calc(50% - 3212.88px / 2 - 3.11px);
+  top: -350px;
+  background: linear-gradient(170.1deg, rgba(0, 0, 0, 0) 2.99%, rgba(51, 160, 113, 0.3) 94.41%);
+  opacity: 0.5;
+  filter: blur(60px);
+  transform: matrix(-1, 0.01, 0.01, 1, 0, 0);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Wheel Animations */
+@keyframes roulette-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-roulette-spin {
+  animation: roulette-spin 12s linear infinite;
+}
+
