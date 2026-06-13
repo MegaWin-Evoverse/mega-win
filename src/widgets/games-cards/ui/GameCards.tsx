@@ -1,5 +1,5 @@
 import { SectionHeader } from '@/shared/ui/section-header';
-import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../config/constants';
+import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../model/constants';
 import { GameCard } from './GameCard';
 
 export function GameCards() {
