@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
-import { type LeaderCardData, LEADERBOARD_CONSTANTS, LEADERBOARD_SIZES } from '../config/constants';
+import { LEADERBOARD_CONSTANTS, LEADERBOARD_SIZES } from '../model/constants';
+import type { LeaderCardData } from '../model/types';
 
 interface Props {
   card: LeaderCardData;

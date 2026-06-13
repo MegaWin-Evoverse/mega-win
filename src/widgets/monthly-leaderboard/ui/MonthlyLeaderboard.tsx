@@ -7,7 +7,7 @@ import {
   LEADERBOARD_DECORATIONS,
   LEADERBOARD_BACKDROP,
   LEADERBOARD_ROUTE,
-} from '../config/constants';
+} from '../model/constants';
 import { LeaderboardCard } from './LeaderboardCard';
 
 interface Props {
