@@ -1,8 +1,4 @@
-export interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from './types';
 
 export const FAQ_CONSTANTS = {
   SECTION_TITLE: 'Frequently asked questions',

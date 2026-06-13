@@ -8,7 +8,7 @@ import {
 } from '@/shared/ui/accordion';
 import { SectionTitle } from '@/shared/ui/section-title';
 import { cn } from '@/shared/lib/cn';
-import { FAQ_ITEMS, FAQ_CONSTANTS } from '../config/constants';
+import { FAQ_ITEMS, FAQ_CONSTANTS } from '../model/constants';
 
 interface Props {
   className?: string;

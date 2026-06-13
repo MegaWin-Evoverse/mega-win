@@ -1,5 +1,4 @@
 import { SectionTitle } from '@/shared/ui/section-title';
-
 import { cn } from '@/shared/lib/cn';
 import { FEATURE_CARDS } from '../config/constants';
 import { FeatureCard } from './FeatureCard';
