@@ -1,11 +1,5 @@
 import { ROUTES } from '@/shared/config';
-
-export interface GameCardData {
-  id: string;
-  title: string;
-  imageSrc: string;
-  href: string;
-}
+import type { GameCardData } from './types';
 
 export const GAME_CARDS_CONSTANTS = {
   SECTION_TITLE: 'Games',

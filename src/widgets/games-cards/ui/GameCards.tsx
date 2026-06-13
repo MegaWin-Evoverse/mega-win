@@ -1,5 +1,5 @@
 import { SectionTitle } from '@/shared/ui/section-title';
-import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../config/constants';
+import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../model/constants';
 import { GameCard } from './GameCard';
 
 export function GameCards() {
