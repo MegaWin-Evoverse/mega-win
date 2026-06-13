@@ -5,11 +5,12 @@ import {
   ActiveCampaigns,
   GettingStarted,
   GameCards,
+  MonthlyLeaderboard,
 } from '@/widgets';
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col w-full">
+    <main className="flex-1 flex flex-col w-full overflow-x-hidden">
       <Hero />
       <div className="w-full max-w-[1133px] mx-auto px-4 mt-8 flex flex-col gap-8">
         <ActiveCampaigns />
@@ -17,6 +18,7 @@ export default function Home() {
         <Features />
         <GettingStarted />
         <GameCards />
+        <MonthlyLeaderboard />
       </div>
       <div className="flex-1 flex flex-col gap-6 p-6"></div>
     </main>
