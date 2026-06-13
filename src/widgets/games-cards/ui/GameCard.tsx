@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { type GameCardData, GAME_CARDS_CONSTANTS } from '../config/constants';
+import { GAME_CARDS_CONSTANTS } from '../model/constants';
+import type { GameCardData } from '../model/types';
 
 interface Props {
   card: GameCardData;
