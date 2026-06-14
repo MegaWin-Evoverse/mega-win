@@ -1,9 +1,8 @@
 'use client';
-
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { BUTTON_LABELS } from '@/shared/config';
-import { useIsMobile } from '@/shared/lib/hooks/use-mobile';
+import { useIsMobile } from '@/shared/hooks/useIsMobile';
 
 interface Props {
   onRegisterClick?: () => void;

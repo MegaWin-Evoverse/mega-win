@@ -10,8 +10,9 @@ Generic, reusable building blocks with zero domain knowledge.
 
 - `ui/` — shadcn/ui components (Button, Input, etc.)
 - `lib/cn.ts` — `cn()` helper (clsx + tailwind-merge)
-- `lib/hooks/` — generic hooks (useDebounce, useMediaQuery, etc.)
+- `hooks/` — generic hooks (useIsMobile, useNumberOfBets, etc.) — kept directly under `shared/`, not nested in `lib/`
 - `api/client.ts` — base axios API client
+- `config/` — app-wide constants and configuration (the ONLY place for global constants; slice-local constants live in that slice's `model/constants.ts`)
 
 ## Rules
 

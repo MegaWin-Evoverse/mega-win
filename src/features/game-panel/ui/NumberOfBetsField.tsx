@@ -1,6 +1,6 @@
 'use client';
 
-import { type ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';

@@ -1,6 +1,5 @@
 import Image from 'next/image';
-
-import { formatAmount } from '@/shared/lib/format-amount';
+import { formatAmount } from '@/shared/lib/formatAmount';
 import { COIN_ICON } from '@/shared/config';
 
 interface Props {

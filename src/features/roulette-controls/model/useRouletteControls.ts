@@ -1,8 +1,7 @@
 import { useShallow } from 'zustand/react/shallow';
-
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
-import { ROULETTE_DEFAULTS } from '../config/constants';
+import { useNumberOfBets } from '@/shared/hooks/useNumberOfBets';
+import { ROULETTE_DEFAULTS } from './constants';
 import { useRouletteStore } from './rouletteStore';
 
 export function useRouletteControls() {

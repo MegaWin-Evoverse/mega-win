@@ -1,8 +1,7 @@
 import { useShallow } from 'zustand/react/shallow';
-
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
-import { PLINKO_DEFAULTS, PLINKO_LABELS } from '../config/constants';
+import { useNumberOfBets } from '@/shared/hooks/useNumberOfBets';
+import { PLINKO_DEFAULTS, PLINKO_LABELS } from './constants';
 import { usePlinkoStore } from './plinkoStore';
 
 export function usePlinkoControls() {

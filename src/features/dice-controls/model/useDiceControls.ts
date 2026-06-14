@@ -1,9 +1,9 @@
 import { useShallow } from 'zustand/react/shallow';
-
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
-import { DICE_DEFAULTS, DICE_LABELS } from '../config/constants';
-import { useDiceStore, selectProfitOnWin } from './diceStore';
+import { useNumberOfBets } from '@/shared/hooks/useNumberOfBets';
+import { DICE_DEFAULTS, DICE_LABELS } from './constants';
+import { useDiceStore } from './diceStore';
+import { selectProfitOnWin } from './selectors';
 
 export function useDiceControls() {
   const {

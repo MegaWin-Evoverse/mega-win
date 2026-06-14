@@ -25,6 +25,7 @@ entities/
 - Stores use `persist` middleware when state must survive page reload
 - Export only what other layers need through the slice's `index.ts` — keep internals private
 - Cross-entity coordination belongs in `features/`, not here
+- Entity constants (defaults, enums, types) live in `model/` (`constants.ts` / `types.ts`) — never a `config/` segment
 
 ## Zustand selector optimization
 

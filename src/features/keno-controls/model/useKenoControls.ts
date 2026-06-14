@@ -1,8 +1,7 @@
 import { useShallow } from 'zustand/react/shallow';
-
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
-import { KENO_DEFAULTS } from '../config/constants';
+import { useNumberOfBets } from '@/shared/hooks/useNumberOfBets';
+import { KENO_DEFAULTS } from './constants';
 import { useKenoStore } from './kenoStore';
 
 export function useKenoControls() {

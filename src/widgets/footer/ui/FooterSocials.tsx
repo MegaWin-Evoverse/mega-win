@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/shared/ui/button';
 import { cn } from '@/shared/lib/cn';
 import { SOCIAL_LINKS, FOOTER_HEADERS, FOOTER_ARIA } from '@/shared/config';
-import { getSocialIcon } from '../lib/get-social-icon';
+import { getSocialIcon } from '../lib/getSocialIcon';
 
 interface Props {
   className?: string;

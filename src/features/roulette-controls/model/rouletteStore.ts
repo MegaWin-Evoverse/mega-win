@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-
 import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
-import { ROULETTE_DEFAULTS } from '../config/constants';
+import { ROULETTE_DEFAULTS } from './constants';
 
 interface RouletteState {
   activeTab: GamePanelTab;

@@ -12,6 +12,7 @@ features/<name>/
     SomeComponent.tsx  ← 'use client' UI component
   model/
     useSomeFeature.ts  ← logic hook (react-hook-form, mutations, state)
+    constants.ts       ← labels, default state, domain enums, option lists
   api/
     useSomeQuery.ts    ← @tanstack/react-query useQuery / useMutation
     index.ts
@@ -35,6 +36,7 @@ The `src/features/` directory is an empty scaffold (`.gitkeep`). Feature slices 
 - `api/` hooks wrap `useQuery` / `useMutation` from @tanstack/react-query and use the shared axios `api` client.
 - Zod schemas for form validation live in `model/schemas.ts`.
 - `index.ts` is the only public surface — external layers import from `features/<name>`, not from internal paths.
+- Slice constants (labels, defaults, enums, option lists) live in `model/constants.ts`. Do **not** introduce a `config/` segment for them — `config/` is for feature flags / env config only. Global constants belong in `shared/config`.
 
 ---
 

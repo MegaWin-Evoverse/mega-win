@@ -33,5 +33,3 @@ export const PLINKO_DEFAULTS = {
   BET_AMOUNT_TEXT: '0.00',
   NUMBER_OF_BETS: '0',
 } as const;
-
-export { BET_AMOUNT_DECIMALS, BET_AMOUNT_STEP } from '@/shared/config';

@@ -29,5 +29,3 @@ export const KENO_DEFAULTS = {
   NUMBER_OF_BETS: '0',
   RISK: KENO_RISK.CLASSIC,
 } as const;
-
-export { BET_AMOUNT_DECIMALS, BET_AMOUNT_STEP } from '@/shared/config';

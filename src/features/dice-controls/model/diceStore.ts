@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-
 import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
 import {
   sanitizeBetInput,
@@ -7,8 +6,8 @@ import {
   calcHalfBet,
   calcDoubleBet,
   calcMaxBet,
-} from '@/shared/lib/bet-amount';
-import { BET_AMOUNT_DECIMALS, DICE_DEFAULTS } from '../config/constants';
+} from '@/shared/lib/betAmount';
+import { DICE_DEFAULTS } from './constants';
 
 export interface DiceState {
   activeTab: GamePanelTab;
@@ -73,10 +72,4 @@ const useDiceStoreRaw = create<DiceState>((set, get) => ({
 
 export function useDiceStore<T>(selector: (state: DiceState) => T): T {
   return useDiceStoreRaw(selector);
-}
-
-export function selectProfitOnWin(state: DiceState): string {
-  const amount = Number.parseFloat(state.betAmount) || 0;
-  const profit = amount * DICE_DEFAULTS.MULTIPLIER;
-  return profit > 0 ? profit.toFixed(BET_AMOUNT_DECIMALS) : '0.00';
 }

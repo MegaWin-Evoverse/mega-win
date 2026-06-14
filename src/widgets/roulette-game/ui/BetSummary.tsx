@@ -1,9 +1,7 @@
 'use client';
-
 import Image from 'next/image';
-
 import { cn } from '@/shared/lib/cn';
-import { formatAmount } from '@/shared/lib/format-amount';
+import { formatAmount } from '@/shared/lib/formatAmount';
 import { COIN_ICON } from '@/shared/config';
 import { ROULETTE_LABELS } from '@/features/roulette-controls';
 

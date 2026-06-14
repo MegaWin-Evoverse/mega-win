@@ -1,6 +1,6 @@
 'use client';
 
-import { type ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib/cn';

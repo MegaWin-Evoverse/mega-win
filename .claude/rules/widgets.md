@@ -25,4 +25,5 @@ widgets/
 - Export only the top-level component through `index.ts`
 - Import entities and features ONLY through their public `index.ts`
 - Widget-to-widget imports go through the shared barrel `@/widgets` — never directly from `@/widgets/slice-name/Component`
+- Slice constants (labels, defaults, enums) go in `model/constants.ts`, not a `config/` segment — `config/` is only for feature flags / env config
 - When creating or modifying components in this layer, refer to and follow `.claude/rules/components.md`.

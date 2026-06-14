@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-
 import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
 import {
   sanitizeBetInput,
@@ -7,8 +6,8 @@ import {
   calcHalfBet,
   calcDoubleBet,
   calcMaxBet,
-} from '@/shared/lib/bet-amount';
-import { KENO_DEFAULTS, type KenoRisk } from '../config/constants';
+} from '@/shared/lib/betAmount';
+import { KENO_DEFAULTS, type KenoRisk } from './constants';
 
 interface KenoState {
   activeTab: GamePanelTab;
