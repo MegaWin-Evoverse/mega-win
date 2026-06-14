@@ -1,5 +1,4 @@
 'use client';
-
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { getBetsStory } from '../api/betStoryApi';

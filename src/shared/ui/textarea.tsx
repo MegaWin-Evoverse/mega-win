@@ -1,5 +1,4 @@
 import { type ComponentProps } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 
 function Textarea({ className, ...props }: ComponentProps<'textarea'>) {

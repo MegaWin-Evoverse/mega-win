@@ -1,9 +1,6 @@
 'use client';
-
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar';
-
 import { cn } from '@/shared/lib/cn';
-
 import { ComponentProps } from 'react';
 
 function Avatar({

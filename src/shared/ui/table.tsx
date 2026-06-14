@@ -1,6 +1,5 @@
 'use client';
 import { type ComponentProps } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 
 function Table({ className, ...props }: ComponentProps<'table'>) {

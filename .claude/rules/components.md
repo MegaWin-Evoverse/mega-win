@@ -101,6 +101,10 @@ NEVER use `style={}` prop in JSX — use Tailwind classes only:
 
 If a color or value isn't in Tailwind — add it as a CSS variable in `globals.css` and use it via a semantic class.
 
+## No blank lines inside JSX
+
+Do not put blank lines between sibling JSX elements or right inside a `return ( … )`. Keep the markup compact; blank lines belong between logic blocks, not inside the rendered tree. Enforced by the `remove-spaces` skill.
+
 ## shadcn/ui first — NEVER use native HTML primitives
 
 NEVER use native HTML elements when a shadcn component exists:

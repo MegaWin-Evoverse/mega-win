@@ -1,5 +1,4 @@
 import { type ComponentProps } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react';
