@@ -1,5 +1,4 @@
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion';
-
 import { cn } from '@/shared/lib/cn';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 
@@ -52,7 +51,7 @@ function AccordionContent({ className, children, ...props }: AccordionPrimitive.
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up [animation-duration:200ms]"
       {...props}
     >
       <div

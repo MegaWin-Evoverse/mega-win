@@ -98,6 +98,7 @@
   --color-brand-text-white: var(--brand-text-white);
   --color-page-bg: var(--bg-page);
   --color-bg-primary: var(--bg-primary);
+  --color-bg-primary-hover: var(--bg-primary-hover);
   --color-border-default: var(--border-default);
   --color-daily-claimer-bg: var(--daily-claimer-bg);
   --color-daily-claimer-glow: var(--daily-claimer-glow);
@@ -127,11 +128,22 @@
   --color-roulette-red: var(--roulette-red);
   --color-roulette-cell-border: var(--roulette-cell-border);
   --color-roulette-chip-glow: var(--roulette-chip-glow);
+  --color-leaderboard-bg-from: var(--leaderboard-bg-from);
+  --color-leaderboard-bg-to: var(--leaderboard-bg-to);
+  --color-leaderboard-glow-from: var(--leaderboard-glow-from);
+  --color-leaderboard-glow-to: var(--leaderboard-glow-to);
+  --color-leaderboard-card-to: var(--leaderboard-card-to);
+  --color-leaderboard-card-rank1-to: var(--leaderboard-card-rank1-to);
+  --color-leaderboard-accent: var(--leaderboard-accent);
+  --color-leaderboard-dollar: var(--leaderboard-dollar);
+  --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
+  --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
 }
 
 :root {
   --bg-page: #0a0d19;
   --bg-primary: #0e121c;
+  --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
@@ -161,6 +173,16 @@
   --gs-media: #09051a;
   --gs-content: #1b1f26;
   --gs-card-border: #1f2123;
+  --leaderboard-bg-from: #0f1228;
+  --leaderboard-bg-to: #060813;
+  --leaderboard-glow-from: #00ffaa;
+  --leaderboard-glow-to: #6a00ff;
+  --leaderboard-card-to: #212551;
+  --leaderboard-card-rank1-to: #1a2f58;
+  --leaderboard-accent: #3d6cda;
+  --leaderboard-dollar: #00a80c;
+  --leaderboard-reward-bg: #060e16;
+  --leaderboard-btn-hover-to: #3a4150;
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -215,6 +237,7 @@
 .dark {
   --bg-page: #0a0d19;
   --bg-primary: #0e121c;
+  --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
@@ -241,6 +264,16 @@
   --gs-media: #09051a;
   --gs-content: #1b1f26;
   --gs-card-border: #1f2123;
+  --leaderboard-bg-from: #0f1228;
+  --leaderboard-bg-to: #060813;
+  --leaderboard-glow-from: #00ffaa;
+  --leaderboard-glow-to: #6a00ff;
+  --leaderboard-card-to: #212551;
+  --leaderboard-card-rank1-to: #1a2f58;
+  --leaderboard-accent: #3d6cda;
+  --leaderboard-dollar: #00a80c;
+  --leaderboard-reward-bg: #060e16;
+  --leaderboard-btn-hover-to: #3a4150;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -575,3 +608,21 @@
   animation: roulette-spin 12s linear infinite;
 }
 
+/* Monthly Leaderboard Section */
+.leaderboard-shadow {
+  box-shadow:
+    inset 0px 1px 1px rgba(255, 255, 255, 0.05),
+    0px 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.leaderboard-card-rank1-shadow {
+  box-shadow: 0px 0px 30px rgba(48, 223, 140, 0.15);
+}
+
+.leaderboard-avatar-ring {
+  background: radial-gradient(
+    60.56% 60.56% at 50% 50%,
+    rgba(61, 108, 218, 0.4) 0%,
+    rgba(11, 42, 28, 0.4) 100%
+  );
+}

@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { BUTTON_LABELS } from '@/shared/config';
