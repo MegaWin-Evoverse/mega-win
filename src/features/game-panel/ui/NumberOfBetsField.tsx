@@ -1,7 +1,5 @@
 'use client';
-
 import type { ChangeEvent } from 'react';
-
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { GAME_PANEL_LABELS } from '@/shared/config';

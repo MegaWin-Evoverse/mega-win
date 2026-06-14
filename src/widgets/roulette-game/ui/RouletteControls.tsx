@@ -1,9 +1,7 @@
 'use client';
-
 import { useRouletteControls, ROULETTE_LABELS } from '@/features/roulette-controls';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { GamePanel, NumberOfBetsField } from '@/features/game-panel';
-
 import { BetSummary } from './BetSummary';
 import { ChipsGrid } from './ChipsGrid';
 import { ChooseActions } from './ChooseActions';

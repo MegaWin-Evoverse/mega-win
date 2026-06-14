@@ -1,9 +1,7 @@
 'use client';
-
 import { usePlinkoControls } from '@/features/plinko-controls';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { GamePanel, NumberOfBetsField } from '@/features/game-panel';
-
 import { RiskSelector } from './RiskSelector';
 import { RowsSlider } from './RowsSlider';
 

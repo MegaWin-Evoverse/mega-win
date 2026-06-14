@@ -1,7 +1,5 @@
 'use client';
-
 import { Trash2, Undo2 } from 'lucide-react';
-
 import { Button } from '@/shared/ui/button';
 import { ROULETTE_LABELS } from '@/features/roulette-controls';
 

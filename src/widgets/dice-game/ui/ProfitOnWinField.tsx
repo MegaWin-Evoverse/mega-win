@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { Input } from '@/shared/ui/input';
 import { DICE_LABELS } from '@/features/dice-controls';
 import { COIN_ICON } from '@/shared/config';

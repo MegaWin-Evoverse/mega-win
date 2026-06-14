@@ -1,9 +1,7 @@
 'use client';
-
 import { useKenoControls, KENO_LABELS } from '@/features/keno-controls';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { GamePanel, NumberOfBetsField } from '@/features/game-panel';
-
 import { RiskSelector } from './RiskSelector';
 import { TableActions } from './TableActions';
 

@@ -1,8 +1,6 @@
 'use client';
-
 import { cn } from '@/shared/lib/cn';
 import { CHIP_NOMINALS } from '@/features/roulette-controls';
-
 import { ChipIcon } from './ChipIcon';
 
 interface Props {

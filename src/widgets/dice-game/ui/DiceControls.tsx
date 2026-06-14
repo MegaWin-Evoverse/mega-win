@@ -1,9 +1,7 @@
 'use client';
-
 import { useDiceControls } from '@/features/dice-controls';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { GamePanel, NumberOfBetsField } from '@/features/game-panel';
-
 import { ProfitOnWinField } from './ProfitOnWinField';
 import { AutoBetSummaryGrid } from './AutoBetSummaryGrid';
 import { ConfigureButton } from './ConfigureButton';

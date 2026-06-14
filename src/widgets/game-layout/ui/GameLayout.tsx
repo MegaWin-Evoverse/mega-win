@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 
 interface Props {

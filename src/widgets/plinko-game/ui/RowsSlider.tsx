@@ -1,5 +1,4 @@
 'use client';
-
 import { cn } from '@/shared/lib/cn';
 import { Slider } from '@/shared/ui/slider';
 import { PLINKO_LABELS, PLINKO_ROWS } from '@/features/plinko-controls';

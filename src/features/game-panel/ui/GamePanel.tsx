@@ -1,12 +1,9 @@
 'use client';
-
 import type { ReactNode } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { GAME_PANEL_LABELS, GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
-
 import { BetAmountField } from './BetAmountField';
 
 interface Props {

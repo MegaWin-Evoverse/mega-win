@@ -1,13 +1,10 @@
 'use client';
-
 import type { ChangeEvent } from 'react';
 import Image from 'next/image';
-
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { COIN_ICON, GAME_PANEL_LABELS } from '@/shared/config';
-
 import { BalanceDisplay } from './BalanceDisplay';
 
 interface Props {

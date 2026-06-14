@@ -1,5 +1,4 @@
 'use client';
-
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { KENO_LABELS, KENO_RISK_OPTIONS, type KenoRisk } from '@/features/keno-controls';

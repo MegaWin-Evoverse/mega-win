@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { COIN_ICON } from '@/shared/config';
 
 interface Props {

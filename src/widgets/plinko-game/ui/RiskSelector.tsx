@@ -1,5 +1,4 @@
 'use client';
-
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { PLINKO_LABELS, PLINKO_RISK_OPTIONS, type PlinkoRisk } from '@/features/plinko-controls';
