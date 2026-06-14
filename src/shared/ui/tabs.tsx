@@ -1,8 +1,6 @@
 'use client';
-
 import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/shared/lib/cn';
 
 function Tabs({ className, orientation = 'horizontal', ...props }: TabsPrimitive.Root.Props) {
@@ -23,6 +21,7 @@ const tabsListVariants = cva(
       variant: {
         default: 'bg-muted',
         line: 'gap-1 bg-transparent',
+        bets: '!h-[60px] gap-2 p-2 bg-bg-primary rounded-xl group-data-horizontal/tabs:h-[60px]',
       },
     },
     defaultVariants: {
@@ -55,6 +54,8 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         'group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent',
         'data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground',
         'after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100',
+        'group-data-[variant=bets]/tabs-list:h-11 group-data-[variant=bets]/tabs-list:rounded-lg group-data-[variant=bets]/tabs-list:px-4 group-data-[variant=bets]/tabs-list:py-3 group-data-[variant=bets]/tabs-list:font-outfit group-data-[variant=bets]/tabs-list:text-base group-data-[variant=bets]/tabs-list:font-medium group-data-[variant=bets]/tabs-list:border-transparent group-data-[variant=bets]/tabs-list:text-text-secondary group-data-[variant=bets]/tabs-list:hover:text-brand-text-white group-data-[variant=bets]/tabs-list:after:hidden',
+        'group-data-[variant=bets]/tabs-list:data-active:bg-linear-to-b group-data-[variant=bets]/tabs-list:data-active:from-border-default/40 group-data-[variant=bets]/tabs-list:data-active:to-brand-btn-gradient-to/40 group-data-[variant=bets]/tabs-list:data-active:text-brand-text-white group-data-[variant=bets]/tabs-list:data-active:shadow-none group-data-[variant=bets]/tabs-list:dark:data-active:bg-transparent group-data-[variant=bets]/tabs-list:dark:data-active:border-transparent',
         className
       )}
       {...props}

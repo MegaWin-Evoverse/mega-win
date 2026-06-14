@@ -1,7 +1,5 @@
 'use client';
-
 import { type ComponentProps } from 'react';
-
 import { cn } from '@/shared/lib/cn';
 import {
   Sidebar as BaseSidebar,
@@ -11,7 +9,6 @@ import {
   useSidebar,
 } from '@/shared/ui/sidebar';
 import { useSidebarMenu } from '../model/useSidebarMenu';
-
 import { SidebarHeaderSection } from './SidebarHeaderSection';
 import { SidebarMenuSection } from './SidebarMenuSection';
 import { SidebarFooterSection } from './SidebarFooterSection';

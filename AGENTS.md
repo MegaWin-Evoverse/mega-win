@@ -97,7 +97,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 # Public API
 
 - Every slice MUST expose a public `index.ts` file.
-- Never import internal paths directly (e.g., `features/auth/model/`, `entities/user/ui/`). Always go through `index.ts`.
+- Never import internal paths directly (e.g., `features/auth/model/`, `entities/user/ui/`). Always go through the slice's `index.ts`.
+- **No layer-level barrels**: layers do NOT have their own `index.ts`. Import slices directly: `@/widgets/header`, `@/entities/user`, etc. — never `@/widgets` or `@/entities`.
 
 ---
 

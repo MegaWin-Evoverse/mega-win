@@ -19,9 +19,12 @@ These are hard rules; the `review` skill audits against them.
 - NEVER hardcode hex/rgb/hsl/oklch or Tailwind palette classes (`text-zinc-400`) — use semantic OKLCH tokens.
 - No magic numbers/strings. App-wide values → `shared/config/*`; slice-local values (UI labels, default state, domain enums, option lists) → the slice's `model/constants.ts`.
 
-## Imports
+## Imports & blank lines
 
-- Imports form a single contiguous block — NO blank lines between import statements, and none between a leading `'use client'`/`'use server'` directive and the first import. Exactly one blank line separates the import block from the code below.
+- Imports form a single contiguous block — NO blank lines between import statements, and none between a leading `'use client'`/`'use server'` directive and the first import. Exactly one blank line separates the import block from the code.
+- No blank lines inside JSX markup (between sibling elements or right inside a `return ( … )`).
+- KEEP blank lines that aid readability: between top-level declarations, between logical statement groups in a function body, and between grouped entries in large object/array literals.
+- Enforced by the `remove-spaces` skill and `scripts/check-blank-lines.mjs`.
 
 ## Dead code
 

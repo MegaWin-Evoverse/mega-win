@@ -22,7 +22,15 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 
    If errors — fix them before continuing.
 
-3. **Forbidden native elements check**
+3. **Remove redundant blank lines** — invoke the `remove-spaces` skill.
+
+   ```bash
+   node scripts/check-blank-lines.mjs $(git diff --staged --name-only --diff-filter=ACM -- 'src/**/*.ts' 'src/**/*.tsx')
+   ```
+
+   If it reports violations, run the skill to fix import blocks (`--fix`) and review JSX, then `git add` the result. Do not proceed until it prints `OK`.
+
+4. **Forbidden native elements check**
 
    Native `<button>` and `<img>` are banned in favour of shared UI components.
 
@@ -36,7 +44,7 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 
    If any matches are found — list each `file:line` and **stop**. Do not proceed to commit.
 
-4. **Run tests** (if any exist)
+5. **Run tests** (if any exist)
 
    ```bash
    npm run test:related
@@ -44,7 +52,7 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
 
    If tests fail — stop and explain which ones and why.
 
-5. **Check doc freshness** (automated)
+6. **Check doc freshness** (automated)
 
    ```bash
    npm run doc:check
@@ -60,9 +68,9 @@ Run pre-commit checks: lint, forbidden elements, tests, doc freshness, and commi
    - `SKIP_DOC_CHECK=1 git commit` — bypass the hook entirely for one commit
    - `SKIP_AI_UPDATE=1 npm run doc:check` — dry-run: reports stale docs without calling Claude
 
-6. **Commit**
+7. **Commit**
 
-   Only after lint, element checks, and tests pass:
+   Only after lint, blank-line, element checks, and tests pass:
 
    ```bash
    git commit -m "<type(scope): description>"
