@@ -9,11 +9,9 @@ import {
   type ComponentProps,
   type CSSProperties,
 } from 'react';
-
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { useIsMobile } from '@/shared/lib/hooks/use-mobile';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';

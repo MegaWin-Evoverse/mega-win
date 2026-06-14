@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { Copy } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
@@ -66,7 +65,6 @@ export function StepCard({ card }: Props) {
           size="none"
           nativeButton={false}
           render={<Link href={href} />}
-          nativeButton={false}
           className="flex h-12 w-full items-center justify-center rounded-lg font-outfit text-lg font-medium"
         >
           {buttonLabel}

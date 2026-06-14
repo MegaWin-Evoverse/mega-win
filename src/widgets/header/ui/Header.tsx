@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { Button } from '@/shared/ui/button';

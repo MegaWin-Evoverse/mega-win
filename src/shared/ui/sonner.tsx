@@ -1,6 +1,5 @@
 'use client';
 import { type CSSProperties } from 'react';
-
 import { Toaster as Sonner, type ToasterProps } from 'sonner';
 import {
   CircleCheckIcon,

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { cn } from '@/shared/lib/cn';
 import { ChevronLeftIcon } from '@/shared/ui/ChevronLeftIcon';
 import { Button } from '@/shared/ui/button';

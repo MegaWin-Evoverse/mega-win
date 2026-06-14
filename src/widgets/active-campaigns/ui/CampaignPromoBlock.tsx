@@ -1,5 +1,4 @@
 'use client';
-
 import { Clock, Copy } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { CAMPAIGN_CONSTANTS } from '../config/constants';

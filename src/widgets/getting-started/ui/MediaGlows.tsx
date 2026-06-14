@@ -1,5 +1,4 @@
 'use client';
-
 import { cn } from '@/shared/lib/cn';
 import type { StepCardData } from '../model/types';
 

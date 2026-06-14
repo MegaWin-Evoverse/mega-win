@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { cn } from '@/shared/lib/cn';
 import { FEATURE_CARDS } from '../config/constants';
 import { FeatureCard } from './FeatureCard';

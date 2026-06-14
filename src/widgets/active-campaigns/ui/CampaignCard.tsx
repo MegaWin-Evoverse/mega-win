@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { Card } from '@/shared/ui/card';
 import { useCampaignCard } from '../model/useCampaignCard';

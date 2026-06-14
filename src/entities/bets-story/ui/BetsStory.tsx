@@ -1,5 +1,4 @@
 'use client';
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { useState } from 'react';
 import { BetsList } from './BetsList';
