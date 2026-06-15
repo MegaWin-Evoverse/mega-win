@@ -1,15 +1,16 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
-import { CHIP_NOMINALS } from '../model/constants';
+import { CHIP_NOMINALS } from '@/entities/game';
+import { useChipSelector } from '../model/useChipSelector';
 import { ChipIcon } from './ChipIcon';
 
 interface Props {
-  selectedChip: string | null;
-  onChipSelect: (chip: string) => void;
   className?: string;
 }
 
-export function ChipsGrid({ selectedChip, onChipSelect, className }: Props) {
+export function ChipsGrid({ className }: Props) {
+  const { selectedChip, selectChip } = useChipSelector();
+
   return (
     <div
       className={cn(
@@ -22,7 +23,7 @@ export function ChipsGrid({ selectedChip, onChipSelect, className }: Props) {
           key={nominal}
           valueText={nominal}
           isActive={selectedChip === nominal}
-          onClick={() => onChipSelect(nominal)}
+          onClick={() => selectChip(nominal)}
         />
       ))}
     </div>

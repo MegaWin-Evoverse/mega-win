@@ -1,0 +1,99 @@
+import { create } from 'zustand';
+import { GAME_PANEL_TAB, type GamePanelTab, GAME_BALANCE } from '@/shared/config';
+import {
+  sanitizeBetInput,
+  normalizeBetValue,
+  calcHalfBet,
+  calcDoubleBet,
+  calcMaxBet,
+} from '@/shared/lib/betAmount';
+import { type Risk, GAME_CONTROLS_DEFAULTS, PLINKO_ROWS } from './constants';
+
+const DIGITS_ONLY = /\D/g;
+
+export interface GameControlsState {
+  activeTab: GamePanelTab;
+  betAmount: string;
+  balance: number;
+  risk: Risk | null;
+  rows: number;
+  numberOfBets: string;
+  selectedChip: string | null;
+  placedBet: number;
+  onWinMode: string;
+  onLossMode: string;
+  stopOnProfit: string;
+  stopOnLoss: string;
+  isBetActive: boolean;
+  setTab: (tab: GamePanelTab) => void;
+  setBetAmount: (value: string) => void;
+  normalizeBetAmount: () => void;
+  betHalf: () => void;
+  betDouble: () => void;
+  betMax: () => void;
+  setRisk: (risk: Risk) => void;
+  setRows: (value: number | readonly number[]) => void;
+  setNumberOfBets: (value: string) => void;
+  setInfinity: () => void;
+  selectChip: (chip: string) => void;
+  clearTable: () => void;
+  undo: () => void;
+  autoPick: () => void;
+}
+
+const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
+  activeTab: GAME_PANEL_TAB.MANUAL,
+  betAmount: GAME_CONTROLS_DEFAULTS.BET_AMOUNT_TEXT,
+  balance: GAME_BALANCE,
+  risk: null,
+  rows: PLINKO_ROWS.DEFAULT,
+  numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS,
+  selectedChip: null,
+  placedBet: 0,
+  onWinMode: GAME_CONTROLS_DEFAULTS.ON_WIN,
+  onLossMode: GAME_CONTROLS_DEFAULTS.ON_LOSS,
+  stopOnProfit: GAME_CONTROLS_DEFAULTS.STOP_ON_PROFIT,
+  stopOnLoss: GAME_CONTROLS_DEFAULTS.STOP_ON_LOSS,
+  isBetActive: false,
+  setTab: (activeTab) => set({ activeTab }),
+  setBetAmount: (value) => {
+    if (value === '') {
+      set({ betAmount: '', isBetActive: false });
+      return;
+    }
+    const next = sanitizeBetInput(value, get().balance);
+    set({ betAmount: next, isBetActive: (Number.parseFloat(next) || 0) > 0 });
+  },
+  normalizeBetAmount: () => {
+    const next = normalizeBetValue(get().betAmount);
+    set({ betAmount: next, isBetActive: true });
+  },
+  betHalf: () =>
+    set((state) => {
+      const next = calcHalfBet(state.betAmount);
+      return { betAmount: next, isBetActive: (Number.parseFloat(next) || 0) > 0 };
+    }),
+  betDouble: () =>
+    set((state) => {
+      const next = calcDoubleBet(state.betAmount, state.balance);
+      return { betAmount: next, isBetActive: (Number.parseFloat(next) || 0) > 0 };
+    }),
+  betMax: () =>
+    set((state) => {
+      const next = calcMaxBet(state.balance);
+      return { betAmount: next, isBetActive: (Number.parseFloat(next) || 0) > 0 };
+    }),
+  setRisk: (risk) => set({ risk }),
+  setRows: (value) => set({ rows: Array.isArray(value) ? value[0] : (value as number) }),
+  setNumberOfBets: (value) => set({ numberOfBets: value.replace(DIGITS_ONLY, '') }),
+  setInfinity: () => set({ numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS }),
+  selectChip: (chip) =>
+    set((state) => ({ selectedChip: state.selectedChip === chip ? null : chip })),
+  clearTable: () => set({ selectedChip: null }),
+  undo: () => {},
+  autoPick: () => {},
+}));
+
+export function useGameControlsStore<T>(selector: (state: GameControlsState) => T): T {
+  return useGameControlsStoreRaw(selector);
+}

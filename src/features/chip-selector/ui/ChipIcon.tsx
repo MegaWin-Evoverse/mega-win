@@ -1,8 +1,8 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
+import { type ChipNominal } from '@/entities/game';
 import {
-  type ChipNominal,
   CHIP_BASE_COLOR,
   CHIP_CORE_COLOR,
   CHIP_TEXT_COLOR,

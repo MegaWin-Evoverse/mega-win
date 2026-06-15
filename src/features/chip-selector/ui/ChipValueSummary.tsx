@@ -3,19 +3,20 @@ import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
 import { formatAmount } from '@/shared/lib/formatAmount';
 import { COIN_ICON, GAME_PANEL_LABELS } from '@/shared/config';
-import { CONTROL_PANEL_LABELS } from '../model/constants';
+import { CHIP_LABELS } from '../model/constants';
+import { useChipSelector } from '../model/useChipSelector';
 
 interface Props {
-  selectedChip: string | null;
-  placedBet: number;
   className?: string;
 }
 
-export function ChipValueSummary({ selectedChip, placedBet, className }: Props) {
+export function ChipValueSummary({ className }: Props) {
+  const { selectedChip, placedBet } = useChipSelector();
+
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>
       <div className="flex items-center justify-between font-outfit text-base font-medium">
-        <span className="text-brand-text-white">{CONTROL_PANEL_LABELS.CHIP_VALUE}</span>
+        <span className="text-brand-text-white">{CHIP_LABELS.CHIP_VALUE}</span>
         <div className="flex items-center gap-2 text-brand-text-white">
           <span
             className={cn(
@@ -24,9 +25,7 @@ export function ChipValueSummary({ selectedChip, placedBet, className }: Props) 
             )}
           />
           <span>
-            {selectedChip
-              ? `${selectedChip} ${CONTROL_PANEL_LABELS.COINS}`
-              : `0 ${CONTROL_PANEL_LABELS.COINS}`}
+            {selectedChip ? `${selectedChip} ${CHIP_LABELS.COINS}` : `0 ${CHIP_LABELS.COINS}`}
           </span>
         </div>
       </div>
@@ -40,7 +39,7 @@ export function ChipValueSummary({ selectedChip, placedBet, className }: Props) 
             height={COIN_ICON.SIZE_BALANCE}
           />
           <span>
-            {formatAmount(placedBet)} {CONTROL_PANEL_LABELS.COINS}
+            {formatAmount(placedBet)} {CHIP_LABELS.COINS}
           </span>
         </div>
       </div>
