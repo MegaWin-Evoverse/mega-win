@@ -1,5 +1,10 @@
 export const ROUTES = {
   HOME: '/',
+  PROFILE: '/profile',
+  CONNECTIONS: '/connections',
+  BETS_HISTORY: '/bets-history',
+  AFFILIATES: '/affiliates',
+  SEED_HISTORY: '/seed-history',
   POINTSHOP: '/pointshop',
   LEADERBOARD: '/leaderboard',
   GAMES: '/games',

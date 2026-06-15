@@ -6,6 +6,8 @@ import { Logo } from '@/shared/ui/logo';
 import { ROUTES, BUTTON_LABELS } from '@/shared/config';
 import { useSidebar } from '@/shared/ui/sidebar';
 import { useAuthStore } from '@/features/auth';
+import { useUserQuery } from '@/entities/user';
+import { UserPanel } from './UserPanel';
 
 const ARIA_LABEL_HEADER = 'Main header';
 const ARIA_LABEL_BUTTON = 'Log in';
@@ -15,6 +17,7 @@ const ARIA_LABEL_MENU_BUTTON = 'Toggle navigation menu';
 export function Header() {
   const { toggleSidebar, isMobile, isTablet } = useSidebar();
   const openAuthForm = useAuthStore((state) => state.openAuthForm);
+  const { data: user } = useUserQuery();
   const isMobileOrTablet = isMobile || isTablet;
 
   return (
@@ -39,15 +42,18 @@ export function Header() {
           <Logo />
         </Link>
       </div>
-
-      <Button
-        variant="main"
-        onClick={openAuthForm}
-        aria-label={ARIA_LABEL_BUTTON}
-        className="w-[120px] h-10 py-3 px-4 rounded-lg flex items-center justify-center gap-2"
-      >
-        {BUTTON_LABELS.LOG}
-      </Button>
+      {user ? (
+        <UserPanel user={user} />
+      ) : (
+        <Button
+          variant="main"
+          onClick={openAuthForm}
+          aria-label={ARIA_LABEL_BUTTON}
+          className="w-[120px] h-10 py-3 px-4 rounded-lg flex items-center justify-center gap-2"
+        >
+          {BUTTON_LABELS.LOG}
+        </Button>
+      )}
     </header>
   );
 }

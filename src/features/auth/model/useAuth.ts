@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type Resolver } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
+import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { signInSchema, signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
 import { ERROR_MESSAGE, PATHS, RECAPTCHA_ERROR, SUCCESS_MESSAGE } from './constants';
@@ -15,7 +16,9 @@ interface UseAuthParams {
 }
 
 export function useAuth({ type }: UseAuthParams) {
+  const queryClient = useQueryClient();
   const { recaptchaToken, setRecaptchaToken, recaptchaKey, resetRecaptcha } = useRecaptcha();
+  const closeAuthForm = useAuthStore((state) => state.closeAuthForm);
   const setVerificationToken = useAuthStore((state) => state.setVerificationToken);
   const setEmail = useAuthStore((state) => state.setEmail);
   const schema = type === 'sign-in' ? signInSchema : signUpSchema;
@@ -49,11 +52,16 @@ export function useAuth({ type }: UseAuthParams) {
     },
     onSuccess: (result, data) => {
       if (type === 'sign-in') {
+        closeAuthForm();
+
         toast.success(SUCCESS_MESSAGE['sign-in']);
+
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
       }
 
       if (type === 'sign-up' && result.verificationToken) {
         setVerificationToken(result.verificationToken);
+
         setEmail(data.email);
       }
     },
