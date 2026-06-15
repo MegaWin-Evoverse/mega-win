@@ -1,16 +1,16 @@
 import type { CellState } from './types';
 
-export const KENO_TOTAL_NUMBERS = 40;
-export const KENO_DRAWN_COUNT = 20;
-export const KENO_MAX_PICKS = 10;
-export const KENO_MIN_PICKS = 1;
-export const KENO_DEFAULT_BET = 100;
-export const KENO_MULTIPLIER_DECIMALS = 2;
-export const KENO_BET_DECIMALS = 2;
-export const KENO_REVEAL_DELAY_MS = 80;
-export const KENO_RESULT_DELAY_MS = 400;
+export const TOTAL_NUMBERS = 40;
+export const DRAWN_COUNT = 20;
+export const MAX_PICKS = 10;
+export const MIN_PICKS = 1;
+export const DEFAULT_BET = 100;
+export const MULTIPLIER_DECIMALS = 2;
+export const BET_DECIMALS = 2;
+export const REVEAL_DELAY_MS = 80;
+export const RESULT_DELAY_MS = 400;
 
-export const KENO_LABELS = {
+export const LABELS = {
   SELECT_PROMPT: 'Select numbers 1-10 to start',
   PLAY: 'Play',
   PLAY_AGAIN: 'Play Again',
@@ -19,7 +19,7 @@ export const KENO_LABELS = {
   WIN_MATCHES_ALT: 'Matches',
 } as const;
 
-export const KENO_PAYOUTS: Readonly<Record<number, readonly number[]>> = {
+export const PAYOUTS: Readonly<Record<number, readonly number[]>> = {
   1: [0, 3.96],
   2: [0, 1, 9],
   3: [0, 0, 2.7, 27],
@@ -32,7 +32,7 @@ export const KENO_PAYOUTS: Readonly<Record<number, readonly number[]>> = {
   10: [0, 0, 0.5, 1, 2, 6, 15, 50, 200, 1000, 5000],
 } as const;
 
-export const KENO_NUMBERS = Array.from({ length: KENO_TOTAL_NUMBERS }, (_, i) => i + 1);
+export const NUMBERS = Array.from({ length: TOTAL_NUMBERS }, (_, i) => i + 1);
 
 export const CELL_STATE_CLASSES: Record<CellState, string> = {
   idle: 'bg-gradient-to-b from-brand-border to-brand-btn-gradient-to border border-keno-cell-border text-brand-text-white hover:brightness-125',

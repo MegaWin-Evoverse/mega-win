@@ -4,7 +4,7 @@ import { Board } from './Board';
 import { Payout } from './Payout';
 import { WinModal } from './WinModal';
 import { useKenoGame } from '../model/useKenoGame';
-import { KENO_LABELS } from '../model/constants';
+import { LABELS } from '../model/constants';
 
 export function KenoGame() {
   const {
@@ -31,7 +31,7 @@ export function KenoGame() {
 
       {phase === 'default' && (
         <div className="flex h-[60px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-border to-brand-btn-gradient-to font-outfit text-sm font-semibold text-brand-text-muted">
-          {KENO_LABELS.SELECT_PROMPT}
+          {LABELS.SELECT_PROMPT}
         </div>
       )}
 
@@ -41,13 +41,13 @@ export function KenoGame() {
 
       {phase === 'pick' && !isRevealing && (
         <Button variant="main" className="h-12 w-full" onClick={handlePlay}>
-          {KENO_LABELS.PLAY}
+          {LABELS.PLAY}
         </Button>
       )}
 
       {phase === 'lose' && (
         <Button variant="outline" className="h-12 w-full" onClick={handleReset}>
-          {KENO_LABELS.PLAY_AGAIN}
+          {LABELS.PLAY_AGAIN}
         </Button>
       )}
 

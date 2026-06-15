@@ -1,12 +1,12 @@
 'use client';
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import {
-  KENO_MAX_PICKS,
-  KENO_MIN_PICKS,
-  KENO_DEFAULT_BET,
-  KENO_PAYOUTS,
-  KENO_REVEAL_DELAY_MS,
-  KENO_RESULT_DELAY_MS,
+  MAX_PICKS,
+  MIN_PICKS,
+  DEFAULT_BET,
+  PAYOUTS,
+  REVEAL_DELAY_MS,
+  RESULT_DELAY_MS,
 } from './constants';
 import type { GamePhase, CellState, GameResult } from './types';
 import { drawNumbers } from './drawNumbers';
@@ -26,7 +26,7 @@ interface UseKenoGameResult {
   getCellState: (n: number) => CellState;
 }
 
-export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
+export function useKenoGame(betAmount = DEFAULT_BET): UseKenoGameResult {
   const [gameResult, setGameResult] = useState<GameResult>('idle');
   const [selectedNumbers, setSelectedNumbers] = useState<Set<number>>(new Set());
   const [allDrawnNumbers, setAllDrawnNumbers] = useState<Set<number>>(new Set());
@@ -45,7 +45,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
           : 'pick';
 
   const currentPayouts = useMemo<readonly number[]>(
-    () => (selectedCount >= KENO_MIN_PICKS ? (KENO_PAYOUTS[selectedCount] ?? []) : []),
+    () => (selectedCount >= MIN_PICKS ? (PAYOUTS[selectedCount] ?? []) : []),
     [selectedCount]
   );
 
@@ -81,7 +81,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
 
         if (next.has(n)) {
           next.delete(n);
-        } else if (next.size < KENO_MAX_PICKS) {
+        } else if (next.size < MAX_PICKS) {
           next.add(n);
         }
 
@@ -92,7 +92,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
   );
 
   const handlePlay = useCallback(() => {
-    if (selectedNumbers.size < KENO_MIN_PICKS || isRevealing) {
+    if (selectedNumbers.size < MIN_PICKS || isRevealing) {
       return;
     }
 
@@ -109,7 +109,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
       }
     });
 
-    const multiplier = (KENO_PAYOUTS[selectedNumbers.size] ?? [])[matches] ?? 0;
+    const multiplier = (PAYOUTS[selectedNumbers.size] ?? [])[matches] ?? 0;
 
     setAllDrawnNumbers(drawn);
     setRevealedNumbers(new Set());
@@ -124,7 +124,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
             return next;
           });
         },
-        (i + 1) * KENO_REVEAL_DELAY_MS
+        (i + 1) * REVEAL_DELAY_MS
       );
 
       timeoutsRef.current.push(timeout);
@@ -135,7 +135,7 @@ export function useKenoGame(betAmount = KENO_DEFAULT_BET): UseKenoGameResult {
         setIsRevealing(false);
         setGameResult(multiplier > 0 ? 'win' : 'lose');
       },
-      (drawnArray.length + 1) * KENO_REVEAL_DELAY_MS + KENO_RESULT_DELAY_MS
+      (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
     );
 
     timeoutsRef.current.push(finalTimeout);

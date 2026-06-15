@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
-import { KENO_MULTIPLIER_DECIMALS, PAYOUT_COLS } from '../model/constants';
+import { MULTIPLIER_DECIMALS, PAYOUT_COLS } from '../model/constants';
 import type { GamePhase } from '../model/types';
 
 interface Props {
@@ -41,7 +41,7 @@ export function Payout({ payouts, matchCount, phase }: Props) {
 
             <div className="flex items-center justify-center bg-gradient-to-b from-brand-border to-brand-btn-gradient-to px-4 py-2">
               <span className="w-full text-center font-outfit text-xs font-semibold leading-4 text-brand-text-white">
-                {multiplier.toFixed(KENO_MULTIPLIER_DECIMALS)}x
+                {multiplier.toFixed(MULTIPLIER_DECIMALS)}x
               </span>
             </div>
           </div>
