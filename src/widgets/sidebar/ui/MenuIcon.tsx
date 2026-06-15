@@ -10,7 +10,6 @@ import {
   Disc,
   type LucideProps,
 } from 'lucide-react';
-
 import { type IconName } from '../model/menu';
 import { PlinkoIcon } from './PlinkoIcon';
 import { RouletteIcon } from './RouletteIcon';
