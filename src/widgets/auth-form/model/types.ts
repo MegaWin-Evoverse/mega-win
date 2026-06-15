@@ -1,1 +1,1 @@
-export type AuthTab = 'sign-in' | 'sign-up';
+export type { AuthType as AuthTab } from '@/features/auth';

@@ -141,8 +141,6 @@
   --auth-text-secondary: #c7cbd4;
   --auth-text-muted: #6b7280;
   --auth-btn-text: #0a0d19;
-  --auth-green-from: #4ade80;
-  --auth-green-to: #22c55e;
   --auth-checkbox-border: rgba(10, 13, 25, 0.5);
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
@@ -293,7 +291,7 @@
 }
 
 @utility bg-auth-btn-primary {
-  background: linear-gradient(180deg, var(--auth-green-from) 0%, var(--auth-green-to) 100%);
+  background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
 }
 
 @utility bg-auth-btn-social {

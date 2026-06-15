@@ -1,10 +1,12 @@
+'use client';
+
 import { useState } from 'react';
 import { useAuth } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Recaptcha } from '@/shared/ui/recaptcha';
 import { Checkbox } from '@/shared/ui/checkbox';
-import { Error } from '@/shared/ui/error';
+import { FieldError } from '@/shared/ui/field-error';
 import { BUTTON_TEXT } from '../model/constants';
 import { GoogleIcon } from './icons/GoogleIcon';
 import { DiscordIcon } from './icons/DiscordIcon';
@@ -37,7 +39,7 @@ export function AuthFormBody({ type }: Props) {
             className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
             {...register('username')}
           />
-          {errors.username && <Error message={errors.username.message} />}
+          {errors.username && <FieldError message={errors.username.message} />}
         </div>
       )}
 
@@ -52,7 +54,7 @@ export function AuthFormBody({ type }: Props) {
           className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('email')}
         />
-        {errors.email && <Error message={errors.email.message} />}
+        {errors.email && <FieldError message={errors.email.message} />}
       </div>
 
       <div className="flex flex-col gap-[4px]">
@@ -66,7 +68,7 @@ export function AuthFormBody({ type }: Props) {
           className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('password')}
         />
-        {errors.password && <Error message={errors.password.message} />}
+        {errors.password && <FieldError message={errors.password.message} />}
       </div>
 
       {type === 'sign-up' && (

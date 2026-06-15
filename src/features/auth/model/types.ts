@@ -11,3 +11,5 @@ export type AuthResponse = {
   success?: boolean;
   verificationToken?: string;
 };
+
+export type AuthType = 'sign-in' | 'sign-up';

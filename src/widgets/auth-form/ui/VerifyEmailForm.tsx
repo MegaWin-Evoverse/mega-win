@@ -3,10 +3,14 @@
 import { useVerifyEmail } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
-import { Error } from '@/shared/ui/error';
+import { FieldError } from '@/shared/ui/field-error';
 import { OTP_LENGTH } from '../model/constants';
 
-export function VerifyEmailForm({ email }: { email: string | null }) {
+interface Props {
+  email: string | null;
+}
+
+export function VerifyEmailForm({ email }: Props) {
   const { errors, code, handleCodeChange, onSubmit, isPending, clearVerificationToken } =
     useVerifyEmail();
 
@@ -38,7 +42,7 @@ export function VerifyEmailForm({ email }: { email: string | null }) {
 
       {errors.code && (
         <div className="mb-[8px]">
-          <Error message={errors.code.message} />
+          <FieldError message={errors.code.message} />
         </div>
       )}
 

@@ -3,7 +3,7 @@ import createAuthRefresh from 'axios-auth-refresh';
 import { AUTH_PATHS, REFRESH_PATH } from './constants';
 
 function refreshTokens() {
-  return axios.post(REFRESH_PATH, null, { withCredentials: true });
+  return axios.get(REFRESH_PATH, { withCredentials: true });
 }
 
 function shouldRefresh(error: AxiosError): boolean {

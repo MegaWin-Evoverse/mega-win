@@ -1,4 +1,4 @@
-import type { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import setCookieParser from 'set-cookie-parser';
 import { ACCESS_TOKEN_MAX_AGE, REFRESH_TOKEN_MAX_AGE } from './model/constants';
 
@@ -29,4 +29,42 @@ export function applyAuthCookies(response: NextResponse, backendHeaders: Headers
       secure,
     });
   }
+}
+
+interface ProxyAuthRequestParams {
+  endpoint: string;
+  request: Request;
+  passthrough?: boolean;
+}
+
+export async function proxyAuthRequest({
+  endpoint,
+  request,
+  passthrough = false,
+}: ProxyAuthRequestParams): Promise<NextResponse> {
+  const body = await request.json();
+  const recaptchaToken = request.headers.get('recaptcha-token');
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(recaptchaToken && { 'recaptcha-token': recaptchaToken }),
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    return NextResponse.json(error, { status: response.status });
+  }
+
+  if (passthrough) {
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
+  }
+
+  const nextResponse = NextResponse.json({ success: true }, { status: response.status });
+  applyAuthCookies(nextResponse, response.headers);
+  return nextResponse;
 }

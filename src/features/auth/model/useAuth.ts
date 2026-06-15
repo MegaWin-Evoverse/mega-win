@@ -5,13 +5,13 @@ import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { signInSchema, signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { ERROR_MESSAGE, PATHS } from './constants';
+import { ERROR_MESSAGE, PATHS, RECAPTCHA_ERROR, SUCCESS_MESSAGE } from './constants';
 import { useRecaptcha } from './useRecaptcha';
 import { api } from '@/shared/api/client';
-import type { AuthResponse, SignUpSchema } from './types';
+import type { AuthResponse, AuthType, SignUpSchema } from './types';
 
 interface UseAuthParams {
-  type: 'sign-in' | 'sign-up';
+  type: AuthType;
 }
 
 export function useAuth({ type }: UseAuthParams) {
@@ -49,7 +49,7 @@ export function useAuth({ type }: UseAuthParams) {
     },
     onSuccess: (result, data) => {
       if (type === 'sign-in') {
-        toast.success('Welcome back!');
+        toast.success(SUCCESS_MESSAGE['sign-in']);
       }
 
       if (type === 'sign-up' && result.verificationToken) {
@@ -68,7 +68,7 @@ export function useAuth({ type }: UseAuthParams) {
 
   const onSubmit = handleSubmit((data) => {
     if (!recaptchaToken) {
-      toast.error('Please complete the reCAPTCHA');
+      toast.error(RECAPTCHA_ERROR);
 
       return;
     }

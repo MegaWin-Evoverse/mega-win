@@ -11,6 +11,12 @@ export const ERROR_MESSAGE = {
 
 export const VERIFY_EMAIL_ERROR = 'Invalid or expired verification code';
 
+export const SUCCESS_MESSAGE = {
+  'sign-in': 'Welcome back!',
+} as const;
+
+export const RECAPTCHA_ERROR = 'Please complete the reCAPTCHA';
+
 export const VERIFY_EMAIL_FIELDS = {
   code: 'code',
 } as const;

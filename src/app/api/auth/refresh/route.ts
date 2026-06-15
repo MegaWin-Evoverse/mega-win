@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { applyAuthCookies } from '@/features/auth/server';
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const refreshToken = request.cookies.get('refresh_token')?.value;
 
   if (!refreshToken) {
@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
   }
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
-    method: 'POST',
     headers: {
       Cookie: `refresh_token=${refreshToken}`,
     },
