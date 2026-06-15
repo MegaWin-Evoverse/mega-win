@@ -7,6 +7,8 @@ export const KENO_MIN_PICKS = 1;
 export const KENO_DEFAULT_BET = 100;
 export const KENO_MULTIPLIER_DECIMALS = 2;
 export const KENO_BET_DECIMALS = 2;
+export const KENO_REVEAL_DELAY_MS = 80;
+export const KENO_RESULT_DELAY_MS = 400;
 
 export const KENO_LABELS = {
   SELECT_PROMPT: 'Select numbers 1-10 to start',

@@ -10,9 +10,18 @@ interface Props {
 export function Board({ getCellState, onNumberToggle }: Props) {
   return (
     <div className="grid w-full grid-cols-8 gap-[4.75px]">
-      {KENO_NUMBERS.map((n) => (
-        <Cell key={n} number={n} state={getCellState(n)} onSelect={onNumberToggle} />
-      ))}
+      {KENO_NUMBERS.map((number) => {
+        const state = getCellState(number);
+
+        return (
+          <Cell
+            key={state === 'drawn' ? `${number}-drawn` : number}
+            number={number}
+            state={state}
+            onSelect={onNumberToggle}
+          />
+        );
+      })}
     </div>
   );
 }

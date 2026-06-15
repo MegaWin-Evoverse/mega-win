@@ -13,6 +13,7 @@ export function KenoGame() {
     winMultiplier,
     currentPayouts,
     betAmount,
+    isRevealing,
     handleNumberToggle,
     handlePlay,
     handleReset,
@@ -38,7 +39,7 @@ export function KenoGame() {
         <Payout payouts={currentPayouts} matchCount={matchCount} phase={phase} />
       )}
 
-      {phase === 'pick' && (
+      {phase === 'pick' && !isRevealing && (
         <Button variant="main" className="h-12 w-full" onClick={handlePlay}>
           {KENO_LABELS.PLAY}
         </Button>
