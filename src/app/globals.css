@@ -123,6 +123,10 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-dice-thumb: var(--dice-thumb);
+  --color-dice-tooltip-win: var(--dice-tooltip-win);
+  --color-dice-tooltip-win-inner: var(--dice-tooltip-win-inner);
+  --color-dice-glow: var(--dice-glow);
 }
 
 :root {
@@ -168,6 +172,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -243,6 +251,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
