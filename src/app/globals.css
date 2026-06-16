@@ -48,6 +48,16 @@
   --font-geist: var(--font-geist-sans);
   --font-figtree: var(--font-figtree-font);
   --font-outfit: var(--font-outfit-font);
+  --color-auth-bg: var(--bg-primary);
+  --color-auth-surface: var(--auth-surface);
+  --color-auth-surface-light: var(--auth-surface-light);
+  --color-auth-surface-dim: var(--auth-surface-dim);
+  --color-auth-surface-light-dim: var(--auth-surface-light-dim);
+  --color-auth-checkbox-border: var(--auth-checkbox-border);
+  --color-auth-text: var(--auth-text);
+  --color-auth-text-secondary: var(--auth-text-secondary);
+  --color-auth-text-muted: var(--auth-text-muted);
+  --color-auth-btn-text: var(--auth-btn-text);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -138,17 +148,30 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-coin-game: var(--coin-game);
+  --color-coin-watch: var(--coin-watch);
 }
 
 :root {
   --bg-page: #0a0d19;
   --bg-primary: #0e121c;
+  --auth-surface: #1b1f26;
+  --auth-surface-light: #2b303b;
+  --auth-surface-dim: color-mix(in srgb, var(--auth-surface) 40%, transparent);
+  --auth-surface-light-dim: color-mix(in srgb, var(--auth-surface-light) 40%, transparent);
+  --auth-text: #fdfdfd;
+  --auth-text-secondary: #c7cbd4;
+  --auth-text-muted: #6b7280;
+  --auth-btn-text: #0a0d19;
+  --auth-checkbox-border: rgba(10, 13, 25, 0.5);
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --coin-game: #fbbf24;
+  --coin-watch: #22c55e;
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
@@ -243,6 +266,8 @@
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --coin-game: #fbbf24;
+  --coin-watch: #22c55e;
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
   --brand-dark: #07111a;
@@ -319,6 +344,26 @@
   --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
+@utility bg-auth-btn-primary {
+  background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
+}
+
+@utility bg-auth-btn-social {
+  background: linear-gradient(180deg, var(--auth-surface) 0%, var(--auth-surface-light) 100%);
+}
+
+.auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
+  background: linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%);
+  color: var(--auth-text);
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.auth-tabs-nav [data-slot='tabs-trigger']:not([data-active]) {
+  background: transparent;
+  color: var(--auth-text-secondary);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -357,7 +402,7 @@
   border-radius: 8px;
   border: 2px solid transparent;
   background:
-    linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%) padding-box,
+    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
   transition:
     background 0.15s ease-in-out,

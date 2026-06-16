@@ -1,2 +1,3 @@
-export { useUser } from './model/useUser';
-export type { UserProfile, UserBalance } from './model/types';
+export { useUserQuery } from './model/useUserQuery';
+export { BALANCE_TYPE } from './model/types';
+export type { User, UserBalance, BalanceType } from './model/types';
