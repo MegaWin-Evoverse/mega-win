@@ -24,6 +24,9 @@ export const useAuthStore = create<AuthState>()(
       openAuthForm: () => set({ isAuthFormOpen: true }),
       closeAuthForm: () => set({ isAuthFormOpen: false }),
     }),
-    { name: 'auth-storage' }
+    {
+      name: 'auth-storage',
+      partialize: (state) => ({ email: state.email }),
+    }
   )
 );

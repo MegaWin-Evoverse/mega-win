@@ -51,6 +51,9 @@
   --color-auth-bg: var(--bg-primary);
   --color-auth-surface: var(--auth-surface);
   --color-auth-surface-light: var(--auth-surface-light);
+  --color-auth-surface-dim: var(--auth-surface-dim);
+  --color-auth-surface-light-dim: var(--auth-surface-light-dim);
+  --color-auth-checkbox-border: var(--auth-checkbox-border);
   --color-auth-text: var(--auth-text);
   --color-auth-text-secondary: var(--auth-text-secondary);
   --color-auth-text-muted: var(--auth-text-muted);
@@ -130,6 +133,8 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-coin-game: var(--coin-game);
+  --color-coin-watch: var(--coin-watch);
 }
 
 :root {
@@ -137,6 +142,8 @@
   --bg-primary: #0e121c;
   --auth-surface: #1b1f26;
   --auth-surface-light: #2b303b;
+  --auth-surface-dim: color-mix(in srgb, var(--auth-surface) 40%, transparent);
+  --auth-surface-light-dim: color-mix(in srgb, var(--auth-surface-light) 40%, transparent);
   --auth-text: #fdfdfd;
   --auth-text-secondary: #c7cbd4;
   --auth-text-muted: #6b7280;
@@ -148,6 +155,8 @@
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --coin-game: #fbbf24;
+  --coin-watch: #22c55e;
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
@@ -226,6 +235,8 @@
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --coin-game: #fbbf24;
+  --coin-watch: #22c55e;
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
   --brand-dark: #07111a;
@@ -299,7 +310,7 @@
 }
 
 .auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%);
+  background: linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%);
   color: var(--auth-text);
   box-shadow: none;
   border-color: transparent;
@@ -348,7 +359,7 @@
   border-radius: 8px;
   border: 2px solid transparent;
   background:
-    linear-gradient(180deg, rgba(27, 31, 38, 0.4) 0%, rgba(43, 48, 59, 0.4) 100%) padding-box,
+    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
   transition:
     background 0.15s ease-in-out,
