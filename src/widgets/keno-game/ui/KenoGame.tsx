@@ -12,10 +12,9 @@ export function KenoGame() {
     matchCount,
     winMultiplier,
     currentPayouts,
+    currentChances,
     betAmount,
-    isRevealing,
     handleNumberToggle,
-    handlePlay,
     handleReset,
     getCellState,
   } = useKenoGame();
@@ -36,13 +35,13 @@ export function KenoGame() {
       )}
 
       {phase !== 'default' && currentPayouts.length > 0 && (
-        <Payout payouts={currentPayouts} matchCount={matchCount} phase={phase} />
-      )}
-
-      {phase === 'pick' && !isRevealing && (
-        <Button variant="main" className="h-12 w-full" onClick={handlePlay}>
-          {LABELS.PLAY}
-        </Button>
+        <Payout
+          payouts={currentPayouts}
+          chances={currentChances}
+          matchCount={matchCount}
+          phase={phase}
+          betAmount={betAmount}
+        />
       )}
 
       {phase === 'lose' && (

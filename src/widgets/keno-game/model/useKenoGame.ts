@@ -1,15 +1,21 @@
 'use client';
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { useShallow } from 'zustand/react/shallow';
+import { useGameControlsStore, RISK } from '@/entities/game';
 import {
   MAX_PICKS,
   MIN_PICKS,
-  DEFAULT_BET,
-  PAYOUTS,
+  PAYOUTS_BY_RISK,
+  PICK_CHANCES,
   REVEAL_DELAY_MS,
   RESULT_DELAY_MS,
+  BET_DECIMALS,
+  LABELS,
 } from './constants';
 import type { GamePhase, CellState, GameResult } from './types';
-import { drawNumbers } from './drawNumbers';
+import { kenoBet } from '../api/kenoBet';
 
 interface UseKenoGameResult {
   phase: GamePhase;
@@ -18,6 +24,7 @@ interface UseKenoGameResult {
   matchCount: number;
   winMultiplier: number;
   currentPayouts: readonly number[];
+  currentChances: readonly number[];
   betAmount: number;
   isRevealing: boolean;
   handleNumberToggle: (n: number) => void;
@@ -26,13 +33,24 @@ interface UseKenoGameResult {
   getCellState: (n: number) => CellState;
 }
 
-export function useKenoGame(betAmount = DEFAULT_BET): UseKenoGameResult {
+export function useKenoGame(): UseKenoGameResult {
+  const { storeBetAmount, storeRisk, setBetCallback } = useGameControlsStore(
+    useShallow((state) => ({
+      storeBetAmount: state.betAmount,
+      storeRisk: state.risk,
+      setBetCallback: state.setBetCallback,
+    }))
+  );
+
   const [gameResult, setGameResult] = useState<GameResult>('idle');
+  const [serverMultiplier, setServerMultiplier] = useState(0);
   const [selectedNumbers, setSelectedNumbers] = useState<Set<number>>(new Set());
   const [allDrawnNumbers, setAllDrawnNumbers] = useState<Set<number>>(new Set());
   const [revealedNumbers, setRevealedNumbers] = useState<Set<number>>(new Set());
   const [isRevealing, setIsRevealing] = useState(false);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const handlePlayRef = useRef<() => void>(() => {});
+
   const selectedCount = selectedNumbers.size;
 
   const phase: GamePhase =
@@ -44,109 +62,118 @@ export function useKenoGame(betAmount = DEFAULT_BET): UseKenoGameResult {
           ? 'default'
           : 'pick';
 
-  const currentPayouts = useMemo<readonly number[]>(
-    () => (selectedCount >= MIN_PICKS ? (PAYOUTS[selectedCount] ?? []) : []),
+  const currentPayouts = useMemo<readonly number[]>(() => {
+    if (selectedCount < MIN_PICKS) return [];
+    const risk = storeRisk ?? RISK.CLASSIC;
+    return (PAYOUTS_BY_RISK[risk] ?? PAYOUTS_BY_RISK[RISK.CLASSIC]).slice(0, selectedCount + 1);
+  }, [selectedCount, storeRisk]);
+
+  const currentChances = useMemo<readonly number[]>(
+    () => (selectedCount >= MIN_PICKS ? PICK_CHANCES.slice(0, selectedCount + 1) : []),
     [selectedCount]
   );
 
   const matchCount = useMemo<number>(() => {
-    if (gameResult === 'idle') {
-      return 0;
-    }
-
+    if (gameResult === 'idle') return 0;
     let count = 0;
-
     selectedNumbers.forEach((n) => {
-      if (allDrawnNumbers.has(n)) {
-        count++;
-      }
+      if (allDrawnNumbers.has(n)) count++;
     });
-
     return count;
   }, [gameResult, selectedNumbers, allDrawnNumbers]);
 
-  const winMultiplier = useMemo<number>(
-    () => (gameResult === 'idle' ? 0 : (currentPayouts[matchCount] ?? 0)),
-    [gameResult, currentPayouts, matchCount]
-  );
+  const winMultiplier = gameResult === 'idle' ? 0 : serverMultiplier;
 
-  const handleNumberToggle = useCallback(
-    (n: number) => {
-      if (gameResult !== 'idle' || isRevealing) {
-        return;
-      }
+  const betAmount = parseFloat(storeBetAmount) || 0;
 
-      setSelectedNumbers((prev) => {
-        const next = new Set(prev);
+  const { mutate, isPending } = useMutation({
+    mutationFn: kenoBet,
+    onSuccess: (response) => {
+      const drawnArray = response.results.map((n) => n + 1);
+      const drawn = new Set(drawnArray);
 
-        if (next.has(n)) {
-          next.delete(n);
-        } else if (next.size < MAX_PICKS) {
-          next.add(n);
-        }
+      setAllDrawnNumbers(drawn);
+      setRevealedNumbers(new Set());
+      setServerMultiplier(response.multiplier);
 
-        return next;
+      drawnArray.forEach((n, i) => {
+        const timeout = setTimeout(
+          () => {
+            setRevealedNumbers((prev) => {
+              const next = new Set(prev);
+              next.add(n);
+              return next;
+            });
+          },
+          (i + 1) * REVEAL_DELAY_MS
+        );
+        timeoutsRef.current.push(timeout);
       });
+
+      const finalTimeout = setTimeout(
+        () => {
+          setIsRevealing(false);
+          setGameResult(response.multiplier > 0 ? 'win' : 'lose');
+        },
+        (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
+      );
+
+      timeoutsRef.current.push(finalTimeout);
     },
-    [gameResult, isRevealing]
-  );
+    onError: () => {
+      setIsRevealing(false);
+      toast.error(LABELS.BET_ERROR);
+    },
+  });
 
   const handlePlay = useCallback(() => {
-    if (selectedNumbers.size < MIN_PICKS || isRevealing) {
+    if (selectedNumbers.size < MIN_PICKS || isRevealing || isPending || gameResult !== 'idle') {
       return;
     }
 
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
 
-    const drawn = drawNumbers();
-    const drawnArray = Array.from(drawn);
-    let matches = 0;
-
-    selectedNumbers.forEach((n) => {
-      if (drawn.has(n)) {
-        matches++;
-      }
-    });
-
-    const multiplier = (PAYOUTS[selectedNumbers.size] ?? [])[matches] ?? 0;
-
-    setAllDrawnNumbers(drawn);
-    setRevealedNumbers(new Set());
     setIsRevealing(true);
 
-    drawnArray.forEach((n, i) => {
-      const timeout = setTimeout(
-        () => {
-          setRevealedNumbers((prev) => {
-            const next = new Set(prev);
-            next.add(n);
-            return next;
-          });
-        },
-        (i + 1) * REVEAL_DELAY_MS
-      );
-
-      timeoutsRef.current.push(timeout);
+    mutate({
+      betSize: parseFloat(storeBetAmount).toFixed(BET_DECIMALS),
+      risk: (storeRisk ?? RISK.CLASSIC).toUpperCase(),
+      selected: Array.from(selectedNumbers).map((n) => n - 1),
     });
+  }, [selectedNumbers, isRevealing, isPending, gameResult, mutate, storeBetAmount, storeRisk]);
 
-    const finalTimeout = setTimeout(
-      () => {
-        setIsRevealing(false);
-        setGameResult(multiplier > 0 ? 'win' : 'lose');
-      },
-      (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
-    );
+  useLayoutEffect(() => {
+    handlePlayRef.current = handlePlay;
+  });
 
-    timeoutsRef.current.push(finalTimeout);
-  }, [selectedNumbers, isRevealing]);
+  useEffect(() => {
+    const stableCallback = () => handlePlayRef.current();
+    setBetCallback(stableCallback);
+    return () => setBetCallback(null);
+  }, [setBetCallback]);
+
+  const handleNumberToggle = useCallback(
+    (n: number) => {
+      if (gameResult !== 'idle' || isRevealing) return;
+      setSelectedNumbers((prev) => {
+        const next = new Set(prev);
+        if (next.has(n)) {
+          next.delete(n);
+        } else if (next.size < MAX_PICKS) {
+          next.add(n);
+        }
+        return next;
+      });
+    },
+    [gameResult, isRevealing]
+  );
 
   const handleReset = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout);
-
     timeoutsRef.current = [];
-
     setGameResult('idle');
+    setServerMultiplier(0);
     setSelectedNumbers(new Set());
     setAllDrawnNumbers(new Set());
     setRevealedNumbers(new Set());
@@ -164,22 +191,11 @@ export function useKenoGame(betAmount = DEFAULT_BET): UseKenoGameResult {
       if (!isRevealing && gameResult === 'idle') {
         return selectedNumbers.has(number) ? 'selected' : 'idle';
       }
-
       const isSelected = selectedNumbers.has(number);
       const isRevealed = revealedNumbers.has(number);
-
-      if (isSelected && isRevealed) {
-        return 'hit';
-      }
-
-      if (isSelected) {
-        return isRevealing ? 'selected' : 'miss';
-      }
-
-      if (isRevealed) {
-        return 'drawn';
-      }
-
+      if (isSelected && isRevealed) return 'hit';
+      if (isSelected) return isRevealing ? 'selected' : 'miss';
+      if (isRevealed) return 'drawn';
       return 'idle';
     },
     [isRevealing, gameResult, selectedNumbers, revealedNumbers]
@@ -192,6 +208,7 @@ export function useKenoGame(betAmount = DEFAULT_BET): UseKenoGameResult {
     matchCount,
     winMultiplier,
     currentPayouts,
+    currentChances,
     betAmount,
     isRevealing,
     handleNumberToggle,
