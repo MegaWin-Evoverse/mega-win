@@ -10,13 +10,14 @@ These are hard rules; the `review` skill audits against them.
 
 - NEVER `any` or `as any`. Type everything explicitly. Props interface named `Props`.
 - Props MUST use `interface`. Elsewhere pick by situation: `interface` for object/data structures, `type` for unions/intersections/aliases; empty `interface X extends Y {}` → `type X = Y`.
+- Type-only imports: when a statement imports only types, use `import type { X } from '…'`. Use the inline `type` qualifier (`import { value, type X }`) ONLY when a single statement mixes values and types.
 
 ## Styling
 
 - NEVER inline `style={{}}` (exception: a dynamic CSS variable via `var()`).
 - NEVER `!important` in CSS — raise specificity instead.
 - NEVER hardcode hex/rgb/hsl/oklch or Tailwind palette classes (`text-zinc-400`) — use semantic OKLCH tokens.
-- No magic numbers — extract to `shared/config/*`.
+- No magic numbers/strings. App-wide values → `shared/config/*`; slice-local values (UI labels, default state, domain enums, option lists) → the slice's `model/constants.ts`.
 
 ## Imports & blank lines
 
@@ -42,6 +43,7 @@ These are hard rules; the `review` skill audits against them.
 ## Architecture
 
 - FSD layer imports downward only; entities never import entities; import slices via their public `index.ts`.
+- Segments group by purpose: `model` = data model (stores, types, defaults, enums, **constants**); `ui` = presentation; `api` = backend calls. The `config/` segment is ONLY for feature flags / env-driven config — NOT a generic constants bucket. Slice constants live in `model/constants.ts`.
 
 ## Components/hooks
 
