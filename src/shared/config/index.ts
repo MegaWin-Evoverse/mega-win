@@ -6,4 +6,11 @@ export {
   COPYRIGHT_TEXT,
   FOOTER_HEADERS,
   FOOTER_ARIA,
+  GAME_PANEL_TAB,
+  type GamePanelTab,
+  GAME_PANEL_LABELS,
+  GAME_BALANCE,
+  BET_AMOUNT_STEP,
+  BET_AMOUNT_DECIMALS,
+  COIN_ICON,
 } from './constants';

@@ -49,7 +49,7 @@ const eslintConfig = defineConfig([
                   { type: 'app' },
                   {
                     type: ['widgets', 'features', 'entities'],
-                    internalPath: 'index.ts',
+                    internalPath: ['index.ts', 'server.ts'],
                   },
                   { type: 'shared' },
                 ],

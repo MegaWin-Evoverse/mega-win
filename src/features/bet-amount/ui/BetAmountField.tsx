@@ -1,0 +1,36 @@
+'use client';
+import { cn } from '@/shared/lib/cn';
+import { AmountInput } from '@/shared/ui/amount-input';
+import { COIN_ICON, GAME_PANEL_LABELS } from '@/shared/config';
+import { useBetAmount } from '../model/useBetAmount';
+import { BalanceDisplay } from './BalanceDisplay';
+import { QuickBetButtons } from './QuickBetButtons';
+
+interface Props {
+  className?: string;
+}
+
+export function BetAmountField({ className }: Props) {
+  const { betAmount, balance, setBetAmount, onBetBlur, betHalf, betDouble, betMax } =
+    useBetAmount();
+
+  return (
+    <div className={cn('flex w-full flex-col gap-2', className)}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="font-outfit text-base font-medium text-brand-text-white">
+          {GAME_PANEL_LABELS.BET_AMOUNT}
+        </span>
+        <BalanceDisplay balance={balance} />
+      </div>
+      <AmountInput
+        value={betAmount}
+        onValueChange={setBetAmount}
+        onBlur={onBetBlur}
+        iconSrc={COIN_ICON.SRC}
+        iconAlt={COIN_ICON.ALT}
+        iconSize={COIN_ICON.SIZE_INPUT}
+        trailing={<QuickBetButtons onBetHalf={betHalf} onBetDouble={betDouble} onBetMax={betMax} />}
+      />
+    </div>
+  );
+}
