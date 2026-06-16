@@ -10,6 +10,7 @@ import { SidebarProvider } from '@/shared/ui/sidebar';
 import { Toaster } from '@/shared/ui/sonner';
 import { Providers } from './providers';
 import './globals.css';
+import { AuthForm } from '@/widgets/auth-form';
 
 const anekBangla = Anek_Bangla({
   variable: '--font-anek-bangla-font',
@@ -54,6 +55,7 @@ export default function RootLayout({
         <Providers>
           <SidebarProvider>
             <div className="w-full flex flex-col min-h-screen">
+              <AuthForm />
               <Header />
               <div className="flex-1 flex flex-row relative w-full pt-16">
                 <Sidebar />
