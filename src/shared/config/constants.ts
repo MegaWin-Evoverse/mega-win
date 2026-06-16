@@ -34,3 +34,40 @@ export const FOOTER_ARIA = {
   LOGO_LINK: 'Go to homepage',
   SOCIAL_LINK_PREFIX: 'Visit our ',
 } as const;
+
+export const GAME_PANEL_TAB = {
+  MANUAL: 'manual',
+  AUTO: 'auto',
+} as const;
+
+export type GamePanelTab = (typeof GAME_PANEL_TAB)[keyof typeof GAME_PANEL_TAB];
+
+export const GAME_PANEL_LABELS = {
+  MANUAL: 'Manual',
+  AUTO: 'Auto',
+  BET_AMOUNT: 'Bet Amount',
+  BET: 'Bet',
+  HALF: '1/2',
+  DOUBLE: '2X',
+  MAX: 'MAX',
+  NUMBER_OF_BETS: 'Number of bets',
+  INFINITY_SYMBOL: '∞',
+  INFINITY_ARIA_LABEL: 'Set infinite bets',
+} as const;
+
+export const BET_AMOUNT_STEP = {
+  HALF: 0.5,
+  DOUBLE: 2,
+} as const;
+
+export const BET_AMOUNT_DECIMALS = 2;
+
+export const GAME_BALANCE = 4593.24;
+
+export const COIN_ICON = {
+  SRC: '/icons/coin-1.svg',
+  ALT: 'Coin',
+  SIZE_BALANCE: 20,
+  SIZE_INPUT: 16,
+  SIZE_SUMMARY: 14,
+} as const;

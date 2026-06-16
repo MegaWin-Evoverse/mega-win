@@ -27,6 +27,15 @@ A reader should understand the business domain from the name alone — without r
 
 ---
 
+## File names
+
+- **Folders** → kebab-case: `dice-controls/`, `game-panel/`
+- **Component files** → PascalCase, matching the component: `GamePanel.tsx`, `BalanceDisplay.tsx`
+- **All other files** → lowerCamelCase, matching their primary export: `useNumberOfBets.ts`, `useDiceControls.ts`, `diceStore.ts`, `betAmount.ts`, `getSocialIcon.tsx`, `selectors.ts`
+- **Exception** — `shared/ui/` shadcn primitives keep shadcn's own kebab-case file names (`dropdown-menu.tsx`, `scroll-area.tsx`); they are CLI-managed (`npx shadcn add`), so renaming them breaks regeneration.
+
+---
+
 ## Anti-patterns — never use these
 
 ```ts

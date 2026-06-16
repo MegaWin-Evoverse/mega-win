@@ -6,7 +6,7 @@ paths: ['src/**']
 
 ## React namespace — never `React.*`
 
-Import types directly from `'react'` (`import { type ChangeEvent, type ReactNode } from 'react'`).
+Import types directly from `'react'`. When a statement imports only types, use `import type { ChangeEvent, ReactNode } from 'react'`; mix into a value import via the inline qualifier only when needed (`import { useCallback, type ChangeEvent } from 'react'`).
 `import React from 'react'` is forbidden — use named imports.
 
 ## Public API — always through index.ts
