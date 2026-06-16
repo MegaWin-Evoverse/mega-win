@@ -1,5 +1,5 @@
 import { type CSSProperties } from 'react';
-import { getChipStripe } from '@/features/roulette-controls';
+import { getChipStripe } from '@/entities/game';
 import { decomposeIntoChips } from '../model/chipStack';
 
 // Most chips to render in one stack; greedy decomposition keeps this small in practice.

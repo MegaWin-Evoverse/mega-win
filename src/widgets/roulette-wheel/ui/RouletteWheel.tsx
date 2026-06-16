@@ -215,7 +215,7 @@ export function RouletteWheel({ className }: Props) {
       )}
     >
       {/* Main Wheel Rendering Container */}
-      <div className="relative flex h-[260px] w-[260px] md:h-[300px] md:w-[300px] items-center justify-center rounded-full bg-[#0a0d19] shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+      <div className="relative flex h-[260px] w-[260px] md:h-[300px] md:w-[300px] items-center justify-center rounded-full roulette-wheel-outer">
         {/* SVG Wrapper */}
         <svg viewBox="0 0 100 100" className="w-full h-full relative z-10 overflow-visible">
           {/* Single Outer Border Circle with Gradient */}

@@ -61,6 +61,28 @@ export const CHIP_NOMINALS = [
 
 export type ChipNominal = (typeof CHIP_NOMINALS)[number];
 
+export const CHIP_STRIPES: Record<ChipNominal, string> = {
+  '1': '#FFFFFF',
+  '5': '#75D2FD',
+  '10': '#018BCB',
+  '25': '#FFBABA',
+  '50': '#FF4D4D',
+  '100': '#EC0303',
+  '250': '#9CFFC5',
+  '500': '#35FF89',
+  '1K': '#35FF89',
+  '2K': '#F3FF9C',
+  '5K': '#B2C807',
+  '10K': '#B2C807',
+  '25K': '#CDB1FE',
+  '50K': '#9A5FFF',
+  '100K': '#6208FF',
+};
+
+export function getChipStripe(nominal: string): string {
+  return CHIP_STRIPES[nominal as ChipNominal] ?? CHIP_STRIPES['1'];
+}
+
 export const GAME_CONTROLS_DEFAULTS = {
   BET_AMOUNT_TEXT: '0.00',
   PROFIT_ON_WIN_TEXT: '0.00',

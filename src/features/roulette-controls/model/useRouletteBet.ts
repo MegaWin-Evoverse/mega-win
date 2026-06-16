@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
-
 import { api } from '@/shared/api/client';
-
-import { AUTO_BET_DELAY_MS, BET_TYPE } from '../config/constants';
+import { AUTO_BET_DELAY_MS, BET_TYPE } from './constants';
 import type { BetResponse, PlacedBet } from './types';
 import { useRouletteConfig } from './useRouletteConfig';
 import { useRouletteStore } from './rouletteStore';

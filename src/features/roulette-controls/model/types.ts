@@ -1,4 +1,4 @@
-import type { BetType } from '../config/constants';
+import type { BetType } from './constants';
 
 export interface PlacedBet {
   type: BetType;

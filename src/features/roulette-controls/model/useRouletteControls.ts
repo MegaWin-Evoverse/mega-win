@@ -1,6 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { ROULETTE_DEFAULTS } from '../config/constants';
+import { ROULETTE_DEFAULTS } from './constants';
 import { useRouletteStore } from './rouletteStore';
 
 const DIGITS_ONLY = /\D/g;

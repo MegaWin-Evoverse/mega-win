@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-
-import { RESULT_OVERLAY_DURATION_MS } from '../config/constants';
+import { RESULT_OVERLAY_DURATION_MS } from './constants';
 import { useRouletteStore } from './rouletteStore';
 
 export function useBetResultAutoDismiss() {

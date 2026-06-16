@@ -1,13 +1,10 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
 import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
-import { ROULETTE_DEFAULTS, parseChipValue } from '../config/constants';
+import { ROULETTE_DEFAULTS, parseChipValue } from './constants';
 import type { BetResult, HistoryEntry, PlacedBet } from './types';
 
 const BET_HISTORY_MAX = 10;
-
-let historyIdSeq = 0;
 
 interface RouletteState {
   activeTab: GamePanelTab;
@@ -20,6 +17,7 @@ interface RouletteState {
   betResult: BetResult | null;
   pendingBetResult: BetResult | null;
   betHistory: HistoryEntry[];
+  nextHistoryId: number;
   isSpinning: boolean;
   isAutoRunning: boolean;
   autoBetsRemaining: number;
@@ -52,6 +50,7 @@ const useRouletteStoreRaw = create<RouletteState>()(
       betResult: null,
       pendingBetResult: null,
       betHistory: [],
+      nextHistoryId: 1,
       isSpinning: false,
       isAutoRunning: false,
       autoBetsRemaining: 0,
@@ -104,8 +103,9 @@ const useRouletteStoreRaw = create<RouletteState>()(
           set((state) => ({
             betResult: pendingBetResult,
             pendingBetResult: null,
+            nextHistoryId: state.nextHistoryId + 1,
             betHistory: [
-              { id: ++historyIdSeq, position: pendingBetResult.position },
+              { id: state.nextHistoryId, position: pendingBetResult.position },
               ...state.betHistory,
             ].slice(0, BET_HISTORY_MAX),
           }));

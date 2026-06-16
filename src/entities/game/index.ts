@@ -9,6 +9,8 @@ export {
   PLINKO_ROWS,
   CHIP_NOMINALS,
   type ChipNominal,
+  CHIP_STRIPES,
+  getChipStripe,
   GAME_CONTROLS_DEFAULTS,
 } from './model/constants';
 export { useGameControlsStore, type GameControlsState } from './model/store';

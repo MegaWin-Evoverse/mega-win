@@ -1,13 +1,8 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
-import { type ChipNominal } from '@/entities/game';
-import {
-  CHIP_BASE_COLOR,
-  CHIP_CORE_COLOR,
-  CHIP_TEXT_COLOR,
-  CHIP_STRIPES,
-} from '../model/constants';
+import { type ChipNominal, CHIP_STRIPES } from '@/entities/game';
+import { CHIP_BASE_COLOR, CHIP_CORE_COLOR, CHIP_TEXT_COLOR } from '../model/constants';
 
 interface Props {
   valueText: string;

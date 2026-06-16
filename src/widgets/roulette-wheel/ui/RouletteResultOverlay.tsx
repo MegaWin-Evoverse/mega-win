@@ -1,5 +1,4 @@
 'use client';
-
 import { GameResultCard, getResultVariant } from '@/shared/ui/game-result-card';
 import { useRouletteStore, useBetResultAutoDismiss } from '@/features/roulette-controls';
 

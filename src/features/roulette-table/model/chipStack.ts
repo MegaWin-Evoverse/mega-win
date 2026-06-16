@@ -1,4 +1,5 @@
-import { CHIP_NOMINALS, parseChipValue } from '@/features/roulette-controls';
+import { CHIP_NOMINALS } from '@/entities/game';
+import { parseChipValue } from '@/features/roulette-controls';
 
 // All chip denominations, largest first, for greedy decomposition.
 const CHIP_DENOMINATIONS = [...CHIP_NOMINALS].map(parseChipValue).sort((a, b) => b - a);
