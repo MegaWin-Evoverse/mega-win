@@ -1,5 +1,3 @@
-import { GAME_BALANCE } from '@/shared/config';
-
 export const ROULETTE_LABELS = {
   CHIP_VALUE: 'Chip Value',
   BET_AMOUNT: 'Bet Amount',
@@ -12,16 +10,10 @@ export const ROULETTE_LABELS = {
   COINS: 'COINS',
 } as const;
 
+export const MIN_AUTO_BET_COUNT = 1;
 // Pause between auto-bet spins (must stay below RESULT_OVERLAY_DURATION_MS so the
 // next spin starts before the result overlay auto-dismisses).
 export const AUTO_BET_DELAY_MS = 1200;
-
-export const ROULETTE_DEFAULTS = {
-  BALANCE: GAME_BALANCE,
-  NUMBER_OF_BETS: '10',
-} as const;
-
-export const MIN_AUTO_BET_COUNT = 1;
 
 export const RESULT_OVERLAY_DURATION_MS = 2000;
 
@@ -88,6 +80,14 @@ export const ROULETTE_TABLE_LABELS = {
 // must all agree on this format (`<type>-<value>`).
 export function betZoneKey(type: BetType, value: string | number): string {
   return `${type}-${value}`;
+}
+
+export function parseBetZoneKey(key: string): { type: BetType; value: string } {
+  const dashIndex = key.indexOf('-');
+  return {
+    type: key.slice(0, dashIndex) as BetType,
+    value: key.slice(dashIndex + 1),
+  };
 }
 
 const CHIP_K_MULTIPLIER = 1000;

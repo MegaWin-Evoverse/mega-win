@@ -1,16 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
-import { ROULETTE_DEFAULTS, parseChipValue } from './constants';
+import { parseChipValue } from './constants';
 import type { BetResult, HistoryEntry, PlacedBet } from './types';
 
 const BET_HISTORY_MAX = 10;
 
 interface RouletteState {
-  activeTab: GamePanelTab;
-  selectedChip: string | null;
   placedBet: number;
-  numberOfBets: string;
   isBetActive: boolean;
   placedBets: PlacedBet[];
   lastResult: number | null;
@@ -21,10 +17,8 @@ interface RouletteState {
   isSpinning: boolean;
   isAutoRunning: boolean;
   autoBetsRemaining: number;
-  setTab: (tab: GamePanelTab) => void;
-  selectChip: (chip: string | null) => void;
-  setNumberOfBets: (bets: string) => void;
-  placeBetOnZone: (type: PlacedBet['type'], key: string, label: string) => void;
+  autoBetCount: number;
+  placeBetOnZone: (type: PlacedBet['type'], key: string, label: string, chip: string) => void;
   clearTable: () => void;
   undo: () => void;
   setLastResult: (position: number) => void;
@@ -40,10 +34,7 @@ interface RouletteState {
 const useRouletteStoreRaw = create<RouletteState>()(
   persist(
     (set, get) => ({
-      activeTab: GAME_PANEL_TAB.MANUAL,
-      selectedChip: null,
       placedBet: 0,
-      numberOfBets: ROULETTE_DEFAULTS.NUMBER_OF_BETS,
       isBetActive: false,
       placedBets: [],
       lastResult: null,
@@ -54,18 +45,12 @@ const useRouletteStoreRaw = create<RouletteState>()(
       isSpinning: false,
       isAutoRunning: false,
       autoBetsRemaining: 0,
+      autoBetCount: 0,
 
-      setTab: (activeTab) => set({ activeTab }),
-
-      selectChip: (selectedChip) => set({ selectedChip }),
-
-      setNumberOfBets: (numberOfBets) => set({ numberOfBets }),
-
-      placeBetOnZone: (type, key, label) => {
-        const { selectedChip, placedBets } = get();
-        if (!selectedChip) return;
-
-        const chipAmount = parseChipValue(selectedChip);
+      placeBetOnZone: (type, key, label, chip) => {
+        if (!chip) return;
+        const { placedBets } = get();
+        const chipAmount = parseChipValue(chip);
         const existing = placedBets.find((b) => b.key === key);
         const updated = existing
           ? placedBets.map((b) => (b.key === key ? { ...b, amount: b.amount + chipAmount } : b))
@@ -79,7 +64,6 @@ const useRouletteStoreRaw = create<RouletteState>()(
         set({
           placedBets: [],
           placedBet: 0,
-          selectedChip: null,
           isBetActive: false,
         }),
 
@@ -114,17 +98,17 @@ const useRouletteStoreRaw = create<RouletteState>()(
 
       setSpinning: (spinning) => set({ isSpinning: spinning }),
 
-      startAutoBet: (count) => set({ isAutoRunning: true, autoBetsRemaining: count }),
+      startAutoBet: (count) =>
+        set({ isAutoRunning: true, autoBetsRemaining: count, autoBetCount: count }),
 
       decrementAutoBet: () =>
         set((state) => ({ autoBetsRemaining: Math.max(0, state.autoBetsRemaining - 1) })),
 
-      stopAutoBet: () => set({ isAutoRunning: false, autoBetsRemaining: 0 }),
+      stopAutoBet: () => set({ isAutoRunning: false, autoBetsRemaining: 0, autoBetCount: 0 }),
     }),
     {
       name: 'roulette-storage',
       partialize: (state) => ({
-        selectedChip: state.selectedChip,
         placedBets: state.placedBets,
         placedBet: state.placedBet,
         isBetActive: state.isBetActive,

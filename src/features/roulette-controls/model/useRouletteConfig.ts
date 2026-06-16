@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { api } from '@/shared/api/client';
 import { ROULETTE_CONFIG_QUERY_KEYS } from '@/shared/api/query-keys';
 
-const ROULETTE_CONFIG_PATH = '/games/house/roulette/config';
+const ROULETTE_CONFIG_PATH = '/api/games/house/roulette/config';
 
 const ROULETTE_CONFIG_DEFAULTS = {
   MIN_BET: 1,

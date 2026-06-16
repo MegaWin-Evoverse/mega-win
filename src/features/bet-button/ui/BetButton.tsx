@@ -9,15 +9,30 @@ interface Props {
   requiresBet: boolean;
   onBet?: () => void;
   className?: string;
+  isAutoRunning?: boolean;
+  autoActiveLabel?: string;
 }
 
-export function BetButton({ manualLabel, autoLabel, requiresBet, onBet, className }: Props) {
+export function BetButton({
+  manualLabel,
+  autoLabel,
+  requiresBet,
+  onBet,
+  className,
+  isAutoRunning,
+  autoActiveLabel,
+}: Props) {
   const { isAutoMode, canBet } = useBetButton(requiresBet);
-  const label = isAutoMode ? autoLabel : manualLabel;
+  const isStopState = isAutoMode && Boolean(isAutoRunning);
+  const label = isAutoMode
+    ? isAutoRunning && autoActiveLabel
+      ? autoActiveLabel
+      : autoLabel
+    : manualLabel;
 
   return (
     <Button
-      variant="main"
+      variant={isStopState ? 'main-stop' : 'main'}
       size="play"
       onClick={onBet}
       disabled={!canBet}

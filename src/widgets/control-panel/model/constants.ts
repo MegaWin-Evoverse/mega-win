@@ -11,6 +11,7 @@ const BET_LABELS = {
   BET: 'Bet',
   START_AUTO_BET: 'Start Auto-Bet',
   START_AUTOBET: 'Start autobet',
+  STOP_AUTOBET: 'Stop Autobet',
 } as const;
 
 interface ControlPanelClassNames {
@@ -40,7 +41,7 @@ interface ControlPanelConfig {
   showChips: boolean;
   tableActions: TableActionsVariant | null;
   requiresBet: boolean;
-  betLabels: { manual: string; auto: string };
+  betLabels: { manual: string; auto: string; autoActive?: string };
   classNames: ControlPanelClassNames;
 }
 
@@ -117,7 +118,11 @@ export const CONTROL_PANEL_CONFIG: Record<Game, ControlPanelConfig> = {
     showChips: true,
     tableActions: TABLE_ACTIONS.ROULETTE,
     requiresBet: false,
-    betLabels: { manual: BET_LABELS.BET, auto: BET_LABELS.BET },
+    betLabels: {
+      manual: BET_LABELS.BET,
+      auto: BET_LABELS.START_AUTOBET,
+      autoActive: BET_LABELS.STOP_AUTOBET,
+    },
     classNames: {
       actionButton: 'lg:mt-3',
       betSummary: 'order-3 lg:order-none lg:mt-8',

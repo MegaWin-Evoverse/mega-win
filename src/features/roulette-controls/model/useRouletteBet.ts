@@ -3,12 +3,19 @@ import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
-import { AUTO_BET_DELAY_MS, BET_TYPE } from './constants';
+import { useGameControlsStore, selectIsAutoMode } from '@/entities/game';
+import {
+  AUTO_BET_DELAY_MS,
+  BET_TYPE,
+  MIN_AUTO_BET_COUNT,
+  ROULETTE_LABELS,
+  parseBetZoneKey,
+} from './constants';
 import type { BetResponse, PlacedBet } from './types';
 import { useRouletteConfig } from './useRouletteConfig';
 import { useRouletteStore } from './rouletteStore';
 
-const ROULETTE_BET_PATH = '/games/house/roulette/bet';
+const ROULETTE_BET_PATH = '/api/games/house/roulette/bet';
 
 const BET_ERROR_MESSAGES = {
   NO_BETS: 'Place at least one bet before spinning.',
@@ -86,7 +93,7 @@ function buildBetParams(placedBets: PlacedBet[]): BetParams {
 
   for (const bet of placedBets) {
     const amount = bet.amount.toString();
-    const [, value] = bet.key.split('-');
+    const { value } = parseBetZoneKey(bet.key);
 
     if (bet.type === BET_TYPE.STRAIGHT) {
       params.straightValues.push({ straightNumber: parseInt(value, 10), amount });
@@ -107,22 +114,25 @@ function buildBetParams(placedBets: PlacedBet[]): BetParams {
 }
 
 export function useRouletteBet() {
+  const isAutoMode = useGameControlsStore(selectIsAutoMode);
+  const numberOfBets = useGameControlsStore((state) => state.numberOfBets);
   const placedBets = useRouletteStore((state) => state.placedBets);
   const placedBet = useRouletteStore((state) => state.placedBet);
   const betResult = useRouletteStore((state) => state.betResult);
   const isAutoRunning = useRouletteStore((state) => state.isAutoRunning);
   const autoBetsRemaining = useRouletteStore((state) => state.autoBetsRemaining);
+  const autoBetCount = useRouletteStore((state) => state.autoBetCount);
   const setLastResult = useRouletteStore((state) => state.setLastResult);
   const setBetResult = useRouletteStore((state) => state.setBetResult);
   const setPendingBetResult = useRouletteStore((state) => state.setPendingBetResult);
   const setSpinning = useRouletteStore((state) => state.setSpinning);
   const clearTable = useRouletteStore((state) => state.clearTable);
-  const startAutoBet = useRouletteStore((state) => state.startAutoBet);
   const decrementAutoBet = useRouletteStore((state) => state.decrementAutoBet);
   const stopAutoBet = useRouletteStore((state) => state.stopAutoBet);
+  const startAutoBet = useRouletteStore((state) => state.startAutoBet);
   const { minBet, maxBet } = useRouletteConfig();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async () => {
       const params = buildBetParams(placedBets);
       const response = await api.post<BetResponse>(ROULETTE_BET_PATH, { params });
@@ -176,8 +186,12 @@ export function useRouletteBet() {
     mutate();
   }
 
-  function startAuto(count: number) {
+  function startAuto() {
     if (!validateBet()) return;
+    const count = Math.max(
+      MIN_AUTO_BET_COUNT,
+      Number.parseInt(numberOfBets, 10) || MIN_AUTO_BET_COUNT
+    );
     startAutoBet(count);
     mutate();
   }
@@ -185,6 +199,18 @@ export function useRouletteBet() {
   function stopAuto() {
     stopAutoBet();
     clearTable();
+  }
+
+  function onBet() {
+    if (!isAutoMode) {
+      placeBet();
+      return;
+    }
+    if (isAutoRunning) {
+      stopAuto();
+      return;
+    }
+    startAuto();
   }
 
   // Drive the auto-bet loop: each spin settles (betResult set) -> after a short pause,
@@ -214,11 +240,13 @@ export function useRouletteBet() {
     mutate,
   ]);
 
+  const autoBetLabel = isAutoRunning
+    ? `${ROULETTE_LABELS.STOP_AUTOBET} ${autoBetCount - autoBetsRemaining + 1}/${autoBetCount}`
+    : undefined;
+
   return {
-    placeBet,
-    startAuto,
-    stopAuto,
+    onBet,
     isAutoRunning,
-    isPlacingBet: isPending,
+    autoBetLabel,
   };
 }
