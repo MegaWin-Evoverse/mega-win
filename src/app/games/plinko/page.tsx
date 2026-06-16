@@ -1,6 +1,6 @@
-import { GameLayout } from '@/widgets/game-layout';
-import { PlinkoControls } from '@/widgets/plinko-game';
+import { ControlPanel } from '@/widgets/control-panel';
+import { GAME } from '@/entities/game';
 
 export default function PlinkoPage() {
-  return <GameLayout controls={<PlinkoControls />} />;
+  return <ControlPanel game={GAME.PLINKO} />;
 }

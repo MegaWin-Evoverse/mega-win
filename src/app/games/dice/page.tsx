@@ -1,6 +1,6 @@
-import { GameLayout } from '@/widgets/game-layout';
-import { DiceControls } from '@/widgets/dice-game';
+import { ControlPanel } from '@/widgets/control-panel';
+import { GAME } from '@/entities/game';
 
 export default function DicePage() {
-  return <GameLayout controls={<DiceControls />} />;
+  return <ControlPanel game={GAME.DICE} />;
 }

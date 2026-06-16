@@ -1,6 +1,6 @@
 'use client';
-
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
 import { useRouletteStore } from '@/features/roulette-controls';
 import { useQueryClient } from '@tanstack/react-query';
@@ -275,19 +275,14 @@ export function RouletteWheel({ className }: Props) {
         </svg>
 
         {/* Center Dome Cap Image styled exactly as 100x100px, rotating in sync */}
-        <img
+        <Image
           ref={centerCapRef}
           src="/roulette/icons/center.svg"
           alt=""
-          className="absolute z-20 pointer-events-none rounded-full"
-          style={{
-            width: '100px',
-            height: '100px',
-            left: 'calc(50% - 50px)',
-            top: 'calc(50% - 50px)',
-            transformOrigin: 'center',
-            boxShadow: '0px 0px 10px #1A0B00',
-          }}
+          width={100}
+          height={100}
+          unoptimized
+          className="absolute z-20 pointer-events-none rounded-full origin-center left-[calc(50%-50px)] top-[calc(50%-50px)] roulette-cap-shadow"
         />
       </div>
     </div>

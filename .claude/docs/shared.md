@@ -9,7 +9,8 @@
 ```
 src/shared/
   ui/             ← shadcn components (built on @base-ui/react)
-  lib/            ← utilities and custom hooks
+  lib/            ← utilities (cn, etc.)
+  hooks/          ← generic custom hooks
   api/            ← axios instance and interceptors
   config/         ← constants and app-wide configuration
   types/          ← shared TypeScript types
@@ -38,7 +39,15 @@ All imported via barrel: `import { Button, Input } from '@/shared/ui'`
 | File                  | Exports       | Purpose                                                   |
 | --------------------- | ------------- | --------------------------------------------------------- |
 | `cn.ts`               | `cn()`        | clsx + tailwind-merge utility for conditional class names |
-| `hooks/use-mobile.ts` | `useMobile()` | Detects mobile viewport via media query                   |
+
+---
+
+## hooks/
+
+| File                  | Exports             | Purpose                                 |
+| --------------------- | ------------------- | --------------------------------------- |
+| `useIsMobile.ts`      | `useIsMobile()`     | Detects mobile viewport via media query |
+| `useNumberOfBets.ts`  | `useNumberOfBets()` | Number-of-bets input + infinity toggle  |
 
 ---
 
@@ -62,6 +71,8 @@ Use this instance in all feature-level API calls — do not create new axios ins
 ## config/
 
 App-wide constants and configuration types. Barrel-exported via `config/index.ts`.
+
+This is the home for **global** constants only. Slice-local constants (labels, defaults, domain enums, option lists) belong in that slice's `model/constants.ts`, not here and not in a per-slice `config/` segment.
 
 ---
 

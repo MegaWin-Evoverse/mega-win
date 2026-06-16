@@ -11,9 +11,10 @@ Each entity slice follows this layout:
 ```
 entities/<name>/
   model/
-    store.ts   ← Zustand store (useXxxStore)
-    types.ts   ← entity-specific TypeScript types
-  index.ts     ← public API barrel export
+    store.ts     ← Zustand store (useXxxStore)
+    types.ts     ← entity-specific TypeScript types
+    constants.ts ← defaults, domain enums (when needed)
+  index.ts       ← public API barrel export
 ```
 
 ---
@@ -56,6 +57,7 @@ export type { CounterState } from './model/types';
 - Stores contain state fields + action methods only — no async logic (that belongs in `features/`).
 - Use `persist` middleware only when client-side persistence across sessions is required.
 - Entities do **not** import from each other or from `features`/`widgets`/`pages`/`app`.
+- Constants (defaults, enums) live in `model/constants.ts` — never a `config/` segment.
 
 ---
 

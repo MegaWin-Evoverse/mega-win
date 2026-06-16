@@ -608,6 +608,10 @@
   animation: roulette-spin 12s linear infinite;
 }
 
+.roulette-cap-shadow {
+  box-shadow: 0px 0px 10px #1a0b00;
+}
+
 /* Monthly Leaderboard Section */
 .leaderboard-shadow {
   box-shadow:

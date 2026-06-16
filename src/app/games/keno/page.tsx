@@ -1,6 +1,6 @@
-import { GameLayout } from '@/widgets/game-layout';
-import { KenoControls } from '@/widgets/keno-game';
+import { ControlPanel } from '@/widgets/control-panel';
+import { GAME } from '@/entities/game';
 
 export default function KenoPage() {
-  return <GameLayout controls={<KenoControls />} />;
+  return <ControlPanel game={GAME.KENO} />;
 }

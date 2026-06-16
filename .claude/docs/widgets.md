@@ -31,6 +31,7 @@ The `src/widgets/` directory is an empty scaffold (`.gitkeep`). Widget slices wi
 - The `model/` hook aggregates multiple feature hooks into one interface for the widget component.
 - Internal sub-components live in `ui/` and are not exported publicly.
 - `index.ts` is the only public surface.
+- Widget constants (labels, defaults) live in `model/constants.ts` — not a `config/` segment.
 
 ---
 

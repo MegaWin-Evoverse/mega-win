@@ -1,9 +1,9 @@
 import { useShallow } from 'zustand/react/shallow';
-
 import { GAME_PANEL_TAB } from '@/shared/config';
-import { useNumberOfBets } from '@/shared/lib/hooks/use-number-of-bets';
 import { ROULETTE_DEFAULTS } from '../config/constants';
 import { useRouletteStore } from './rouletteStore';
+
+const DIGITS_ONLY = /\D/g;
 
 export function useRouletteControls() {
   const {
@@ -34,10 +34,13 @@ export function useRouletteControls() {
     }))
   );
 
-  const { handleNumberOfBetsChange, handleInfinityClick } = useNumberOfBets(
-    setNumberOfBets,
-    ROULETTE_DEFAULTS.NUMBER_OF_BETS
-  );
+  function handleNumberOfBetsChange(value: string) {
+    setNumberOfBets(value.replace(DIGITS_ONLY, ''));
+  }
+
+  function handleInfinityClick() {
+    setNumberOfBets(ROULETTE_DEFAULTS.NUMBER_OF_BETS);
+  }
 
   const isAutoMode = activeTab === GAME_PANEL_TAB.AUTO;
 
