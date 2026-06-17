@@ -1,5 +1,5 @@
-import { UnderConstruction } from '@/shared/ui/under-construction';
+import { Rewards } from '@/widgets/rewards';
 
 export default function RewardsPage() {
-  return <UnderConstruction title="Rewards" />;
+  return <Rewards />;
 }
