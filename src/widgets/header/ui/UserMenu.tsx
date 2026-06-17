@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, ChevronUp, LogOut } from 'lucide-react';
+import { ChevronDown, ChevronUp, LogOut, User as UserIcon } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,7 +12,10 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 import type { User } from '@/entities/user';
+import { ROUTES } from '@/shared/config';
 import { USER_MENU_ITEMS, LOGOUT_LABEL } from '../model/constants';
+
+const PROFILE_LABEL = 'Profile';
 
 interface Props {
   user: User;
@@ -37,6 +40,12 @@ export function UserMenu({ user, onLogout, isLoggingOut }: Props) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuItem>
+          <Link href={ROUTES.PROFILE} className="flex w-full items-center gap-3">
+            <UserIcon className="size-4" />
+            {PROFILE_LABEL}
+          </Link>
+        </DropdownMenuItem>
         {USER_MENU_ITEMS.map((item) => (
           <DropdownMenuItem key={item.label}>
             <Link href={item.href} className="flex w-full items-center gap-3">
