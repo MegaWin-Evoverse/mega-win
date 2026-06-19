@@ -1,16 +1,18 @@
 import { type CSSProperties } from 'react';
-import { getChipStripe } from '@/entities/game';
+import { getChipStripe, type ChipNominal } from '@/entities/game';
 import { decomposeIntoChips } from '../model/chipStack';
 
 // Most chips to render in one stack; greedy decomposition keeps this small in practice.
 const MAX_VISIBLE_CHIPS = 5;
 const CHIP_K_THRESHOLD = 1000;
 
-function formatChipValue(denomination: number): string {
+// decomposeIntoChips only ever returns denominations derived from CHIP_NOMINALS,
+// so the formatted value is always a valid ChipNominal.
+function formatChipValue(denomination: number): ChipNominal {
   if (denomination >= CHIP_K_THRESHOLD) {
-    return `${denomination / CHIP_K_THRESHOLD}K`;
+    return `${denomination / CHIP_K_THRESHOLD}K` as ChipNominal;
   }
-  return denomination.toString();
+  return denomination.toString() as ChipNominal;
 }
 
 interface MiniChipProps {

@@ -79,8 +79,8 @@ export const CHIP_STRIPES: Record<ChipNominal, string> = {
   '100K': '#6208FF',
 };
 
-export function getChipStripe(nominal: string): string {
-  return CHIP_STRIPES[nominal as ChipNominal] ?? CHIP_STRIPES['1'];
+export function getChipStripe(nominal: ChipNominal = CHIP_NOMINALS[0]): string {
+  return CHIP_STRIPES[nominal];
 }
 
 export const GAME_CONTROLS_DEFAULTS = {
