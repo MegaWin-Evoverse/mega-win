@@ -3,7 +3,7 @@ import { useGameControlsStore, selectIsAutoMode } from '@/entities/game';
 
 interface UseBetButtonReturn {
   isAutoMode: boolean;
-  isDisabled: boolean;
+  canBet: boolean;
 }
 
 export function useBetButton(requiresBet: boolean): UseBetButtonReturn {
@@ -17,9 +17,9 @@ export function useBetButton(requiresBet: boolean): UseBetButtonReturn {
   );
 
   const parsedBet = Number.parseFloat(betAmount);
-  const isDisabled = requiresBet
-    ? (!isAutoMode && !isBetActive) || parsedBet <= 0 || Number.isNaN(parsedBet)
-    : selectedChip === null;
+  const canBet = requiresBet
+    ? (isAutoMode || isBetActive) && parsedBet > 0 && !Number.isNaN(parsedBet)
+    : selectedChip !== null;
 
-  return { isAutoMode, isDisabled };
+  return { isAutoMode, canBet };
 }

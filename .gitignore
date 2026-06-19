@@ -44,3 +44,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 REVIEW.md
+
+# Local feature explainer (not part of PR)
+ROULETTE-FEATURE-EXPLAINED.md
