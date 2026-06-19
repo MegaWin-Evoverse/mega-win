@@ -8,7 +8,7 @@ import {
 } from '@/widgets/roulette-wheel';
 import { RouletteTable } from '@/features/roulette-table';
 import { BetsStory } from '@/entities/bets-story';
-import { RouletteControls } from './_RouletteControls';
+import { RouletteControls } from './RouletteControls';
 
 export const metadata: Metadata = {
   title: 'Roulette',
