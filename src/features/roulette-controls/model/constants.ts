@@ -17,6 +17,18 @@ export const AUTO_BET_DELAY_MS = 1200;
 
 export const RESULT_OVERLAY_DURATION_MS = 2000;
 
+export const ROULETTE_BET_PATH = '/api/games/house/roulette/bet';
+
+export const BET_ERROR_MESSAGES = {
+  NO_BETS: 'Place at least one bet before spinning.',
+  BELOW_MIN: (min: number) => `Minimum bet is ${min} coins.`,
+  ABOVE_MAX: (max: number) => `Maximum bet is ${max} coins.`,
+  UNAUTHORIZED: 'Please log in to place bets.',
+  GENERIC: 'Failed to place bet. Please try again.',
+} as const;
+
+export const HTTP_UNAUTHORIZED = 401;
+
 export const BET_TYPE = {
   STRAIGHT: 'straight',
   HALF: 'half',
