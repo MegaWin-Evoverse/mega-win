@@ -70,4 +70,22 @@ export const GAME_CONTROLS_DEFAULTS = {
   STOP_ON_PROFIT: '1.00',
   STOP_ON_LOSS: '1.00',
   PROFIT_MULTIPLIER: 1.41,
+  BALANCE: 0,
 } as const;
+
+export const RISK_API_MAP: Record<Risk, 'LOW' | 'MEDIUM' | 'HIGH'> = {
+  [RISK.CLASSIC]: 'LOW',
+  [RISK.LOW]: 'LOW',
+  [RISK.MEDIUM]: 'MEDIUM',
+  [RISK.HIGH]: 'HIGH',
+};
+
+export const MULTIPLIER_TIER = {
+  GREEN: 'green',
+  YELLOW: 'yellow',
+  ORANGE_LIGHT: 'orange-light',
+  ORANGE: 'orange',
+  RED: 'red',
+} as const;
+
+export type MultiplierTier = (typeof MULTIPLIER_TIER)[keyof typeof MULTIPLIER_TIER];

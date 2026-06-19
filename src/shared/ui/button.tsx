@@ -9,6 +9,8 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/80',
         main: 'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
+        'main-stop':
+          'bg-brand-red text-brand-text-white hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
         outline:
           'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
         secondary:

@@ -11,9 +11,13 @@ import { CONTROL_PANEL_CONFIG } from '../model/constants';
 
 interface Props {
   game: Game;
+  onBet?: () => void;
+  isBetting?: boolean;
+  isAutoRunning?: boolean;
+  autoRunningLabel?: string;
 }
 
-export function ControlPanel({ game }: Props) {
+export function ControlPanel({ game, onBet, isBetting, isAutoRunning, autoRunningLabel }: Props) {
   const config = CONTROL_PANEL_CONFIG[game];
 
   return (
@@ -44,6 +48,10 @@ export function ControlPanel({ game }: Props) {
         manualLabel={config.betLabels.manual}
         autoLabel={config.betLabels.auto}
         requiresBet={config.requiresBet}
+        onBet={onBet}
+        isBetting={isBetting}
+        isAutoRunning={isAutoRunning}
+        autoActiveLabel={autoRunningLabel ?? config.betLabels.autoActive}
         className={config.classNames.actionButton}
       />
     </div>
