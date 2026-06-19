@@ -1,4 +1,5 @@
-import { BET_TYPE, parseBetZoneKey } from './constants';
+import { parseBetZoneKey } from './betZoneKey';
+import { BET_TYPE } from './constants';
 import { createEmptyBetParams } from './createEmptyBetParams';
 import type { BetParams, PlacedBet } from './types';
 

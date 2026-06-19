@@ -87,26 +87,3 @@ export const ROULETTE_TABLE_LABELS = {
   PARITY_EVEN: 'Even',
   PARITY_ODD: 'Odd',
 } as const;
-
-// Single source for bet zone keys: store, table cells and the bet payload builder
-// must all agree on this format (`<type>-<value>`).
-export function betZoneKey(type: BetType, value: string | number): string {
-  return `${type}-${value}`;
-}
-
-export function parseBetZoneKey(key: string): { type: BetType; value: string } {
-  const dashIndex = key.indexOf('-');
-  return {
-    type: key.slice(0, dashIndex) as BetType,
-    value: key.slice(dashIndex + 1),
-  };
-}
-
-const CHIP_K_MULTIPLIER = 1000;
-
-export function parseChipValue(nominal: string): number {
-  if (nominal.endsWith('K')) {
-    return parseFloat(nominal.slice(0, -1)) * CHIP_K_MULTIPLIER;
-  }
-  return parseFloat(nominal);
-}

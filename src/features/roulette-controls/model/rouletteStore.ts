@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { parseChipValue } from './constants';
+import { parseChipValue } from './betZoneKey';
 import type { BetResult, HistoryEntry, PlacedBet } from './types';
 
 const BET_HISTORY_MAX = 10;
