@@ -9,6 +9,8 @@ export {
   PLINKO_ROWS,
   CHIP_NOMINALS,
   type ChipNominal,
+  CHIP_STRIPES,
+  getChipStripe,
   GAME_CONTROLS_DEFAULTS,
   RISK_API_MAP,
   MULTIPLIER_TIER,

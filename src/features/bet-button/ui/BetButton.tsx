@@ -7,8 +7,8 @@ interface Props {
   manualLabel: string;
   autoLabel: string;
   requiresBet: boolean;
-  className?: string;
   onBet?: () => void;
+  className?: string;
   isBetting?: boolean;
   isAutoRunning?: boolean;
   autoActiveLabel?: string;
@@ -18,23 +18,26 @@ export function BetButton({
   manualLabel,
   autoLabel,
   requiresBet,
-  className,
   onBet,
+  className,
   isBetting,
   isAutoRunning,
   autoActiveLabel,
 }: Props) {
-  const { isAutoMode, isDisabled } = useBetButton(requiresBet);
+  const { isAutoMode, canBet } = useBetButton(requiresBet);
   const isStopState = isAutoMode && Boolean(isAutoRunning);
-  const baseLabel = isAutoMode ? autoLabel : manualLabel;
-  const label = isStopState && autoActiveLabel ? autoActiveLabel : baseLabel;
+  const label = isAutoMode
+    ? isAutoRunning && autoActiveLabel
+      ? autoActiveLabel
+      : autoLabel
+    : manualLabel;
 
   return (
     <Button
       variant={isStopState ? 'main-stop' : 'main'}
       size="play"
       onClick={onBet}
-      disabled={isDisabled && !isBetting}
+      disabled={!canBet && !isBetting}
       className={cn('order-first lg:order-none', className)}
     >
       {label}

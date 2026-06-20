@@ -1,5 +1,4 @@
 'use client';
-
 import { useSignIn } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';

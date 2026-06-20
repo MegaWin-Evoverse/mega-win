@@ -120,7 +120,11 @@ export const CONTROL_PANEL_CONFIG: Record<Game, ControlPanelConfig> = {
     showChips: true,
     tableActions: TABLE_ACTIONS.ROULETTE,
     requiresBet: false,
-    betLabels: { manual: BET_LABELS.BET, auto: BET_LABELS.BET },
+    betLabels: {
+      manual: BET_LABELS.BET,
+      auto: BET_LABELS.START_AUTOBET,
+      autoActive: BET_LABELS.STOP_AUTOBET,
+    },
     classNames: {
       actionButton: 'lg:mt-3',
       betSummary: 'order-3 lg:order-none lg:mt-8',

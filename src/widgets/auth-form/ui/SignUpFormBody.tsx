@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useSignUp } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
