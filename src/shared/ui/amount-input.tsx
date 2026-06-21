@@ -1,6 +1,6 @@
 'use client';
 import type { ChangeEvent, ReactNode } from 'react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { cn } from '@/shared/lib/cn';
 import { Input } from '@/shared/ui/input';
 
@@ -10,7 +10,7 @@ interface Props {
   onBlur?: () => void;
   inputMode?: 'decimal' | 'numeric';
   readOnly?: boolean;
-  iconSrc?: string;
+  iconSrc?: StaticImageData;
   iconAlt?: string;
   iconSize?: number;
   trailing?: ReactNode;

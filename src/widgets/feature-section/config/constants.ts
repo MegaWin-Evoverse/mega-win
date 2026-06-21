@@ -22,7 +22,7 @@ export const FEATURE_CARDS: readonly FeatureCardData[] = [
     imageSrc: '/feature/crown-big.webp',
     ariaLabel: 'Go to Leaderboard',
     decorations: [
-      { src: '/feature/diamont.svg', width: 145, height: 108, className: 'left-0 top-0' },
+      { src: '/feature/diamond.svg', width: 145, height: 108, className: 'left-0 top-0' },
       { src: '/feature/blur-cube.svg', width: 85, height: 188, className: 'right-0 bottom-0' },
     ],
   },
