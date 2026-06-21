@@ -36,7 +36,9 @@ export function getBoardLayout(rows: number, width: number): BoardLayout {
   const pegRadius = pitchX * BOARD.PEG_RADIUS_RATIO;
   const ballRadius = pitchX * BOARD.BALL_RADIUS_RATIO;
   const topY = pitchY * BOARD.TOP_OFFSET_RATIO;
-  const height = topY + (rows - 1) * pitchY + pegRadius + BOARD.PEG_BORDER_WIDTH * 2;
+  const bucketZoneHeight = pitchY * BOARD.BUCKET_ZONE_RATIO;
+  const height =
+    topY + (rows - 1) * pitchY + pegRadius + BOARD.PEG_BORDER_WIDTH * 2 + bucketZoneHeight;
 
   return { width, height, centerX: width / 2, topY, pitchX, pitchY, pegRadius, ballRadius };
 }

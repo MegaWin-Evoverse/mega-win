@@ -17,8 +17,10 @@ export function PlinkoBoard({ rows, multipliers, drops, history, onDropLanded }:
   return (
     <div className="relative flex w-full max-w-[620px] flex-col items-center gap-[32px]">
       <BetHistory history={history} />
-      <canvas ref={canvasRef} className="h-auto w-full" />
-      <MultiplierRow multipliers={multipliers} landedBucket={landedBucket} />
+      <div className="flex w-full flex-col items-center">
+        <canvas ref={canvasRef} className="h-auto w-full" />
+        <MultiplierRow multipliers={multipliers} landedBucket={landedBucket} />
+      </div>
     </div>
   );
 }

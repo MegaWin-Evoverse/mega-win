@@ -388,6 +388,7 @@
   .bg-plinko-green {
     background-image: linear-gradient(135deg, var(--plinko-green-from), var(--plinko-green-to));
   }
+}
 
 @utility bg-auth-btn-primary {
   background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
