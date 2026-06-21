@@ -710,30 +710,24 @@ git commit -m "feat(daily-claim): add useDailyClaim orchestrating hook and publi
 - Modify: `src/widgets/sidebar/ui/DailyClaimerCard.tsx`
 - Test: `src/widgets/sidebar/ui/DailyClaimerCard.test.tsx`
 
+**Note on Task 5's actual interface:** `useDailyClaim` computes the countdown
+internally (calling `useCountdown` itself) and returns a ready-to-render
+`countdownLabel: string`, not a raw `nextClaimAt` timestamp. The widget consumes
+`countdownLabel` directly — it does not call `useCountdown` itself, and the slice
+does not need to export `useCountdown` from its public `index.ts`.
+
 **Interfaces:**
-- Consumes: `useDailyClaim` and `DailyClaimUiState` from `@/features/daily-claim` (Task 5); `useCountdown` is NOT imported into the widget — re-export it from the slice instead (see Step 0).
+- Consumes: `useDailyClaim` and `DailyClaimUiState` from `@/features/daily-claim` (Task 5).
 - Produces: `DailyClaimerCard(props: Props)` where:
 
 ```ts
 interface Props {
   uiState: DailyClaimUiState;
   pointsAmount: number;
-  nextClaimAt: string | undefined;
+  countdownLabel: string;
   isClaiming: boolean;
   onAction: () => void;
 }
-```
-
-- [ ] **Step 0: Export `useCountdown` from the slice's public API**
-
-The widget needs to turn `nextClaimAt` into a live label; per FSD rules the widget
-may only import through `@/features/daily-claim`'s `index.ts`. Modify
-`src/features/daily-claim/index.ts` to also export it:
-
-```ts
-export { useDailyClaim } from './model/useDailyClaim';
-export { useCountdown } from './model/useCountdown';
-export type { DailyClaimUiState } from './model/types';
 ```
 
 - [ ] **Step 1: Write the failing test for `DailyClaimerCard`**
@@ -749,7 +743,7 @@ describe('DailyClaimerCard', () => {
       <DailyClaimerCard
         uiState="login"
         pointsAmount={0}
-        nextClaimAt={undefined}
+        countdownLabel="0h:00m:00s"
         isClaiming={false}
         onAction={onAction}
       />
@@ -764,7 +758,7 @@ describe('DailyClaimerCard', () => {
       <DailyClaimerCard
         uiState="claim"
         pointsAmount={25}
-        nextClaimAt={undefined}
+        countdownLabel="0h:00m:00s"
         isClaiming={false}
         onAction={jest.fn()}
       />
@@ -778,14 +772,14 @@ describe('DailyClaimerCard', () => {
       <DailyClaimerCard
         uiState="countdown"
         pointsAmount={10}
-        nextClaimAt={new Date(Date.now() + 3661 * 1000).toISOString()}
+        countdownLabel="1h:01m:01s"
         isClaiming={false}
         onAction={jest.fn()}
       />
     );
 
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
-    expect(screen.getByText(/1h:01m:0[01]s/)).toBeInTheDocument();
+    expect(screen.getByText('1h:01m:01s')).toBeInTheDocument();
   });
 });
 ```
@@ -802,19 +796,17 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import { BUTTON_LABELS } from '@/shared/config';
-import { useCountdown, type DailyClaimUiState } from '@/features/daily-claim';
+import type { DailyClaimUiState } from '@/features/daily-claim';
 
 interface Props {
   uiState: DailyClaimUiState;
   pointsAmount: number;
-  nextClaimAt: string | undefined;
+  countdownLabel: string;
   isClaiming: boolean;
   onAction: () => void;
 }
 
-export function DailyClaimerCard({ uiState, pointsAmount, nextClaimAt, isClaiming, onAction }: Props) {
-  const { label: countdownLabel } = useCountdown(nextClaimAt);
-
+export function DailyClaimerCard({ uiState, pointsAmount, countdownLabel, isClaiming, onAction }: Props) {
   return (
     <Card className="daily-claimer-card relative h-[124px] w-[195px] flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] bg-daily-claimer-bg py-0 ring-0">
       <div
