@@ -36,17 +36,15 @@ hardcoded reward amount. It must become functional:
 - `429` throttled
 - `500` `DAILY_CLAIMER_INVALID_CONFIG`
 
-## BFF layer (`src/app/api/daily-claimer/**`)
+## BFF layer
 
-Following the existing proxy pattern (`src/app/api/user/query/me/route.ts`):
-
-- `src/app/api/daily-claimer/status/route.ts` — `GET`, proxies to
-  `${NEXT_PUBLIC_API_URL}/daily-claimer/status`, forwards the `Cookie` header,
-  passes the upstream status code through on failure.
-- `src/app/api/daily-claimer/claim/route.ts` — `POST`, proxies to
-  `${NEXT_PUBLIC_API_URL}/daily-claimer/claim`, forwards the `Cookie` header,
-  passes upstream status codes (403/409/429/500) through unchanged so the
-  client mutation can branch on them.
+No new route files needed. `src/app/api/[...path]/route.ts` is a generic catch-all
+proxy already handling `GET`/`POST`/etc., forwarding the `Cookie` header and
+passing the upstream status code/body through unchanged. Calling
+`api.get('/api/daily-claimer/status')` / `api.post('/api/daily-claimer/claim')`
+from the client is automatically proxied to
+`${NEXT_PUBLIC_API_URL}/daily-claimer/status` / `.../daily-claimer/claim` —
+exactly the same mechanism `getUser()` uses for `/api/user/query/me`.
 
 ## Feature slice — `src/features/daily-claim/`
 
