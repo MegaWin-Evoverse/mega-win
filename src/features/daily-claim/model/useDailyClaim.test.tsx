@@ -140,4 +140,95 @@ describe('useDailyClaim', () => {
 
     await waitFor(() => expect(toast.error).toHaveBeenCalledWith("You've already claimed today"));
   });
+
+  it('toasts the throttled message on 429', async () => {
+    mockUseUserQuery.mockReturnValue({ data: { id: '1' } });
+    mockFetchClaimStatus.mockResolvedValue({
+      available: true,
+      enabled: true,
+      pointsAmount: 10,
+      nextClaimAt: '2026-06-22T00:00:00.000Z',
+      secondsUntilNextClaim: 0,
+      invalidConfig: false,
+    });
+    mockClaimDaily.mockRejectedValue({ isAxiosError: true, response: { status: 429 } });
+
+    const { result } = renderDailyClaim();
+
+    await waitFor(() => expect(result.current.uiState).toBe('claim'));
+
+    await act(async () => {
+      result.current.onAction();
+    });
+
+    await waitFor(() =>
+      expect(toast.error).toHaveBeenCalledWith('Too many attempts, please slow down')
+    );
+  });
+
+  it('toasts the unavailable message on a non-axios error', async () => {
+    mockUseUserQuery.mockReturnValue({ data: { id: '1' } });
+    mockFetchClaimStatus.mockResolvedValue({
+      available: true,
+      enabled: true,
+      pointsAmount: 10,
+      nextClaimAt: '2026-06-22T00:00:00.000Z',
+      secondsUntilNextClaim: 0,
+      invalidConfig: false,
+    });
+    mockClaimDaily.mockRejectedValue(new Error('network down'));
+
+    const { result } = renderDailyClaim();
+
+    await waitFor(() => expect(result.current.uiState).toBe('claim'));
+
+    await act(async () => {
+      result.current.onAction();
+    });
+
+    await waitFor(() =>
+      expect(toast.error).toHaveBeenCalledWith('Daily claimer is unavailable right now')
+    );
+  });
+
+  it('toasts the unavailable message on a 403/500 response', async () => {
+    mockUseUserQuery.mockReturnValue({ data: { id: '1' } });
+    mockFetchClaimStatus.mockResolvedValue({
+      available: true,
+      enabled: true,
+      pointsAmount: 10,
+      nextClaimAt: '2026-06-22T00:00:00.000Z',
+      secondsUntilNextClaim: 0,
+      invalidConfig: false,
+    });
+    mockClaimDaily.mockRejectedValue({ isAxiosError: true, response: { status: 500 } });
+
+    const { result } = renderDailyClaim();
+
+    await waitFor(() => expect(result.current.uiState).toBe('claim'));
+
+    await act(async () => {
+      result.current.onAction();
+    });
+
+    await waitFor(() =>
+      expect(toast.error).toHaveBeenCalledWith('Daily claimer is unavailable right now')
+    );
+  });
+
+  it('refetches status once the countdown target has already passed', async () => {
+    mockUseUserQuery.mockReturnValue({ data: { id: '1' } });
+    mockFetchClaimStatus.mockResolvedValue({
+      available: false,
+      enabled: true,
+      pointsAmount: 10,
+      nextClaimAt: '2020-01-01T00:00:00.000Z',
+      secondsUntilNextClaim: 0,
+      invalidConfig: false,
+    });
+
+    renderDailyClaim();
+
+    await waitFor(() => expect(mockFetchClaimStatus).toHaveBeenCalledTimes(2));
+  });
 });

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -28,6 +29,9 @@ function resolveErrorMessage(error: unknown): string {
   if (status === DAILY_CLAIM_HTTP_STATUS.ALREADY_CLAIMED)
     return DAILY_CLAIM_ERROR_MESSAGE.ALREADY_CLAIMED;
   if (status === DAILY_CLAIM_HTTP_STATUS.THROTTLED) return DAILY_CLAIM_ERROR_MESSAGE.THROTTLED;
+  if (status === DAILY_CLAIM_HTTP_STATUS.DISABLED) return DAILY_CLAIM_ERROR_MESSAGE.UNAVAILABLE;
+  if (status === DAILY_CLAIM_HTTP_STATUS.INVALID_CONFIG)
+    return DAILY_CLAIM_ERROR_MESSAGE.UNAVAILABLE;
 
   return DAILY_CLAIM_ERROR_MESSAGE.UNAVAILABLE;
 }
@@ -50,7 +54,15 @@ export function useDailyClaim(): UseDailyClaimResult {
   const { data: user } = useUserQuery();
   const isAuthenticated = user !== undefined;
   const { data: status } = useClaimStatus(isAuthenticated);
-  const { label: countdownLabel } = useCountdown(status?.nextClaimAt);
+  const { label: countdownLabel, isComplete } = useCountdown(status?.nextClaimAt);
+  const wasCompleteRef = useRef(false);
+
+  useEffect(() => {
+    if (isComplete && !wasCompleteRef.current) {
+      queryClient.invalidateQueries({ queryKey: DAILY_CLAIM_QUERY_KEYS.status });
+    }
+    wasCompleteRef.current = isComplete;
+  }, [isComplete, queryClient]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: claimDaily,
