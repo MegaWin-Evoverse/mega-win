@@ -10,3 +10,7 @@ export const QUERY_KEYS = {
   betStory: (path: string) => ['bets-story', path],
   currentUser: ['current-user'],
 } as const;
+
+export const DAILY_CLAIM_QUERY_KEYS = {
+  status: ['daily-claim', 'status'] as const,
+};
