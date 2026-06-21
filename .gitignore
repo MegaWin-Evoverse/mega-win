@@ -50,3 +50,6 @@ ROULETTE-FEATURE-EXPLAINED.md
 
 # Subagent-driven-development scratch (ledger, task briefs/reports, diff packages)
 .superpowers/
+
+# Superpowers specs/plans — local working docs, not part of the PR (.claude/docs/ covers project docs)
+docs/superpowers/
