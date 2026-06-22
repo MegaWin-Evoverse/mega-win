@@ -2,7 +2,7 @@
 import { Button } from '@/shared/ui/button';
 import { ErrorState } from '@/shared/ui/error-state';
 import { FormFieldsSkeleton } from '@/shared/ui/skeleton';
-import { type FairnessData } from '../model/types';
+import type { FairnessData } from '../model/types';
 import { LOADING_PLACEHOLDER, FAIRNESS_LABELS } from '../model/constants';
 import { CopyInput } from './CopyInput';
 

@@ -1,5 +1,5 @@
 import { GAME, type Game } from '@/entities/game';
-import { type FairnessTab } from './types';
+import type { FairnessTab } from './types';
 
 export const FAIRNESS_TAB = {
   SEEDS: 'seeds',

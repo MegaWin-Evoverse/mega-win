@@ -1,4 +1,4 @@
-import { CountdownValues } from './types';
+import type { CountdownValues } from './types';
 
 export const LEADERBOARD_LABELS = {
   TITLE: "The Doctor's End of Month Bonus Buy Competition!",

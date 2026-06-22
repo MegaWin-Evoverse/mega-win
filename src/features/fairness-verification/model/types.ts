@@ -1,4 +1,4 @@
-import { type FAIRNESS_TAB } from './constants';
+import type { FAIRNESS_TAB } from './constants';
 
 export interface FairnessData {
   clientSeed: string;

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { cn } from '@/shared/lib/cn';
 import {
   SidebarGroup,

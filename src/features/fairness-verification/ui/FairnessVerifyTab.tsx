@@ -1,4 +1,4 @@
-import { type ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
 import { GAME, type Game } from '@/entities/game';
