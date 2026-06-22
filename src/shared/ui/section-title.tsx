@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import { cn } from '@/shared/lib/cn';
 

@@ -1,5 +1,5 @@
 'use client';
-import { type ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { cn } from '@/shared/lib/cn';
 
 function Label({ className, ...props }: ComponentProps<'label'>) {

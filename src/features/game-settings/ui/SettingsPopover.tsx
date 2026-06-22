@@ -1,5 +1,5 @@
 'use client';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { Volume2, FileText } from 'lucide-react';
 import { Switch } from '@/shared/ui/switch';
 import { Slider } from '@/shared/ui/slider';
