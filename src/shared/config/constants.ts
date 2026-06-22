@@ -1,3 +1,5 @@
+import coin1Icon from '../assets/icons/coin-1.svg';
+
 export const BUTTON_LABELS = {
   LOG: 'Log In',
   PLAY: 'Play',
@@ -65,7 +67,7 @@ export const BET_AMOUNT_DECIMALS = 2;
 export const GAME_BALANCE = 4593.24;
 
 export const COIN_ICON = {
-  SRC: '/icons/coin-1.svg',
+  SRC: coin1Icon,
   ALT: 'Coin',
   SIZE_BALANCE: 20,
   SIZE_INPUT: 16,
