@@ -1,6 +1,5 @@
-import { BALANCE_TYPE } from '@/entities/user';
+import type { BALANCE_TYPE, User } from '@/entities/user';
 import { formatAmount } from '@/shared/lib/formatAmount';
-import type { User } from '@/entities/user';
 
 export const getBalance = (type: (typeof BALANCE_TYPE)[keyof typeof BALANCE_TYPE], user?: User) =>
   formatAmount(

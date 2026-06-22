@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { WALLET_DRAFT_DEFAULTS } from './constants';
-import { BALANCE_TYPE, UserCryptoAddresses, type User } from '@/entities/user';
+import { BALANCE_TYPE, type UserCryptoAddresses, type User } from '@/entities/user';
 import type { CryptoWalletKey } from './types';
 import { getBalance } from './getBalance';
 
