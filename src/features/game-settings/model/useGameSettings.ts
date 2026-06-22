@@ -1,12 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { DEFAULT_VOLUME } from './constants';
+import { useTurboModeStore } from './turboModeStore';
 
 export function useGameSettings() {
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isRulesOpen, setIsRulesOpen] = useState<boolean>(false);
-  const [turboMode, setTurboMode] = useState<boolean>(true);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
+  const setTurboMode = useTurboModeStore((state) => state.setTurboMode);
   const [maxBet, setMaxBet] = useState<boolean>(false);
   const [volume, setVolume] = useState<number[]>([DEFAULT_VOLUME]);
 

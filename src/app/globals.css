@@ -379,6 +379,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #0a271a transparent;
   }
 
   body {
@@ -393,6 +395,24 @@
   button,
   [role='button'] {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0a271a 0%, var(--brand-green-from) 100%);
   }
 }
 
@@ -634,6 +654,52 @@
 
 .result-surface-neutral {
   background: linear-gradient(180deg, #1b1f26 0%, #2b303b 100%);
+}
+
+/* Fullscreen Game Mode: hide global chrome and let the active game fill the viewport */
+html:fullscreen .app-header,
+html:fullscreen .app-footer,
+html:fullscreen .app-bottom-nav,
+html:fullscreen [data-slot='sidebar'],
+html:fullscreen .bets-story {
+  display: none;
+}
+
+html:fullscreen .app-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .games-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .game-page {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  align-items: stretch;
+}
+
+html:fullscreen .game-layout {
+  max-width: none;
+  height: auto;
+  flex: 1 1 auto;
+  border-radius: 0;
+}
+
+html:fullscreen .game-settings-bar {
+  max-width: none;
+  border-radius: 0;
+}
+
+html:fullscreen .game-field-content {
+  justify-content: center;
+}
+
+html:fullscreen .game-field-content .roulette-table {
+  margin-top: 2rem;
 }
 
 /* Roulette Vector Glow */

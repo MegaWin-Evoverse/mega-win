@@ -83,7 +83,7 @@ export function SettingsPopover({
             min={VOLUME_MIN}
             max={VOLUME_MAX}
             step={VOLUME_STEP}
-            className="flex-1 [&_[data-slot='slider-range']]:bg-brand-green-to [&_[data-slot='slider-track']]:bg-surface-toggle [&_[data-slot='slider-thumb']]:bg-white [&_[data-slot='slider-thumb']]:border-border-control/40 [&_[data-slot='slider-thumb']]:size-3.5"
+            className="flex-1 [&_[data-slot='slider-range']]:bg-brand-green-to [&_[data-slot='slider-track']]:bg-surface-toggle [&_[data-slot='slider-thumb']]:bg-white [&_[data-slot='slider-thumb']]:border-border-control/40 [&_[data-slot='slider-thumb']]:w-1.5 [&_[data-slot='slider-thumb']]:h-4 [&_[data-slot='slider-thumb']]:rounded-full"
           />
         </div>
       </PopoverContent>

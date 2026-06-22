@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function RouletteRoute() {
   return (
-    <div className="flex flex-col items-center gap-8 px-4 py-6 lg:px-6">
+    <div className="game-page flex flex-col items-center px-4 py-6 lg:px-6">
       <GameLayout
         controls={<RouletteControls />}
         gameField={
@@ -28,18 +28,18 @@ export default function RouletteRoute() {
               <SoundToggle />
               <LastResults />
             </div>
-            <div className="flex-1 overflow-x-hidden overflow-y-auto pb-[25px] flex flex-col items-center">
+            <div className="game-field-content flex-1 overflow-x-hidden overflow-y-auto pb-[25px] flex flex-col items-center">
               <div className="sm:relative">
                 <RouletteWheel />
               </div>
-              <RouletteTable className="relative z-10 mt-4 sm:mt-8 lg:mt-auto" />
+              <RouletteTable className="roulette-table relative z-10 mt-4 sm:mt-8 lg:mt-auto" />
             </div>
             <RouletteResultOverlay />
           </div>
         }
       />
-      <GameSettingsBar game={GAME.ROULETTE} className="max-w-none" />
-      <BetsStory />
+      <GameSettingsBar game={GAME.ROULETTE} className="mt-1" />
+      <BetsStory className="mt-10" />
     </div>
   );
 }

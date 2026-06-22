@@ -20,7 +20,7 @@ export function GameRulesModal({ isOpen, onOpenChange, game }: Props) {
             {GAME_SETTINGS_LABELS.gameRules}
           </DialogTitle>
         </div>
-        <div className="flex flex-col gap-4 mt-4 max-h-[70vh] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-border-default [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-border-control">
+        <div className="flex flex-col gap-4 mt-4 max-h-[70vh] overflow-y-auto pr-2">
           {GAME_RULES[game].map((rule, idx) => (
             <div key={idx} className="flex flex-col gap-1.5">
               <div className="flex items-start gap-2">

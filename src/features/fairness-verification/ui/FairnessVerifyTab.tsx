@@ -1,25 +1,33 @@
-'use client';
-import { useState, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
-import { Button } from '@/shared/ui/button';
-import type { Game } from '@/entities/game';
-import { VERIFY_GAMES, DEFAULT_VERIFY_NONCE, FAIRNESS_LABELS } from '../model/constants';
+import { GAME, type Game } from '@/entities/game';
+import { VERIFY_GAMES, FAIRNESS_LABELS } from '../model/constants';
 import { getGameIcon, getGameLabel } from '../model/helpers';
+import { useVerifyOutcome } from '../model/useVerifyOutcome';
+import type { VerifyFormState } from '../model/useVerifyForm';
+import { FairnessRouletteBoard } from './FairnessRouletteBoard';
 
-interface Props {
-  game: Game;
-}
+type Props = VerifyFormState;
 
-export function FairnessVerifyTab({ game }: Props) {
-  const [selectedVerifyGame, setSelectedVerifyGame] = useState<Game>(game);
-  const [verifyClientSeed, setVerifyClientSeed] = useState<string>('');
-  const [verifyServerSeed, setVerifyServerSeed] = useState<string>('');
-  const [verifyNonce, setVerifyNonce] = useState<string>(DEFAULT_VERIFY_NONCE);
+export function FairnessVerifyTab({
+  selectedVerifyGame,
+  onVerifyGameChange,
+  verifyClientSeed,
+  onClientSeedChange,
+  verifyServerSeed,
+  onServerSeedChange,
+  verifyNonce,
+  onNonceChange,
+}: Props) {
+  const winningNumber = useVerifyOutcome(verifyClientSeed, verifyServerSeed, verifyNonce);
 
   return (
     <div className="flex flex-col gap-4 animate-in fade-in duration-200">
       <div className="flex flex-col gap-3 w-full">
+        {selectedVerifyGame === GAME.ROULETTE && (
+          <FairnessRouletteBoard winningNumber={winningNumber} />
+        )}
         <div className="flex flex-col gap-1 w-full">
           <span className="font-outfit font-light text-sm text-brand-text-light select-none">
             {FAIRNESS_LABELS.fieldGame}
@@ -27,7 +35,7 @@ export function FairnessVerifyTab({ game }: Props) {
           <Select
             value={selectedVerifyGame}
             onValueChange={(val) => {
-              if (val !== null) setSelectedVerifyGame(val as Game);
+              if (val !== null) onVerifyGameChange(val as Game);
             }}
           >
             <SelectTrigger className="w-full data-[size=default]:h-11 bg-bg-primary border border-border-default text-sm font-normal font-outfit text-brand-text-light hover:text-brand-text-white text-left px-3 gap-2 rounded-lg [&_[data-slot=select-value]]:flex [&_[data-slot=select-value]]:items-center [&_[data-slot=select-value]]:gap-2 [&_[data-slot=select-value]]:w-full cursor-pointer shadow-sm">
@@ -57,8 +65,8 @@ export function FairnessVerifyTab({ game }: Props) {
           <Input
             type="text"
             value={verifyClientSeed}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setVerifyClientSeed(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-within:border-button-brand-bg-dark"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onClientSeedChange(e.target.value)}
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0"
             placeholder={FAIRNESS_LABELS.placeholderClientSeed}
           />
         </div>
@@ -69,8 +77,8 @@ export function FairnessVerifyTab({ game }: Props) {
           <Input
             type="text"
             value={verifyServerSeed}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setVerifyServerSeed(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-within:border-button-brand-bg-dark"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onServerSeedChange(e.target.value)}
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0"
             placeholder={FAIRNESS_LABELS.placeholderServerSeed}
           />
         </div>
@@ -81,18 +89,11 @@ export function FairnessVerifyTab({ game }: Props) {
           <Input
             type="number"
             value={verifyNonce}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setVerifyNonce(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-within:border-button-brand-bg-dark"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onNonceChange(e.target.value)}
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             placeholder={FAIRNESS_LABELS.placeholderNonce}
           />
         </div>
-        <Button
-          variant="tab"
-          size="none"
-          className="flex h-11 w-full items-center justify-center rounded-lg bg-brand-green-to hover:bg-brand-green-to/90 text-bg-primary font-outfit font-semibold text-sm transition-colors cursor-pointer mt-2"
-        >
-          {FAIRNESS_LABELS.verifyButton}
-        </Button>
       </div>
     </div>
   );

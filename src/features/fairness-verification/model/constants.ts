@@ -36,7 +36,6 @@ export const FAIRNESS_LABELS = {
   title: 'Fairness',
   close: 'Close',
   copyToClipboard: 'Copy to clipboard',
-  verifyButton: 'Verify Game Outcome',
   fieldGame: 'Game',
   fieldClientSeed: 'Client Seed',
   fieldServerSeed: 'Server Seed',

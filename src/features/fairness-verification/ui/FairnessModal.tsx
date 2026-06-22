@@ -6,6 +6,7 @@ import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Button } from '@/shared/ui/button';
 import type { Game } from '@/entities/game';
 import { useFairnessQuery } from '../model/useFairnessQuery';
+import { useVerifyForm } from '../model/useVerifyForm';
 import { FAIRNESS_TAB, FAIRNESS_TAB_ITEMS, FAIRNESS_LABELS } from '../model/constants';
 import type { FairnessTab } from '../model/types';
 import { FairnessSeedsTab } from './FairnessSeedsTab';
@@ -19,6 +20,7 @@ interface Props {
 
 export function FairnessModal({ isOpen, onOpenChange, game }: Props) {
   const [activeFairnessTab, setActiveFairnessTab] = useState<FairnessTab>(FAIRNESS_TAB.SEEDS);
+  const verifyForm = useVerifyForm(game);
 
   const {
     data: fairnessData,
@@ -35,7 +37,7 @@ export function FairnessModal({ isOpen, onOpenChange, game }: Props) {
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-full max-w-[calc(100%-2rem)] sm:w-[705px] sm:max-w-[705px] bg-page-bg border border-border-default p-6 sm:p-10 text-brand-text-white shadow-2xl rounded-[24px] overflow-hidden flex flex-col gap-7 select-none"
+        className="w-full max-w-[calc(100%-2rem)] sm:w-[705px] sm:max-w-[705px] max-h-[calc(100vh-2rem)] bg-page-bg border border-border-default p-6 sm:p-10 text-brand-text-white shadow-2xl rounded-[24px] overflow-y-auto flex flex-col gap-7 select-none"
       >
         <Button
           variant="tab"
@@ -65,7 +67,7 @@ export function FairnessModal({ isOpen, onOpenChange, game }: Props) {
             rotateSeeds={rotateSeeds}
           />
         ) : (
-          <FairnessVerifyTab game={game} />
+          <FairnessVerifyTab {...verifyForm} />
         )}
       </DialogContent>
     </Dialog>
