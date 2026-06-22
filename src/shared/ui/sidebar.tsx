@@ -34,6 +34,7 @@ type SidebarContextProps = {
   setOpen: (open: boolean) => void;
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
+  isSmallMobile: boolean;
   isMobile: boolean;
   isTablet: boolean;
   toggleSidebar: () => void;
@@ -63,7 +64,7 @@ function SidebarProvider({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
-  const { isMobile, isTablet } = useIsMobile();
+  const { isSmallMobile, isMobile, isTablet } = useIsMobile();
   const [openMobile, setOpenMobile] = useState(false);
 
   // This is the internal state of the sidebar.
@@ -114,13 +115,24 @@ function SidebarProvider({
       state,
       open,
       setOpen,
+      isSmallMobile,
       isMobile,
       isTablet,
       openMobile,
       setOpenMobile,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, isTablet, openMobile, setOpenMobile, toggleSidebar]
+    [
+      state,
+      open,
+      setOpen,
+      isSmallMobile,
+      isMobile,
+      isTablet,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar,
+    ]
   );
 
   return (
