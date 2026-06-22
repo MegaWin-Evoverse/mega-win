@@ -9,6 +9,7 @@ export const STATS_DECIMALS = 2;
 export const CHANCE_DECIMALS = 4;
 export const BET_DECIMALS = 2;
 export const ROLL_ABOVE = true;
+export const DICE_BET_ROUTE = '/api/games/house/dice/bet' as const;
 export const TICK_MARKS = [2, 25, 50, 75, 100] as const;
 export const LABELS = {
   MULTIPLIER: 'Multiplier',

@@ -1,4 +1,5 @@
 'use client';
+import type { CSSProperties } from 'react';
 import { Slider as SliderPrimitive } from '@base-ui/react/slider';
 import { cn } from '@/shared/lib/cn';
 import { MIN_ROLLOVER, MAX_ROLLOVER, STEP, TICK_MARKS, ROLL_DECIMALS } from '../model/constants';
@@ -12,14 +13,13 @@ interface Props {
 
 export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
   const thumbPct = ((rollover - MIN_ROLLOVER) / (MAX_ROLLOVER - MIN_ROLLOVER)) * 100;
-  const rollPct = lastRoll ? lastRoll.value : null;
 
   return (
     <div className="flex w-full flex-col gap-1.5">
       <div className="relative h-[53px] w-full">
-        {rollPct !== null && lastRoll && (
+        {lastRoll && (
           <div
-            style={{ '--roll': `${rollPct}%` } as React.CSSProperties}
+            style={{ '--roll': `${lastRoll.value}%` } as CSSProperties}
             className="absolute bottom-0 left-[var(--roll)] flex -translate-x-1/2 flex-col items-center"
           >
             <div
@@ -50,7 +50,7 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
       </div>
 
       <div
-        style={{ '--tp': `${thumbPct}%` } as React.CSSProperties}
+        style={{ '--tp': `${thumbPct}%` } as CSSProperties}
         className="flex h-12 w-full items-center rounded-xl border-[6px] border-brand-border bg-bg-primary px-4"
       >
         <SliderPrimitive.Root
