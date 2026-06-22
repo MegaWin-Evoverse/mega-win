@@ -46,7 +46,7 @@ export function Hero({ onRegisterClick }: Props) {
         className="absolute w-[725px] h-[218px] left-[calc(50%-362.5px+184px)] bottom-[-141px] hero-ellipse-glow z-0 pointer-events-none"
       />
       <Image
-        src="/hero/character.png"
+        src="/hero/character.webp"
         alt=""
         aria-hidden
         width={isMobile ? 650 : 480}
@@ -86,7 +86,7 @@ export function Hero({ onRegisterClick }: Props) {
           priority
         />
         <Image
-          src="/hero/Airbrush-1.svg"
+          src="/hero/airbrush-1.svg"
           alt=""
           width={77}
           height={82}
@@ -94,7 +94,7 @@ export function Hero({ onRegisterClick }: Props) {
           priority
         />
         <Image
-          src="/hero/Airbrush-2.png"
+          src="/hero/airbrush-2.webp"
           alt=""
           width={136}
           height={145}

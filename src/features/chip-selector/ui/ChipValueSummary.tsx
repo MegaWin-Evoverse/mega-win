@@ -8,10 +8,12 @@ import { useChipSelector } from '../model/useChipSelector';
 
 interface Props {
   className?: string;
+  placedBet?: number;
 }
 
-export function ChipValueSummary({ className }: Props) {
-  const { selectedChip, placedBet } = useChipSelector();
+export function ChipValueSummary({ className, placedBet: placedBetProp }: Props) {
+  const { selectedChip, placedBet: storePlacedBet } = useChipSelector();
+  const placedBet = placedBetProp ?? storePlacedBet;
 
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>

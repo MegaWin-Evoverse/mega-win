@@ -136,6 +136,14 @@
   --color-risk-medium: var(--risk-medium);
   --color-risk-high: var(--risk-high);
   --color-chip-active-glow: var(--chip-active-glow);
+  --color-border-control: var(--border-control);
+  --color-surface-toggle: var(--surface-toggle);
+  --color-button-brand-bg-disabled: var(--button-brand-bg-disabled);
+  --color-bg-cell: var(--bg-cell);
+  --color-brand-red: var(--brand-red);
+  --color-roulette-red: var(--roulette-red);
+  --color-roulette-cell-border: var(--roulette-cell-border);
+  --color-roulette-chip-glow: var(--roulette-chip-glow);
   --color-leaderboard-bg-from: var(--leaderboard-bg-from);
   --color-leaderboard-bg-to: var(--leaderboard-bg-to);
   --color-leaderboard-glow-from: var(--leaderboard-glow-from);
@@ -243,13 +251,25 @@
   --sidebar-ring: oklch(0.708 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --border-control: #3f4a59;
+  --surface-toggle: #1e293b;
   --chip-active-glow: oklch(0.70 0.15 162);
+  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
+  --bg-cell: var(--button-brand-bg-disabled);
+  --brand-red: oklch(0.55 0.22 25);
+  /* Roulette betting table */
+  --roulette-red: oklch(0.577 0.245 27.325);
+  /* #DC2626 */
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
+  /* rgba(63,74,89,0.5) */
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
 .dark {
@@ -331,13 +351,19 @@
   --sidebar-ring: oklch(0.556 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --border-control: #3f4a59;
+  --surface-toggle: #1e293b;
   --chip-active-glow: oklch(0.70 0.15 162);
+  --roulette-red: oklch(0.577 0.245 27.325);
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
 @utility bg-auth-btn-primary {
@@ -349,7 +375,9 @@
 }
 
 .auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%);
+  background: linear-gradient(180deg,
+      var(--auth-surface-dim) 0%,
+      var(--auth-surface-light-dim) 100%);
   color: var(--auth-text);
   box-shadow: none;
   border-color: transparent;
@@ -363,6 +391,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #0a271a transparent;
   }
 
   body {
@@ -377,6 +407,24 @@
   button,
   [role='button'] {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0a271a 0%, var(--brand-green-from) 100%);
   }
 }
 
@@ -448,12 +496,21 @@
 
 .bg-total-rewards {
   background-image:
-    url('/total-rewards/dollar-coins%201.png'),
+    url('/total-rewards/dollar-coins.webp'),
     linear-gradient(90.95deg, rgba(27, 209, 103, 0.1) 0%, rgba(0, 0, 0, 0) 53.02%),
     linear-gradient(0deg, #11121a, #11121a);
   background-repeat: no-repeat;
   background-position: left center;
   background-size: auto, cover, cover;
+}
+
+.games-hero-bg {
+  background-image:
+    linear-gradient(180deg, rgba(10, 8, 14, 0.55) 0%, rgba(10, 8, 14, 0.85) 100%),
+    url('/games/hero-bg.webp');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
 }
 
 .feature-glow-outer {
@@ -607,6 +664,104 @@
   color: var(--risk-high);
 }
 
+/* Game Result Overlay */
+.result-header-win {
+  background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+}
+
+.result-header-loss {
+  background: linear-gradient(135.15deg, #f13636 -3.15%, #891111 100.75%);
+}
+
+.result-surface-neutral {
+  background: linear-gradient(180deg, #1b1f26 0%, #2b303b 100%);
+}
+
+/* Fullscreen Game Mode: hide global chrome and let the active game fill the viewport */
+html:fullscreen .app-header,
+html:fullscreen .app-footer,
+html:fullscreen .app-bottom-nav,
+html:fullscreen [data-slot='sidebar'],
+html:fullscreen .bets-story {
+  display: none;
+}
+
+html:fullscreen .app-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .games-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .game-page {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  align-items: stretch;
+}
+
+html:fullscreen .game-layout {
+  max-width: none;
+  height: auto;
+  flex: 1 1 auto;
+  border-radius: 0;
+}
+
+html:fullscreen .game-settings-bar {
+  max-width: none;
+  border-radius: 0;
+}
+
+html:fullscreen .game-field-content {
+  justify-content: center;
+}
+
+html:fullscreen .game-field-content .roulette-table {
+  margin-top: 2rem;
+}
+
+/* Roulette Vector Glow */
+.roulette-vector-glow {
+  position: absolute;
+  width: 3212.88px;
+  height: 512.16px;
+  left: calc(50% - 3212.88px / 2 - 3.11px);
+  top: -350px;
+  background: linear-gradient(170.1deg, rgba(0, 0, 0, 0) 2.99%, rgba(51, 160, 113, 0.3) 94.41%);
+  opacity: 0.5;
+  filter: blur(60px);
+  transform: matrix(-1, 0.01, 0.01, 1, 0, 0);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Wheel Animations */
+@keyframes roulette-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-roulette-spin {
+  animation: roulette-spin 12s linear infinite;
+}
+
+.roulette-cap-shadow {
+  box-shadow: 0px 0px 10px #1a0b00;
+}
+
+.roulette-wheel-outer {
+  background-color: #0a0d19;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
 /* Monthly Leaderboard Section */
 .leaderboard-shadow {
   box-shadow:
@@ -619,9 +774,7 @@
 }
 
 .leaderboard-avatar-ring {
-  background: radial-gradient(
-    60.56% 60.56% at 50% 50%,
-    rgba(61, 108, 218, 0.4) 0%,
-    rgba(11, 42, 28, 0.4) 100%
-  );
+  background: radial-gradient(60.56% 60.56% at 50% 50%,
+      rgba(61, 108, 218, 0.4) 0%,
+      rgba(11, 42, 28, 0.4) 100%);
 }

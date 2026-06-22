@@ -1,5 +1,5 @@
-import { UnderConstruction } from '@/shared/ui/under-construction';
+import { Leaderboard } from '@/widgets/leaderboard';
 
 export default function LeaderboardPage() {
-  return <UnderConstruction title="Leaderboard" />;
+  return <Leaderboard />;
 }
