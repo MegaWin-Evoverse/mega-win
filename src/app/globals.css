@@ -118,6 +118,10 @@
   --color-total-rewards-glow: var(--total-rewards-glow);
   --color-feature-overlay: var(--feature-overlay);
   --color-brand-btn-gradient-to: var(--brand-btn-gradient-to);
+  --color-keno-cell-border: var(--keno-cell-border);
+  --color-keno-payout-from: var(--keno-payout-from);
+  --color-keno-payout-to: var(--keno-payout-to);
+  --color-keno-glow: var(--keno-glow);
   --color-promo-purple: var(--promo-purple);
   --color-promo-red: var(--promo-red);
   --color-gs-media: var(--gs-media);
@@ -193,6 +197,10 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-from: #0a271a;
+  --keno-payout-to: #39b17d;
+  --keno-glow: rgba(51, 160, 113, 0.5);
   --promo-purple: #7e22ce;
   --promo-red: #dc2626;
   --gs-media: #09051a;
@@ -291,6 +299,10 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-from: #0a271a;
+  --keno-payout-to: #39b17d;
+  --keno-glow: rgba(51, 160, 113, 0.5);
   --promo-purple: #7e22ce;
   --promo-red: #dc2626;
   --gs-media: #09051a;
