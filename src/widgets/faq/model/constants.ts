@@ -1,9 +1,10 @@
 import type { FAQItem } from './types';
+import askIcon from '../assets/icons/ask.svg';
 
 export const FAQ_CONSTANTS = {
   SECTION_TITLE: 'Frequently asked questions',
   SECTION_ARIA_LABEL: 'Frequently asked questions',
-  ICON_SRC: '/frequently-asked-questions/ask.svg',
+  ICON_SRC: askIcon,
   ICON_WIDTH: 24,
   ICON_HEIGHT: 24,
 } as const;

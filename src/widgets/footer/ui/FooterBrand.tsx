@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Logo } from '@/shared/ui/logo';
 import { ROUTES, FOOTER_ARIA } from '@/shared/config';
+import eighteenPlusIcon from '../assets/icons/18-plus.svg';
 
 interface Props {
   className?: string;
@@ -19,7 +20,7 @@ export function FooterBrand({ className }: Props) {
       </Link>
 
       <Image
-        src="/icons/18-plus.svg"
+        src={eighteenPlusIcon}
         alt="18+ Gamble Responsibly"
         width={150}
         height={41}

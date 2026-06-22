@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import { BUTTON_LABELS } from '@/shared/config';
+import coinIcon from '@/shared/assets/icons/coin.svg';
 
 export function DailyClaimerCard() {
   return (
@@ -15,7 +16,7 @@ export function DailyClaimerCard() {
         className="absolute bottom-0 left-0 h-7 w-[calc(100%+7px)] bg-gradient-to-t from-daily-claimer-overlay to-transparent"
       />
       <Image
-        src="/daily-claimer-chest.png"
+        src="/daily-claimer-chest.webp"
         width={111}
         height={118}
         alt=""
@@ -33,7 +34,7 @@ export function DailyClaimerCard() {
         aria-label="Claim daily reward"
       >
         {BUTTON_LABELS.CLAIM}
-        <Image src="/icons/coin.svg" width={14} height={14} alt="" aria-hidden />
+        <Image src={coinIcon} width={14} height={14} alt="" aria-hidden />
         <span>10</span>
       </Button>
     </Card>

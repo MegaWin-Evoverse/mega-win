@@ -28,15 +28,19 @@ export function UserMenu({ user, onLogout, isLoggingOut }: Props) {
 
   return (
     <DropdownMenu onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg px-2 py-1.5 outline-none cursor-pointer hover:bg-muted/50">
-        <Avatar>
+      <DropdownMenuTrigger className="flex min-w-0 items-center gap-2 rounded-lg px-2 py-1.5 outline-none cursor-pointer hover:bg-muted/50">
+        <Avatar className="shrink-0">
           <AvatarImage src={user.profileImgUrl} alt={user.username} />
           <AvatarFallback>{user.username[0]?.toUpperCase()}</AvatarFallback>
         </Avatar>
 
-        <span className="text-sm font-medium">{user.email}</span>
+        <span className="truncate text-sm font-medium max-md:max-w-[80px]">{user.email}</span>
 
-        {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+        {isOpen ? (
+          <ChevronUp className="size-4 shrink-0" />
+        ) : (
+          <ChevronDown className="size-4 shrink-0" />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56">
