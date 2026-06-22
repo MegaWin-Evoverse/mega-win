@@ -1,4 +1,4 @@
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { ManualAutoTabs } from '@/features/game-mode-tabs';
 import { BetAmountField, ProfitOnWinField } from '@/features/bet-amount';
 import { RiskSelector } from '@/features/risk-selector';
@@ -11,16 +11,32 @@ import { CONTROL_PANEL_CONFIG } from '../model/constants';
 
 interface Props {
   game: Game;
+  onBet?: () => void;
+  placedBet?: number;
+  isAutoRunning?: boolean;
+  autoRunningLabel?: string;
+  onClearTable?: () => void;
+  onUndo?: () => void;
 }
 
-export function ControlPanel({ game }: Props) {
+export function ControlPanel({
+  game,
+  onBet,
+  placedBet,
+  isAutoRunning,
+  autoRunningLabel,
+  onClearTable,
+  onUndo,
+}: Props) {
   const config = CONTROL_PANEL_CONFIG[game];
 
   return (
     <div className="flex w-full flex-col gap-4 lg:gap-0 bg-bg-primary px-4 py-6 lg:w-[352px] lg:shrink-0 lg:p-6 overflow-y-auto max-h-full">
       <ManualAutoTabs />
       {config.showBetAmount && <BetAmountField className={config.classNames.betAmountField} />}
-      {config.showChips && <ChipValueSummary className={config.classNames.betSummary} />}
+      {config.showChips && (
+        <ChipValueSummary className={config.classNames.betSummary} placedBet={placedBet} />
+      )}
       {config.riskOptions && (
         <RiskSelector options={config.riskOptions} className={config.classNames.risk} />
       )}
@@ -37,6 +53,8 @@ export function ControlPanel({ game }: Props) {
       {config.tableActions && (
         <TableActions
           variant={config.tableActions}
+          onClearTable={onClearTable}
+          onUndo={onUndo}
           className={config.classNames.tableActionsSection}
         />
       )}
@@ -44,6 +62,9 @@ export function ControlPanel({ game }: Props) {
         manualLabel={config.betLabels.manual}
         autoLabel={config.betLabels.auto}
         requiresBet={config.requiresBet}
+        onBet={onBet}
+        isAutoRunning={isAutoRunning}
+        autoActiveLabel={autoRunningLabel ?? config.betLabels.autoActive}
         className={config.classNames.actionButton}
       />
     </div>

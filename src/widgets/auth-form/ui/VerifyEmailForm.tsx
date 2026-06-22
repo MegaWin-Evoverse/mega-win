@@ -1,5 +1,4 @@
 'use client';
-
 import { useVerifyEmail } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';

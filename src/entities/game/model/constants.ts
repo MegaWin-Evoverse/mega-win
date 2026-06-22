@@ -21,6 +21,13 @@ export interface RiskOption {
   label: string;
 }
 
+export const RISK_API_MAP: Record<Risk, string> = {
+  [RISK.CLASSIC]: 'LOW',
+  [RISK.LOW]: 'LOW',
+  [RISK.MEDIUM]: 'MEDIUM',
+  [RISK.HIGH]: 'HIGH',
+} as const;
+
 export const KENO_RISK_OPTIONS: readonly RiskOption[] = [
   { value: RISK.CLASSIC, label: 'Classic' },
   { value: RISK.LOW, label: 'Low' },
@@ -60,6 +67,28 @@ export const CHIP_NOMINALS = [
 ] as const;
 
 export type ChipNominal = (typeof CHIP_NOMINALS)[number];
+
+export const CHIP_STRIPES: Record<ChipNominal, string> = {
+  '1': '#FFFFFF',
+  '5': '#75D2FD',
+  '10': '#018BCB',
+  '25': '#FFBABA',
+  '50': '#FF4D4D',
+  '100': '#EC0303',
+  '250': '#9CFFC5',
+  '500': '#35FF89',
+  '1K': '#35FF89',
+  '2K': '#F3FF9C',
+  '5K': '#B2C807',
+  '10K': '#B2C807',
+  '25K': '#CDB1FE',
+  '50K': '#9A5FFF',
+  '100K': '#6208FF',
+};
+
+export function getChipStripe(nominal: ChipNominal = CHIP_NOMINALS[0]): string {
+  return CHIP_STRIPES[nominal];
+}
 
 export const GAME_CONTROLS_DEFAULTS = {
   BET_AMOUNT_TEXT: '0.00',

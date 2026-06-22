@@ -12,7 +12,7 @@ export function DailyClaimerCardCollapsed() {
 
       {/* Chest image fills the card */}
       <Image
-        src="/image-2423.png"
+        src="/image-2423.webp"
         fill
         unoptimized
         alt="Daily Claimer"

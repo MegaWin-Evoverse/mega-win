@@ -1,13 +1,8 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
-import { type ChipNominal } from '@/entities/game';
-import {
-  CHIP_BASE_COLOR,
-  CHIP_CORE_COLOR,
-  CHIP_TEXT_COLOR,
-  CHIP_STRIPES,
-} from '../model/constants';
+import { type ChipNominal, CHIP_STRIPES } from '@/entities/game';
+import { CHIP_BASE_COLOR, CHIP_CORE_COLOR, CHIP_TEXT_COLOR } from '../model/constants';
 
 interface Props {
   valueText: string;
@@ -25,8 +20,8 @@ export function ChipIcon({ valueText, isActive, onClick, className }: Props) {
       size="none"
       onClick={onClick}
       className={cn(
-        'relative size-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 select-none outline-none border-0 bg-transparent shrink-0',
-        isActive ? 'scale-105' : 'hover:scale-105',
+        'relative size-12 rounded-full flex items-center justify-center transition-all duration-100 select-none outline-none border-0 bg-transparent shrink-0 active:scale-90 cursor-pointer hover:scale-105',
+        isActive && 'scale-105',
         className
       )}
       aria-label={`Chip ${valueText}`}

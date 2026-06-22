@@ -20,6 +20,11 @@ const eslintConfig = defineConfig([
     rules: {
       'prettier/prettier': 'error',
       'react-compiler/react-compiler': 'error',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
+      ],
+      '@typescript-eslint/no-import-type-side-effects': 'error',
     },
   },
   {
@@ -67,7 +72,11 @@ const eslintConfig = defineConfig([
             {
               from: { type: 'features' },
               allow: {
-                to: [{ type: 'entities', internalPath: 'index.ts' }, { type: 'shared' }],
+                to: [
+                  { type: 'features', internalPath: 'index.ts' },
+                  { type: 'entities', internalPath: 'index.ts' },
+                  { type: 'shared' },
+                ],
               },
             },
             { from: { type: 'entities' }, allow: { to: { type: 'shared' } } },

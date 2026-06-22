@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/table';
 import { COLUMN_HEADERS } from '../model/constants';
 import type { Bet } from '../model/types';
+import greenCoinIcon from '../assets/icons/green-coin.svg';
 
 const HEAD_CLASS = 'h-11 px-4 py-3 text-xs text-brand-text-light font-normal';
 const CELL_CLASS = 'h-11 px-4 py-3 text-xs text-brand-text-white';
@@ -42,7 +43,7 @@ export function BetsList({ bets }: Props) {
 
             <TableCell className={CELL_CLASS}>
               <div className="flex items-center gap-1.5">
-                <Image src="/icons/green-coin.svg" width={16} height={16} alt="" aria-hidden />
+                <Image src={greenCoinIcon} width={16} height={16} alt="" aria-hidden />
                 <span>${bet.betSize}</span>
               </div>
             </TableCell>
@@ -51,7 +52,7 @@ export function BetsList({ bets }: Props) {
 
             <TableCell className={CELL_CLASS}>
               <div className="flex items-center gap-1.5">
-                <Image src="/icons/green-coin.svg" width={16} height={16} alt="" aria-hidden />
+                <Image src={greenCoinIcon} width={16} height={16} alt="" aria-hidden />
                 <span>${bet.payout}</span>
               </div>
             </TableCell>
