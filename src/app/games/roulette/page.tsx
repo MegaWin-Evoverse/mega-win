@@ -9,6 +9,8 @@ import {
 import { RouletteTable } from '@/features/roulette-table';
 import { BetsStory } from '@/entities/bets-story';
 import { RouletteControls } from './RouletteControls';
+import { GameSettingsBar } from '@/widgets/game-settings-bar';
+import { GAME } from '@/entities/game';
 
 export const metadata: Metadata = {
   title: 'Roulette',
@@ -36,6 +38,7 @@ export default function RouletteRoute() {
           </div>
         }
       />
+      <GameSettingsBar game={GAME.ROULETTE} className="max-w-none" />
       <BetsStory />
     </div>
   );
