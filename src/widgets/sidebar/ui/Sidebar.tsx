@@ -8,7 +8,6 @@ import {
   SidebarTrigger,
   useSidebar,
 } from '@/shared/ui/sidebar';
-import { useSidebarMenu } from '../model/useSidebarMenu';
 import { SidebarHeaderSection } from './SidebarHeaderSection';
 import { SidebarMenuSection } from './SidebarMenuSection';
 import { SidebarFooterSection } from './SidebarFooterSection';
@@ -24,10 +23,8 @@ export function Sidebar({
   onSupportClick,
   ...props
 }: Props) {
-  const { state, isMobile, isTablet } = useSidebar();
+  const { state } = useSidebar();
   const isCollapsed = state === 'collapsed';
-  const { isGamesOpen, onGamesToggle } = useSidebarMenu();
-  const isMobileOrTablet = isMobile || isTablet;
 
   return (
     <BaseSidebar
@@ -38,14 +35,10 @@ export function Sidebar({
       )}
       {...props}
     >
-      {!isMobileOrTablet && <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />}
+      <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />
       <SidebarContent>
         <SidebarHeaderSection />
-        <SidebarMenuSection
-          isCollapsed={isCollapsed}
-          isGamesOpen={isGamesOpen}
-          onGamesToggle={onGamesToggle}
-        />
+        <SidebarMenuSection isCollapsed={isCollapsed} />
         {children}
       </SidebarContent>
       <SidebarFooterSection isCollapsed={isCollapsed} onSupportClick={onSupportClick} />
