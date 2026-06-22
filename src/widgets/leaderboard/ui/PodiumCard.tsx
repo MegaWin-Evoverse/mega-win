@@ -8,16 +8,15 @@ import {
   PODIUM_RANK_ICON_SRC,
   PODIUM_CHAMP_ICON_SRC,
 } from '../model/constants';
-import type { LeaderboardParticipant } from '../model/types';
+import type { PodiumParticipant } from '../model/types';
 
 interface Props {
-  participant: LeaderboardParticipant;
+  participant: PodiumParticipant;
   className?: string;
 }
 
 export function PodiumCard({ participant, className }: Props) {
-  const { username, usdWager, prizeValue, position } = participant;
-  const pos = position as 1 | 2 | 3;
+  const { username, usdWager, prizeValue, position: pos } = participant;
   const isFirst = pos === 1;
 
   return (

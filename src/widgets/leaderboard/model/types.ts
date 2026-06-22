@@ -1,3 +1,9 @@
+export type PodiumPosition = 1 | 2 | 3;
+
+export interface PodiumParticipant extends Omit<LeaderboardParticipant, 'position'> {
+  position: PodiumPosition;
+}
+
 export interface LeaderboardParticipant {
   month: string;
   username: string;

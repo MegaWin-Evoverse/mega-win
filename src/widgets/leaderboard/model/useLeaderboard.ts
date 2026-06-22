@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { getLeaderboard } from '../api/getLeaderboard';
@@ -26,5 +26,7 @@ export function useLeaderboard() {
     setVisibleCount((prev) => prev + ROWS_PER_LOAD);
   }
 
-  return { top3, visibleRows, hasMore, loadMore, isLoading, endDate: getCompetitionEndDate(month) };
+  const endDate = useMemo(() => getCompetitionEndDate(month), [month]);
+
+  return { top3, visibleRows, hasMore, loadMore, isLoading, endDate };
 }

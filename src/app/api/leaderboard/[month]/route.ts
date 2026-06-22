@@ -11,11 +11,17 @@ export async function GET(request: NextRequest, { params }: Context) {
   const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/leaderboard/${month}`);
   searchParams.forEach((value, key) => url.searchParams.set(key, value));
 
-  const response = await fetch(url.toString(), {
-    headers: {
-      Cookie: request.headers.get('cookie') ?? '',
-    },
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(url.toString(), {
+      headers: {
+        Cookie: request.headers.get('cookie') ?? '',
+      },
+    });
+  } catch {
+    return NextResponse.json({}, { status: 502 });
+  }
 
   if (!response.ok) {
     return NextResponse.json({}, { status: response.status });

@@ -11,7 +11,7 @@ import { Button } from '@/shared/ui/button';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { formatAmount } from '@/shared/lib/formatAmount';
 import { COIN_ICON } from '@/shared/config';
-import { LEADERBOARD_LABELS, LEADERBOARD_SIZES } from '../model/constants';
+import { INITIAL_VISIBLE_ROWS, LEADERBOARD_LABELS, LEADERBOARD_SIZES } from '../model/constants';
 import type { LeaderboardParticipant } from '../model/types';
 
 interface Props {
@@ -44,7 +44,7 @@ export function Table({ rows, hasMore, onLoadMore, isLoading }: Props) {
 
         <TableBody>
           {isLoading
-            ? Array.from({ length: 10 }).map((_, i) => (
+            ? Array.from({ length: INITIAL_VISIBLE_ROWS }).map((_, i) => (
                 <TableRow key={i} className="border-brand-border/10">
                   <TableCell>
                     <Skeleton className="h-4 w-6" />
