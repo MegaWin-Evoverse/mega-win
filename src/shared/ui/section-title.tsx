@@ -1,11 +1,11 @@
 import { type ReactNode } from 'react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { cn } from '@/shared/lib/cn';
 
 interface Props {
   title: string;
   icon?: ReactNode;
-  iconSrc?: string;
+  iconSrc?: StaticImageData;
   iconWidth?: number;
   iconHeight?: number;
   className?: string;

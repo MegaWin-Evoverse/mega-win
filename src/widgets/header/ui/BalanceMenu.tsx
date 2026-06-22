@@ -26,13 +26,17 @@ export function BalanceMenu({ balances }: Props) {
 
   return (
     <DropdownMenu onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg border border-brand-border bg-brand-bg px-3 py-2 text-sm outline-none cursor-pointer">
-        <Coins className="size-4 text-coin-game" />
-        <span className="font-medium">{formatBalance(gamePoints)}</span>
-        <Separator orientation="vertical" className="h-4" />
-        <Coins className="size-4 text-coin-watch" />
-        <span className="font-medium">{formatBalance(watchPoints)}</span>
-        {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+      <DropdownMenuTrigger className="flex min-w-0 items-center gap-2 rounded-lg border border-brand-border bg-brand-bg px-3 py-2 text-sm outline-none cursor-pointer max-md:gap-1.5 max-md:px-2 max-md:text-xs">
+        <Coins className="size-4 shrink-0 text-coin-game max-md:size-3.5" />
+        <span className="truncate font-medium">{formatBalance(gamePoints)}</span>
+        <Separator orientation="vertical" className="h-4 shrink-0" />
+        <Coins className="size-4 shrink-0 text-coin-watch max-md:size-3.5" />
+        <span className="truncate font-medium">{formatBalance(watchPoints)}</span>
+        {isOpen ? (
+          <ChevronUp className="size-4 shrink-0" />
+        ) : (
+          <ChevronDown className="size-4 shrink-0" />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start" className="w-72 p-4">
