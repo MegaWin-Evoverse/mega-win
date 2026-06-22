@@ -9,10 +9,14 @@ import { useTableActions } from '../model/useTableActions';
 interface Props {
   variant: TableActionsVariant;
   className?: string;
+  onClearTable?: () => void;
+  onUndo?: () => void;
 }
 
-export function TableActions({ variant, className }: Props) {
-  const { clearTable, autoPick, undo, isAutoMode } = useTableActions();
+export function TableActions({ variant, className, onClearTable, onUndo }: Props) {
+  const { clearTable: storeClearTable, autoPick, undo: storeUndo, isAutoMode } = useTableActions();
+  const clearTable = onClearTable ?? storeClearTable;
+  const undo = onUndo ?? storeUndo;
 
   if (variant === TABLE_ACTIONS.ROULETTE) {
     return (
