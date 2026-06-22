@@ -10,6 +10,8 @@ export const REWARDS_LABELS = {
   TIME_MINUTES: 'm',
   TIME_EXPIRED: 'Expired',
   LOADING_ALT: 'Loading rewards...',
+  EMPTY_MESSAGE: 'No rewards available at the moment.',
+  ERROR_MESSAGE: 'Failed to load rewards. Please try again later.',
 } as const;
 
 export interface SortOption {
@@ -28,4 +30,4 @@ export const DEFAULT_PAGE = 1;
 
 export const DEFAULT_TAKE = 8;
 
-export const REWARD_CARD_IMAGE_SIZE = { width: 400, height: 260 } as const;
+export const TIME_LEFT_TICK_MS = 60_000;

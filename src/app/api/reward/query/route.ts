@@ -7,11 +7,17 @@ export async function GET(request: NextRequest) {
 
   searchParams.forEach((value, key) => url.searchParams.set(key, value));
 
-  const response = await fetch(url.toString(), {
-    headers: {
-      Cookie: request.headers.get('cookie') ?? '',
-    },
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(url.toString(), {
+      headers: {
+        Cookie: request.headers.get('cookie') ?? '',
+      },
+    });
+  } catch {
+    return NextResponse.json({}, { status: 503 });
+  }
 
   if (!response.ok) {
     return NextResponse.json({}, { status: response.status });

@@ -1,8 +1,9 @@
+'use client';
 import Image from 'next/image';
 import { Clock } from 'lucide-react';
 import { REWARDS_LABELS } from '../model/constants';
 import type { Reward } from '../model/types';
-import { formatTimeLeft } from '../model/formatTimeLeft';
+import { useTimeLeft } from '../model/useTimeLeft';
 
 interface Props {
   reward: Reward;
@@ -10,7 +11,7 @@ interface Props {
 
 export function RewardCard({ reward }: Props) {
   const { title, shortDescription, photoUrl, endDate } = reward;
-  const timeLeft = formatTimeLeft(endDate);
+  const timeLeft = useTimeLeft(endDate);
 
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-brand-border/10 bg-card">
