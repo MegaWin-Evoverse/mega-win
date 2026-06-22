@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { type CSSProperties } from 'react';
 import { cn } from '@/shared/lib/cn';
 import {
   SidebarGroup,
@@ -9,14 +10,13 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
 } from '@/shared/ui/sidebar';
+import { useSidebarMenu } from '../model/useSidebarMenu';
 import { SIDEBAR_MENU_ITEMS } from '../model/menu';
 import { MenuIcon } from './MenuIcon';
 import { CaretIcon } from './CaretIcon';
 
 interface Props {
   isCollapsed: boolean;
-  isGamesOpen: boolean;
-  onGamesToggle: () => void;
 }
 
 const MENU_BTN_BASE =
@@ -25,7 +25,9 @@ const MENU_BTN_BASE =
 const MENU_BTN_COLLAPSED =
   'group-data-[collapsible=icon]:size-auto! flex items-center justify-center p-0 group-data-[collapsible=icon]:p-0! h-[52px] group-data-[collapsible=icon]:h-[52px]!';
 
-export function SidebarMenuSection({ isCollapsed, isGamesOpen, onGamesToggle }: Props) {
+export function SidebarMenuSection({ isCollapsed }: Props) {
+  const { isGamesOpen, onGamesToggle, gamesContentRef, gamesContentHeight } = useSidebarMenu();
+
   return (
     <SidebarGroup className="mt-4 px-4 py-0 w-full">
       <SidebarMenu className="flex flex-col gap-2 w-full">
@@ -52,33 +54,32 @@ export function SidebarMenuSection({ isCollapsed, isGamesOpen, onGamesToggle }: 
                 </SidebarMenuButton>
                 {!isCollapsed && (
                   <div
+                    style={{ '--games-content-height': `${gamesContentHeight}px` } as CSSProperties}
                     className={cn(
-                      'grid transition-[grid-template-rows,opacity] duration-200 ease-in-out',
-                      isGamesOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                      'overflow-hidden transition-[height,opacity] duration-500 ease-out',
+                      isGamesOpen ? 'h-(--games-content-height) opacity-100' : 'h-0 opacity-0'
                     )}
                   >
-                    <div className="overflow-hidden">
-                      <div className="pt-2">
-                        {item.subItems && (
-                          <SidebarMenuSub className="flex flex-col gap-2 pl-4 border-l-0 ml-0 py-0">
-                            {item.subItems.map((sub) => (
-                              <SidebarMenuSubItem key={sub.label}>
-                                <SidebarMenuSubButton
-                                  render={
-                                    <Link
-                                      href={sub.href}
-                                      className="flex items-center gap-2 text-brand-text-white hover:text-brand-text-light py-2 px-3 rounded-md transition-colors duration-150 font-outfit font-medium text-base lining-nums proportional-nums"
-                                    />
-                                  }
-                                >
-                                  <MenuIcon name={sub.iconName} className="h-5 w-5 flex-shrink-0" />
-                                  <span>{sub.label}</span>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        )}
-                      </div>
+                    <div ref={gamesContentRef} className="pt-2 pr-3">
+                      {item.subItems && (
+                        <SidebarMenuSub className="flex flex-col gap-2 translate-x-0 border-l-0 mx-0 px-0 py-0">
+                          {item.subItems.map((sub) => (
+                            <SidebarMenuSubItem key={sub.label}>
+                              <SidebarMenuSubButton
+                                render={
+                                  <Link
+                                    href={sub.href}
+                                    className="flex items-center gap-2 w-full h-auto text-brand-text-white hover:text-brand-text-light py-3 pl-6 pr-3 rounded-md transition-all duration-500 ease-out hover:translate-x-2 font-outfit font-medium text-base lining-nums proportional-nums"
+                                  />
+                                }
+                              >
+                                <MenuIcon name={sub.iconName} className="h-5 w-5 flex-shrink-0" />
+                                <span>{sub.label}</span>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      )}
                     </div>
                   </div>
                 )}

@@ -231,7 +231,7 @@ export function RouletteWheel({ className }: Props) {
           {/* Slices & Numbers Group (This rotates) */}
           <g ref={wheelGroupRef}>
             <image
-              href="/roulette/icons/image-roulette.0wcv01o5us4m~.svg"
+              href="/roulette-wheel/roulette-wheel-art.svg"
               x="0"
               y="0"
               width="100"
@@ -277,7 +277,7 @@ export function RouletteWheel({ className }: Props) {
         {/* Center Dome Cap Image styled exactly as 100x100px, rotating in sync */}
         <Image
           ref={centerCapRef}
-          src="/roulette/icons/center.svg"
+          src="/roulette-wheel/center.svg"
           alt=""
           width={100}
           height={100}
