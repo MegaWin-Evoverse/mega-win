@@ -58,7 +58,7 @@ export default function RootLayout({
             <div className="w-full flex flex-col min-h-screen">
               <AuthForm />
               <Header />
-              <div className="flex-1 flex flex-row relative w-full pt-16 max-[639px]:pb-16">
+              <div className="app-shell flex-1 flex flex-row relative w-full pt-16 max-[639px]:pb-16">
                 <Sidebar />
                 <div className="flex-1 min-w-0 flex flex-col">
                   <div className="flex-1 flex flex-col">{children}</div>

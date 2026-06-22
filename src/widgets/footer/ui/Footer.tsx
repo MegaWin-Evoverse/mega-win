@@ -15,7 +15,7 @@ export function Footer({ className }: Props) {
       role="contentinfo"
       aria-label={FOOTER_ARIA.FOOTER}
       className={cn(
-        'w-full bg-brand-bg border-t border-brand-border py-[28px] px-[32px] flex flex-col items-center justify-center shrink-0',
+        'app-footer w-full bg-brand-bg border-t border-brand-border py-[28px] px-[32px] flex flex-col items-center justify-center shrink-0',
         className
       )}
     >

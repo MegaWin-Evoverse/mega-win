@@ -132,6 +132,8 @@
   --color-risk-medium: var(--risk-medium);
   --color-risk-high: var(--risk-high);
   --color-chip-active-glow: var(--chip-active-glow);
+  --color-border-control: var(--border-control);
+  --color-surface-toggle: var(--surface-toggle);
   --color-button-brand-bg-disabled: var(--button-brand-bg-disabled);
   --color-bg-cell: var(--bg-cell);
   --color-brand-red: var(--brand-red);
@@ -241,19 +243,24 @@
   --sidebar-ring: oklch(0.708 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --border-control: #3f4a59;
+  --surface-toggle: #1e293b;
   --chip-active-glow: oklch(0.70 0.15 162);
   --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
   --bg-cell: var(--button-brand-bg-disabled);
   --brand-red: oklch(0.55 0.22 25);
   /* Roulette betting table */
-  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
-  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
+  --roulette-red: oklch(0.577 0.245 27.325);
+  /* #DC2626 */
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
+  /* rgba(63,74,89,0.5) */
   --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
@@ -332,12 +339,15 @@
   --sidebar-ring: oklch(0.556 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --border-control: #3f4a59;
+  --surface-toggle: #1e293b;
   --chip-active-glow: oklch(0.70 0.15 162);
   --roulette-red: oklch(0.577 0.245 27.325);
   --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
@@ -353,7 +363,9 @@
 }
 
 .auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%);
+  background: linear-gradient(180deg,
+      var(--auth-surface-dim) 0%,
+      var(--auth-surface-light-dim) 100%);
   color: var(--auth-text);
   box-shadow: none;
   border-color: transparent;
@@ -367,6 +379,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #0a271a transparent;
   }
 
   body {
@@ -381,6 +395,24 @@
   button,
   [role='button'] {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0a271a 0%, var(--brand-green-from) 100%);
   }
 }
 
@@ -633,6 +665,52 @@
   background: linear-gradient(180deg, #1b1f26 0%, #2b303b 100%);
 }
 
+/* Fullscreen Game Mode: hide global chrome and let the active game fill the viewport */
+html:fullscreen .app-header,
+html:fullscreen .app-footer,
+html:fullscreen .app-bottom-nav,
+html:fullscreen [data-slot='sidebar'],
+html:fullscreen .bets-story {
+  display: none;
+}
+
+html:fullscreen .app-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .games-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .game-page {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  align-items: stretch;
+}
+
+html:fullscreen .game-layout {
+  max-width: none;
+  height: auto;
+  flex: 1 1 auto;
+  border-radius: 0;
+}
+
+html:fullscreen .game-settings-bar {
+  max-width: none;
+  border-radius: 0;
+}
+
+html:fullscreen .game-field-content {
+  justify-content: center;
+}
+
+html:fullscreen .game-field-content .roulette-table {
+  margin-top: 2rem;
+}
+
 /* Roulette Vector Glow */
 .roulette-vector-glow {
   position: absolute;
@@ -653,6 +731,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -683,9 +762,7 @@
 }
 
 .leaderboard-avatar-ring {
-  background: radial-gradient(
-    60.56% 60.56% at 50% 50%,
-    rgba(61, 108, 218, 0.4) 0%,
-    rgba(11, 42, 28, 0.4) 100%
-  );
+  background: radial-gradient(60.56% 60.56% at 50% 50%,
+      rgba(61, 108, 218, 0.4) 0%,
+      rgba(11, 42, 28, 0.4) 100%);
 }

@@ -25,7 +25,7 @@ export function Header() {
     <header
       role="banner"
       aria-label={ARIA_LABEL_HEADER}
-      className="fixed top-0 left-0 w-full h-16 bg-brand-bg border-b border-brand-border pl-[22px] pr-8 py-3 flex items-center justify-between gap-[15px] z-50 shrink-0"
+      className="app-header fixed top-0 left-0 w-full h-16 bg-brand-bg border-b border-brand-border pl-[22px] pr-8 py-3 flex items-center justify-between gap-[15px] z-50 shrink-0"
     >
       <div className="flex items-center gap-2 shrink-0">
         {isMobileOrTablet && !isSmallMobile && (
