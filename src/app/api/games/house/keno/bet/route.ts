@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 
+const KENO_BET_PATH = '/games/house/keno/bet';
+
 export async function POST(request: Request) {
   const body = await request.json();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/house/keno/bet`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${KENO_BET_PATH}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

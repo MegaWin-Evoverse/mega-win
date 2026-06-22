@@ -1,4 +1,7 @@
+import type { Risk } from '@/entities/game';
 import type { CellState } from './types';
+
+export const KENO_BET_ENDPOINT = '/api/games/house/keno/bet';
 
 export const TOTAL_NUMBERS = 40;
 export const DRAWN_COUNT = 20;
@@ -45,7 +48,7 @@ export const PAYOUT_COLS: Readonly<Record<number, string>> = {
   11: 'grid-cols-11',
 } as const;
 
-export const PAYOUTS_BY_RISK: Readonly<Record<string, readonly number[]>> = {
+export const PAYOUTS_BY_RISK: Readonly<Record<Risk, readonly number[]>> = {
   classic: [0, 0, 0, 1.4, 2.25, 4.5, 8, 17, 50, 80, 100],
   low: [0, 0, 1.1, 1.2, 1.3, 1.8, 3.5, 13, 50, 250, 1000],
   medium: [0, 0, 0, 1.6, 2, 4, 7, 26, 100, 500, 1000],

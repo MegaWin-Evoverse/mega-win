@@ -1,9 +1,8 @@
 'use client';
-import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
-import { useGameControlsStore, RISK } from '@/entities/game';
+import { useGameControlsStore, RISK, RISK_API_MAP } from '@/entities/game';
 import {
   MAX_PICKS,
   MIN_PICKS,
@@ -15,41 +14,37 @@ import {
   LABELS,
 } from './constants';
 import type { GamePhase, CellState, GameResult } from './types';
-import { kenoBet } from '../api/kenoBet';
+import { useKenoBetMutation } from '../api/useKenoBetMutation';
 
 interface UseKenoGameResult {
   phase: GamePhase;
-  selectedNumbers: Set<number>;
-  drawnNumbers: Set<number>;
   matchCount: number;
   winMultiplier: number;
   currentPayouts: readonly number[];
   currentChances: readonly number[];
   betAmount: number;
   isRevealing: boolean;
+  getCellState: (n: number) => CellState;
   handleNumberToggle: (n: number) => void;
   handlePlay: () => void;
   handleReset: () => void;
-  getCellState: (n: number) => CellState;
 }
 
 export function useKenoGame(): UseKenoGameResult {
-  const { storeBetAmount, storeRisk, setBetCallback } = useGameControlsStore(
+  const { storeBetAmount, storeRisk } = useGameControlsStore(
     useShallow((state) => ({
       storeBetAmount: state.betAmount,
       storeRisk: state.risk,
-      setBetCallback: state.setBetCallback,
     }))
   );
 
   const [gameResult, setGameResult] = useState<GameResult>('idle');
-  const [serverMultiplier, setServerMultiplier] = useState(0);
+  const [serverMultiplier, setServerMultiplier] = useState<number>(0);
   const [selectedNumbers, setSelectedNumbers] = useState<Set<number>>(new Set());
   const [allDrawnNumbers, setAllDrawnNumbers] = useState<Set<number>>(new Set());
   const [revealedNumbers, setRevealedNumbers] = useState<Set<number>>(new Set());
-  const [isRevealing, setIsRevealing] = useState(false);
+  const [isRevealing, setIsRevealing] = useState<boolean>(false);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const handlePlayRef = useRef<() => void>(() => {});
 
   const selectedCount = selectedNumbers.size;
 
@@ -65,7 +60,7 @@ export function useKenoGame(): UseKenoGameResult {
   const currentPayouts = useMemo<readonly number[]>(() => {
     if (selectedCount < MIN_PICKS) return [];
     const risk = storeRisk ?? RISK.CLASSIC;
-    return (PAYOUTS_BY_RISK[risk] ?? PAYOUTS_BY_RISK[RISK.CLASSIC]).slice(0, selectedCount + 1);
+    return PAYOUTS_BY_RISK[risk].slice(0, selectedCount + 1);
   }, [selectedCount, storeRisk]);
 
   const currentChances = useMemo<readonly number[]>(
@@ -83,20 +78,18 @@ export function useKenoGame(): UseKenoGameResult {
   }, [gameResult, selectedNumbers, allDrawnNumbers]);
 
   const winMultiplier = gameResult === 'idle' ? 0 : serverMultiplier;
-
   const betAmount = parseFloat(storeBetAmount) || 0;
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: kenoBet,
+  const { mutate, isPending } = useKenoBetMutation({
     onSuccess: (response) => {
-      const drawnArray = response.results.map((n) => n + 1);
-      const drawn = new Set(drawnArray);
+      const drawnArray = response.results.map((n: number) => n + 1);
+      const drawn = new Set<number>(drawnArray);
 
       setAllDrawnNumbers(drawn);
       setRevealedNumbers(new Set());
       setServerMultiplier(response.multiplier);
 
-      drawnArray.forEach((n, i) => {
+      drawnArray.forEach((n: number, i: number) => {
         const timeout = setTimeout(
           () => {
             setRevealedNumbers((prev) => {
@@ -127,7 +120,13 @@ export function useKenoGame(): UseKenoGameResult {
   });
 
   const handlePlay = useCallback(() => {
-    if (selectedNumbers.size < MIN_PICKS || isRevealing || isPending || gameResult !== 'idle') {
+    if (
+      selectedNumbers.size < MIN_PICKS ||
+      isRevealing ||
+      isPending ||
+      gameResult !== 'idle' ||
+      !Number.isFinite(parseFloat(storeBetAmount))
+    ) {
       return;
     }
 
@@ -138,20 +137,10 @@ export function useKenoGame(): UseKenoGameResult {
 
     mutate({
       betSize: parseFloat(storeBetAmount).toFixed(BET_DECIMALS),
-      risk: (storeRisk ?? RISK.CLASSIC).toUpperCase(),
+      risk: RISK_API_MAP[storeRisk ?? RISK.CLASSIC],
       selected: Array.from(selectedNumbers).map((n) => n - 1),
     });
   }, [selectedNumbers, isRevealing, isPending, gameResult, mutate, storeBetAmount, storeRisk]);
-
-  useLayoutEffect(() => {
-    handlePlayRef.current = handlePlay;
-  });
-
-  useEffect(() => {
-    const stableCallback = () => handlePlayRef.current();
-    setBetCallback(stableCallback);
-    return () => setBetCallback(null);
-  }, [setBetCallback]);
 
   const handleNumberToggle = useCallback(
     (n: number) => {
@@ -203,17 +192,15 @@ export function useKenoGame(): UseKenoGameResult {
 
   return {
     phase,
-    selectedNumbers,
-    drawnNumbers: allDrawnNumbers,
     matchCount,
     winMultiplier,
     currentPayouts,
     currentChances,
     betAmount,
     isRevealing,
+    getCellState,
     handleNumberToggle,
     handlePlay,
     handleReset,
-    getCellState,
   };
 }

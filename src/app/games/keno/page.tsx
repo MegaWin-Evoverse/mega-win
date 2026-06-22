@@ -1,12 +1,5 @@
-import { ControlPanel } from '@/widgets/control-panel';
-import { KenoGame } from '@/widgets/keno-game';
-import { GAME } from '@/entities/game';
+import { KenoPageClient } from './KenoPageClient';
 
 export default function Keno() {
-  return (
-    <div className="flex">
-      <ControlPanel game={GAME.KENO} />
-      <KenoGame />
-    </div>
-  );
+  return <KenoPageClient />;
 }
