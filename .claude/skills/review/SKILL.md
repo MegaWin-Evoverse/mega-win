@@ -50,6 +50,7 @@ For Zustand:
 - Component props — type named exactly `Props`
 - Empty `interface X extends Y {}` → `type X = Y`
 - `Record<string, ...>` for known union keys → `Record<UnionType, ...>`
+- **Type-only imports**: a statement importing ONLY types must use `import type { X } from '…'`, NOT inline `import { type X } from '…'`. The inline `type` qualifier is allowed ONLY when one statement mixes values and types (`import { value, type X }`). Flag every `import { type X } from …` that has no value import. Exception: CLI-managed `shared/ui` shadcn primitives.
 
 # 4. DRY
 
