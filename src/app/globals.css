@@ -154,6 +154,10 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-dice-thumb: var(--dice-thumb);
+  --color-dice-tooltip-win: var(--dice-tooltip-win);
+  --color-dice-tooltip-win-inner: var(--dice-tooltip-win-inner);
+  --color-dice-glow: var(--dice-glow);
   --color-coin-game: var(--coin-game);
   --color-coin-watch: var(--coin-watch);
 }
@@ -216,6 +220,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -258,18 +266,6 @@
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
   --chip-active-glow: oklch(0.7 0.15 162);
-  --border-control: #3f4a59;
-  --surface-toggle: #1e293b;
-  --chip-active-glow: oklch(0.70 0.15 162);
-  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
-  --bg-cell: var(--button-brand-bg-disabled);
-  --brand-red: oklch(0.55 0.22 25);
-  /* Roulette betting table */
-  --roulette-red: oklch(0.577 0.245 27.325);
-  /* #DC2626 */
-  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
-  /* rgba(63,74,89,0.5) */
-  --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
 .dark {
@@ -318,6 +314,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -446,7 +446,8 @@
   border-radius: 8px;
   border: 2px solid transparent;
   background:
-    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%) padding-box,
+    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%)
+      padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
   transition:
     background 0.15s ease-in-out,
@@ -460,16 +461,20 @@
 }
 
 .hero-banner-bg {
-  background: linear-gradient(84.47deg,
-      rgba(15, 22, 26, 0.94) 2.15%,
-      rgba(19, 21, 23, 0.94) 98.56%);
+  background: linear-gradient(
+    84.47deg,
+    rgba(15, 22, 26, 0.94) 2.15%,
+    rgba(19, 21, 23, 0.94) 98.56%
+  );
 }
 
 .hero-radial-glow {
-  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%,
-      rgba(48, 223, 140, 0.15) 0%,
-      rgba(33, 173, 107, 0.03) 50%,
-      rgba(13, 110, 64, 0) 91.23%);
+  background: radial-gradient(
+    78.35% 190.25% at 64.43% 30.64%,
+    rgba(48, 223, 140, 0.15) 0%,
+    rgba(33, 173, 107, 0.03) 50%,
+    rgba(13, 110, 64, 0) 91.23%
+  );
 }
 
 .hero-ellipse-glow {
@@ -514,17 +519,21 @@
 }
 
 .feature-glow-outer {
-  background: radial-gradient(ellipse at center,
-      rgba(49, 255, 76, 0.28) 0%,
-      rgba(49, 255, 76, 0.08) 50%,
-      transparent 85%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.28) 0%,
+    rgba(49, 255, 76, 0.08) 50%,
+    transparent 85%
+  );
 }
 
 .feature-glow-inner {
-  background: radial-gradient(ellipse at center,
-      rgba(49, 255, 76, 0.58) 0%,
-      rgba(49, 255, 76, 0.18) 45%,
-      transparent 75%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(49, 255, 76, 0.58) 0%,
+    rgba(49, 255, 76, 0.18) 45%,
+    transparent 75%
+  );
 }
 
 /* Promo Cards & Campaigns Section */
@@ -545,25 +554,31 @@
 }
 
 .promo-ellipse-6743-purple {
-  background: linear-gradient(359.14deg,
-      rgba(0, 255, 170, 0.7) 4.92%,
-      rgba(36, 166, 199, 0.7) 34.46%,
-      rgba(106, 0, 255, 0.7) 91.82%);
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.7) 4.92%,
+    rgba(36, 166, 199, 0.7) 34.46%,
+    rgba(106, 0, 255, 0.7) 91.82%
+  );
   filter: blur(124.719px);
 }
 
 .promo-ellipse-6744-purple {
-  background: linear-gradient(359.14deg,
-      rgba(43, 6, 162, 0.3) 4.92%,
-      rgba(106, 0, 255, 0.3) 91.82%);
+  background: linear-gradient(
+    359.14deg,
+    rgba(43, 6, 162, 0.3) 4.92%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
   filter: blur(116.555px);
 }
 
 .promo-ellipse-6742-purple {
-  background: linear-gradient(359.14deg,
-      rgba(0, 255, 170, 0.3) 4.92%,
-      rgba(36, 166, 199, 0.3) 34.46%,
-      rgba(106, 0, 255, 0.3) 91.82%);
+  background: linear-gradient(
+    359.14deg,
+    rgba(0, 255, 170, 0.3) 4.92%,
+    rgba(36, 166, 199, 0.3) 34.46%,
+    rgba(106, 0, 255, 0.3) 91.82%
+  );
   filter: blur(100px);
 }
 
@@ -626,9 +641,11 @@
 }
 
 .gs-sparkle {
-  background: radial-gradient(50% 50% at 50% 50%,
-      rgba(214, 189, 255, 0.5) 0%,
-      rgba(80, 91, 229, 0.5) 100%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(214, 189, 255, 0.5) 0%,
+    rgba(80, 91, 229, 0.5) 100%
+  );
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
 }
 

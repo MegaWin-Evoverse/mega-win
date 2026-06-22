@@ -25,6 +25,8 @@ export interface GameControlsState {
   stopOnProfit: string;
   stopOnLoss: string;
   isBetActive: boolean;
+  betCallback: (() => void) | null;
+  setBetCallback: (fn: (() => void) | null) => void;
   setTab: (tab: GamePanelTab) => void;
   setBetAmount: (value: string) => void;
   normalizeBetAmount: () => void;
@@ -55,6 +57,8 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   stopOnProfit: GAME_CONTROLS_DEFAULTS.STOP_ON_PROFIT,
   stopOnLoss: GAME_CONTROLS_DEFAULTS.STOP_ON_LOSS,
   isBetActive: false,
+  betCallback: null,
+  setBetCallback: (betCallback) => set({ betCallback }),
   setTab: (activeTab) => set({ activeTab }),
   setBetAmount: (value) => {
     if (value === '') {
