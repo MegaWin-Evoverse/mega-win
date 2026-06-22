@@ -12,7 +12,7 @@ interface Props {
 export function CopyInput({ label, value }: Props) {
   const [copied, setCopied] = useState<boolean>(false);
 
-  const handleCopy = async () => {
+  async function handleCopy() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
@@ -20,7 +20,7 @@ export function CopyInput({ label, value }: Props) {
     } catch (error) {
       console.error('Failed to copy to clipboard:', error);
     }
-  };
+  }
 
   return (
     <div className="flex flex-col gap-1 w-full">

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { FAIRNESS_LABELS } from '../model/constants';
 import { FairnessModal } from './FairnessModal';
 

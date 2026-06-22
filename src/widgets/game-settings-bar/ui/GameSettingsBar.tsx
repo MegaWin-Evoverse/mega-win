@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/cn';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { GameSettings } from '@/features/game-settings';
 import { ProvablyFair } from '@/features/fairness-verification';
 

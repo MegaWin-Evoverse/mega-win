@@ -1,4 +1,5 @@
 import { GAME, type Game } from '@/entities/game';
+import type { RuleStep } from './types';
 
 export const VOLUME_MIN = 0;
 export const VOLUME_MAX = 100;
@@ -15,11 +16,6 @@ export const GAME_SETTINGS_LABELS = {
   turboMode: 'Turbo Mode',
   maxBet: 'Max Bet',
 } as const;
-
-export interface RuleStep {
-  text: string;
-  subBullets?: string[];
-}
 
 export const GAME_RULES: Record<Game, RuleStep[]> = {
   [GAME.DICE]: [

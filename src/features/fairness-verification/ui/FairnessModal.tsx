@@ -4,14 +4,10 @@ import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/shared/ui/dialog';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Button } from '@/shared/ui/button';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { useFairnessQuery } from '../model/useFairnessQuery';
-import {
-  FAIRNESS_TAB,
-  FAIRNESS_TAB_ITEMS,
-  FAIRNESS_LABELS,
-  type FairnessTab,
-} from '../model/constants';
+import { FAIRNESS_TAB, FAIRNESS_TAB_ITEMS, FAIRNESS_LABELS } from '../model/constants';
+import type { FairnessTab } from '../model/types';
 import { FairnessSeedsTab } from './FairnessSeedsTab';
 import { FairnessVerifyTab } from './FairnessVerifyTab';
 
@@ -31,9 +27,9 @@ export function FairnessModal({ isOpen, onOpenChange, game }: Props) {
     refetch,
   } = useFairnessQuery(isOpen);
 
-  const rotateSeeds = () => {
+  function rotateSeeds() {
     refetch();
-  };
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>

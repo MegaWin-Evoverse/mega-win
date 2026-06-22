@@ -1,9 +1,9 @@
 import { Dices, Layers, Triangle, Compass } from 'lucide-react';
 import { GAME, type Game } from '@/entities/game';
-import { GAME_LABELS } from '../model/constants';
+import { GAME_LABELS } from './constants';
 
-export function getGameIcon(g: Game) {
-  switch (g) {
+export function getGameIcon(game: Game) {
+  switch (game) {
     case GAME.DICE:
       return <Dices className="w-5 h-5 text-current shrink-0" />;
     case GAME.KENO:
@@ -17,6 +17,6 @@ export function getGameIcon(g: Game) {
   }
 }
 
-export function getGameLabel(g: Game) {
-  return GAME_LABELS[g];
+export function getGameLabel(game: Game) {
+  return GAME_LABELS[game];
 }

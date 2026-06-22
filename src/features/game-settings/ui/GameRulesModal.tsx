@@ -1,7 +1,7 @@
 'use client';
 import { FileText } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/shared/ui/dialog';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { GAME_RULES, GAME_SETTINGS_LABELS } from '../model/constants';
 
 interface Props {

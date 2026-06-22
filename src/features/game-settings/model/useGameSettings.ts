@@ -10,7 +10,7 @@ export function useGameSettings() {
   const [maxBet, setMaxBet] = useState<boolean>(false);
   const [volume, setVolume] = useState<number[]>([DEFAULT_VOLUME]);
 
-  const toggleFullscreen = () => {
+  function toggleFullscreen() {
     if (!document.fullscreenElement) {
       document.documentElement
         .requestFullscreen()
@@ -25,12 +25,12 @@ export function useGameSettings() {
         setIsFullscreen(false);
       });
     }
-  };
+  }
 
   useEffect(() => {
-    const handleFullscreenChange = () => {
+    function handleFullscreenChange() {
       setIsFullscreen(!!document.fullscreenElement);
-    };
+    }
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);

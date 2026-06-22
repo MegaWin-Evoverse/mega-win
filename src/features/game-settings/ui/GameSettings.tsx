@@ -1,7 +1,7 @@
 'use client';
 import { Maximize2, Settings } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { Button } from '@/shared/ui/button';
 import { useGameSettings } from '../model/useGameSettings';
 import { GAME_SETTINGS_LABELS } from '../model/constants';

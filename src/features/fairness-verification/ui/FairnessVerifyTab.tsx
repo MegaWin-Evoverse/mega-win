@@ -3,9 +3,9 @@ import { useState, type ChangeEvent } from 'react';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { VERIFY_GAMES, DEFAULT_VERIFY_NONCE, FAIRNESS_LABELS } from '../model/constants';
-import { getGameIcon, getGameLabel } from '../lib/helpers';
+import { getGameIcon, getGameLabel } from '../model/helpers';
 
 interface Props {
   game: Game;

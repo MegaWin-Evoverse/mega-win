@@ -1,11 +1,10 @@
 import { GAME, type Game } from '@/entities/game';
+import { type FairnessTab } from './types';
 
 export const FAIRNESS_TAB = {
   SEEDS: 'seeds',
   VERIFY: 'verify',
 } as const;
-
-export type FairnessTab = (typeof FAIRNESS_TAB)[keyof typeof FAIRNESS_TAB];
 
 export const FAIRNESS_TAB_ITEMS: { value: FairnessTab; label: string }[] = [
   { value: FAIRNESS_TAB.SEEDS, label: 'Seeds' },
