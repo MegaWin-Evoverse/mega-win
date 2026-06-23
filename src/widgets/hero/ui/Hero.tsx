@@ -20,11 +20,11 @@ export function Hero({ onRegisterClick }: Props) {
     <section
       role="region"
       aria-label={ARIA_HERO_SECTION}
-      className="relative w-full min-h-[300px] flex flex-row items-center pt-[60px] pb-[40px] px-0 overflow-hidden rounded-none hero-banner-bg border-b border-brand-border shrink-0 select-none isolate"
+      className="relative w-full min-h-[300px] flex flex-col lg:flex-row items-center pt-[60px] lg:pb-[40px] px-0 overflow-hidden rounded-none hero-banner-bg border-b border-brand-border shrink-0 select-none isolate"
     >
-      <div className="w-full max-w-[1133px] mx-auto pl-4 pr-[530px] z-10 flex flex-col items-start gap-8">
-        <div className="flex flex-col items-start">
-          <h1 className="font-outfit text-4xl lg:text-5xl font-black uppercase leading-[60px] text-brand-text-white tracking-normal">
+      <div className="w-full max-w-[1133px] mx-auto px-4 lg:pl-4 lg:pr-[530px] z-10 flex flex-col items-center lg:items-start gap-8">
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <h1 className="font-outfit text-4xl lg:text-5xl font-black uppercase leading-[48px] lg:leading-[60px] text-brand-text-white tracking-normal">
             {HERO_TITLE}
           </h1>
           <p className="font-outfit text-lg font-normal leading-6 text-brand-text-light mt-2 max-w-[542px]">
@@ -46,12 +46,12 @@ export function Hero({ onRegisterClick }: Props) {
         className="absolute w-[725px] h-[218px] left-[calc(50%-362.5px+184px)] bottom-[-141px] hero-ellipse-glow z-0 pointer-events-none"
       />
       <Image
-        src="/hero/character.png"
+        src="/hero/character.webp"
         alt=""
         aria-hidden
         width={isMobile ? 650 : 480}
         height={isMobile ? 650 : 480}
-        className="absolute right-[-20px] md:right-[100px]  bottom-0 z-10 pointer-events-none object-contain object-bottom"
+        className="relative lg:absolute right-auto lg:right-[100px] bottom-0 z-10 pointer-events-none object-contain object-bottom mt-8 lg:mt-0 max-w-full h-auto"
         priority
       />
       <div className="absolute right-0 bottom-0 w-[763px] h-[303px] pointer-events-none z-0 overflow-hidden">
@@ -86,7 +86,7 @@ export function Hero({ onRegisterClick }: Props) {
           priority
         />
         <Image
-          src="/hero/Airbrush-1.svg"
+          src="/hero/airbrush-1.svg"
           alt=""
           width={77}
           height={82}
@@ -94,7 +94,7 @@ export function Hero({ onRegisterClick }: Props) {
           priority
         />
         <Image
-          src="/hero/Airbrush-2.png"
+          src="/hero/airbrush-2.webp"
           alt=""
           width={136}
           height={145}

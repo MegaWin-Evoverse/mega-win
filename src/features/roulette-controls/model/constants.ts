@@ -11,11 +11,11 @@ export const ROULETTE_LABELS = {
 } as const;
 
 export const MIN_AUTO_BET_COUNT = 1;
-// Pause between auto-bet spins (must stay below RESULT_OVERLAY_DURATION_MS so the
-// next spin starts before the result overlay auto-dismisses).
 export const AUTO_BET_DELAY_MS = 1200;
+export const AUTO_BET_DELAY_TURBO_MS = 400;
 
 export const RESULT_OVERLAY_DURATION_MS = 2000;
+export const RESULT_OVERLAY_DURATION_TURBO_MS = 700;
 
 export const ROULETTE_BET_PATH = '/api/games/house/roulette/bet';
 

@@ -1,4 +1,4 @@
-import { type ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ShoppingCart,
   Trophy,
@@ -10,7 +10,7 @@ import {
   Disc,
   type LucideProps,
 } from 'lucide-react';
-import { type IconName } from '../model/menu';
+import type { IconName } from '../model/menu';
 import { PlinkoIcon } from './PlinkoIcon';
 import { RouletteIcon } from './RouletteIcon';
 import { KenoIcon } from './KenoIcon';

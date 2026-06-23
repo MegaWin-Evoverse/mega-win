@@ -1,7 +1,8 @@
 'use client';
-import { type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { useTotalRewardsCounter } from '../model/useTotalRewardsCounter';
+import dollarIcon from '../assets/icons/dollar.svg';
 
 const DIGIT_VALUES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const DIGIT_HEIGHT = 40;
@@ -14,7 +15,7 @@ export function TotalRewardsCounter() {
       <div className="absolute left-0 top-1/2 -translate-y-1/2 origin-left scale-[0.523] sm:scale-[0.817] md:scale-[0.85] lg:scale-100 w-[487.19px] h-[80.48px] flex flex-row items-center py-3 pr-3 pl-5 gap-5 bg-page-bg rounded-xl select-none isolation-auto">
         <div className="flex items-center justify-center w-[23px] h-[40px] shrink-0 z-0">
           <Image
-            src="/total-rewards/$.svg"
+            src={dollarIcon}
             alt=""
             width={21}
             height={33}

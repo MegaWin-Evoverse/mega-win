@@ -1,10 +1,11 @@
 import { ROUTES } from '@/shared/config';
 import type { GameCardData } from './types';
+import puzzleIcon from '../assets/icons/puzzle.svg';
 
 export const GAME_CARDS_CONSTANTS = {
   SECTION_TITLE: 'Games',
   SECTION_ARIA_LABEL: 'Games catalog',
-  ICON_SRC: '/games-cards/puzle.svg',
+  ICON_SRC: puzzleIcon,
   ICON_WIDTH: 23,
   ICON_HEIGHT: 24,
   CARD_WIDTH: 268,

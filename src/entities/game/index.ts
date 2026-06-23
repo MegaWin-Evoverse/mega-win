@@ -2,6 +2,7 @@ export {
   GAME,
   type Game,
   RISK,
+  RISK_API_MAP,
   type Risk,
   type RiskOption,
   KENO_RISK_OPTIONS,

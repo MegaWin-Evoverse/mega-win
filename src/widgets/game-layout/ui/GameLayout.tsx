@@ -1,5 +1,4 @@
-import { type ReactNode } from 'react';
-
+import type { ReactNode } from 'react';
 import { cn } from '@/shared/lib/cn';
 
 interface Props {
@@ -12,7 +11,7 @@ export function GameLayout({ controls, gameField, className }: Props) {
   return (
     <div
       className={cn(
-        ' mx-auto flex w-full max-w-[1017px] flex-col overflow-hidden lg:h-[668px] lg:flex-row lg:rounded-[16px]',
+        'game-layout mx-auto flex w-full max-w-[1017px] flex-col overflow-hidden lg:h-[668px] lg:flex-row lg:rounded-[16px]',
         className
       )}
     >

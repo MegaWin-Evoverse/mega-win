@@ -2,8 +2,9 @@ import Image from 'next/image';
 import { Trophy } from 'lucide-react';
 
 import { cn } from '@/shared/lib/cn';
+import coinIcon from '@/shared/assets/icons/coin.svg';
 
-const COIN_ICON_SRC = '/icons/coin.svg';
+const COIN_ICON_SRC = coinIcon;
 const COIN_ICON_SIZE = 16;
 const RESULT_DECIMAL_PLACES = 2;
 const MULTIPLIER_SUFFIX = 'x';

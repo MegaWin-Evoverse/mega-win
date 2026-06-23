@@ -1,4 +1,4 @@
-import { type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { getChipStripe, type ChipNominal } from '@/entities/game';
 import { decomposeIntoChips } from '../model/chipStack';
 

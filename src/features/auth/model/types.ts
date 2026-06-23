@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { signInSchema, signUpSchema, verifyEmailSchema } from './schema';
+import type { z } from 'zod';
+import type { signInSchema, signUpSchema, verifyEmailSchema } from './schema';
 
 export type SignInSchema = z.infer<typeof signInSchema>;
 

@@ -1,2 +1,2 @@
 export { RouletteTable } from './ui/RouletteTable';
-export { getNumberColor } from './model/rouletteLayout';
+export { ROULETTE_ROWS, getNumberColor } from './model/rouletteLayout';

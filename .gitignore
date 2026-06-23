@@ -47,3 +47,10 @@ REVIEW.md
 
 # Local feature explainer (not part of PR)
 ROULETTE-FEATURE-EXPLAINED.md
+
+# Subagent-driven-development scratch (ledger, task briefs/reports, diff packages)
+.superpowers/
+
+# Superpowers specs/plans — local working docs, not part of the PR (.claude/docs/ covers project docs)
+# Local design specs (not part of PR)
+docs/superpowers/

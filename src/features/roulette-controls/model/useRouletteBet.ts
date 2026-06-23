@@ -3,9 +3,12 @@ import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
+import { getTurboValue } from '@/shared/lib/getTurboValue';
 import { useGameControlsStore, selectIsAutoMode } from '@/entities/game';
+import { useTurboModeStore } from '@/features/game-settings';
 import {
   AUTO_BET_DELAY_MS,
+  AUTO_BET_DELAY_TURBO_MS,
   BET_ERROR_MESSAGES,
   HTTP_UNAUTHORIZED,
   MIN_AUTO_BET_COUNT,
@@ -34,6 +37,7 @@ export function useRouletteBet() {
   const decrementAutoBet = useRouletteStore((state) => state.decrementAutoBet);
   const stopAutoBet = useRouletteStore((state) => state.stopAutoBet);
   const startAutoBet = useRouletteStore((state) => state.startAutoBet);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
   const { minBet, maxBet } = useRouletteConfig();
 
   const { mutate } = useMutation({
@@ -55,8 +59,6 @@ export function useRouletteBet() {
         position: data.randomPosition,
       });
       setSpinning(false);
-      // Bets always remain on the table after a spin so they can be repeated or adjusted;
-      // the user can manually clear them anytime using the Clear button.
     },
     onError: (error) => {
       setSpinning(false);
@@ -117,8 +119,6 @@ export function useRouletteBet() {
     startAuto();
   }
 
-  // Drive the auto-bet loop: each spin settles (betResult set) -> after a short pause,
-  // either start the next spin (bets stay on the table) or finish the sequence.
   useEffect(() => {
     if (!isAutoRunning || !betResult) return;
 
@@ -128,10 +128,11 @@ export function useRouletteBet() {
       return;
     }
 
+    const delay = getTurboValue(turboMode, AUTO_BET_DELAY_MS, AUTO_BET_DELAY_TURBO_MS);
     const timer = setTimeout(() => {
       decrementAutoBet();
       mutate();
-    }, AUTO_BET_DELAY_MS);
+    }, delay);
 
     return () => clearTimeout(timer);
   }, [
@@ -142,6 +143,7 @@ export function useRouletteBet() {
     stopAutoBet,
     clearTable,
     mutate,
+    turboMode,
   ]);
 
   const autoBetLabel = isAutoRunning

@@ -28,6 +28,8 @@ export interface GameControlsState {
   applyBet: (amount: number) => void;
   applyWin: (amount: number) => void;
   setBalance: (balance: number) => void;
+  betCallback: (() => void) | null;
+  setBetCallback: (fn: (() => void) | null) => void;
   setTab: (tab: GamePanelTab) => void;
   setBetAmount: (value: string) => void;
   normalizeBetAmount: () => void;
@@ -61,6 +63,8 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   applyBet: (amount) => set((state) => ({ balance: Math.max(0, state.balance - amount) })),
   applyWin: (amount) => set((state) => ({ balance: state.balance + amount })),
   setBalance: (balance) => set({ balance }),
+  betCallback: null,
+  setBetCallback: (betCallback) => set({ betCallback }),
   setTab: (activeTab) => set({ activeTab }),
   setBetAmount: (value) => {
     if (value === '') {
