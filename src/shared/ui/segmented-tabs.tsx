@@ -1,5 +1,6 @@
 'use client';
-import { type CSSProperties, type ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { useSegmentedIndicator } from '@/shared/hooks/useSegmentedIndicator';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 
@@ -22,10 +23,7 @@ export function SegmentedTabs<T extends string>({
   onValueChange,
   className,
 }: Props<T>) {
-  const activeIndex = Math.max(
-    0,
-    items.findIndex((item) => item.value === value)
-  );
+  const { indicator, registerTab } = useSegmentedIndicator(value, items.length);
 
   return (
     <div
@@ -33,34 +31,36 @@ export function SegmentedTabs<T extends string>({
         'relative flex w-full items-center rounded-[12px] bg-bg-primary p-2',
         className
       )}
-      style={
-        {
-          '--tab-count': items.length,
-          '--active-index': activeIndex,
-        } as CSSProperties
-      }
     >
-      <span
-        aria-hidden="true"
-        className="game-tab-active pointer-events-none absolute top-2 bottom-2 left-2 w-[calc((100%-1rem)/var(--tab-count))] translate-x-[calc(var(--active-index)*100%)] rounded-lg transition-transform duration-300 ease-out"
-      />
+      {indicator && (
+        <span
+          aria-hidden="true"
+          className="game-tab-active pointer-events-none absolute top-2 bottom-2 left-(--ind-left) w-(--ind-width) rounded-lg transition-[left,width] duration-300 ease-out"
+          style={
+            {
+              '--ind-left': `${indicator.left}px`,
+              '--ind-width': `${indicator.width}px`,
+            } as CSSProperties
+          }
+        />
+      )}
       {items.map((item) => {
         const isActive = item.value === value;
-
         return (
-          <Button
-            key={item.value}
-            variant="tab"
-            size="none"
-            aria-pressed={isActive}
-            onClick={() => onValueChange(item.value)}
-            className={cn(
-              'relative z-10 h-11 flex-1 rounded-lg px-4 py-3 font-outfit text-base font-medium leading-5 text-brand-text-light aria-pressed:text-brand-text-white',
-              item.className
-            )}
-          >
-            {item.label}
-          </Button>
+          <span key={item.value} ref={registerTab(item.value)} className="relative z-10 flex-1">
+            <Button
+              variant="tab"
+              size="none"
+              aria-pressed={isActive}
+              onClick={() => onValueChange(item.value)}
+              className={cn(
+                'h-11 w-full rounded-lg px-4 py-3 font-outfit text-base font-medium leading-5 text-brand-text-light aria-pressed:text-brand-text-white',
+                item.className
+              )}
+            >
+              {item.label}
+            </Button>
+          </span>
         );
       })}
     </div>

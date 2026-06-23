@@ -14,7 +14,7 @@ export default function GamesPage() {
       <GamesHero />
       <div className="w-full max-w-[900px] mx-auto px-4 flex flex-col gap-8">
         <GameCardsGrid columns={2} variant="wide" />
-        <BetsStory />
+        <BetsStory showLiveTitle />
         <FAQ />
       </div>
     </main>
