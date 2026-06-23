@@ -509,15 +509,6 @@
   background-size: auto, cover, cover;
 }
 
-.games-hero-bg {
-  background-image:
-    linear-gradient(180deg, rgba(10, 8, 14, 0.55) 0%, rgba(10, 8, 14, 0.85) 100%),
-    url('/games/hero-bg.webp');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-}
-
 .feature-glow-outer {
   background: radial-gradient(
     ellipse at center,
