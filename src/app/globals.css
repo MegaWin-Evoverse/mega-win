@@ -461,12 +461,20 @@
 }
 
 .games-hero-bg {
-  background-image:
-    linear-gradient(180deg, rgba(10, 8, 14, 0.55) 0%, rgba(10, 8, 14, 0.85) 100%),
-    url('/games/hero-bg.webp');
+  background-image: url('/games/hero-bg.webp');
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
+}
+
+.games-hero-glow {
+  background: linear-gradient(
+    180deg,
+    rgba(108, 31, 178, 0.1) 0%,
+    rgba(108, 31, 178, 0.06) 35%,
+    rgba(108, 31, 178, 0.02) 70%,
+    rgba(108, 31, 178, 0) 100%
+  );
 }
 
 .feature-glow-outer {

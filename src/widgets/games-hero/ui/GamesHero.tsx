@@ -5,9 +5,13 @@ export function GamesHero() {
     <section
       role="region"
       aria-label={GAMES_HERO_CONSTANTS.SECTION_ARIA_LABEL}
-      className="games-hero-bg relative w-full flex flex-col items-center px-4 pt-16 pb-12"
+      className="games-hero-bg relative w-full flex flex-col items-center px-4 pt-8 pb-12"
     >
-      <div className="w-full max-w-[1133px] mx-auto flex flex-col items-center gap-4 text-center">
+      <div
+        aria-hidden
+        className="games-hero-glow absolute inset-x-0 top-0 h-[650px] pointer-events-none"
+      />
+      <div className="relative w-full max-w-[1133px] mx-auto flex flex-col items-center gap-4 text-center">
         <h1 className="flex w-full flex-col items-center">
           <span className="font-outfit text-[40px] font-black uppercase leading-[48px] text-promo-purple">
             {GAMES_HERO_CONSTANTS.TITLE_LINE_1}
