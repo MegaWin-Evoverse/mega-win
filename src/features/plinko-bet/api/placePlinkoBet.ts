@@ -1,11 +1,7 @@
 import { api } from '@/shared/api/client';
 import { toApiRisk } from '@/entities/game';
 import { PLINKO_BET_URL } from '../model/constants';
-import {
-  type PlacePlinkoBetArgs,
-  type PlinkoBetPayload,
-  type PlinkoBetResult,
-} from '../model/types';
+import type { PlacePlinkoBetArgs, PlinkoBetPayload, PlinkoBetResult } from '../model/types';
 
 export async function placePlinkoBet({
   betSize,

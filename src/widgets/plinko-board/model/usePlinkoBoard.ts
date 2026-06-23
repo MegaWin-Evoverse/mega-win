@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { getBucketIndex } from '@/entities/game';
-import { type PlinkoDrop } from '@/features/plinko-bet';
+import type { PlinkoDrop } from '@/features/plinko-bet';
 import { BOARD, CSS_VAR } from './constants';
 import { getBoardLayout, getPegPositions } from './geometry';
-import { type BallFrame, type PegHit } from './physics';
+import type { BallFrame, PegHit } from './physics';
 import { solveTrajectory } from './solver';
 
 interface ActiveBall {

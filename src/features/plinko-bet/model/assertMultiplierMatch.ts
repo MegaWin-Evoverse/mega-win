@@ -1,5 +1,5 @@
 import { getBucketIndex, PLINKO_MULTIPLIERS, type Risk } from '@/entities/game';
-import { type PlinkoBetResult } from './types';
+import type { PlinkoBetResult } from './types';
 
 export function assertMultiplierMatch(data: PlinkoBetResult, rows: number, risk: Risk): void {
   if (process.env.NODE_ENV === 'production') return;

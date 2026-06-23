@@ -1,6 +1,6 @@
 import { MULTIPLIER_TIER, type MultiplierTier } from '@/entities/game';
 import { cn } from '@/shared/lib/cn';
-import { type PlinkoHistoryEntry } from '../model/types';
+import type { PlinkoHistoryEntry } from '../model/types';
 
 interface Props {
   history: PlinkoHistoryEntry[];

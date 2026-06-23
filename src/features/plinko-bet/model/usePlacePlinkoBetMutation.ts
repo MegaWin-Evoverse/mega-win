@@ -8,7 +8,7 @@ import {
 } from '@/entities/game';
 import { placePlinkoBet } from '../api/placePlinkoBet';
 import { assertMultiplierMatch } from './assertMultiplierMatch';
-import { type PlacePlinkoBetArgs, type PlinkoBetResult, type PlinkoDrop } from './types';
+import type { PlacePlinkoBetArgs, PlinkoBetResult, PlinkoDrop } from './types';
 
 interface UsePlacePlinkoBetMutationArgs {
   rows: number;

@@ -1,4 +1,4 @@
-import { type MultiplierTier, type Risk } from '@/entities/game';
+import type { MultiplierTier, Risk } from '@/entities/game';
 
 export interface PlinkoBetPayload {
   betSize: number;

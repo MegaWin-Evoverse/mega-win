@@ -6,7 +6,7 @@ import { useGameControlsStore, type GameControlsState } from '@/entities/game';
 import { useUserQuery, BALANCE_TYPE, type User } from '@/entities/user';
 import { usePlacePlinkoBetMutation } from './usePlacePlinkoBetMutation';
 import { PLINKO_BET_ERROR_MESSAGE, PLINKO_HISTORY_LIMIT, PLINKO_LABELS } from './constants';
-import { type PlinkoDrop, type PlinkoHistoryEntry } from './types';
+import type { PlinkoDrop, PlinkoHistoryEntry } from './types';
 
 interface AutoBetProgress {
   current: number;
