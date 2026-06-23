@@ -370,24 +370,6 @@
   background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
 }
 
-@utility bg-auth-btn-social {
-  background: linear-gradient(180deg, var(--auth-surface) 0%, var(--auth-surface-light) 100%);
-}
-
-.auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg,
-      var(--auth-surface-dim) 0%,
-      var(--auth-surface-light-dim) 100%);
-  color: var(--auth-text);
-  box-shadow: none;
-  border-color: transparent;
-}
-
-.auth-tabs-nav [data-slot='tabs-trigger']:not([data-active]) {
-  background: transparent;
-  color: var(--auth-text-secondary);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

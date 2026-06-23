@@ -1,9 +1,10 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
-import type { User } from '@/entities/user';
+import { LOGOUT_PATH } from '@/shared/api/constants';
 import { LOGOUT_ERROR } from './constants';
 
 interface UseUserPanelResult {
@@ -13,11 +14,14 @@ interface UseUserPanelResult {
 
 export function useUserPanel(): UseUserPanelResult {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { mutate: logout, isPending: isLoggingOut } = useMutation({
-    mutationFn: () => api.post('/api/auth/logout'),
+    mutationFn: () => api.post(LOGOUT_PATH),
     onSuccess: () => {
-      queryClient.setQueryData<User | undefined>(QUERY_KEYS.currentUser, undefined);
+      queryClient.removeQueries({ queryKey: QUERY_KEYS.currentUser });
+      queryClient.clear();
+      router.refresh();
     },
     onError: () => {
       toast.error(LOGOUT_ERROR);
