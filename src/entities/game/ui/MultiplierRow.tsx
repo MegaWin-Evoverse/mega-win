@@ -1,10 +1,6 @@
-import {
-  getMultiplierColorTier,
-  MULTIPLIER_TIER,
-  type MultiplierTier,
-  type LandedBucket,
-} from '../model/plinkoHelpers';
 import { cn } from '@/shared/lib/cn';
+import { MULTIPLIER_TIER, type MultiplierTier } from '../model/constants';
+import { getMultiplierColorTier, type LandedBucket } from '../model/plinkoHelpers';
 
 interface Props {
   multipliers: readonly number[];
