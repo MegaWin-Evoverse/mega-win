@@ -13,3 +13,7 @@ export const QUERY_KEYS = {
   fairnessSeed: ['fairness-seed'],
   rewards: (params: string) => ['rewards', params],
 } as const;
+
+export const DAILY_CLAIM_QUERY_KEYS = {
+  status: ['daily-claim', 'status'] as const,
+};
