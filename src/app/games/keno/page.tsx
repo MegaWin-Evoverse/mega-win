@@ -1,6 +1,5 @@
-import { ControlPanel } from '@/widgets/control-panel';
-import { GAME } from '@/entities/game';
+import { KenoPageClient } from './KenoPageClient';
 
-export default function KenoPage() {
-  return <ControlPanel game={GAME.KENO} />;
+export default function Keno() {
+  return <KenoPageClient />;
 }

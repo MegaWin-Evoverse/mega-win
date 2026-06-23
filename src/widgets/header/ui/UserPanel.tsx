@@ -12,7 +12,7 @@ export function UserPanel({ user }: Props) {
   const { logout, isLoggingOut } = useUserPanel();
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex min-w-0 items-center gap-2">
       <BalanceMenu balances={user.userBalances} />
       <UserMenu user={user} onLogout={logout} isLoggingOut={isLoggingOut} />
     </div>

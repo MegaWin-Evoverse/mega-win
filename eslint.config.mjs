@@ -20,6 +20,11 @@ const eslintConfig = defineConfig([
     rules: {
       'prettier/prettier': 'error',
       'react-compiler/react-compiler': 'error',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
+      ],
+      '@typescript-eslint/no-import-type-side-effects': 'error',
     },
   },
   {

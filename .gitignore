@@ -52,4 +52,5 @@ ROULETTE-FEATURE-EXPLAINED.md
 .superpowers/
 
 # Superpowers specs/plans — local working docs, not part of the PR (.claude/docs/ covers project docs)
+# Local design specs (not part of PR)
 docs/superpowers/

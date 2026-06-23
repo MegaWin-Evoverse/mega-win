@@ -1,9 +1,9 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
 }
 
 export default function GamesLayout({ children }: Props) {
-  return <div className="pt-8 pb-10">{children}</div>;
+  return <div className="games-shell pt-8 pb-10">{children}</div>;
 }
