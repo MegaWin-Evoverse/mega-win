@@ -11,7 +11,7 @@ export function ActiveCampaigns({ className }: Props) {
     <section
       aria-label={CAMPAIGN_CONSTANTS.SECTION_ARIA_LABEL}
       className={cn(
-        'w-full flex flex-col xl:flex-row gap-4 items-center justify-between',
+        'w-full flex flex-col md:flex-row gap-4 items-center justify-between',
         className
       )}
     >
