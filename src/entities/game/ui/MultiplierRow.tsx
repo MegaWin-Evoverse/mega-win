@@ -1,6 +1,10 @@
-import { getMultiplierColorTier, MULTIPLIER_TIER, type MultiplierTier } from '@/entities/game';
+import {
+  getMultiplierColorTier,
+  MULTIPLIER_TIER,
+  type MultiplierTier,
+  type LandedBucket,
+} from '../model/plinkoHelpers';
 import { cn } from '@/shared/lib/cn';
-import type { LandedBucket } from '../model/usePlinkoBoard';
 
 interface Props {
   multipliers: readonly number[];

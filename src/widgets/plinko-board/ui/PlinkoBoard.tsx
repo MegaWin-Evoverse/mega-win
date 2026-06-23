@@ -1,7 +1,7 @@
 'use client';
 import { BetHistory, type PlinkoDrop, type PlinkoHistoryEntry } from '@/features/plinko-bet';
+import { MultiplierRow } from '@/entities/game';
 import { usePlinkoBoard } from '../model/usePlinkoBoard';
-import { MultiplierRow } from './MultiplierRow';
 
 interface Props {
   rows: number;

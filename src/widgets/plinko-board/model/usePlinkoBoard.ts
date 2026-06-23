@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState, type RefObject } from 'react';
-import { getBucketIndex } from '@/entities/game';
+import { getBucketIndex, type LandedBucket } from '@/entities/game';
 import type { PlinkoDrop } from '@/features/plinko-bet';
 import { BOARD, CSS_VAR } from './constants';
 import { getBoardLayout, getPegPositions } from './geometry';
@@ -15,11 +15,6 @@ interface ActiveBall {
   pegHits: PegHit[];
   frameCursor: number;
   nextHitIndex: number;
-}
-
-export interface LandedBucket {
-  bucket: number;
-  hitAt: number;
 }
 
 interface UsePlinkoBoardArgs {

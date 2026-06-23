@@ -13,7 +13,6 @@ export {
   CHIP_STRIPES,
   getChipStripe,
   GAME_CONTROLS_DEFAULTS,
-  RISK_API_MAP,
   MULTIPLIER_TIER,
   type MultiplierTier,
 } from './model/constants';
@@ -21,3 +20,5 @@ export { useGameControlsStore, type GameControlsState } from './model/store';
 export { selectIsAutoMode, selectProfitOnWin } from './model/selectors';
 export { PLINKO_MULTIPLIERS } from './model/plinkoMultipliers';
 export { getBucketIndex, getMultiplierColorTier, toApiRisk } from './model/plinkoHelpers';
+export type { LandedBucket } from './model/plinkoHelpers';
+export { MultiplierRow } from './ui/MultiplierRow';

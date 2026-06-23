@@ -1,5 +1,10 @@
 import { type Risk, RISK_API_MAP, MULTIPLIER_TIER, type MultiplierTier } from './constants';
 
+export interface LandedBucket {
+  bucket: number;
+  hitAt: number;
+}
+
 const TIER_BY_DISTANCE: readonly MultiplierTier[] = [
   MULTIPLIER_TIER.GREEN,
   MULTIPLIER_TIER.YELLOW,
