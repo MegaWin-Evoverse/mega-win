@@ -28,7 +28,7 @@ export function HistoryFilter({ activeGame, onGameChange }: Props) {
           >
             <GameIcon
               name={filter.iconName}
-              className={cn(isActive && filter.value === 'all' && 'text-yellow-400')}
+              className={cn(isActive && filter.value === 'all' && 'text-filter-icon-all')}
             />
             {filter.label}
           </Button>

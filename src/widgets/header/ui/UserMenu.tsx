@@ -13,9 +13,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 import type { User } from '@/entities/user';
 import { ROUTES } from '@/shared/config';
-import { USER_MENU_ITEMS, LOGOUT_LABEL } from '../model/constants';
-
-const PROFILE_LABEL = 'Profile';
+import { USER_MENU_ITEMS, LOGOUT_LABEL, PROFILE_LABEL } from '../model/constants';
 
 interface Props {
   user: User;

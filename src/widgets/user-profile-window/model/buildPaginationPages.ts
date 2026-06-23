@@ -1,8 +1,11 @@
-export function buildPaginationPages(current: number, total: number): (number | 'ellipsis')[] {
-  const paginationEdge = 1;
-  const paginationSiblings = 2;
+import {
+  BETS_PAGINATION_EDGE,
+  BETS_PAGINATION_THRESHOLD,
+  BETS_PAGINATION_WINDOW,
+} from './constants';
 
-  if (total <= 7) {
+export function buildPaginationPages(current: number, total: number): (number | 'ellipsis')[] {
+  if (total <= BETS_PAGINATION_THRESHOLD) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
@@ -10,13 +13,13 @@ export function buildPaginationPages(current: number, total: number): (number | 
   const left = new Set<number>();
   const right = new Set<number>();
 
-  for (let i = 1; i <= paginationEdge; i++) left.add(i);
+  for (let i = 1; i <= BETS_PAGINATION_EDGE; i++) left.add(i);
 
-  for (let i = total - paginationEdge + 1; i <= total; i++) right.add(i);
+  for (let i = total - BETS_PAGINATION_EDGE + 1; i <= total; i++) right.add(i);
 
   for (
-    let i = Math.max(1, current - paginationSiblings);
-    i <= Math.min(total, current + paginationSiblings);
+    let i = Math.max(1, current - BETS_PAGINATION_WINDOW);
+    i <= Math.min(total, current + BETS_PAGINATION_WINDOW);
     i++
   ) {
     if (!left.has(i) && !right.has(i)) pages.push(i);

@@ -84,6 +84,12 @@ export const GAME_FILTERS = [
   { value: 'Dice', label: 'Dice', iconName: 'dice' as const },
 ];
 
+export const GAME_ICON_SRC: Partial<Record<'roulette' | 'keno' | 'plinko', string>> = {
+  roulette: '/games-cards/roulette.webp',
+  keno: '/games-cards/keno.webp',
+  plinko: '/games-cards/plinko.webp',
+};
+
 export const BETS_TABLE_COLUMNS = {
   USER: 'User',
   GAME: 'Game',
@@ -94,6 +100,8 @@ export const BETS_TABLE_COLUMNS = {
 } as const;
 
 export const BETS_PAGINATION_WINDOW = 2;
+export const BETS_PAGINATION_EDGE = 1;
+export const BETS_PAGINATION_THRESHOLD = 7;
 
 export const PRIVATE_MODE_SWITCH_ID = 'private-mode-switch';
 
@@ -113,9 +121,9 @@ export const DATE_FORMAT = new Intl.DateTimeFormat('en-GB', {
 });
 
 export const LABEL_COLOR: Record<CryptoWalletKey, string> = {
-  btcAddress: 'text-orange-400',
-  ethAddress: 'text-blue-400',
-  ltcAddress: 'text-purple-400',
+  btcAddress: 'text-crypto-btc',
+  ethAddress: 'text-crypto-eth',
+  ltcAddress: 'text-crypto-ltc',
 };
 
 export const HEAD_CLASS = 'h-11 px-4 py-3 text-xs text-muted-foreground font-normal';

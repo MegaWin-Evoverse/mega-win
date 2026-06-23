@@ -1,5 +1,6 @@
 'use client';
 import { Pencil, Check, X } from 'lucide-react';
+import { cn } from '@/shared/lib/cn';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
 import {
@@ -37,7 +38,7 @@ export function CryptoWalletInput({
 }: Props) {
   return (
     <div className="flex items-center gap-2 rounded-xl border border-border bg-bg-primary px-3 py-2 flex-1 min-w-0">
-      <span className={`text-xs font-bold shrink-0 ${LABEL_COLOR[walletKey]}`}>{label}</span>
+      <span className={cn('text-xs font-bold shrink-0', LABEL_COLOR[walletKey])}>{label}</span>
       <Input
         className="h-7 border-0 bg-transparent px-0 text-xs focus-visible:ring-0 min-w-0"
         placeholder={placeholder}

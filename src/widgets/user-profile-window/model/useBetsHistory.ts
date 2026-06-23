@@ -14,8 +14,14 @@ export function useBetsHistory() {
 
   const filteredBets = useMemo(() => {
     const all = bets?.data ?? [];
-    const filtered =
-      activeGame === GAME_FILTER_ALL ? all : all.filter((b) => b.gameName === activeGame);
+    const query = searchQuery.toLowerCase();
+
+    const filtered = all.filter((b) => {
+      if (activeGame !== GAME_FILTER_ALL && b.gameName !== activeGame) return false;
+      if (query && !b.gameName.toLowerCase().includes(query) && !b.betSize.includes(query))
+        return false;
+      return true;
+    });
 
     return [...filtered].sort((a, b) => {
       if (activeSort === 'win') {
@@ -24,7 +30,7 @@ export function useBetsHistory() {
 
       return new Date(b.settledAt).getTime() - new Date(a.settledAt).getTime();
     });
-  }, [bets, activeGame, activeSort]);
+  }, [bets, activeGame, activeSort, searchQuery]);
 
   const totalPages = bets?.totalPages ?? 1;
 

@@ -16,6 +16,7 @@ export const USER_MENU_ITEMS: UserMenuItem[] = [
   { label: 'Seed history', href: ROUTES.SEED_HISTORY, icon: Shield },
 ];
 
+export const PROFILE_LABEL = 'Profile';
 export const LOGOUT_LABEL = 'Logout';
 export const BALANCE_HEADER = 'Points Balance';
 export const EXCHANGE_LABEL = 'Exchange Points';

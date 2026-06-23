@@ -76,7 +76,7 @@ export function HistoryTab({ user }: Props) {
 
       <div className="overflow-x-auto">
         {filteredBets.length > 0 ? (
-          <HistoryTable bets={filteredBets} user={user} searchQuery={searchQuery} />
+          <HistoryTable bets={filteredBets} user={user} />
         ) : (
           <div className="py-12 text-center text-sm text-muted-foreground">No bets found</div>
         )}

@@ -11,18 +11,9 @@ import type { User } from '@/entities/user';
 interface Props {
   bets: MyBet[];
   user: User;
-  searchQuery: string;
 }
 
-export function HistoryTable({ bets, user, searchQuery }: Props) {
-  const query = searchQuery.toLowerCase();
-
-  const filtered = query
-    ? bets.filter(
-        (bet) => bet.gameName.toLowerCase().includes(query) || bet.betSize.includes(query)
-      )
-    : bets;
-
+export function HistoryTable({ bets, user }: Props) {
   return (
     <Table>
       <TableHeader className="[&_tr]:border-0">
@@ -37,7 +28,7 @@ export function HistoryTable({ bets, user, searchQuery }: Props) {
       </TableHeader>
 
       <TableBody className="[&_tr:last-child]:border-0">
-        {filtered.map((bet) => (
+        {bets.map((bet) => (
           <TableRow key={bet.id} className="border-0 odd:bg-bg-primary">
             <TableCell className={CELL_CLASS}>
               <div className="flex items-center gap-2">
