@@ -118,6 +118,10 @@
   --color-total-rewards-glow: var(--total-rewards-glow);
   --color-feature-overlay: var(--feature-overlay);
   --color-brand-btn-gradient-to: var(--brand-btn-gradient-to);
+  --color-keno-cell-border: var(--keno-cell-border);
+  --color-keno-payout-from: var(--keno-payout-from);
+  --color-keno-payout-to: var(--keno-payout-to);
+  --color-keno-glow: var(--keno-glow);
   --color-promo-purple: var(--promo-purple);
   --color-promo-red: var(--promo-red);
   --color-gs-media: var(--gs-media);
@@ -132,6 +136,8 @@
   --color-risk-medium: var(--risk-medium);
   --color-risk-high: var(--risk-high);
   --color-chip-active-glow: var(--chip-active-glow);
+  --color-border-control: var(--border-control);
+  --color-surface-toggle: var(--surface-toggle);
   --color-button-brand-bg-disabled: var(--button-brand-bg-disabled);
   --color-bg-cell: var(--bg-cell);
   --color-brand-red: var(--brand-red);
@@ -148,6 +154,10 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-dice-thumb: var(--dice-thumb);
+  --color-dice-tooltip-win: var(--dice-tooltip-win);
+  --color-dice-tooltip-win-inner: var(--dice-tooltip-win-inner);
+  --color-dice-glow: var(--dice-glow);
   --color-coin-game: var(--coin-game);
   --color-coin-watch: var(--coin-watch);
 }
@@ -191,6 +201,10 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-from: #0a271a;
+  --keno-payout-to: #39b17d;
+  --keno-glow: rgba(51, 160, 113, 0.5);
   --promo-purple: #7e22ce;
   --promo-red: #dc2626;
   --gs-media: #09051a;
@@ -206,6 +220,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --logo-shadow: oklch(0 0 0 / 80%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -241,20 +259,13 @@
   --sidebar-ring: oklch(0.708 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
-  --chip-active-glow: oklch(0.70 0.15 162);
-  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
-  --bg-cell: var(--button-brand-bg-disabled);
-  --brand-red: oklch(0.55 0.22 25);
-  /* Roulette betting table */
-  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
-  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
-  --roulette-chip-glow: oklch(1 0 0 / 0.4);
+  --chip-active-glow: oklch(0.7 0.15 162);
 }
 
 .dark {
@@ -284,6 +295,10 @@
   --feature-overlay: #131517;
   --brand-btn-gradient-to: #2b303b;
   --feature-btn-glow: rgba(34, 197, 94, 0.3);
+  --keno-cell-border: rgba(63, 74, 89, 0.5);
+  --keno-payout-from: #0a271a;
+  --keno-payout-to: #39b17d;
+  --keno-glow: rgba(51, 160, 113, 0.5);
   --promo-purple: #7e22ce;
   --promo-red: #dc2626;
   --gs-media: #09051a;
@@ -299,6 +314,10 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --dice-thumb: #3f4a59;
+  --dice-tooltip-win: #1db901;
+  --dice-tooltip-win-inner: #0e0f13;
+  --dice-glow: rgba(51, 160, 113, 0.5);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -332,12 +351,15 @@
   --sidebar-ring: oklch(0.556 0 0);
   --button-brand-bg-dark: oklch(0.38 0.12 155);
   --surface-inset: oklch(0.16 0.02 263);
-  --chip-text-muted: oklch(0.50 0.02 265);
+  --chip-text-muted: oklch(0.5 0.02 265);
   --btn-disabled-bg: oklch(0.34 0.03 255);
-  --risk-classic: oklch(0.62 0.20 255);
+  --risk-classic: oklch(0.62 0.2 255);
   --risk-low: oklch(0.62 0.16 145);
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
+  --chip-active-glow: oklch(0.7 0.15 162);
+  --border-control: #3f4a59;
+  --surface-toggle: #1e293b;
   --chip-active-glow: oklch(0.70 0.15 162);
   --roulette-red: oklch(0.577 0.245 27.325);
   --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
@@ -353,7 +375,9 @@
 }
 
 .auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%);
+  background: linear-gradient(180deg,
+      var(--auth-surface-dim) 0%,
+      var(--auth-surface-light-dim) 100%);
   color: var(--auth-text);
   box-shadow: none;
   border-color: transparent;
@@ -367,6 +391,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #0a271a transparent;
   }
 
   body {
@@ -381,6 +407,24 @@
   button,
   [role='button'] {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0a271a 0%, #39b17d 100%);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0a271a 0%, var(--brand-green-from) 100%);
   }
 }
 
@@ -468,13 +512,11 @@
 }
 
 .games-hero-glow {
-  background: linear-gradient(
-    180deg,
-    rgba(108, 31, 178, 0.1) 0%,
-    rgba(108, 31, 178, 0.06) 35%,
-    rgba(108, 31, 178, 0.02) 70%,
-    rgba(108, 31, 178, 0) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(108, 31, 178, 0.1) 0%,
+      rgba(108, 31, 178, 0.06) 35%,
+      rgba(108, 31, 178, 0.02) 70%,
+      rgba(108, 31, 178, 0) 100%);
 }
 
 .feature-glow-outer {
@@ -641,6 +683,52 @@
   background: linear-gradient(180deg, #1b1f26 0%, #2b303b 100%);
 }
 
+/* Fullscreen Game Mode: hide global chrome and let the active game fill the viewport */
+html:fullscreen .app-header,
+html:fullscreen .app-footer,
+html:fullscreen .app-bottom-nav,
+html:fullscreen [data-slot='sidebar'],
+html:fullscreen .bets-story {
+  display: none;
+}
+
+html:fullscreen .app-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .games-shell {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+html:fullscreen .game-page {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  align-items: stretch;
+}
+
+html:fullscreen .game-layout {
+  max-width: none;
+  height: auto;
+  flex: 1 1 auto;
+  border-radius: 0;
+}
+
+html:fullscreen .game-settings-bar {
+  max-width: none;
+  border-radius: 0;
+}
+
+html:fullscreen .game-field-content {
+  justify-content: center;
+}
+
+html:fullscreen .game-field-content .roulette-table {
+  margin-top: 2rem;
+}
+
 /* Roulette Vector Glow */
 .roulette-vector-glow {
   position: absolute;
@@ -661,6 +749,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -691,9 +780,7 @@
 }
 
 .leaderboard-avatar-ring {
-  background: radial-gradient(
-    60.56% 60.56% at 50% 50%,
-    rgba(61, 108, 218, 0.4) 0%,
-    rgba(11, 42, 28, 0.4) 100%
-  );
+  background: radial-gradient(60.56% 60.56% at 50% 50%,
+      rgba(61, 108, 218, 0.4) 0%,
+      rgba(11, 42, 28, 0.4) 100%);
 }

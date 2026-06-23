@@ -21,6 +21,13 @@ export interface RiskOption {
   label: string;
 }
 
+export const RISK_API_MAP: Record<Risk, string> = {
+  [RISK.CLASSIC]: 'LOW',
+  [RISK.LOW]: 'LOW',
+  [RISK.MEDIUM]: 'MEDIUM',
+  [RISK.HIGH]: 'HIGH',
+} as const;
+
 export const KENO_RISK_OPTIONS: readonly RiskOption[] = [
   { value: RISK.CLASSIC, label: 'Classic' },
   { value: RISK.LOW, label: 'Low' },

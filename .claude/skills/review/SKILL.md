@@ -6,6 +6,18 @@ You are a Senior Frontend Reviewer. Analyze the entire codebase and produce a st
 
 First read `package.json`, `tsconfig.json`, `eslint.config.*`, `CLAUDE.md`/`AGENTS.md` and `src/app/globals.css` to understand the real stack and rules. Do not trust stale memory files — ground truth is `package.json`.
 
+# 0. Project rules compliance (MANDATORY — do this first)
+
+You MUST verify the code against the project's own rule files. This step is NOT optional.
+
+1. Open `.claude/doc-mapping.json` and read the full `mappings` list.
+2. For EVERY file under review, look up which patterns it matches and collect the corresponding `rules` (in `.claude/rules/...`) and `doc` (in `.claude/docs/...`) entries. A single file usually matches MULTIPLE patterns (e.g. a `src/features/**/*.tsx` file maps to `features.md`, `components.md`, `naming.md`, `pitfalls.md`, `code-quality.md`).
+3. Open and READ every matched rules/docs file — do not rely on memory or on the summaries in this skill. The files in `.claude/rules/` are the ground truth for conventions.
+4. Check the code against EVERY rule in those files. For each rule that is violated, add an issue to the report citing the rule file and the rule.
+5. In the output, include a dedicated "Rules compliance" section (see Output format) listing each applicable rule file and a PASS/FAIL verdict. Never skip a rule file that maps to a reviewed path.
+
+The categories below (1–13) are a checklist on top of — not a replacement for — the rule files. If a rule file contradicts this skill, the rule file wins.
+
 # 1. Architecture (FSD)
 
 Check EVERY import for layer compliance `app → pages → widgets → features → entities → shared`:
@@ -38,6 +50,7 @@ For Zustand:
 - Component props — type named exactly `Props`
 - Empty `interface X extends Y {}` → `type X = Y`
 - `Record<string, ...>` for known union keys → `Record<UnionType, ...>`
+- **Type-only imports**: a statement importing ONLY types must use `import type { X } from '…'`, NOT inline `import { type X } from '…'`. The inline `type` qualifier is allowed ONLY when one statement mixes values and types (`import { value, type X }`). Flag every `import { type X } from …` that has no value import. Exception: CLI-managed `shared/ui` shadcn primitives.
 
 # 4. DRY
 
@@ -140,6 +153,15 @@ Write result to `REVIEW.md` in the project root:
 
 ## Summary
 2–3 sentences on overall health.
+
+## Rules compliance
+For every rule file from `.claude/doc-mapping.json` that maps to a reviewed path:
+
+| Rule file | Applies to | Verdict | Notes |
+|---|---|---|---|
+| `.claude/rules/<name>.md` | <matched paths> | ✅ PASS / ❌ FAIL | <violated rule + file:line, or "—"> |
+
+Every FAIL row MUST have a matching entry in `## Issues`.
 
 ## Issues
 Numbered list:

@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
+import { useGameControlsStore } from '@/entities/game';
 import { useBetButton } from '../model/useBetButton';
 
 interface Props {

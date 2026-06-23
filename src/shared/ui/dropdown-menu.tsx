@@ -1,5 +1,5 @@
 'use client';
-import { type ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { Menu as MenuPrimitive } from '@base-ui/react/menu';
 import { cn } from '@/shared/lib/cn';
 import { ChevronRightIcon, CheckIcon } from 'lucide-react';

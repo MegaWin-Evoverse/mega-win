@@ -23,7 +23,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label={ARIA_LABEL_BOTTOM_NAV}
-      className="fixed bottom-0 left-0 w-full h-16 bg-brand-bg border-t border-brand-border flex items-center justify-around z-50"
+      className="app-bottom-nav fixed bottom-0 left-0 w-full h-16 bg-brand-bg border-t border-brand-border flex items-center justify-around z-50"
     >
       <Button
         variant="ghost"
