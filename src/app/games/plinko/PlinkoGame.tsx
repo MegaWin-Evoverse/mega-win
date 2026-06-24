@@ -9,6 +9,7 @@ import {
 import { usePlinkoGame } from '@/features/plinko-bet';
 import { PlinkoBoard } from '@/widgets/plinko-board';
 import { ControlPanel } from '@/widgets/control-panel';
+import { GameSettingsBar } from '@/widgets/game-settings-bar';
 import { BetsStory } from '@/entities/bets-story';
 
 function selectBoard(state: GameControlsState) {
@@ -41,6 +42,7 @@ export function PlinkoGame() {
           />
         </div>
       </div>
+      <GameSettingsBar game={GAME.PLINKO} className="mt-1" />
       <BetsStory />
     </div>
   );
