@@ -17,6 +17,7 @@ interface Props {
   autoRunningLabel?: string;
   onClearTable?: () => void;
   onUndo?: () => void;
+  onAutoPick?: () => void;
 }
 
 export function ControlPanel({
@@ -27,6 +28,7 @@ export function ControlPanel({
   autoRunningLabel,
   onClearTable,
   onUndo,
+  onAutoPick,
 }: Props) {
   const config = CONTROL_PANEL_CONFIG[game];
 
@@ -55,6 +57,7 @@ export function ControlPanel({
           variant={config.tableActions}
           onClearTable={onClearTable}
           onUndo={onUndo}
+          onAutoPick={onAutoPick}
           className={config.classNames.tableActionsSection}
         />
       )}

@@ -93,7 +93,7 @@ export function getChipStripe(nominal: ChipNominal = CHIP_NOMINALS[0]): string {
 export const GAME_CONTROLS_DEFAULTS = {
   BET_AMOUNT_TEXT: '0.00',
   PROFIT_ON_WIN_TEXT: '0.00',
-  NUMBER_OF_BETS: '0',
+  NUMBER_OF_BETS: '∞',
   ON_WIN: 'Auto',
   ON_LOSS: 'Auto',
   STOP_ON_PROFIT: '1.00',

@@ -1,7 +1,7 @@
 'use client';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { useState } from 'react';
 import { cn } from '@/shared/lib/cn';
+import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { BetsList } from './BetsList';
 import { useBetsStoryQuery } from '@/entities/bets-story/model/useBetsStoryQuery';
 import { TAB_LABELS, TAB_PATHS } from '../model/constants';
@@ -16,23 +16,13 @@ export function BetsStory({ className }: Props) {
   const { data: bets = [] } = useBetsStoryQuery(activePath);
 
   return (
-    <Tabs
-      className={cn('bets-story w-full max-w-[1000px]', className)}
-      value={activePath}
-      onValueChange={(value) => setActivePath(value as Path)}
-    >
-      <TabsList variant="bets">
-        {TAB_PATHS.map((path) => (
-          <TabsTrigger key={path} value={path}>
-            {TAB_LABELS[path]}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {TAB_PATHS.map((path) => (
-        <TabsContent key={path} value={path}>
-          <BetsList bets={bets} />
-        </TabsContent>
-      ))}
-    </Tabs>
+    <div className={cn('bets-story w-full', className)}>
+      <SegmentedTabs
+        items={TAB_PATHS.map((path) => ({ value: path, label: TAB_LABELS[path] }))}
+        value={activePath}
+        onValueChange={setActivePath}
+      />
+      <BetsList bets={bets} />
+    </div>
   );
 }

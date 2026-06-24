@@ -34,18 +34,19 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
             <TooltipTrigger render={<div className="flex flex-col overflow-hidden rounded-lg" />}>
               <div
                 className={cn(
-                  'flex items-center justify-center gap-1 border border-keno-cell-border px-4 py-1.5',
+                  'flex items-center justify-center gap-0.5 border border-keno-cell-border px-1 py-1.5 lg:gap-1 lg:px-4',
                   isActive
                     ? 'border-brand-green-to/40 bg-gradient-to-b from-brand-green-from to-brand-green-to'
                     : 'bg-gradient-to-b from-keno-payout-from to-keno-payout-to'
                 )}
               >
                 <Image
-                  src="/icons/green-coin.svg"
+                  src="/keno/coin.svg"
                   alt=""
                   width={16}
                   height={16}
                   aria-hidden="true"
+                  className="hidden lg:block"
                 />
                 <span
                   className={cn(
@@ -56,7 +57,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                   {index}x
                 </span>
               </div>
-              <div className="flex items-center justify-center bg-gradient-to-b from-brand-border to-brand-btn-gradient-to px-4 py-2">
+              <div className="flex items-center justify-center bg-gradient-to-b from-brand-border to-brand-btn-gradient-to px-1 py-2 lg:px-4">
                 <span className="w-full text-center font-outfit text-xs font-semibold leading-4 text-brand-text-white">
                   {displayMultiplier}x
                 </span>
@@ -73,13 +74,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                     {PAYOUT_TOOLTIP_LABELS.MULTIPLIER}
                   </span>
                   <div className="flex items-center gap-1">
-                    <Image
-                      src="/icons/green-coin.svg"
-                      alt=""
-                      width={14}
-                      height={14}
-                      aria-hidden="true"
-                    />
+                    <Image src="/keno/coin.svg" alt="" width={14} height={14} aria-hidden="true" />
                     <span className="font-outfit text-xs font-semibold leading-4">
                       {displayMultiplier}x
                     </span>
@@ -92,7 +87,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                     </span>
                     <div className="flex items-center gap-1">
                       <Image
-                        src="/icons/coin.svg"
+                        src="/keno/profit.svg"
                         alt=""
                         width={14}
                         height={14}

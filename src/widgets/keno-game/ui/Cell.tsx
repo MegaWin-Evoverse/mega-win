@@ -22,7 +22,7 @@ export function Cell({ number, state, onSelect }: Props) {
       aria-label={`Number ${number}`}
       aria-pressed={state === 'selected' || state === 'hit'}
       className={cn(
-        'relative aspect-square w-full rounded-xl font-outfit text-xl font-semibold transition-all disabled:opacity-100 disabled:pointer-events-none',
+        'relative aspect-square w-full rounded-lg font-outfit text-sm font-semibold transition-all disabled:opacity-100 disabled:pointer-events-none lg:rounded-xl lg:text-xl',
         CELL_STATE_CLASSES[state],
         state === 'drawn' && 'animate-in fade-in zoom-in-95 duration-200'
       )}

@@ -12,6 +12,8 @@ export const MULTIPLIER_DECIMALS = 2;
 export const BET_DECIMALS = 2;
 export const REVEAL_DELAY_MS = 80;
 export const RESULT_DELAY_MS = 400;
+export const AUTO_PICK_DELAY_MS = 100;
+export const AUTO_BET_DELAY_MS = 1500;
 
 export const LABELS = {
   SELECT_PROMPT: 'Select numbers 1-10 to start',

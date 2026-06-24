@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@/shared/ui/button';
+
 import { Board } from './Board';
 import { Payout } from './Payout';
 import { WinModal } from './WinModal';
@@ -27,10 +27,9 @@ export function KenoGame({
   betAmount,
   getCellState,
   onNumberToggle,
-  onReset,
 }: Props) {
   return (
-    <div className="relative isolate flex w-full flex-col items-center justify-center gap-8 overflow-hidden rounded-[0_16px_16px_0] bg-bg-primary p-8">
+    <div className="relative isolate flex w-full flex-col items-center justify-center gap-4 overflow-hidden bg-bg-primary p-4 lg:gap-8 lg:rounded-[0_16px_16px_0] lg:p-8">
       <div
         className="pointer-events-none absolute bottom-[-146px] left-1/2 h-[153px] w-[725px] -translate-x-1/2 bg-keno-glow blur-[300px]"
         aria-hidden="true"
@@ -50,18 +49,8 @@ export function KenoGame({
           betAmount={betAmount}
         />
       )}
-      {phase === 'lose' && (
-        <Button variant="outline" className="h-12 w-full" onClick={onReset}>
-          {LABELS.PLAY_AGAIN}
-        </Button>
-      )}
       {phase === 'win' && (
-        <WinModal
-          multiplier={winMultiplier}
-          betAmount={betAmount}
-          matchCount={matchCount}
-          onPlayAgain={onReset}
-        />
+        <WinModal multiplier={winMultiplier} betAmount={betAmount} matchCount={matchCount} />
       )}
     </div>
   );

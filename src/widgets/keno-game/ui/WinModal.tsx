@@ -1,47 +1,34 @@
 import Image from 'next/image';
 import { Trophy } from 'lucide-react';
-import { Button } from '@/shared/ui/button';
 import { LABELS, MULTIPLIER_DECIMALS, BET_DECIMALS } from '../model/constants';
 
 interface Props {
   multiplier: number;
   betAmount: number;
   matchCount: number;
-  onPlayAgain: () => void;
 }
 
-export function WinModal({ multiplier, betAmount, matchCount, onPlayAgain }: Props) {
+export function WinModal({ multiplier, betAmount, matchCount }: Props) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center rounded-2xl backdrop-blur-sm bg-background/60 z-10">
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl backdrop-blur-sm bg-background/60 z-10">
       <div className="overflow-hidden rounded-xl bg-card shadow-2xl min-w-56">
-        <div className="flex items-center justify-center gap-2 px-6 py-4 text-foreground">
-          <Trophy className="size-5" aria-label={LABELS.WIN_TROPHY_ARIA} />
-          <span className="text-xl font-bold font-heading">
-            {multiplier.toFixed(MULTIPLIER_DECIMALS)}x
-          </span>
+        <div className="flex items-center justify-center gap-2 px-4 py-3 h-[52px] self-stretch bg-gradient-to-b from-[#0A271A] to-[#39B17D] border border-[rgba(63,74,89,0.5)] rounded-t-xl">
+          <div className="flex items-center gap-1.5 px-4 py-1 w-24 h-7 rounded-2xl">
+            <Trophy className="size-5 text-white" aria-label={LABELS.WIN_TROPHY_ARIA} />
+            <span className="text-base font-semibold font-heading text-white">
+              {multiplier.toFixed(MULTIPLIER_DECIMALS)}x
+            </span>
+          </div>
         </div>
-
         <div className="flex items-center justify-center gap-8 border-t border-border bg-secondary/50 px-6 py-4">
           <div className="flex items-center gap-1.5">
-            <Image src="/icons/coin.svg" alt={LABELS.WIN_COIN_ALT} width={20} height={20} />
+            <Image src="/keno/bet-amount.svg" alt={LABELS.WIN_COIN_ALT} width={20} height={20} />
             <span className="font-medium text-foreground">{betAmount.toFixed(BET_DECIMALS)}</span>
           </div>
-
           <div className="flex items-center gap-1.5">
-            <Image
-              src="/icons/green-coin.svg"
-              alt={LABELS.WIN_MATCHES_ALT}
-              width={20}
-              height={20}
-            />
+            <Image src="/keno/coin.svg" alt={LABELS.WIN_MATCHES_ALT} width={20} height={20} />
             <span className="font-medium text-foreground">{matchCount}x</span>
           </div>
-        </div>
-
-        <div className="px-4 pb-4 pt-3">
-          <Button variant="main" className="w-full" onClick={onPlayAgain}>
-            {LABELS.PLAY_AGAIN}
-          </Button>
         </div>
       </div>
     </div>

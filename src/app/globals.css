@@ -198,6 +198,7 @@
   --brand-text-light: #c7cbd4;
   --brand-text-muted: #566374;
   --brand-text-white: #fdfdfd;
+  --brand-red: oklch(0.577 0.245 27.325);
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
   --daily-claimer-bg: #09110e;
@@ -714,7 +715,7 @@ html:fullscreen .games-shell {
 
 html:fullscreen .game-page {
   min-height: 100vh;
-  height: auto;
+  height: 100dvh;
   padding: 0;
   align-items: stretch;
 }
