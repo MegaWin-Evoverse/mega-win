@@ -160,6 +160,12 @@
   --color-dice-glow: var(--dice-glow);
   --color-coin-game: var(--coin-game);
   --color-coin-watch: var(--coin-watch);
+  --color-plinko-multiplier-text: var(--plinko-multiplier-text);
+  --color-brand-red: var(--brand-red);
+  --color-filter-icon-all: var(--filter-icon-all);
+  --color-crypto-btc: var(--crypto-btc);
+  --color-crypto-eth: var(--crypto-eth);
+  --color-crypto-ltc: var(--crypto-ltc);
 }
 
 :root {
@@ -177,11 +183,17 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --brand-red: oklch(0.55 0.22 25);
   --coin-game: #fbbf24;
   --coin-watch: #22c55e;
+  --filter-icon-all: oklch(0.852 0.199 91.936);
+  --crypto-btc: oklch(0.75 0.183 55.934);
+  --crypto-eth: oklch(0.707 0.165 254.624);
+  --crypto-ltc: oklch(0.714 0.203 305.504);
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
@@ -266,6 +278,31 @@
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
   --chip-active-glow: oklch(0.7 0.15 162);
+  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
+  --bg-cell: var(--button-brand-bg-disabled);
+  --brand-red: oklch(0.55 0.22 25);
+  /* Roulette betting table */
+  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
+  --plinko-multiplier-text: oklch(0.18 0.03 268);
+  --plinko-red-from: oklch(0.62 0.22 25);
+  --plinko-red-to: oklch(0.4 0.16 25);
+  --plinko-orange-from: oklch(0.7 0.18 50);
+  --plinko-orange-to: oklch(0.46 0.13 45);
+  --plinko-orange-light-from: oklch(0.78 0.16 70);
+  --plinko-orange-light-to: oklch(0.52 0.13 55);
+  --plinko-yellow-from: oklch(0.86 0.16 95);
+  --plinko-yellow-to: oklch(0.66 0.14 80);
+  --plinko-green-from: oklch(0.78 0.2 150);
+  --plinko-green-to: oklch(0.55 0.16 150);
+  --plinko-peg: #3f4a59;
+  --plinko-peg-glow: var(--border-brand-main);
+  --plinko-ball-highlight: oklch(0.88 0.12 145);
+  --plinko-ball-from: oklch(0.72 0.2 150);
+  --plinko-ball-to: oklch(0.55 0.18 150);
+  --plinko-ball-trail-from: #0a271a;
+  --plinko-ball-trail-to: #39b17d;
 }
 
 .dark {
@@ -274,9 +311,11 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --brand-red: oklch(0.55 0.22 25);
   --coin-game: #fbbf24;
   --coin-watch: #22c55e;
   --text-brand: var(--brand-green-to);
@@ -360,14 +399,69 @@
   --chip-active-glow: oklch(0.7 0.15 162);
   --border-control: #3f4a59;
   --surface-toggle: #1e293b;
-  --chip-active-glow: oklch(0.70 0.15 162);
   --roulette-red: oklch(0.577 0.245 27.325);
   --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
   --roulette-chip-glow: oklch(1 0 0 / 0.4);
 }
 
+@layer utilities {
+  .bg-plinko-red {
+    background-image: linear-gradient(135deg, var(--plinko-red-from), var(--plinko-red-to));
+  }
+  .bg-plinko-orange {
+    background-image: linear-gradient(135deg, var(--plinko-orange-from), var(--plinko-orange-to));
+  }
+  .bg-plinko-orange-light {
+    background-image: linear-gradient(
+      135deg,
+      var(--plinko-orange-light-from),
+      var(--plinko-orange-light-to)
+    );
+  }
+  .bg-plinko-yellow {
+    background-image: linear-gradient(135deg, var(--plinko-yellow-from), var(--plinko-yellow-to));
+  }
+  .bg-plinko-green {
+    background-image: linear-gradient(135deg, var(--plinko-green-from), var(--plinko-green-to));
+  }
+}
+
 @utility bg-auth-btn-primary {
   background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
+}
+
+@keyframes plinko-bucket-land {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  35% {
+    transform: translateY(6px) scaleY(0.82);
+  }
+  65% {
+    transform: translateY(-3px) scaleY(1.06);
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@utility animate-plinko-bucket-land {
+  animation: plinko-bucket-land 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes plinko-history-enter {
+  0% {
+    transform: translateY(-10px) scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@utility animate-plinko-history-enter {
+  animation: plinko-history-enter 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @utility bg-auth-btn-social {
@@ -375,9 +469,11 @@
 }
 
 .auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg,
-      var(--auth-surface-dim) 0%,
-      var(--auth-surface-light-dim) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--auth-surface-dim) 0%,
+    var(--auth-surface-light-dim) 100%
+  );
   color: var(--auth-text);
   box-shadow: none;
   border-color: transparent;

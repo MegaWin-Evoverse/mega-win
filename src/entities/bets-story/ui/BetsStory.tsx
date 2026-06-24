@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { cn } from '@/shared/lib/cn';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 import { BetsList } from './BetsList';
-import { useBetsStoryQuery } from '@/entities/bets-story/model/useBetsStoryQuery';
+import { useBetsStoryQuery } from '../model/useBetsStoryQuery';
 import { BETS_STORY_LIVE_TITLE, LIVE_TAB_PATHS, TAB_LABELS, TAB_PATHS } from '../model/constants';
 import type { Path } from '../model/types';
 

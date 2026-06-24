@@ -1,4 +1,4 @@
-import { GAME, type Game } from '@/entities/game';
+import { GAME, type Game, PLINKO_ROWS, RISK } from '@/entities/game';
 import type { FairnessTab } from './types';
 
 export const FAIRNESS_TAB = {
@@ -21,6 +21,10 @@ export const FAIRNESS_SEED_ERROR = 'API server returned non-OK status';
 
 export const DEFAULT_VERIFY_NONCE = '1';
 
+export const DEFAULT_VERIFY_ROWS = PLINKO_ROWS.DEFAULT;
+
+export const DEFAULT_VERIFY_RISK = RISK.LOW;
+
 export const LOADING_PLACEHOLDER = 'Loading...';
 
 export const GAME_LABELS: Record<Game, string> = {
@@ -40,6 +44,8 @@ export const FAIRNESS_LABELS = {
   fieldClientSeed: 'Client Seed',
   fieldServerSeed: 'Server Seed',
   fieldNonce: 'Nonce',
+  fieldRows: 'Rows',
+  fieldRisk: 'Risk',
   placeholderClientSeed: 'Enter client seed',
   placeholderServerSeed: 'Enter server seed',
   placeholderNonce: 'Enter nonce',

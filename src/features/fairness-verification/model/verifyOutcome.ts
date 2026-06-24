@@ -33,3 +33,14 @@ export async function computeRouletteOutcome(
   const float = bytesToFloat(bytes);
   return Math.floor(float * ROULETTE_POCKET_COUNT);
 }
+
+export async function computePlinkoOutcome(
+  clientSeed: string,
+  serverSeed: string,
+  nonce: string,
+  rows: number
+): Promise<number[]> {
+  const hex = await hmacSha256Hex(serverSeed, `${clientSeed}:${nonce}:0`);
+  const bytes = (hex.match(/.{2}/g) ?? []).slice(0, rows).map((byte) => parseInt(byte, 16));
+  return bytes.map((byte) => byte % 2);
+}

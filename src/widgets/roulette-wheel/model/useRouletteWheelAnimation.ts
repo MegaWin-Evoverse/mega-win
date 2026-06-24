@@ -181,7 +181,7 @@ export function useRouletteWheelAnimation(): RouletteWheelAnimation {
     return () => {
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [queryClient, resolveBetResult]);
 
   return {
     wheelGroupRef,

@@ -2,7 +2,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { type Risk, useGameControlsStore } from '@/entities/game';
 
 interface UseRiskSelectorReturn {
-  risk: Risk | null;
+  risk: Risk;
   setRisk: (risk: Risk) => void;
 }
 
