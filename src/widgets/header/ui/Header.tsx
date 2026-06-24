@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/shared/ui/button';
 import { BurgerIcon } from '@/shared/ui/burger-icon';
 import { Logo } from '@/shared/ui/logo';
+import { Skeleton } from '@/shared/ui/skeleton';
 import { ROUTES, BUTTON_LABELS } from '@/shared/config';
 import { useSidebar } from '@/shared/ui/sidebar';
 import { useAuthStore } from '@/features/auth';
@@ -18,7 +19,7 @@ const ARIA_LABEL_MENU_BUTTON = 'Toggle navigation menu';
 export function Header() {
   const { toggleSidebar, isSmallMobile, isMobile, isTablet } = useSidebar();
   const openAuthForm = useAuthStore((state) => state.openAuthForm);
-  const { data: user } = useUserQuery();
+  const { data: user, isPending: isUserPending } = useUserQuery();
   const isMobileOrTablet = isMobile || isTablet;
 
   return (
@@ -44,7 +45,9 @@ export function Header() {
         </Link>
       </div>
       <div className="flex items-center justify-end min-w-0">
-        {user ? (
+        {isUserPending ? (
+          <Skeleton className="w-[120px] h-10 rounded-lg" />
+        ) : user ? (
           isSmallMobile ? (
             <BalanceMenu balances={user.userBalances} />
           ) : (
