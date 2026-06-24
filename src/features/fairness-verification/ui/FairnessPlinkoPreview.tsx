@@ -1,0 +1,38 @@
+'use client';
+import { MultiplierRow, PLINKO_MULTIPLIERS, type LandedBucket, type Risk } from '@/entities/game';
+import { usePlinkoVerifyOutcome } from '../model/usePlinkoVerifyOutcome';
+import { VerifyRowsSlider } from './VerifyRowsSlider';
+import { VerifyRiskSelector } from './VerifyRiskSelector';
+
+interface Props {
+  rows: number;
+  onRowsChange: (rows: number) => void;
+  risk: Risk;
+  onRiskChange: (risk: Risk) => void;
+  clientSeed: string;
+  serverSeed: string;
+  nonce: string;
+}
+
+export function FairnessPlinkoPreview({
+  rows,
+  onRowsChange,
+  risk,
+  onRiskChange,
+  clientSeed,
+  serverSeed,
+  nonce,
+}: Props) {
+  const outcome = usePlinkoVerifyOutcome(clientSeed, serverSeed, nonce, rows, risk);
+  const multipliers = PLINKO_MULTIPLIERS[risk]?.[rows] ?? [];
+  const displayedMultipliers = outcome ? [outcome.multiplier] : multipliers;
+  const displayedLandedBucket: LandedBucket | null = outcome ? { bucket: 0, hitAt: 0 } : null;
+
+  return (
+    <div className="flex flex-col gap-4 w-full">
+      <MultiplierRow multipliers={displayedMultipliers} landedBucket={displayedLandedBucket} />
+      <VerifyRowsSlider rows={rows} onRowsChange={onRowsChange} />
+      <VerifyRiskSelector risk={risk} onRiskChange={onRiskChange} />
+    </div>
+  );
+}
