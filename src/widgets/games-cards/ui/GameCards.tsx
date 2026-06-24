@@ -1,6 +1,7 @@
+import { ROUTES } from '@/shared/config';
 import { SectionTitle } from '@/shared/ui/section-title';
-import { GAME_CARDS, GAME_CARDS_CONSTANTS } from '../model/constants';
-import { GameCard } from './GameCard';
+import { GAME_CARDS_CONSTANTS } from '../model/constants';
+import { GameCardsGrid } from './GameCardsGrid';
 
 export function GameCards() {
   return (
@@ -10,15 +11,12 @@ export function GameCards() {
     >
       <SectionTitle
         title={GAME_CARDS_CONSTANTS.SECTION_TITLE}
+        href={ROUTES.GAMES}
         iconSrc={GAME_CARDS_CONSTANTS.ICON_SRC}
         iconWidth={GAME_CARDS_CONSTANTS.ICON_WIDTH}
         iconHeight={GAME_CARDS_CONSTANTS.ICON_HEIGHT}
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-        {GAME_CARDS.map((card) => (
-          <GameCard key={card.id} card={card} />
-        ))}
-      </div>
+      <GameCardsGrid />
     </section>
   );
 }

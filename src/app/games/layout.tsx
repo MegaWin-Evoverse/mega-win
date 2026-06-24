@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function GamesLayout({ children }: Props) {
-  return <div className="games-shell pt-8 pb-10">{children}</div>;
+  return <div className="games-shell pb-10">{children}</div>;
 }

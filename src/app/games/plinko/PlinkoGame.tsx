@@ -43,7 +43,9 @@ export function PlinkoGame() {
         </div>
       </div>
       <GameSettingsBar game={GAME.PLINKO} className="mt-1" />
-      <BetsStory className="mt-10" />
+      <div className="mt-10">
+        <BetsStory />
+      </div>
     </div>
   );
 }

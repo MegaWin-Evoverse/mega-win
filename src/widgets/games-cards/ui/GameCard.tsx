@@ -1,27 +1,33 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { GAME_CARDS_CONSTANTS } from '../model/constants';
+import { cn } from '@/shared/lib/cn';
+import { CARD_ACCENT_GLOW_CLASS } from '../model/constants';
 import type { GameCardData } from '../model/types';
 
 interface Props {
   card: GameCardData;
+  isPriority?: boolean;
 }
 
-export function GameCard({ card }: Props) {
-  const { title, imageSrc, href } = card;
+export function GameCard({ card, isPriority }: Props) {
+  const { title, imageSrc, imageWidth, imageHeight, href, accentColor } = card;
 
   return (
     <Link
       href={href}
-      className="relative block w-full overflow-hidden rounded-xl bg-brand-border/30 border border-brand-border/20 transition-all duration-300 ease-out hover:border-brand-border hover:shadow-lg hover:shadow-black/20 hover:scale-[1.04] group cursor-pointer"
+      className={cn(
+        'relative block w-full overflow-hidden rounded-xl bg-brand-border/30 border border-brand-border/20 transition-all duration-300 ease-out hover:border-brand-border hover:scale-[1.04] group cursor-pointer',
+        CARD_ACCENT_GLOW_CLASS[accentColor]
+      )}
     >
       <Image
         src={imageSrc}
         alt={title}
-        width={GAME_CARDS_CONSTANTS.CARD_WIDTH}
-        height={GAME_CARDS_CONSTANTS.CARD_HEIGHT}
+        width={imageWidth}
+        height={imageHeight}
         className="w-full h-auto block"
-        priority
+        priority={isPriority}
+        loading={isPriority ? undefined : 'lazy'}
       />
     </Link>
   );

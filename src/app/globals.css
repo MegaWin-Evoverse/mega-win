@@ -542,8 +542,7 @@
   border-radius: 8px;
   border: 2px solid transparent;
   background:
-    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%)
-      padding-box,
+    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
   transition:
     background 0.15s ease-in-out,
@@ -557,20 +556,16 @@
 }
 
 .hero-banner-bg {
-  background: linear-gradient(
-    84.47deg,
-    rgba(15, 22, 26, 0.94) 2.15%,
-    rgba(19, 21, 23, 0.94) 98.56%
-  );
+  background: linear-gradient(84.47deg,
+      rgba(15, 22, 26, 0.94) 2.15%,
+      rgba(19, 21, 23, 0.94) 98.56%);
 }
 
 .hero-radial-glow {
-  background: radial-gradient(
-    78.35% 190.25% at 64.43% 30.64%,
-    rgba(48, 223, 140, 0.15) 0%,
-    rgba(33, 173, 107, 0.03) 50%,
-    rgba(13, 110, 64, 0) 91.23%
-  );
+  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%,
+      rgba(48, 223, 140, 0.15) 0%,
+      rgba(33, 173, 107, 0.03) 50%,
+      rgba(13, 110, 64, 0) 91.23%);
 }
 
 .hero-ellipse-glow {
@@ -605,22 +600,33 @@
   background-size: auto, cover, cover;
 }
 
+.games-hero-bg {
+  background-image: url('/games/hero-bg.webp');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.games-hero-glow {
+  background: linear-gradient(180deg,
+      rgba(108, 31, 178, 0.1) 0%,
+      rgba(108, 31, 178, 0.06) 35%,
+      rgba(108, 31, 178, 0.02) 70%,
+      rgba(108, 31, 178, 0) 100%);
+}
+
 .feature-glow-outer {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.28) 0%,
-    rgba(49, 255, 76, 0.08) 50%,
-    transparent 85%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.28) 0%,
+      rgba(49, 255, 76, 0.08) 50%,
+      transparent 85%);
 }
 
 .feature-glow-inner {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.58) 0%,
-    rgba(49, 255, 76, 0.18) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.58) 0%,
+      rgba(49, 255, 76, 0.18) 45%,
+      transparent 75%);
 }
 
 /* Promo Cards & Campaigns Section */
@@ -641,31 +647,25 @@
 }
 
 .promo-ellipse-6743-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.7) 4.92%,
-    rgba(36, 166, 199, 0.7) 34.46%,
-    rgba(106, 0, 255, 0.7) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.7) 4.92%,
+      rgba(36, 166, 199, 0.7) 34.46%,
+      rgba(106, 0, 255, 0.7) 91.82%);
   filter: blur(124.719px);
 }
 
 .promo-ellipse-6744-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(43, 6, 162, 0.3) 4.92%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(43, 6, 162, 0.3) 4.92%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(116.555px);
 }
 
 .promo-ellipse-6742-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.3) 4.92%,
-    rgba(36, 166, 199, 0.3) 34.46%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.3) 4.92%,
+      rgba(36, 166, 199, 0.3) 34.46%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(100px);
 }
 
@@ -728,11 +728,9 @@
 }
 
 .gs-sparkle {
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(214, 189, 255, 0.5) 0%,
-    rgba(80, 91, 229, 0.5) 100%
-  );
+  background: radial-gradient(50% 50% at 50% 50%,
+      rgba(214, 189, 255, 0.5) 0%,
+      rgba(80, 91, 229, 0.5) 100%);
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
 }
 
