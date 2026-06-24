@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
-import { BUTTON_LABELS } from '@/shared/config';
-import coinIcon from '@/shared/assets/icons/coin.svg';
+import { BUTTON_LABELS, GAME_POINT_ICON } from '@/shared/config';
 import type { DailyClaimUiState } from '@/features/daily-claim';
 
 interface Props {
@@ -59,7 +58,7 @@ export function DailyClaimerCard({
           ) : (
             <>
               {BUTTON_LABELS.CLAIM}
-              <Image src={coinIcon} width={14} height={14} alt="" aria-hidden />
+              <Image src={GAME_POINT_ICON.SRC} width={14} height={14} alt="" aria-hidden />
               <span>{pointsAmount}</span>
             </>
           )}

@@ -1,4 +1,5 @@
 import coin1Icon from '../assets/icons/coin-1.svg';
+import gamePointIcon from '../assets/icons/game-point.svg';
 
 export const BUTTON_LABELS = {
   LOG: 'Log In',
@@ -69,6 +70,14 @@ export const GAME_BALANCE = 4593.24;
 export const COIN_ICON = {
   SRC: coin1Icon,
   ALT: 'Coin',
+  SIZE_BALANCE: 20,
+  SIZE_INPUT: 16,
+  SIZE_SUMMARY: 14,
+} as const;
+
+export const GAME_POINT_ICON = {
+  SRC: gamePointIcon,
+  ALT: 'Game point coin',
   SIZE_BALANCE: 20,
   SIZE_INPUT: 16,
   SIZE_SUMMARY: 14,
