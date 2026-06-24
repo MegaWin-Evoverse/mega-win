@@ -14,6 +14,7 @@ export const BOARD = {
   BUCKET_ZONE_RATIO: 0.5,
   TOP_PEGS: 3,
   REPLAY_FRAMES_PER_MS: 0.03,
+  REPLAY_FRAMES_PER_MS_TURBO: 0.09,
 } as const;
 
 export const PHYSICS = {

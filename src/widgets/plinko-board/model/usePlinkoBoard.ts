@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { getBucketIndex, type LandedBucket } from '@/entities/game';
 import type { PlinkoDrop } from '@/features/plinko-bet';
+import { useTurboModeStore } from '@/features/game-settings';
+import { getTurboValue } from '@/shared/lib/getTurboValue';
 import { BOARD, CSS_VAR } from './constants';
 import { getBoardLayout, getPegPositions } from './geometry';
 import type { BallFrame, PegHit } from './physics';
@@ -43,10 +45,16 @@ export function usePlinkoBoard({
   const glowRef = useRef<Map<string, number>>(new Map());
   const landedRef = useRef(onDropLanded);
   const [landedBucket, setLandedBucket] = useState<LandedBucket | null>(null);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
+  const turboModeRef = useRef(turboMode);
 
   useEffect(() => {
     landedRef.current = onDropLanded;
   }, [onDropLanded]);
+
+  useEffect(() => {
+    turboModeRef.current = turboMode;
+  }, [turboMode]);
 
   useEffect(() => {
     for (const drop of drops) {
@@ -163,7 +171,13 @@ export function usePlinkoBoard({
 
       const survivors: ActiveBall[] = [];
       for (const ball of ballsRef.current) {
-        ball.frameCursor += dt * BOARD.REPLAY_FRAMES_PER_MS;
+        ball.frameCursor +=
+          dt *
+          getTurboValue(
+            turboModeRef.current,
+            BOARD.REPLAY_FRAMES_PER_MS,
+            BOARD.REPLAY_FRAMES_PER_MS_TURBO
+          );
         while (
           ball.nextHitIndex < ball.pegHits.length &&
           ball.pegHits[ball.nextHitIndex].frame <= ball.frameCursor
