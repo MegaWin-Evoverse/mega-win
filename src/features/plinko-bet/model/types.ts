@@ -1,9 +1,9 @@
-import type { MultiplierTier, Risk } from '@/entities/game';
+import type { ApiRisk, MultiplierTier, Risk } from '@/entities/game';
 
 export interface PlinkoBetPayload {
   betSize: number;
   rowsCount: number;
-  risk: 'LOW' | 'MEDIUM' | 'HIGH';
+  risk: ApiRisk;
 }
 
 export interface PlinkoBetResult {

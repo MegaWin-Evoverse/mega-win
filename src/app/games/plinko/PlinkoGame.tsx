@@ -24,7 +24,7 @@ export function PlinkoGame() {
 
   return (
     <div className="mx-auto flex w-full max-w-[1017px] flex-col">
-      <div className="flex w-full flex-col-reverse items-stretch overflow-hidden rounded-2xl py-4 lg:flex-row lg:py-10">
+      <div className="flex w-full flex-col-reverse items-stretch overflow-hidden rounded-2xl pt-4 lg:flex-row lg:pt-10">
         <ControlPanel
           game={GAME.PLINKO}
           onBet={placeBet}

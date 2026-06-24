@@ -179,7 +179,7 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
-  --border-brand-main: #22c55e;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
@@ -303,7 +303,7 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
-  --border-brand-main: #22c55e;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;

@@ -1,18 +1,10 @@
-import { MULTIPLIER_TIER, type MultiplierTier } from '@/entities/game';
+import { TIER_BG_CLASS } from '@/entities/game';
 import { cn } from '@/shared/lib/cn';
 import type { PlinkoHistoryEntry } from '../model/types';
 
 interface Props {
   history: PlinkoHistoryEntry[];
 }
-
-const TIER_CLASS: Record<MultiplierTier, string> = {
-  [MULTIPLIER_TIER.GREEN]: 'bg-plinko-green',
-  [MULTIPLIER_TIER.YELLOW]: 'bg-plinko-yellow',
-  [MULTIPLIER_TIER.ORANGE_LIGHT]: 'bg-plinko-orange-light',
-  [MULTIPLIER_TIER.ORANGE]: 'bg-plinko-orange',
-  [MULTIPLIER_TIER.RED]: 'bg-plinko-red',
-};
 
 export function BetHistory({ history }: Props) {
   if (history.length === 0) return null;
@@ -23,7 +15,7 @@ export function BetHistory({ history }: Props) {
           key={entry.id}
           className={cn(
             'flex h-[30px] w-[51.4px] shrink-0 items-center justify-center rounded-lg p-2.5 text-xs font-semibold uppercase text-plinko-multiplier-text animate-plinko-history-enter',
-            TIER_CLASS[entry.tier]
+            TIER_BG_CLASS[entry.tier]
           )}
         >
           {entry.multiplier}x

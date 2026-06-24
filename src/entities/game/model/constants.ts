@@ -21,13 +21,6 @@ export interface RiskOption {
   label: string;
 }
 
-export const RISK_API_MAP: Record<Risk, string> = {
-  [RISK.CLASSIC]: 'LOW',
-  [RISK.LOW]: 'LOW',
-  [RISK.MEDIUM]: 'MEDIUM',
-  [RISK.HIGH]: 'HIGH',
-} as const;
-
 export const KENO_RISK_OPTIONS: readonly RiskOption[] = [
   { value: RISK.CLASSIC, label: 'Classic' },
   { value: RISK.LOW, label: 'Low' },
@@ -102,7 +95,9 @@ export const GAME_CONTROLS_DEFAULTS = {
   BALANCE: 0,
 } as const;
 
-export const RISK_API_MAP: Record<Risk, 'LOW' | 'MEDIUM' | 'HIGH'> = {
+export type ApiRisk = 'LOW' | 'MEDIUM' | 'HIGH';
+
+export const RISK_API_MAP: Record<Risk, ApiRisk> = {
   [RISK.CLASSIC]: 'LOW',
   [RISK.LOW]: 'LOW',
   [RISK.MEDIUM]: 'MEDIUM',
@@ -118,3 +113,11 @@ export const MULTIPLIER_TIER = {
 } as const;
 
 export type MultiplierTier = (typeof MULTIPLIER_TIER)[keyof typeof MULTIPLIER_TIER];
+
+export const TIER_BG_CLASS: Record<MultiplierTier, string> = {
+  [MULTIPLIER_TIER.GREEN]: 'bg-plinko-green',
+  [MULTIPLIER_TIER.YELLOW]: 'bg-plinko-yellow',
+  [MULTIPLIER_TIER.ORANGE_LIGHT]: 'bg-plinko-orange-light',
+  [MULTIPLIER_TIER.ORANGE]: 'bg-plinko-orange',
+  [MULTIPLIER_TIER.RED]: 'bg-plinko-red',
+};

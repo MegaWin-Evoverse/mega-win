@@ -1,4 +1,10 @@
-import { type Risk, RISK_API_MAP, MULTIPLIER_TIER, type MultiplierTier } from './constants';
+import {
+  type Risk,
+  RISK_API_MAP,
+  MULTIPLIER_TIER,
+  type MultiplierTier,
+  type ApiRisk,
+} from './constants';
 
 export interface LandedBucket {
   bucket: number;
@@ -27,6 +33,6 @@ export function getMultiplierColorTier(index: number, bucketCount: number): Mult
   return TIER_BY_DISTANCE[tierIndex];
 }
 
-export function toApiRisk(risk: Risk): 'LOW' | 'MEDIUM' | 'HIGH' {
+export function toApiRisk(risk: Risk): ApiRisk {
   return RISK_API_MAP[risk];
 }

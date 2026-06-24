@@ -25,12 +25,13 @@ export function FairnessPlinkoPreview({
 }: Props) {
   const outcome = usePlinkoVerifyOutcome(clientSeed, serverSeed, nonce, rows, risk);
   const multipliers = PLINKO_MULTIPLIERS[risk]?.[rows] ?? [];
-  const displayedMultipliers = outcome ? [outcome.multiplier] : multipliers;
-  const displayedLandedBucket: LandedBucket | null = outcome ? { bucket: 0, hitAt: 0 } : null;
+  const landedBucket: LandedBucket | null = outcome
+    ? { bucket: outcome.bucket, hitAt: outcome.bucket }
+    : null;
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <MultiplierRow multipliers={displayedMultipliers} landedBucket={displayedLandedBucket} />
+      <MultiplierRow multipliers={multipliers} landedBucket={landedBucket} />
       <VerifyRowsSlider rows={rows} onRowsChange={onRowsChange} />
       <VerifyRiskSelector risk={risk} onRiskChange={onRiskChange} />
     </div>
