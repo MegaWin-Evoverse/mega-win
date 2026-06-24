@@ -11,7 +11,7 @@ interface SegmentedTabItem<T extends string> {
 }
 
 interface Props<T extends string> {
-  items: SegmentedTabItem<T>[];
+  items: readonly SegmentedTabItem<T>[];
   value: T;
   onValueChange: (value: T) => void;
   className?: string;
