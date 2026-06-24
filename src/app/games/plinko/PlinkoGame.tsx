@@ -23,7 +23,7 @@ export function PlinkoGame() {
   const multipliers = PLINKO_MULTIPLIERS[risk][rows];
 
   return (
-    <div className="mx-auto flex w-full max-w-[1017px] flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-[1017px] flex-col">
       <div className="flex w-full flex-col-reverse items-stretch overflow-hidden rounded-2xl py-4 lg:flex-row lg:py-10">
         <ControlPanel
           game={GAME.PLINKO}
@@ -43,7 +43,7 @@ export function PlinkoGame() {
         </div>
       </div>
       <GameSettingsBar game={GAME.PLINKO} className="mt-1" />
-      <BetsStory />
+      <BetsStory className="mt-10" />
     </div>
   );
 }
