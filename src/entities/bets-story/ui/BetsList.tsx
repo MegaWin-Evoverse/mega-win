@@ -10,11 +10,12 @@ const CELL_CLASS = 'h-11 px-4 py-3 text-xs text-brand-text-white';
 
 interface Props {
   bets: Bet[];
+  className?: string;
 }
 
-export function BetsList({ bets }: Props) {
+export function BetsList({ bets, className }: Props) {
   return (
-    <Table>
+    <Table className={className}>
       <TableHeader className="[&_tr]:border-0">
         <TableRow className="border-0 hover:bg-transparent">
           <TableHead className={HEAD_CLASS}>{COLUMN_HEADERS.USER}</TableHead>

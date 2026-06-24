@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GAME_PANEL_TAB, type GamePanelTab, GAME_BALANCE } from '@/shared/config';
+import { GAME_PANEL_TAB, type GamePanelTab } from '@/shared/config';
 import {
   sanitizeBetInput,
   normalizeBetValue,
@@ -7,7 +7,7 @@ import {
   calcDoubleBet,
   calcMaxBet,
 } from '@/shared/lib/betAmount';
-import { type Risk, GAME_CONTROLS_DEFAULTS, PLINKO_ROWS } from './constants';
+import { type Risk, RISK, GAME_CONTROLS_DEFAULTS, PLINKO_ROWS } from './constants';
 
 const DIGITS_ONLY = /\D/g;
 
@@ -15,7 +15,7 @@ export interface GameControlsState {
   activeTab: GamePanelTab;
   betAmount: string;
   balance: number;
-  risk: Risk | null;
+  risk: Risk;
   rows: number;
   numberOfBets: string;
   selectedChip: string | null;
@@ -25,6 +25,9 @@ export interface GameControlsState {
   stopOnProfit: string;
   stopOnLoss: string;
   isBetActive: boolean;
+  applyBet: (amount: number) => void;
+  applyWin: (amount: number) => void;
+  setBalance: (balance: number) => void;
   betCallback: (() => void) | null;
   setBetCallback: (fn: (() => void) | null) => void;
   setTab: (tab: GamePanelTab) => void;
@@ -46,8 +49,8 @@ export interface GameControlsState {
 const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   activeTab: GAME_PANEL_TAB.MANUAL,
   betAmount: GAME_CONTROLS_DEFAULTS.BET_AMOUNT_TEXT,
-  balance: GAME_BALANCE,
-  risk: null,
+  balance: GAME_CONTROLS_DEFAULTS.BALANCE,
+  risk: RISK.LOW,
   rows: PLINKO_ROWS.DEFAULT,
   numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS,
   selectedChip: null,
@@ -57,6 +60,9 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   stopOnProfit: GAME_CONTROLS_DEFAULTS.STOP_ON_PROFIT,
   stopOnLoss: GAME_CONTROLS_DEFAULTS.STOP_ON_LOSS,
   isBetActive: false,
+  applyBet: (amount) => set((state) => ({ balance: Math.max(0, state.balance - amount) })),
+  applyWin: (amount) => set((state) => ({ balance: state.balance + amount })),
+  setBalance: (balance) => set({ balance }),
   betCallback: null,
   setBetCallback: (betCallback) => set({ betCallback }),
   setTab: (activeTab) => set({ activeTab }),
@@ -98,6 +104,9 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   autoPick: () => {},
 }));
 
-export function useGameControlsStore<T>(selector: (state: GameControlsState) => T): T {
-  return useGameControlsStoreRaw(selector);
-}
+export const useGameControlsStore = Object.assign(
+  function useGameControlsStore<T>(selector: (s: GameControlsState) => T): T {
+    return useGameControlsStoreRaw(selector);
+  },
+  { getState: useGameControlsStoreRaw.getState, setState: useGameControlsStoreRaw.setState }
+);

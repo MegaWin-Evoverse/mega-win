@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
-import type { Game } from '@/entities/game';
-import { DEFAULT_VERIFY_NONCE } from './constants';
+import type { Game, Risk } from '@/entities/game';
+import { DEFAULT_VERIFY_NONCE, DEFAULT_VERIFY_ROWS, DEFAULT_VERIFY_RISK } from './constants';
 
 export interface VerifyFormState {
   selectedVerifyGame: Game;
@@ -12,6 +12,10 @@ export interface VerifyFormState {
   onServerSeedChange: (value: string) => void;
   verifyNonce: string;
   onNonceChange: (value: string) => void;
+  verifyRows: number;
+  onRowsChange: (rows: number) => void;
+  verifyRisk: Risk;
+  onRiskChange: (risk: Risk) => void;
 }
 
 export function useVerifyForm(game: Game): VerifyFormState {
@@ -19,6 +23,8 @@ export function useVerifyForm(game: Game): VerifyFormState {
   const [verifyClientSeed, setVerifyClientSeed] = useState<string>('');
   const [verifyServerSeed, setVerifyServerSeed] = useState<string>('');
   const [verifyNonce, setVerifyNonce] = useState<string>(DEFAULT_VERIFY_NONCE);
+  const [verifyRows, setVerifyRows] = useState<number>(DEFAULT_VERIFY_ROWS);
+  const [verifyRisk, setVerifyRisk] = useState<Risk>(DEFAULT_VERIFY_RISK);
 
   return {
     selectedVerifyGame,
@@ -29,5 +35,9 @@ export function useVerifyForm(game: Game): VerifyFormState {
     onServerSeedChange: setVerifyServerSeed,
     verifyNonce,
     onNonceChange: setVerifyNonce,
+    verifyRows,
+    onRowsChange: setVerifyRows,
+    verifyRisk,
+    onRiskChange: setVerifyRisk,
   };
 }

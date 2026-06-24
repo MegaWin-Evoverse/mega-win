@@ -1,10 +1,3 @@
-export interface CampaignDecoration {
-  src: string;
-  width: number;
-  height: number;
-  className: string;
-}
-
 export interface CampaignCardData {
   id: string;
   variant: 'promoPurple' | 'promoRed';
@@ -14,7 +7,7 @@ export interface CampaignCardData {
   useCodeLabel?: string;
   endTimeString: string;
   logoSrc?: string;
-  decorations: readonly CampaignDecoration[];
+  bgImageSrc: string;
 }
 
 export const CAMPAIGN_IDS = {
@@ -43,30 +36,7 @@ export const CAMPAIGN_CARDS: readonly CampaignCardData[] = [
     promoCode: 'MEGAWIN',
     useCodeLabel: 'Use code:',
     endTimeString: '2d : 15h : 35m',
-    logoSrc: '/bonuses-cards/degencity.svg',
-    decorations: [
-      {
-        src: '/bonuses-cards/gift.webp',
-        width: 553,
-        height: 274,
-        className:
-          'absolute w-[553px] h-[274px] left-[15px] bottom-0 rotate-[6.77deg] z-10 pointer-events-none select-none',
-      },
-      {
-        src: '/bonuses-cards/chips.svg',
-        width: 166,
-        height: 95,
-        className:
-          'absolute w-[166px] h-[95px] left-[232px] bottom-0 rotate-[2deg] z-10 pointer-events-none select-none',
-      },
-      {
-        src: '/bonuses-cards/chip.svg',
-        width: 42,
-        height: 90,
-        className:
-          'absolute w-[42px] h-[90px] right-0 top-[9px]  z-10 pointer-events-none select-none',
-      },
-    ],
+    bgImageSrc: '/bonuses-cards/fortune-bg.webp',
   },
   {
     id: CAMPAIGN_IDS.MONTHLY_COMPETITION,
@@ -74,28 +44,6 @@ export const CAMPAIGN_CARDS: readonly CampaignCardData[] = [
     subtitle: 'Monthly',
     title: 'Competition',
     endTimeString: '2d : 15h : 35m',
-    decorations: [
-      {
-        src: '/bonuses-cards/award.webp',
-        width: 280,
-        height: 220,
-        className:
-          'absolute w-[280px] h-[220px] right-[25px] bottom-0  promo-cup-filter z-10 pointer-events-none select-none',
-      },
-      {
-        src: '/bonuses-cards/coin-1.svg',
-        width: 144,
-        height: 200,
-        className:
-          'absolute w-[144.31px] h-[200.94px] right-[10px] top-[-10px] z-[11] pointer-events-none select-none',
-      },
-      {
-        src: '/bonuses-cards/coin-2.svg',
-        width: 106,
-        height: 148,
-        className:
-          'absolute w-[106.89px] h-[148.83px] right-[180px] bottom-[10px] z-[11] pointer-events-none select-none',
-      },
-    ],
+    bgImageSrc: '/bonuses-cards/competition-bg.webp',
   },
 ] as const;

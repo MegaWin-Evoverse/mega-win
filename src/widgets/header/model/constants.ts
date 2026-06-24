@@ -1,4 +1,4 @@
-import { User as UserIcon, Link2, ShoppingCart, Archive, Users, Shield } from 'lucide-react';
+import { Link2, ShoppingCart, Archive, Users, Shield } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
 
@@ -9,7 +9,6 @@ export interface UserMenuItem {
 }
 
 export const USER_MENU_ITEMS: UserMenuItem[] = [
-  { label: 'Profile', href: ROUTES.PROFILE, icon: UserIcon },
   { label: 'Connections', href: ROUTES.CONNECTIONS, icon: Link2 },
   { label: 'Points Shop', href: ROUTES.POINTSHOP, icon: ShoppingCart },
   { label: 'Bets History', href: ROUTES.BETS_HISTORY, icon: Archive },
@@ -17,6 +16,7 @@ export const USER_MENU_ITEMS: UserMenuItem[] = [
   { label: 'Seed history', href: ROUTES.SEED_HISTORY, icon: Shield },
 ];
 
+export const PROFILE_LABEL = 'Profile';
 export const LOGOUT_LABEL = 'Logout';
 export const BALANCE_HEADER = 'Points Balance';
 export const EXCHANGE_LABEL = 'Exchange Points';

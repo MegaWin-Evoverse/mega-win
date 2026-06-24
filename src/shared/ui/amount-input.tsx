@@ -33,6 +33,10 @@ export function AmountInput({
     onValueChange?.(event.target.value);
   }
 
+  function handleFocus() {
+    if (Number.parseFloat(value) === 0) onValueChange?.('');
+  }
+
   return (
     <div
       className={cn(
@@ -47,10 +51,11 @@ export function AmountInput({
           inputMode={inputMode}
           value={value}
           onChange={handleChange}
+          onFocus={handleFocus}
           onBlur={onBlur}
           readOnly={readOnly}
           className={cn(
-            'h-auto border-0 bg-transparent p-0 font-outfit text-sm text-brand-text-light shadow-none focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent',
+            'h-auto border-0 bg-transparent p-1 font-outfit text-sm text-brand-text-light shadow-none focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent',
             readOnly && 'pointer-events-none select-none'
           )}
         />
