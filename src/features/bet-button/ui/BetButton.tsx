@@ -9,6 +9,7 @@ interface Props {
   requiresBet: boolean;
   onBet?: () => void;
   className?: string;
+  isBetting?: boolean;
   isAutoRunning?: boolean;
   autoActiveLabel?: string;
 }
@@ -19,6 +20,7 @@ export function BetButton({
   requiresBet,
   onBet,
   className,
+  isBetting,
   isAutoRunning,
   autoActiveLabel,
 }: Props) {
@@ -35,7 +37,7 @@ export function BetButton({
       variant={isStopState ? 'main-stop' : 'main'}
       size="play"
       onClick={onBet}
-      disabled={!canBet}
+      disabled={!canBet && !isBetting}
       className={cn('order-first lg:order-none', className)}
     >
       {label}

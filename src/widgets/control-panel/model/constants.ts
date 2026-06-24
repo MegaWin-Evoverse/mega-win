@@ -28,8 +28,6 @@ interface ControlPanelClassNames {
   tableActionsSection?: string;
 }
 
-// Per-game LAYOUT config: which feature-blocks the panel renders and how they are
-// positioned. State lives in entities/game; this file only describes composition.
 interface ControlPanelConfig {
   showBetAmount: boolean;
   riskOptions: readonly RiskOption[] | null;
@@ -98,7 +96,11 @@ export const CONTROL_PANEL_CONFIG: Record<Game, ControlPanelConfig> = {
     showChips: false,
     tableActions: null,
     requiresBet: true,
-    betLabels: { manual: BET_LABELS.BET, auto: BET_LABELS.START_AUTOBET },
+    betLabels: {
+      manual: BET_LABELS.BET,
+      auto: BET_LABELS.START_AUTOBET,
+      autoActive: BET_LABELS.STOP_AUTOBET,
+    },
     classNames: {
       betAmountField: 'order-3 lg:order-none lg:mt-8',
       actionButton: 'lg:mt-6',
