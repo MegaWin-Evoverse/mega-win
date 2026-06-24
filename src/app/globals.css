@@ -162,6 +162,10 @@
   --color-coin-watch: var(--coin-watch);
   --color-plinko-multiplier-text: var(--plinko-multiplier-text);
   --color-brand-red: var(--brand-red);
+  --color-filter-icon-all: var(--filter-icon-all);
+  --color-crypto-btc: var(--crypto-btc);
+  --color-crypto-eth: var(--crypto-eth);
+  --color-crypto-ltc: var(--crypto-ltc);
 }
 
 :root {
@@ -186,6 +190,10 @@
   --brand-red: oklch(0.55 0.22 25);
   --coin-game: #fbbf24;
   --coin-watch: #22c55e;
+  --filter-icon-all: oklch(0.852 0.199 91.936);
+  --crypto-btc: oklch(0.75 0.183 55.934);
+  --crypto-eth: oklch(0.707 0.165 254.624);
+  --crypto-ltc: oklch(0.714 0.203 305.504);
   --brand-dark: #07111a;
   --brand-border: #1b1f26;
   --brand-bg: #0e121c;
