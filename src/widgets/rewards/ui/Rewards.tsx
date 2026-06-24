@@ -33,16 +33,9 @@ export function Rewards() {
               <SelectValue className="font-outfit text-sm font-medium text-brand-green-to flex-none" />
             </div>
           </SelectTrigger>
-          <SelectContent
-            alignItemWithTrigger={false}
-            className="bg-[var(--gs-content)] border border-brand-border/30"
-          >
+          <SelectContent alignItemWithTrigger={false}>
             {SORT_OPTIONS.map((option) => (
-              <SelectItem
-                key={option.value}
-                value={option.value}
-                className="font-outfit font-medium text-sm text-[var(--auth-text-muted)] px-4 py-3 rounded-lg focus:bg-brand-border/50 focus:text-brand-text-white"
-              >
+              <SelectItem key={option.value} value={option.value} className="font-outfit">
                 {option.label}
               </SelectItem>
             ))}

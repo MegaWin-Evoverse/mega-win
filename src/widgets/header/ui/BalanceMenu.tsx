@@ -43,7 +43,7 @@ export function BalanceMenu({ balances }: Props) {
         <p className="mb-3 text-sm font-semibold">{BALANCE_HEADER}</p>
 
         <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between rounded-lg bg-muted p-3">
+          <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
               <Coins className="size-4 text-coin-game" />
               <span className="text-sm">{GAME_POINTS_LABEL}</span>
@@ -51,7 +51,7 @@ export function BalanceMenu({ balances }: Props) {
             </div>
             <span className="text-sm font-medium">{formatBalance(gamePoints)}</span>
           </div>
-          <div className="flex items-center justify-between rounded-lg bg-muted p-3">
+          <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
               <Coins className="size-4 text-coin-watch" />
               <span className="text-sm">{WATCH_POINTS_LABEL}</span>
@@ -61,9 +61,11 @@ export function BalanceMenu({ balances }: Props) {
           </div>
         </div>
 
-        <Button variant="outline" className="mt-3 w-full gap-2">
-          <RefreshCw className="size-4" />
-          {EXCHANGE_LABEL}
+        <Button variant="outline" className="group mt-3 h-auto w-full py-4">
+          <span className="flex items-center gap-2 transition-all duration-500 ease-out group-hover:translate-x-2">
+            <RefreshCw className="size-4" />
+            {EXCHANGE_LABEL}
+          </span>
         </Button>
       </DropdownMenuContent>
     </DropdownMenu>
