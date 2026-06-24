@@ -7,6 +7,7 @@ import { getGameIcon, getGameLabel } from '../model/helpers';
 import { useVerifyOutcome } from '../model/useVerifyOutcome';
 import type { VerifyFormState } from '../model/useVerifyForm';
 import { FairnessRouletteBoard } from './FairnessRouletteBoard';
+import { FairnessPlinkoPreview } from './FairnessPlinkoPreview';
 
 type Props = VerifyFormState;
 
@@ -19,6 +20,10 @@ export function FairnessVerifyTab({
   onServerSeedChange,
   verifyNonce,
   onNonceChange,
+  verifyRows,
+  onRowsChange,
+  verifyRisk,
+  onRiskChange,
 }: Props) {
   const winningNumber = useVerifyOutcome(verifyClientSeed, verifyServerSeed, verifyNonce);
 
@@ -27,6 +32,17 @@ export function FairnessVerifyTab({
       <div className="flex flex-col gap-3 w-full">
         {selectedVerifyGame === GAME.ROULETTE && (
           <FairnessRouletteBoard winningNumber={winningNumber} />
+        )}
+        {selectedVerifyGame === GAME.PLINKO && (
+          <FairnessPlinkoPreview
+            rows={verifyRows}
+            onRowsChange={onRowsChange}
+            risk={verifyRisk}
+            onRiskChange={onRiskChange}
+            clientSeed={verifyClientSeed}
+            serverSeed={verifyServerSeed}
+            nonce={verifyNonce}
+          />
         )}
         <div className="flex flex-col gap-1 w-full">
           <span className="font-outfit font-light text-sm text-brand-text-light select-none">

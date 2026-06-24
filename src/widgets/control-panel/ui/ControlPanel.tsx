@@ -12,6 +12,7 @@ import { CONTROL_PANEL_CONFIG } from '../model/constants';
 interface Props {
   game: Game;
   onBet?: () => void;
+  isBetting?: boolean;
   placedBet?: number;
   isAutoRunning?: boolean;
   autoRunningLabel?: string;
@@ -23,6 +24,7 @@ interface Props {
 export function ControlPanel({
   game,
   onBet,
+  isBetting,
   placedBet,
   isAutoRunning,
   autoRunningLabel,
@@ -66,6 +68,7 @@ export function ControlPanel({
         autoLabel={config.betLabels.auto}
         requiresBet={config.requiresBet}
         onBet={onBet}
+        isBetting={isBetting}
         isAutoRunning={isAutoRunning}
         autoActiveLabel={autoRunningLabel ?? config.betLabels.autoActive}
         className={config.classNames.actionButton}

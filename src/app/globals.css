@@ -160,6 +160,8 @@
   --color-dice-glow: var(--dice-glow);
   --color-coin-game: var(--coin-game);
   --color-coin-watch: var(--coin-watch);
+  --color-plinko-multiplier-text: var(--plinko-multiplier-text);
+  --color-brand-red: var(--brand-red);
   --color-filter-icon-all: var(--filter-icon-all);
   --color-crypto-btc: var(--crypto-btc);
   --color-crypto-eth: var(--crypto-eth);
@@ -181,9 +183,11 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --brand-red: oklch(0.55 0.22 25);
   --coin-game: #fbbf24;
   --coin-watch: #22c55e;
   --filter-icon-all: oklch(0.852 0.199 91.936);
@@ -275,6 +279,31 @@
   --risk-medium: oklch(0.87 0.17 92);
   --risk-high: oklch(0.54 0.22 27);
   --chip-active-glow: oklch(0.7 0.15 162);
+  --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
+  --bg-cell: var(--button-brand-bg-disabled);
+  --brand-red: oklch(0.55 0.22 25);
+  /* Roulette betting table */
+  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
+  --roulette-chip-glow: oklch(1 0 0 / 0.4);
+  --plinko-multiplier-text: oklch(0.18 0.03 268);
+  --plinko-red-from: oklch(0.62 0.22 25);
+  --plinko-red-to: oklch(0.4 0.16 25);
+  --plinko-orange-from: oklch(0.7 0.18 50);
+  --plinko-orange-to: oklch(0.46 0.13 45);
+  --plinko-orange-light-from: oklch(0.78 0.16 70);
+  --plinko-orange-light-to: oklch(0.52 0.13 55);
+  --plinko-yellow-from: oklch(0.86 0.16 95);
+  --plinko-yellow-to: oklch(0.66 0.14 80);
+  --plinko-green-from: oklch(0.78 0.2 150);
+  --plinko-green-to: oklch(0.55 0.16 150);
+  --plinko-peg: #3f4a59;
+  --plinko-peg-glow: var(--border-brand-main);
+  --plinko-ball-highlight: oklch(0.88 0.12 145);
+  --plinko-ball-from: oklch(0.72 0.2 150);
+  --plinko-ball-to: oklch(0.55 0.18 150);
+  --plinko-ball-trail-from: #0a271a;
+  --plinko-ball-trail-to: #39b17d;
 }
 
 .dark {
@@ -283,9 +312,11 @@
   --bg-primary-hover: #141827;
   --card-feature: #0e1519;
   --border-default: #1b1f26;
+  --border-brand-main: var(--brand-green-to);
   --brand-green-from: #4ade80;
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
+  --brand-red: oklch(0.55 0.22 25);
   --coin-game: #fbbf24;
   --coin-watch: #22c55e;
   --text-brand: var(--brand-green-to);
@@ -369,32 +400,69 @@
   --chip-active-glow: oklch(0.7 0.15 162);
   --border-control: #3f4a59;
   --surface-toggle: #1e293b;
-  --chip-active-glow: oklch(0.70 0.15 162);
   --roulette-red: oklch(0.577 0.245 27.325);
   --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
   --roulette-chip-glow: oklch(1 0 0 / 0.4);
+}
+
+@layer utilities {
+  .bg-plinko-red {
+    background-image: linear-gradient(135deg, var(--plinko-red-from), var(--plinko-red-to));
+  }
+  .bg-plinko-orange {
+    background-image: linear-gradient(135deg, var(--plinko-orange-from), var(--plinko-orange-to));
+  }
+  .bg-plinko-orange-light {
+    background-image: linear-gradient(
+      135deg,
+      var(--plinko-orange-light-from),
+      var(--plinko-orange-light-to)
+    );
+  }
+  .bg-plinko-yellow {
+    background-image: linear-gradient(135deg, var(--plinko-yellow-from), var(--plinko-yellow-to));
+  }
+  .bg-plinko-green {
+    background-image: linear-gradient(135deg, var(--plinko-green-from), var(--plinko-green-to));
+  }
 }
 
 @utility bg-auth-btn-primary {
   background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
 }
 
-@utility bg-auth-btn-social {
-  background: linear-gradient(180deg, var(--auth-surface) 0%, var(--auth-surface-light) 100%);
+@keyframes plinko-bucket-land {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  35% {
+    transform: translateY(6px) scaleY(0.82);
+  }
+  65% {
+    transform: translateY(-3px) scaleY(1.06);
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
 }
 
-.auth-tabs-nav [data-slot='tabs-trigger'][data-active] {
-  background: linear-gradient(180deg,
-      var(--auth-surface-dim) 0%,
-      var(--auth-surface-light-dim) 100%);
-  color: var(--auth-text);
-  box-shadow: none;
-  border-color: transparent;
+@utility animate-plinko-bucket-land {
+  animation: plinko-bucket-land 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.auth-tabs-nav [data-slot='tabs-trigger']:not([data-active]) {
-  background: transparent;
-  color: var(--auth-text-secondary);
+@keyframes plinko-history-enter {
+  0% {
+    transform: translateY(-10px) scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@utility animate-plinko-history-enter {
+  animation: plinko-history-enter 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @layer base {
@@ -455,8 +523,7 @@
   border-radius: 8px;
   border: 2px solid transparent;
   background:
-    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%)
-      padding-box,
+    linear-gradient(180deg, var(--auth-surface-dim) 0%, var(--auth-surface-light-dim) 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%) border-box;
   transition:
     background 0.15s ease-in-out,
@@ -470,20 +537,16 @@
 }
 
 .hero-banner-bg {
-  background: linear-gradient(
-    84.47deg,
-    rgba(15, 22, 26, 0.94) 2.15%,
-    rgba(19, 21, 23, 0.94) 98.56%
-  );
+  background: linear-gradient(84.47deg,
+      rgba(15, 22, 26, 0.94) 2.15%,
+      rgba(19, 21, 23, 0.94) 98.56%);
 }
 
 .hero-radial-glow {
-  background: radial-gradient(
-    78.35% 190.25% at 64.43% 30.64%,
-    rgba(48, 223, 140, 0.15) 0%,
-    rgba(33, 173, 107, 0.03) 50%,
-    rgba(13, 110, 64, 0) 91.23%
-  );
+  background: radial-gradient(78.35% 190.25% at 64.43% 30.64%,
+      rgba(48, 223, 140, 0.15) 0%,
+      rgba(33, 173, 107, 0.03) 50%,
+      rgba(13, 110, 64, 0) 91.23%);
 }
 
 .hero-ellipse-glow {
@@ -518,22 +581,33 @@
   background-size: auto, cover, cover;
 }
 
+.games-hero-bg {
+  background-image: url('/games/hero-bg.webp');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.games-hero-glow {
+  background: linear-gradient(180deg,
+      rgba(108, 31, 178, 0.1) 0%,
+      rgba(108, 31, 178, 0.06) 35%,
+      rgba(108, 31, 178, 0.02) 70%,
+      rgba(108, 31, 178, 0) 100%);
+}
+
 .feature-glow-outer {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.28) 0%,
-    rgba(49, 255, 76, 0.08) 50%,
-    transparent 85%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.28) 0%,
+      rgba(49, 255, 76, 0.08) 50%,
+      transparent 85%);
 }
 
 .feature-glow-inner {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(49, 255, 76, 0.58) 0%,
-    rgba(49, 255, 76, 0.18) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(49, 255, 76, 0.58) 0%,
+      rgba(49, 255, 76, 0.18) 45%,
+      transparent 75%);
 }
 
 /* Promo Cards & Campaigns Section */
@@ -554,31 +628,25 @@
 }
 
 .promo-ellipse-6743-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.7) 4.92%,
-    rgba(36, 166, 199, 0.7) 34.46%,
-    rgba(106, 0, 255, 0.7) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.7) 4.92%,
+      rgba(36, 166, 199, 0.7) 34.46%,
+      rgba(106, 0, 255, 0.7) 91.82%);
   filter: blur(124.719px);
 }
 
 .promo-ellipse-6744-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(43, 6, 162, 0.3) 4.92%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(43, 6, 162, 0.3) 4.92%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(116.555px);
 }
 
 .promo-ellipse-6742-purple {
-  background: linear-gradient(
-    359.14deg,
-    rgba(0, 255, 170, 0.3) 4.92%,
-    rgba(36, 166, 199, 0.3) 34.46%,
-    rgba(106, 0, 255, 0.3) 91.82%
-  );
+  background: linear-gradient(359.14deg,
+      rgba(0, 255, 170, 0.3) 4.92%,
+      rgba(36, 166, 199, 0.3) 34.46%,
+      rgba(106, 0, 255, 0.3) 91.82%);
   filter: blur(100px);
 }
 
@@ -641,11 +709,9 @@
 }
 
 .gs-sparkle {
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(214, 189, 255, 0.5) 0%,
-    rgba(80, 91, 229, 0.5) 100%
-  );
+  background: radial-gradient(50% 50% at 50% 50%,
+      rgba(214, 189, 255, 0.5) 0%,
+      rgba(80, 91, 229, 0.5) 100%);
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.38);
 }
 

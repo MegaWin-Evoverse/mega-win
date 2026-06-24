@@ -7,9 +7,6 @@ import { Recaptcha } from '@/shared/ui/recaptcha';
 import { Checkbox } from '@/shared/ui/checkbox';
 import { FieldError } from '@/shared/ui/field-error';
 import { BUTTON_TEXT } from '../model/constants';
-import { GoogleIcon } from './icons/GoogleIcon';
-import { DiscordIcon } from './icons/DiscordIcon';
-import { SteamIcon } from './icons/SteamIcon';
 
 export function SignUpFormBody() {
   const { errors, register, onSubmit, isPending, recaptchaKey, setRecaptchaToken } = useSignUp();
@@ -27,7 +24,7 @@ export function SignUpFormBody() {
           id="username"
           placeholder="Enter your username"
           type="text"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           {...register('username')}
         />
         {errors.username && <FieldError message={errors.username.message} />}
@@ -40,7 +37,7 @@ export function SignUpFormBody() {
           id="email"
           placeholder="Enter your email"
           type="email"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           {...register('email')}
         />
         {errors.email && <FieldError message={errors.email.message} />}
@@ -53,7 +50,7 @@ export function SignUpFormBody() {
           id="password"
           placeholder="Enter your password"
           type="password"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           {...register('password')}
         />
         {errors.password && <FieldError message={errors.password.message} />}
@@ -91,37 +88,6 @@ export function SignUpFormBody() {
       >
         {BUTTON_TEXT['sign-up']}
       </Button>
-      <div className="flex items-center gap-[10px]">
-        <div className="h-px flex-1 rounded-[6px] bg-auth-surface" />
-        <span className="text-sm uppercase text-auth-text-muted">OR</span>
-        <div className="h-px flex-1 rounded-[6px] bg-auth-surface" />
-      </div>
-      <div className="flex gap-[16px]">
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <GoogleIcon />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <DiscordIcon />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <SteamIcon />
-        </Button>
-      </div>
     </form>
   );
 }

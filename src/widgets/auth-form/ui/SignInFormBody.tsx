@@ -5,9 +5,6 @@ import { Input } from '@/shared/ui/input';
 import { Recaptcha } from '@/shared/ui/recaptcha';
 import { FieldError } from '@/shared/ui/field-error';
 import { BUTTON_TEXT } from '../model/constants';
-import { GoogleIcon } from './icons/GoogleIcon';
-import { DiscordIcon } from './icons/DiscordIcon';
-import { SteamIcon } from './icons/SteamIcon';
 
 export function SignInFormBody() {
   const { errors, register, onSubmit, isPending, recaptchaKey, setRecaptchaToken } = useSignIn();
@@ -22,7 +19,7 @@ export function SignInFormBody() {
           id="email"
           placeholder="Enter your email"
           type="email"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           {...register('email')}
         />
         {errors.email && <FieldError message={errors.email.message} />}
@@ -35,7 +32,7 @@ export function SignInFormBody() {
           id="password"
           placeholder="Enter your password"
           type="password"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           {...register('password')}
         />
         {errors.password && <FieldError message={errors.password.message} />}
@@ -48,37 +45,6 @@ export function SignInFormBody() {
       >
         {BUTTON_TEXT['sign-in']}
       </Button>
-      <div className="flex items-center gap-[10px]">
-        <div className="h-px flex-1 rounded-[6px] bg-auth-surface" />
-        <span className="text-sm uppercase text-auth-text-muted">OR</span>
-        <div className="h-px flex-1 rounded-[6px] bg-auth-surface" />
-      </div>
-      <div className="flex gap-[16px]">
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <GoogleIcon />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <DiscordIcon />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          className="h-[48px] flex-1 rounded-[8px] border border-auth-surface bg-auth-btn-social hover:bg-auth-btn-social hover:opacity-85"
-          disabled
-        >
-          <SteamIcon />
-        </Button>
-      </div>
     </form>
   );
 }
