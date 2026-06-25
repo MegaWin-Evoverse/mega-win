@@ -39,7 +39,7 @@ export default function RouletteRoute() {
         }
       />
       <GameSettingsBar game={GAME.ROULETTE} className="mt-1" />
-      <div className="mt-10">
+      <div className="mx-auto mt-10 w-full max-w-[1017px]">
         <BetsStory />
       </div>
     </div>
