@@ -12,32 +12,32 @@ export const FAQ_CONSTANTS = {
 export const FAQ_ITEMS: readonly FAQItem[] = [
   {
     id: 'faq-1',
-    question: 'How do I participate in the leaderboard?',
+    question: 'What are rewards?',
     answer:
-      'Create a DegenCity account using our promo code, connect your Discord, and participate in daily and weekly activities to climb the rankings.',
+      'Rewards are limited-time campaigns, bonuses, and giveaways from TheDoctor for the community. Each card on this page is a separate campaign with its own terms and prizes.',
   },
   {
     id: 'faq-2',
-    question: 'When are the weekly giveaways announced?',
+    question: 'How do I claim a reward?',
     answer:
-      'All giveaways and promotional events are posted in our Discord server under the Announcements and Giveaways channels.',
+      'Open the reward card to see the full campaign details and terms, then follow the action button. Depending on the campaign, it can take you to DegenCity, Discord, or another official destination to complete the claim.',
   },
   {
     id: 'faq-3',
-    question: 'How often is the leaderboard updated?',
+    question: 'Who can participate?',
     answer:
-      'The monthly leaderboard is updated in real-time, allowing you to track your rank and potential rewards instantly.',
+      'Most rewards require a DegenCity account registered under code THEDOCTOR and a linked Discord. Each campaign lists its own conditions, and entries go through eligibility checks before fulfillment.',
   },
   {
     id: 'faq-4',
-    question: 'Can I use multiple accounts to claim rewards?',
+    question: 'How long do rewards stay active?',
     answer:
-      'No, users are restricted to one account per person. Any attempt to use multiple accounts will result in disqualification from all promotions.',
+      'Rewards with an end date show a countdown timer — claim them before it runs out. Rewards without a timer stay active until they are updated or hidden.',
   },
   {
     id: 'faq-5',
-    question: 'How do I claim my tournament rewards?',
+    question: 'What happens when a reward expires?',
     answer:
-      'Tournament rewards are automatically credited to your connected account within 24 hours of the tournament completion.',
+      'Expired rewards are removed from the list and can no longer be claimed, but new campaigns appear regularly — check back or follow announcements in Discord.',
   },
 ] as const;
