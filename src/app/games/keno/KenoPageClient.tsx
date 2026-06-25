@@ -2,6 +2,7 @@
 import { ControlPanel } from '@/widgets/control-panel';
 import { KenoGame, useKenoGame } from '@/widgets/keno-game';
 import { GAME } from '@/entities/game';
+import { RevealOnScroll } from '@/shared/ui/RevealOnScroll';
 
 export function KenoPageClient() {
   const {
@@ -18,7 +19,7 @@ export function KenoPageClient() {
   } = useKenoGame();
 
   return (
-    <div className="flex">
+    <RevealOnScroll triggerOn="mount" className="flex">
       <ControlPanel game={GAME.KENO} onBet={handlePlay} />
       <KenoGame
         phase={phase}
@@ -31,6 +32,6 @@ export function KenoPageClient() {
         onNumberToggle={handleNumberToggle}
         onReset={handleReset}
       />
-    </div>
+    </RevealOnScroll>
   );
 }
