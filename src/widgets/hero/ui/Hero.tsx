@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { BUTTON_LABELS } from '@/shared/config';
 import { useIsMobile } from '@/shared/hooks/useIsMobile';
+import { useUserQuery } from '@/entities/user';
 
 interface Props {
   onRegisterClick?: () => void;
@@ -16,6 +17,8 @@ const ARIA_REGISTER_BUTTON = 'Register for an account';
 
 export function Hero({ onRegisterClick }: Props) {
   const { isMobile } = useIsMobile();
+  const { data: user, isPending: isUserPending } = useUserQuery();
+  const canShowRegisterButton = !user && !isUserPending;
   return (
     <section
       role="region"
@@ -31,15 +34,17 @@ export function Hero({ onRegisterClick }: Props) {
             {HERO_DESCRIPTION}
           </p>
         </div>
-        <Button
-          variant="main"
-          size="none"
-          onClick={onRegisterClick}
-          aria-label={ARIA_REGISTER_BUTTON}
-          className="w-[140px] h-12 rounded-lg text-lg flex items-center justify-center font-outfit font-medium text-brand-dark"
-        >
-          {BUTTON_LABELS.REG}
-        </Button>
+        {canShowRegisterButton && (
+          <Button
+            variant="main"
+            size="none"
+            onClick={onRegisterClick}
+            aria-label={ARIA_REGISTER_BUTTON}
+            className="w-[140px] h-12 rounded-lg text-lg flex items-center justify-center font-outfit font-medium text-brand-dark"
+          >
+            {BUTTON_LABELS.REG}
+          </Button>
+        )}
       </div>
       <div
         aria-hidden
