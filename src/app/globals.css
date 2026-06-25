@@ -154,6 +154,8 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-leaderboard-disclaimer-text: var(--leaderboard-disclaimer-text);
+  --color-leaderboard-disclaimer-bg: var(--leaderboard-disclaimer-bg);
   --color-dice-thumb: var(--dice-thumb);
   --color-dice-tooltip-win: var(--dice-tooltip-win);
   --color-dice-tooltip-win-inner: var(--dice-tooltip-win-inner);
@@ -230,6 +232,8 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --leaderboard-disclaimer-text: #616a80;
+  --leaderboard-disclaimer-bg: rgba(82, 91, 113, 0.13);
   --dice-thumb: #3f4a59;
   --dice-tooltip-win: #1db901;
   --dice-tooltip-win-inner: #0e0f13;
@@ -350,6 +354,8 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --leaderboard-disclaimer-text: #616a80;
+  --leaderboard-disclaimer-bg: rgba(82, 91, 113, 0.13);
   --dice-thumb: #3f4a59;
   --dice-tooltip-win: #1db901;
   --dice-tooltip-win-inner: #0e0f13;
