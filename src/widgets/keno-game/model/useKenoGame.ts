@@ -1,8 +1,12 @@
 'use client';
+
 import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 import { useGameControlsStore, RISK, RISK_API_MAP, selectIsAutoMode } from '@/entities/game';
+import { useUserQuery } from '@/entities/user';
+import { useTurboModeStore } from '@/features/game-settings';
+import { getTurboValue } from '@/shared/lib/getTurboValue';
 import {
   MAX_PICKS,
   MIN_PICKS,
@@ -13,11 +17,13 @@ import {
   RESULT_DELAY_MS,
   AUTO_PICK_DELAY_MS,
   AUTO_BET_DELAY_MS,
+  AUTO_BET_DELAY_TURBO_MS,
   BET_DECIMALS,
   LABELS,
 } from './constants';
 import type { GamePhase, CellState, GameResult } from './types';
 import { useKenoBetMutation } from '../api/useKenoBetMutation';
+import { getGamePointsBalance } from './getGamePointsBalance';
 
 interface UseKenoGameResult {
   phase: GamePhase;
@@ -36,16 +42,32 @@ interface UseKenoGameResult {
 }
 
 export function useKenoGame(): UseKenoGameResult {
-  const { storeBetAmount, storeRisk, isAutoMode, storeNumberOfBets, storeDecrementNumberOfBets } =
-    useGameControlsStore(
-      useShallow((state) => ({
-        storeBetAmount: state.betAmount,
-        storeRisk: state.risk,
-        isAutoMode: selectIsAutoMode(state),
-        storeNumberOfBets: state.numberOfBets,
-        storeDecrementNumberOfBets: state.decrementNumberOfBets,
-      }))
-    );
+  const {
+    storeBetAmount,
+    storeRisk,
+    isAutoMode,
+    storeNumberOfBets,
+    storeDecrementNumberOfBets,
+    setBalance,
+  } = useGameControlsStore(
+    useShallow((state) => ({
+      storeBetAmount: state.betAmount,
+      storeRisk: state.risk,
+      isAutoMode: selectIsAutoMode(state),
+      storeNumberOfBets: state.numberOfBets,
+      storeDecrementNumberOfBets: state.decrementNumberOfBets,
+      setBalance: state.setBalance,
+    }))
+  );
+  const { data: user } = useUserQuery();
+  const gamePointsBalance = getGamePointsBalance(user);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
+
+  useEffect(() => {
+    if (gamePointsBalance !== null) {
+      setBalance(gamePointsBalance);
+    }
+  }, [gamePointsBalance, setBalance]);
 
   const [gameResult, setGameResult] = useState<GameResult>('idle');
   const [serverMultiplier, setServerMultiplier] = useState<number>(0);
@@ -127,6 +149,38 @@ export function useKenoGame(): UseKenoGameResult {
       setRevealedNumbers(new Set());
       setServerMultiplier(response.multiplier);
 
+      function finalize() {
+        setIsRevealing(false);
+        setGameResult(response.multiplier > 0 ? 'win' : 'lose');
+
+        if (!isAutoRunningRef.current) return;
+
+        storeDecrementNumberOfBets();
+        remainingBetsRef.current--;
+
+        if (remainingBetsRef.current <= 0) {
+          isAutoRunningRef.current = false;
+          setIsAutoRunning(false);
+          return;
+        }
+
+        autoBetNextTimeoutRef.current = setTimeout(
+          () => {
+            autoBetNextTimeoutRef.current = null;
+            if (isAutoRunningRef.current) {
+              fireBetRef.current();
+            }
+          },
+          getTurboValue(turboMode, AUTO_BET_DELAY_MS, AUTO_BET_DELAY_TURBO_MS)
+        );
+      }
+
+      if (turboMode) {
+        setRevealedNumbers(drawn);
+        finalize();
+        return;
+      }
+
       drawnArray.forEach((n: number, i: number) => {
         const timeout = setTimeout(
           () => {
@@ -143,37 +197,9 @@ export function useKenoGame(): UseKenoGameResult {
       });
 
       const finalTimeout = setTimeout(
-        () => {
-          setIsRevealing(false);
-          setGameResult(response.multiplier > 0 ? 'win' : 'lose');
-
-          if (!isAutoRunningRef.current) {
-            return;
-          }
-
-          storeDecrementNumberOfBets();
-
-          remainingBetsRef.current--;
-
-          if (remainingBetsRef.current <= 0) {
-            isAutoRunningRef.current = false;
-
-            setIsAutoRunning(false);
-
-            return;
-          }
-
-          autoBetNextTimeoutRef.current = setTimeout(() => {
-            autoBetNextTimeoutRef.current = null;
-
-            if (isAutoRunningRef.current) {
-              fireBetRef.current();
-            }
-          }, AUTO_BET_DELAY_MS);
-        },
+        finalize,
         (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
       );
-
       timeoutsRef.current.push(finalTimeout);
     },
     onError: () => {
