@@ -14,11 +14,24 @@ export function useUserProfileWindow() {
     setActiveTab(tab as ProfileWindowTab);
   }
 
+  const [isResetPasswordOpen, setIsResetPasswordOpen] = useState(false);
+
+  function onOpenResetPassword() {
+    setIsResetPasswordOpen(true);
+  }
+
+  function onCloseResetPassword() {
+    setIsResetPasswordOpen(false);
+  }
+
   return {
     user,
     isUserLoading,
     gamePointsBalance,
     activeTab,
     onTabChange,
+    isResetPasswordOpen,
+    onOpenResetPassword,
+    onCloseResetPassword,
   };
 }

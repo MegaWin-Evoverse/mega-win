@@ -1,17 +1,26 @@
 import type { BetsSortKey, CryptoWalletKey, ProfileWindowTab } from './types';
-import { User as UserIcon, History } from 'lucide-react';
+import { User as UserIcon, History, KeyRound, Link2 } from 'lucide-react';
 
 export const PROFILE_WINDOW_TABS = {
   PROFILE: 'profile',
   BETS_HISTORY: 'bets-history',
+  SEED_HISTORY: 'seed-history',
+  CONNECTIONS: 'connections',
 } as const;
 
 export const TAB_LABELS: Record<ProfileWindowTab, string> = {
   profile: 'Profile',
   'bets-history': 'Bets history',
+  'seed-history': 'Seed history',
+  connections: 'Connections',
 };
 
-export const TAB_LIST: ProfileWindowTab[] = ['profile', 'bets-history'];
+export const TAB_LIST: ProfileWindowTab[] = [
+  'profile',
+  'bets-history',
+  'seed-history',
+  'connections',
+];
 
 export const SECTION_LABELS = {
   PROFILE: 'Profile',
@@ -22,7 +31,11 @@ export const SECTION_LABELS = {
 
 export const USERNAME_LABEL = 'Username';
 
-export const USERNAME_HINT = "Used to login to site, can't be changed";
+export const USERNAME_HINT = 'Your display name visible to other users';
+
+export const USERNAME_EDIT_ARIA = 'Edit username';
+
+export const WALLET_UPDATE_ERROR = 'Failed to update wallet address';
 
 export const STAT_LABELS = {
   TOTAL_WAGERED: 'Total wagered',
@@ -50,14 +63,20 @@ export const DIALOG_TITLE = 'User Profile';
 
 export const DIALOG_DESCRIPTION = 'Manage your profile settings and preferences';
 
-export const STAT_CARD_IMAGE = {
-  SRC: '/total-rewards/dollar-coins 1.png',
-  ALT: '',
-  WIDTH: 72,
-  HEIGHT: 72,
+export const STAT_CARD_BACKGROUND = {
+  WAGERED: '/total-rewards/wagered.webp',
+  POINTS_SPENT: '/total-rewards/points.webp',
 } as const;
 
 export const HISTORY_TITLE = 'Bets history';
+
+export const SEED_HISTORY_TITLE = 'Seed history';
+
+export const SEED_HISTORY_EMPTY = 'No seed history found';
+
+export const CONNECTIONS_TITLE = 'Connections';
+
+export const CONNECTIONS_EMPTY = 'No connections found';
 
 export const SEARCH_PLACEHOLDER = 'Enter text';
 
@@ -120,10 +139,10 @@ export const DATE_FORMAT = new Intl.DateTimeFormat('en-GB', {
   hour12: true,
 });
 
-export const LABEL_COLOR: Record<CryptoWalletKey, string> = {
-  btcAddress: 'text-crypto-btc',
-  ethAddress: 'text-crypto-eth',
-  ltcAddress: 'text-crypto-ltc',
+export const CRYPTO_ICONS: Record<CryptoWalletKey, string> = {
+  btcAddress: '/crypto/btc.svg',
+  ethAddress: '/crypto/eth.svg',
+  ltcAddress: '/crypto/ltc.svg',
 };
 
 export const HEAD_CLASS = 'h-11 px-4 py-3 text-xs text-muted-foreground font-normal';
@@ -133,4 +152,6 @@ export const CELL_CLASS = 'h-14 px-4 py-3 text-sm';
 export const TAB_ICONS = {
   [PROFILE_WINDOW_TABS.PROFILE]: UserIcon,
   [PROFILE_WINDOW_TABS.BETS_HISTORY]: History,
+  [PROFILE_WINDOW_TABS.SEED_HISTORY]: KeyRound,
+  [PROFILE_WINDOW_TABS.CONNECTIONS]: Link2,
 } as const;
