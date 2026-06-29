@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { AmountInput } from '@/shared/ui/amount-input';
-import { COIN_ICON, GAME_PANEL_LABELS } from '@/shared/config';
+import { GAME_PANEL_LABELS, GAME_POINT_ICON } from '@/shared/config';
 import { useBetAmount } from '../model/useBetAmount';
 import { BalanceDisplay } from './BalanceDisplay';
 import { QuickBetButtons } from './QuickBetButtons';
@@ -26,9 +26,9 @@ export function BetAmountField({ className }: Props) {
         value={betAmount}
         onValueChange={setBetAmount}
         onBlur={onBetBlur}
-        iconSrc={COIN_ICON.SRC}
-        iconAlt={COIN_ICON.ALT}
-        iconSize={COIN_ICON.SIZE_INPUT}
+        iconSrc={GAME_POINT_ICON.SRC}
+        iconAlt={GAME_POINT_ICON.ALT}
+        iconSize={GAME_POINT_ICON.SIZE_INPUT}
         trailing={<QuickBetButtons onBetHalf={betHalf} onBetDouble={betDouble} onBetMax={betMax} />}
       />
     </div>

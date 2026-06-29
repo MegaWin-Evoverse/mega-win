@@ -20,10 +20,16 @@ interface Props {
 }
 
 const MENU_BTN_BASE =
-  'sidebar-menu-btn-custom text-brand-text-white font-outfit font-medium text-base lining-nums proportional-nums transition-all duration-200 w-full';
+  'group/menu-btn sidebar-menu-btn-custom text-brand-text-white font-outfit font-medium text-base lining-nums proportional-nums transition-all duration-200 w-full';
 
 const MENU_BTN_COLLAPSED =
   'group-data-[collapsible=icon]:size-auto! flex items-center justify-center p-0 group-data-[collapsible=icon]:p-0! h-[52px] group-data-[collapsible=icon]:h-[52px]!';
+
+const MENU_BTN_CONTENT =
+  'flex items-center gap-2 transition-transform duration-500 ease-out group-hover/menu-btn:translate-x-2';
+
+const SUB_MENU_LINK =
+  'flex items-center gap-2 w-full h-auto text-brand-text-white hover:text-brand-text-light py-3 pl-6 pr-3 rounded-md transition-all duration-500 ease-out hover:translate-x-2 font-outfit font-medium text-base lining-nums proportional-nums';
 
 export function SidebarMenuSection({ isCollapsed }: Props) {
   const { isGamesOpen, onGamesToggle, gamesContentRef, gamesContentHeight } = useSidebarMenu();
@@ -44,7 +50,7 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
                       : 'h-11 px-4 py-3 flex items-center justify-between'
                   )}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className={MENU_BTN_CONTENT}>
                     <MenuIcon name={item.iconName} className="flex-shrink-0" />
                     {!isCollapsed && <span>{item.label}</span>}
                   </div>
@@ -66,12 +72,7 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
                           {item.subItems.map((sub) => (
                             <SidebarMenuSubItem key={sub.label}>
                               <SidebarMenuSubButton
-                                render={
-                                  <Link
-                                    href={sub.href}
-                                    className="flex items-center gap-2 w-full h-auto text-brand-text-white hover:text-brand-text-light py-3 pl-6 pr-3 rounded-md transition-all duration-500 ease-out hover:translate-x-2 font-outfit font-medium text-base lining-nums proportional-nums"
-                                  />
-                                }
+                                render={<Link href={sub.href} className={SUB_MENU_LINK} />}
                               >
                                 <MenuIcon name={sub.iconName} className="h-5 w-5 flex-shrink-0" />
                                 <span>{sub.label}</span>
@@ -89,14 +90,16 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
           return (
             <SidebarMenuItem key={item.label} className="w-full">
               <SidebarMenuButton
-                render={<Link href={item.href} className="flex items-center gap-2" />}
+                render={<Link href={item.href} />}
                 className={cn(
                   MENU_BTN_BASE,
-                  isCollapsed ? MENU_BTN_COLLAPSED : 'h-11 px-4 py-3 flex items-center gap-2'
+                  isCollapsed ? MENU_BTN_COLLAPSED : 'h-11 px-4 py-3 flex items-center'
                 )}
               >
-                <MenuIcon name={item.iconName} className="flex-shrink-0" />
-                {!isCollapsed && <span>{item.label}</span>}
+                <div className={MENU_BTN_CONTENT}>
+                  <MenuIcon name={item.iconName} className="flex-shrink-0" />
+                  {!isCollapsed && <span>{item.label}</span>}
+                </div>
               </SidebarMenuButton>
             </SidebarMenuItem>
           );

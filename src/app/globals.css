@@ -154,18 +154,19 @@
   --color-leaderboard-dollar: var(--leaderboard-dollar);
   --color-leaderboard-reward-bg: var(--leaderboard-reward-bg);
   --color-leaderboard-btn-hover-to: var(--leaderboard-btn-hover-to);
+  --color-leaderboard-disclaimer-text: var(--leaderboard-disclaimer-text);
+  --color-leaderboard-disclaimer-bg: var(--leaderboard-disclaimer-bg);
   --color-dice-thumb: var(--dice-thumb);
   --color-dice-tooltip-win: var(--dice-tooltip-win);
   --color-dice-tooltip-win-inner: var(--dice-tooltip-win-inner);
   --color-dice-glow: var(--dice-glow);
-  --color-coin-game: var(--coin-game);
-  --color-coin-watch: var(--coin-watch);
   --color-plinko-multiplier-text: var(--plinko-multiplier-text);
   --color-brand-red: var(--brand-red);
   --color-filter-icon-all: var(--filter-icon-all);
   --color-crypto-btc: var(--crypto-btc);
   --color-crypto-eth: var(--crypto-eth);
   --color-crypto-ltc: var(--crypto-ltc);
+  --color-header-balance-bg: var(--header-balance-bg);
 }
 
 :root {
@@ -188,8 +189,7 @@
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
   --brand-red: oklch(0.55 0.22 25);
-  --coin-game: #fbbf24;
-  --coin-watch: #22c55e;
+  --header-balance-bg: #1b1f26;
   --filter-icon-all: oklch(0.852 0.199 91.936);
   --crypto-btc: oklch(0.75 0.183 55.934);
   --crypto-eth: oklch(0.707 0.165 254.624);
@@ -233,6 +233,8 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --leaderboard-disclaimer-text: #616a80;
+  --leaderboard-disclaimer-bg: rgba(82, 91, 113, 0.13);
   --dice-thumb: #3f4a59;
   --dice-tooltip-win: #1db901;
   --dice-tooltip-win-inner: #0e0f13;
@@ -317,8 +319,7 @@
   --brand-green-to: #22c55e;
   --brand-green-rewards: #1bd167;
   --brand-red: oklch(0.55 0.22 25);
-  --coin-game: #fbbf24;
-  --coin-watch: #22c55e;
+  --header-balance-bg: #1b1f26;
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
   --brand-dark: #07111a;
@@ -354,6 +355,8 @@
   --leaderboard-dollar: #00a80c;
   --leaderboard-reward-bg: #060e16;
   --leaderboard-btn-hover-to: #3a4150;
+  --leaderboard-disclaimer-text: #616a80;
+  --leaderboard-disclaimer-bg: rgba(82, 91, 113, 0.13);
   --dice-thumb: #3f4a59;
   --dice-tooltip-win: #1db901;
   --dice-tooltip-win-inner: #0e0f13;
@@ -804,6 +807,11 @@ html:fullscreen .game-field-content {
 
 html:fullscreen .game-field-content .roulette-table {
   margin-top: 2rem;
+}
+
+/* Header Balance Coin Shadow */
+.header-balance-coin-shadow {
+  filter: drop-shadow(0px 8px 32px rgba(8, 10, 13, 0.5));
 }
 
 /* Roulette Vector Glow */

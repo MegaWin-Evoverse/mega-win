@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/shared/ui/tooltip';
+import coinIcon from '@/shared/assets/icons/coin.svg';
+import coin1Icon from '@/shared/assets/icons/coin-1.svg';
 import {
   BET_DECIMALS,
   MULTIPLIER_DECIMALS,
@@ -40,14 +42,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                     : 'bg-gradient-to-b from-keno-payout-from to-keno-payout-to'
                 )}
               >
-                <Image
-                  src="/keno/coin.svg"
-                  alt=""
-                  width={16}
-                  height={16}
-                  aria-hidden="true"
-                  className="hidden lg:block"
-                />
+                <Image src={coin1Icon} alt="" width={16} height={16} aria-hidden="true" />
                 <span
                   className={cn(
                     'font-outfit text-xs font-semibold leading-4',
@@ -74,7 +69,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                     {PAYOUT_TOOLTIP_LABELS.MULTIPLIER}
                   </span>
                   <div className="flex items-center gap-1">
-                    <Image src="/keno/coin.svg" alt="" width={14} height={14} aria-hidden="true" />
+                    <Image src={coin1Icon} alt="" width={14} height={14} aria-hidden="true" />
                     <span className="font-outfit text-xs font-semibold leading-4">
                       {displayMultiplier}x
                     </span>
@@ -86,13 +81,7 @@ export function Payout({ payouts, chances, matchCount, phase, betAmount }: Props
                       {PAYOUT_TOOLTIP_LABELS.PROFIT}
                     </span>
                     <div className="flex items-center gap-1">
-                      <Image
-                        src="/keno/profit.svg"
-                        alt=""
-                        width={14}
-                        height={14}
-                        aria-hidden="true"
-                      />
+                      <Image src={coinIcon} alt="" width={14} height={14} aria-hidden="true" />
                       <span className="font-outfit text-xs font-semibold leading-4">{profit}</span>
                     </div>
                   </div>

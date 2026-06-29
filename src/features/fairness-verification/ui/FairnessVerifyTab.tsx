@@ -68,13 +68,9 @@ export function FairnessVerifyTab({
                 <span>{getGameLabel(selectedVerifyGame)}</span>
               </SelectValue>
             </SelectTrigger>
-            <SelectContent className="bg-bg-primary border border-border-default p-1.5 rounded-lg w-[var(--anchor-width)] shadow-2xl">
+            <SelectContent>
               {VERIFY_GAMES.map((verifyGame) => (
-                <SelectItem
-                  key={verifyGame}
-                  value={verifyGame}
-                  className="h-11 pl-3 pr-8 bg-bg-primary text-brand-text-light hover:bg-auth-surface hover:text-brand-text-white focus:bg-auth-surface focus:text-brand-text-white font-outfit text-sm font-normal leading-[18px] rounded-lg cursor-pointer transition-colors flex items-center gap-2 w-full"
-                >
+                <SelectItem key={verifyGame} value={verifyGame} className="h-11 font-outfit">
                   {getGameIcon(verifyGame)}
                   <span>{getGameLabel(verifyGame)}</span>
                 </SelectItem>

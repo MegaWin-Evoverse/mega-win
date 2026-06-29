@@ -13,4 +13,5 @@ export {
   BET_AMOUNT_STEP,
   BET_AMOUNT_DECIMALS,
   COIN_ICON,
+  GAME_POINT_ICON,
 } from './constants';

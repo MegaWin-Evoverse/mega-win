@@ -22,7 +22,7 @@ export function PodiumCard({ participant, className }: Props) {
   return (
     <div
       className={cn(
-        'w-full max-w-[340px] sm:max-w-none sm:w-[220px] md:w-[245px] xl:w-[280px] h-[340px] rounded-[18px] p-4 sm:p-6 flex flex-col items-center justify-start gap-4 border border-brand-border/10 select-none relative',
+        'w-full max-w-[340px] sm:max-w-none sm:w-[200px] md:w-[245px] xl:w-[280px] h-[300px] sm:h-[340px] rounded-[18px] p-4 sm:p-6 flex flex-col items-center justify-start gap-3 sm:gap-4 border border-brand-border/10 select-none relative',
         isFirst
           ? 'bg-gradient-to-b from-leaderboard-bg-from to-leaderboard-card-rank1-to leaderboard-card-rank1-shadow border-leaderboard-accent/30'
           : 'bg-gradient-to-b from-leaderboard-bg-from to-leaderboard-card-to',
@@ -51,7 +51,7 @@ export function PodiumCard({ participant, className }: Props) {
           />
         </div>
       </div>
-      <h4 className="font-outfit font-semibold text-2xl text-brand-text-white tracking-tight truncate w-full text-center mt-2">
+      <h4 className="font-outfit font-semibold text-xl sm:text-2xl text-brand-text-white tracking-tight truncate w-full text-center mt-2">
         {username}
       </h4>
       <div className="flex flex-col items-center gap-1 w-full">
@@ -62,7 +62,7 @@ export function PodiumCard({ participant, className }: Props) {
           <span className="w-5 h-5 rounded-full bg-leaderboard-dollar text-brand-text-white flex items-center justify-center font-bold text-xs select-none">
             $
           </span>
-          <span className="font-outfit font-semibold text-xl text-brand-text-white">
+          <span className="font-outfit font-semibold text-base sm:text-xl text-brand-text-white">
             {formatAmount(Number(usdWager))}
           </span>
         </div>
@@ -77,7 +77,7 @@ export function PodiumCard({ participant, className }: Props) {
             className="object-contain"
             priority
           />
-          <span className="font-outfit font-semibold text-2xl text-brand-text-white">
+          <span className="font-outfit font-semibold text-xl sm:text-2xl text-brand-text-white">
             {formatAmount(Number(prizeValue))}
           </span>
         </div>

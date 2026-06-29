@@ -89,8 +89,8 @@ export const GAME_CONTROLS_DEFAULTS = {
   NUMBER_OF_BETS: '∞',
   ON_WIN: 'Auto',
   ON_LOSS: 'Auto',
-  STOP_ON_PROFIT: '1.00',
-  STOP_ON_LOSS: '1.00',
+  STOP_ON_PROFIT: '0.00',
+  STOP_ON_LOSS: '0.00',
   PROFIT_MULTIPLIER: 1.41,
   BALANCE: 0,
 } as const;

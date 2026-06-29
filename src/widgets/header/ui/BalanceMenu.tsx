@@ -1,9 +1,11 @@
 'use client';
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Coins, Info, RefreshCw } from 'lucide-react';
+import Image from 'next/image';
+import { ChevronDown, ChevronUp, Info, RefreshCw } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/shared/ui/dropdown-menu';
 import { Button } from '@/shared/ui/button';
 import { Separator } from '@/shared/ui/separator';
+import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
 import { BALANCE_TYPE, type UserBalance } from '@/entities/user';
 import {
   BALANCE_HEADER,
@@ -26,12 +28,30 @@ export function BalanceMenu({ balances }: Props) {
 
   return (
     <DropdownMenu onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger className="flex min-w-0 items-center gap-2 rounded-lg border border-brand-border bg-brand-bg px-3 py-2 text-sm outline-none cursor-pointer max-md:gap-1.5 max-md:px-2 max-md:text-xs">
-        <Coins className="size-4 shrink-0 text-coin-game max-md:size-3.5" />
-        <span className="truncate font-medium">{formatBalance(gamePoints)}</span>
-        <Separator orientation="vertical" className="h-4 shrink-0" />
-        <Coins className="size-4 shrink-0 text-coin-watch max-md:size-3.5" />
-        <span className="truncate font-medium">{formatBalance(watchPoints)}</span>
+      <DropdownMenuTrigger className="flex h-10 min-w-0 items-center gap-3 rounded-sm bg-header-balance-bg px-3 py-2 outline-none cursor-pointer">
+        <Image
+          src={GAME_POINT_ICON.SRC}
+          alt=""
+          aria-hidden
+          width={20}
+          height={20}
+          className="header-balance-coin-shadow size-5 shrink-0"
+        />
+        <span className="truncate text-base font-normal leading-5 text-brand-text-white">
+          {formatBalance(gamePoints)}
+        </span>
+        <Separator orientation="vertical" className="h-5 shrink-0" />
+        <Image
+          src={COIN_ICON.SRC}
+          alt=""
+          aria-hidden
+          width={20}
+          height={20}
+          className="header-balance-coin-shadow size-5 shrink-0"
+        />
+        <span className="truncate text-base font-normal leading-5 text-brand-text-white">
+          {formatBalance(watchPoints)}
+        </span>
         {isOpen ? (
           <ChevronUp className="size-4 shrink-0" />
         ) : (
@@ -43,17 +63,31 @@ export function BalanceMenu({ balances }: Props) {
         <p className="mb-3 text-sm font-semibold">{BALANCE_HEADER}</p>
 
         <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between rounded-lg bg-muted p-3">
+          <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
-              <Coins className="size-4 text-coin-game" />
+              <Image
+                src={GAME_POINT_ICON.SRC}
+                alt=""
+                aria-hidden
+                width={16}
+                height={16}
+                className="size-4"
+              />
               <span className="text-sm">{GAME_POINTS_LABEL}</span>
               <Info className="size-3 text-muted-foreground" />
             </div>
             <span className="text-sm font-medium">{formatBalance(gamePoints)}</span>
           </div>
-          <div className="flex items-center justify-between rounded-lg bg-muted p-3">
+          <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
-              <Coins className="size-4 text-coin-watch" />
+              <Image
+                src={COIN_ICON.SRC}
+                alt=""
+                aria-hidden
+                width={16}
+                height={16}
+                className="size-4"
+              />
               <span className="text-sm">{WATCH_POINTS_LABEL}</span>
               <Info className="size-3 text-muted-foreground" />
             </div>
@@ -61,9 +95,11 @@ export function BalanceMenu({ balances }: Props) {
           </div>
         </div>
 
-        <Button variant="outline" className="mt-3 w-full gap-2">
-          <RefreshCw className="size-4" />
-          {EXCHANGE_LABEL}
+        <Button variant="outline" className="group mt-3 h-auto w-full py-4">
+          <span className="flex items-center gap-2 transition-all duration-500 ease-out group-hover:translate-x-2">
+            <RefreshCw className="size-4" />
+            {EXCHANGE_LABEL}
+          </span>
         </Button>
       </DropdownMenuContent>
     </DropdownMenu>

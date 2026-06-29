@@ -4,13 +4,17 @@ export const REWARDS_LABELS = {
   PAGE_TITLE: 'Rewards',
   PAGE_SUBTITLE: 'Explore current reward campaigns, community activations and timed offers.',
   SORT_LABEL: 'Sort by:',
+  SEARCH_PLACEHOLDER: 'Search rewards',
+  BACK_LABEL: 'Back',
   TIME_LEFT_LABEL: 'Time left:',
+  DETAIL_ERROR_MESSAGE: 'Failed to load reward. Please try again later.',
   TIME_DAYS: 'd',
   TIME_HOURS: 'h',
   TIME_MINUTES: 'm',
   TIME_EXPIRED: 'Expired',
   LOADING_ALT: 'Loading rewards...',
   EMPTY_MESSAGE: 'No rewards available at the moment.',
+  NO_SEARCH_RESULTS: 'No rewards match your search.',
   ERROR_MESSAGE: 'Failed to load rewards. Please try again later.',
 } as const;
 

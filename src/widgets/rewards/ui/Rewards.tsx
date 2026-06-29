@@ -1,16 +1,17 @@
 'use client';
-import { Star } from 'lucide-react';
+import { Star, Search } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
+import { Input } from '@/shared/ui/input';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { useRewards } from '../model/useRewards';
 import { DEFAULT_TAKE, REWARDS_LABELS, SORT_OPTIONS } from '../model/constants';
 import { RewardCard } from './RewardCard';
 
 export function Rewards() {
-  const { rewards, isLoading, isError, sort, onSortChange } = useRewards();
+  const { rewards, isLoading, isError, sort, search, onSortChange, onSearchChange } = useRewards();
 
   return (
-    <main className="w-full flex flex-col gap-6 ">
+    <main className="w-full flex flex-col gap-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2.5">
@@ -23,7 +24,18 @@ export function Rewards() {
             {REWARDS_LABELS.PAGE_SUBTITLE}
           </p>
         </div>
+      </div>
 
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-brand-text-muted pointer-events-none" />
+          <Input
+            value={search}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder={REWARDS_LABELS.SEARCH_PLACEHOLDER}
+            className="h-12 pl-11 bg-brand-bg border-brand-border/30 text-brand-text-white placeholder:text-brand-text-muted rounded-xl focus-visible:border-brand-border"
+          />
+        </div>
         <Select value={sort} onValueChange={onSortChange} items={SORT_OPTIONS}>
           <SelectTrigger className="w-[172px] data-[size=default]:h-12 shrink-0 bg-brand-bg border-0 px-4 gap-2 [&>span:last-child]:size-6 [&>span:last-child]:bg-brand-border [&>span:last-child]:rounded-lg [&>span:last-child]:flex [&>span:last-child]:items-center [&>span:last-child]:justify-center [&>span:last-child]:shrink-0">
             <div className="flex items-center gap-1">
@@ -33,16 +45,9 @@ export function Rewards() {
               <SelectValue className="font-outfit text-sm font-medium text-brand-green-to flex-none" />
             </div>
           </SelectTrigger>
-          <SelectContent
-            alignItemWithTrigger={false}
-            className="bg-[var(--gs-content)] border border-brand-border/30"
-          >
+          <SelectContent alignItemWithTrigger={false}>
             {SORT_OPTIONS.map((option) => (
-              <SelectItem
-                key={option.value}
-                value={option.value}
-                className="font-outfit font-medium text-sm text-[var(--auth-text-muted)] px-4 py-3 rounded-lg focus:bg-brand-border/50 focus:text-brand-text-white"
-              >
+              <SelectItem key={option.value} value={option.value} className="font-outfit">
                 {option.label}
               </SelectItem>
             ))}
@@ -66,9 +71,11 @@ export function Rewards() {
             </div>
           ))}
         </div>
-      ) : isError || rewards.length === 0 ? (
+      ) : isError ? (
+        <p className="text-sm text-brand-text-light">{REWARDS_LABELS.ERROR_MESSAGE}</p>
+      ) : rewards.length === 0 ? (
         <p className="text-sm text-brand-text-light">
-          {isError ? REWARDS_LABELS.ERROR_MESSAGE : REWARDS_LABELS.EMPTY_MESSAGE}
+          {search.trim() ? REWARDS_LABELS.NO_SEARCH_RESULTS : REWARDS_LABELS.EMPTY_MESSAGE}
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
