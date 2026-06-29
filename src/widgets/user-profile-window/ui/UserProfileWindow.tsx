@@ -29,7 +29,7 @@ export function UserProfileWindow() {
   if (!user) return null;
 
   return (
-    <div className="mx-auto flex w-full max-w-[1017px] flex-col mb-20 max-md:mb-8">
+    <div className="mx-auto flex w-full max-w-[1017px] flex-col mb-20 max-md:mb-4">
       <div className="mt-4 md:mt-8 flex items-center justify-between gap-3 rounded-xl bg-bg-primary p-4 md:p-8">
         <div className="flex items-center gap-4">
           <Avatar className="size-[60px] md:size-[90px]">

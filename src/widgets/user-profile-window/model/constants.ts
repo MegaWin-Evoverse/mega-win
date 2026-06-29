@@ -103,12 +103,6 @@ export const GAME_FILTERS = [
   { value: 'Dice', label: 'Dice', iconName: 'dice' as const },
 ];
 
-export const GAME_ICON_SRC: Partial<Record<'roulette' | 'keno' | 'plinko', string>> = {
-  roulette: '/games-cards/roulette.webp',
-  keno: '/games-cards/keno.webp',
-  plinko: '/games-cards/plinko.webp',
-};
-
 export const BETS_TABLE_COLUMNS = {
   USER: 'User',
   GAME: 'Game',
@@ -117,6 +111,8 @@ export const BETS_TABLE_COLUMNS = {
   PRIZE: 'Prize',
   TIME: 'Time',
 } as const;
+
+export const PAGE_OF_LABEL = 'of';
 
 export const BETS_PAGINATION_WINDOW = 2;
 export const BETS_PAGINATION_EDGE = 1;
