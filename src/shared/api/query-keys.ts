@@ -13,6 +13,7 @@ export const QUERY_KEYS = {
   leaderboard: (month: string) => ['leaderboard', month],
   fairnessSeed: ['fairness-seed'],
   rewards: (params: string) => ['rewards', params],
+  seedHistory: (page: number) => ['seed-history', page],
 } as const;
 
 export const DAILY_CLAIM_QUERY_KEYS = {

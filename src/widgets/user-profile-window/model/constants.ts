@@ -151,3 +151,26 @@ export const TAB_ICONS = {
   [PROFILE_WINDOW_TABS.SEED_HISTORY]: KeyRound,
   [PROFILE_WINDOW_TABS.CONNECTIONS]: Link2,
 } as const;
+
+export const SEED_PAGE_SIZE = 10;
+
+export const SEED_TRUNCATE_LENGTH = 20;
+
+export const SEED_COPY_RESET_MS = 2000;
+
+export const SEED_HISTORY_ENDPOINT = '/api/fairness/history';
+
+export const SEED_HISTORY_FETCH_ERROR = 'Failed to fetch seed history';
+
+export const SEED_TABLE_COLUMNS = {
+  CLIENT_SEED: 'Client Seed',
+  SERVER_SEED: 'Server Seed',
+  NONCE: 'Nonce',
+  DATE: 'Date',
+} as const;
+
+export const SEED_DATE_FORMAT = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
