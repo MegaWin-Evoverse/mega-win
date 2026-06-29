@@ -76,7 +76,42 @@ export const SEED_HISTORY_EMPTY = 'No seed history found';
 
 export const CONNECTIONS_TITLE = 'Connections';
 
-export const CONNECTIONS_EMPTY = 'No connections found';
+export const CASINO_CONNECTIONS_SECTION_TITLE = 'Casino Connections';
+
+export const CONNECTION_STATUS_DISCONNECTED = 'Not connected';
+
+export const CONNECTION_CONNECT_LABEL = 'Connect';
+
+export const DEGENCITY_USERNAME_LABEL = 'My DegenCity Username';
+
+export const DEGENCITY_USERNAME_PLACEHOLDER = 'Enter username';
+
+export const DEGENCITY_APPLY_LABEL = 'Apply';
+
+export const SOCIAL_CONNECTIONS = [
+  {
+    key: 'discord' as const,
+    name: 'Discord',
+    description: 'Connect Discord to unlock community features',
+  },
+  { key: 'kick' as const, name: 'Kick', description: 'Connect Kick to unlock community features' },
+  {
+    key: 'google' as const,
+    name: 'Google',
+    description: 'Connect Google to unlock account sign-in options',
+  },
+  {
+    key: 'steam' as const,
+    name: 'Steam',
+    description: 'Connect Steam to unlock account sign-in options',
+  },
+] as const;
+
+export const DEGENCITY_CONNECTION = {
+  key: 'degencity' as const,
+  name: 'DegenCity',
+  description: 'Connect DegenCity, unlock community features',
+} as const;
 
 export const SEARCH_PLACEHOLDER = 'Enter text';
 
