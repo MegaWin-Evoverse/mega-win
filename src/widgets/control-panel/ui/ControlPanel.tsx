@@ -1,4 +1,5 @@
 import type { Game } from '@/entities/game';
+import { cn } from '@/shared/lib/cn';
 import { ManualAutoTabs } from '@/features/game-mode-tabs';
 import { BetAmountField, ProfitOnWinField } from '@/features/bet-amount';
 import { RiskSelector } from '@/features/risk-selector';
@@ -11,6 +12,7 @@ import { CONTROL_PANEL_CONFIG } from '../model/constants';
 
 interface Props {
   game: Game;
+  className?: string;
   onBet?: () => void;
   isBetting?: boolean;
   placedBet?: number;
@@ -18,10 +20,12 @@ interface Props {
   autoRunningLabel?: string;
   onClearTable?: () => void;
   onUndo?: () => void;
+  onAutoPick?: () => void;
 }
 
 export function ControlPanel({
   game,
+  className,
   onBet,
   isBetting,
   placedBet,
@@ -29,11 +33,17 @@ export function ControlPanel({
   autoRunningLabel,
   onClearTable,
   onUndo,
+  onAutoPick,
 }: Props) {
   const config = CONTROL_PANEL_CONFIG[game];
 
   return (
-    <div className="flex w-full flex-col gap-4 lg:gap-0 bg-bg-primary px-4 py-6 lg:w-[352px] lg:shrink-0 lg:p-6 overflow-y-auto max-h-full">
+    <div
+      className={cn(
+        'flex w-full flex-col gap-4 lg:gap-0 bg-bg-primary px-4 py-6 lg:w-[352px] lg:shrink-0 lg:p-6 overflow-y-auto max-h-full',
+        className
+      )}
+    >
       <ManualAutoTabs />
       {config.showBetAmount && <BetAmountField className={config.classNames.betAmountField} />}
       {config.showChips && (
@@ -57,6 +67,7 @@ export function ControlPanel({
           variant={config.tableActions}
           onClearTable={onClearTable}
           onUndo={onUndo}
+          onAutoPick={onAutoPick}
           className={config.classNames.tableActionsSection}
         />
       )}

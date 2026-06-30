@@ -8,6 +8,7 @@ import { useVerifyOutcome } from '../model/useVerifyOutcome';
 import type { VerifyFormState } from '../model/useVerifyForm';
 import { FairnessRouletteBoard } from './FairnessRouletteBoard';
 import { FairnessPlinkoPreview } from './FairnessPlinkoPreview';
+import { FairnessKenoPreview } from './FairnessKenoPreview';
 import { FairnessDicePreview } from './FairnessDicePreview';
 
 type Props = VerifyFormState;
@@ -40,6 +41,13 @@ export function FairnessVerifyTab({
         )}
         {selectedVerifyGame === GAME.ROULETTE && (
           <FairnessRouletteBoard winningNumber={winningNumber} />
+        )}
+        {selectedVerifyGame === GAME.KENO && (
+          <FairnessKenoPreview
+            clientSeed={verifyClientSeed}
+            serverSeed={verifyServerSeed}
+            nonce={verifyNonce}
+          />
         )}
         {selectedVerifyGame === GAME.PLINKO && (
           <FairnessPlinkoPreview

@@ -11,12 +11,19 @@ interface Props {
   className?: string;
   onClearTable?: () => void;
   onUndo?: () => void;
+  onAutoPick?: () => void;
 }
 
-export function TableActions({ variant, className, onClearTable, onUndo }: Props) {
-  const { clearTable: storeClearTable, autoPick, undo: storeUndo, isAutoMode } = useTableActions();
+export function TableActions({ variant, className, onClearTable, onUndo, onAutoPick }: Props) {
+  const {
+    clearTable: storeClearTable,
+    autoPick: storeAutoPick,
+    undo: storeUndo,
+    isAutoMode,
+  } = useTableActions();
   const clearTable = onClearTable ?? storeClearTable;
   const undo = onUndo ?? storeUndo;
+  const autoPick = onAutoPick ?? storeAutoPick;
 
   if (variant === TABLE_ACTIONS.ROULETTE) {
     return (

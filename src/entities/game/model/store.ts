@@ -42,6 +42,7 @@ export interface GameControlsState {
   setRows: (value: number | readonly number[]) => void;
   setNumberOfBets: (value: string) => void;
   setInfinity: () => void;
+  decrementNumberOfBets: () => void;
   setOnWinMode: (mode: string) => void;
   setOnWinIncrease: (value: string) => void;
   setOnLossMode: (mode: string) => void;
@@ -116,6 +117,13 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   setRows: (value) => set({ rows: Array.isArray(value) ? value[0] : (value as number) }),
   setNumberOfBets: (value) => set({ numberOfBets: value.replace(DIGITS_ONLY, '') }),
   setInfinity: () => set({ numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS }),
+  decrementNumberOfBets: () =>
+    set((state) => {
+      if (state.numberOfBets === GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS) return {};
+      const current = parseInt(state.numberOfBets, 10);
+      if (isNaN(current) || current <= 1) return { numberOfBets: '0' };
+      return { numberOfBets: String(current - 1) };
+    }),
   setOnWinMode: (onWinMode) => set({ onWinMode }),
   setOnWinIncrease: (onWinIncrease) => set({ onWinIncrease }),
   setOnLossMode: (onLossMode) => set({ onLossMode }),
