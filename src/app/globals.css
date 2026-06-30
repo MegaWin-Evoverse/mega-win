@@ -593,7 +593,7 @@
 :fullscreen .app-header,
 :fullscreen .app-footer,
 :fullscreen .app-bottom-nav,
-:fullscreen [data-slot="sidebar-wrapper"] {
+:fullscreen [data-slot="sidebar"] {
   display: none;
 }
 
