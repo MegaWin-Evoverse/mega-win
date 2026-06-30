@@ -1,9 +1,11 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useGameControlsStore } from '@/entities/game';
+import { useUserQuery } from '@/entities/user';
 
 interface UseBetAmountReturn {
   betAmount: string;
   balance: number;
+  isInputDisabled: boolean;
   setBetAmount: (value: string) => void;
   onBetBlur: () => void;
   betHalf: () => void;
@@ -12,7 +14,10 @@ interface UseBetAmountReturn {
 }
 
 export function useBetAmount(): UseBetAmountReturn {
-  return useGameControlsStore(
+  const { data: user } = useUserQuery();
+  const isAuthenticated = user !== undefined;
+
+  const storeValues = useGameControlsStore(
     useShallow((state) => ({
       betAmount: state.betAmount,
       balance: state.balance,
@@ -23,4 +28,6 @@ export function useBetAmount(): UseBetAmountReturn {
       betMax: state.betMax,
     }))
   );
+
+  return { ...storeValues, isInputDisabled: !isAuthenticated };
 }
