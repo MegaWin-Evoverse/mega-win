@@ -6,6 +6,7 @@ import {
   type RiskOption,
 } from '@/entities/game';
 import { TABLE_ACTIONS, type TableActionsVariant } from '@/features/table-actions';
+import type { SoundName } from '@/shared/lib/playSound';
 
 const BET_LABELS = {
   BET: 'Bet',
@@ -41,6 +42,7 @@ interface ControlPanelConfig {
   requiresBet: boolean;
   betLabels: { manual: string; auto: string; autoActive?: string };
   classNames: ControlPanelClassNames;
+  quickBetSound?: SoundName;
 }
 
 export const CONTROL_PANEL_CONFIG: Record<Game, ControlPanelConfig> = {
@@ -55,6 +57,7 @@ export const CONTROL_PANEL_CONFIG: Record<Game, ControlPanelConfig> = {
     showChips: false,
     tableActions: null,
     requiresBet: true,
+    quickBetSound: 'generic',
     betLabels: { manual: BET_LABELS.BET, auto: BET_LABELS.START_AUTO_BET },
     classNames: {
       betAmountField: 'order-3 lg:order-none lg:mt-8',

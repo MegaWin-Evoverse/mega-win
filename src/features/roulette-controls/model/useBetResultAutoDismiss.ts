@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
+import { playSound, stopSound } from '@/shared/lib/playSound';
 import { useTurboModeStore } from '@/features/game-settings';
 import { RESULT_OVERLAY_DURATION_MS, RESULT_OVERLAY_DURATION_TURBO_MS } from './constants';
 import { useRouletteStore } from './rouletteStore';
@@ -11,6 +12,9 @@ export function useBetResultAutoDismiss() {
 
   useEffect(() => {
     if (!betResult) return;
+
+    stopSound('roulette');
+    playSound('score');
 
     const duration = getTurboValue(
       turboMode,

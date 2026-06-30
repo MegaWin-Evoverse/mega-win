@@ -1,6 +1,7 @@
 'use client';
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
+import { playSound } from '@/shared/lib/playSound';
 import { useShallow } from 'zustand/react/shallow';
 import { useGameControlsStore, RISK, RISK_API_MAP } from '@/entities/game';
 import {
@@ -10,6 +11,7 @@ import {
   PICK_CHANCES,
   REVEAL_DELAY_MS,
   RESULT_DELAY_MS,
+  POCKET_SOUND_DELAY_MS,
   BET_DECIMALS,
   LABELS,
 } from './constants';
@@ -97,6 +99,7 @@ export function useKenoGame(): UseKenoGameResult {
               next.add(n);
               return next;
             });
+            playSound('revealed');
           },
           (i + 1) * REVEAL_DELAY_MS
         );
@@ -106,7 +109,10 @@ export function useKenoGame(): UseKenoGameResult {
       const finalTimeout = setTimeout(
         () => {
           setIsRevealing(false);
-          setGameResult(response.multiplier > 0 ? 'win' : 'lose');
+          const result = response.multiplier > 0 ? 'win' : 'lose';
+          if (result === 'win') playSound('winDialog');
+          setTimeout(() => playSound('pocket'), POCKET_SOUND_DELAY_MS);
+          setGameResult(result);
         },
         (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
       );
@@ -133,6 +139,7 @@ export function useKenoGame(): UseKenoGameResult {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
 
+    playSound('bet');
     setIsRevealing(true);
 
     mutate({
@@ -149,8 +156,10 @@ export function useKenoGame(): UseKenoGameResult {
         const next = new Set(prev);
         if (next.has(n)) {
           next.delete(n);
+          playSound('selected');
         } else if (next.size < MAX_PICKS) {
           next.add(n);
+          playSound('selected');
         }
         return next;
       });

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { toast } from 'sonner';
 import { GAME_PANEL_TAB } from '@/shared/config';
+import { playSound } from '@/shared/lib/playSound';
 import { useGameControlsStore, type GameControlsState } from '@/entities/game';
 import { useUserQuery, BALANCE_TYPE, type User } from '@/entities/user';
 import { usePlacePlinkoBetMutation } from './usePlacePlinkoBetMutation';
@@ -106,6 +107,7 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
     if (betSize <= 0) return false;
     lastBetSizeRef.current = betSize;
     applyBet(betSize);
+    playSound('bet');
     mutate({ betSize, rows, risk });
     return true;
   }, [betAmount, risk, rows, applyBet, mutate]);
@@ -135,6 +137,7 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
   const onDropLanded = useCallback(
     (id: string, payout: number) => {
       if (payout > 0) applyWin(payout);
+      playSound('pocket');
       const landed = drops.find((drop) => drop.id === id);
       if (landed) {
         const entry: PlinkoHistoryEntry = {

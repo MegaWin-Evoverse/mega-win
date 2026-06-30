@@ -35,7 +35,12 @@ export function ControlPanel({
   return (
     <div className="flex w-full flex-col gap-4 lg:gap-0 bg-bg-primary px-4 py-6 lg:w-[352px] lg:shrink-0 lg:p-6 overflow-y-auto max-h-full">
       <ManualAutoTabs />
-      {config.showBetAmount && <BetAmountField className={config.classNames.betAmountField} />}
+      {config.showBetAmount && (
+        <BetAmountField
+          className={config.classNames.betAmountField}
+          quickBetSound={config.quickBetSound}
+        />
+      )}
       {config.showChips && (
         <ChipValueSummary className={config.classNames.betSummary} placedBet={placedBet} />
       )}
