@@ -1,48 +1,45 @@
 'use client';
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Slider as SliderPrimitive } from '@base-ui/react/slider';
 import { cn } from '@/shared/lib/cn';
 import {
-  MIN_ROLLOVER,
-  MAX_ROLLOVER,
-  STEP,
-  TICK_MARKS,
-  ROLL_DECIMALS,
-  TOOLTIP_EDGE_THRESHOLD,
+  DICE_VERIFY_MIN_ROLLOVER,
+  DICE_VERIFY_MAX_ROLLOVER,
+  DICE_VERIFY_DEFAULT_ROLLOVER,
+  DICE_VERIFY_STEP,
+  DICE_VERIFY_TICK_MARKS,
+  DICE_VERIFY_ROLL_DECIMALS,
 } from '../model/constants';
-import type { RollEntry } from '../model/types';
+import { useDiceVerifyOutcome } from '../model/useDiceVerifyOutcome';
 
 interface Props {
-  rollover: number;
-  lastRoll: RollEntry | null;
-  onRolloverChange: (value: number) => void;
+  clientSeed: string;
+  serverSeed: string;
+  nonce: string;
 }
 
-export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
-  const thumbPct = ((rollover - MIN_ROLLOVER) / (MAX_ROLLOVER - MIN_ROLLOVER)) * 100;
+export function FairnessDicePreview({ clientSeed, serverSeed, nonce }: Props) {
+  const [rollover, setRollover] = useState(DICE_VERIFY_DEFAULT_ROLLOVER);
+  const rollValue = useDiceVerifyOutcome(clientSeed, serverSeed, nonce);
+  const thumbPct =
+    ((rollover - DICE_VERIFY_MIN_ROLLOVER) /
+      (DICE_VERIFY_MAX_ROLLOVER - DICE_VERIFY_MIN_ROLLOVER)) *
+    100;
+  const isWin = rollValue !== null && rollValue > rollover;
 
   return (
     <div className="flex w-full flex-col gap-1.5">
       <div className="relative h-[53px] w-full">
-        {lastRoll && (
+        {rollValue !== null && (
           <div
-            style={
-              {
-                '--roll': `${lastRoll.value}%`,
-                '--tx':
-                  lastRoll.value < TOOLTIP_EDGE_THRESHOLD
-                    ? '0%'
-                    : lastRoll.value > 100 - TOOLTIP_EDGE_THRESHOLD
-                      ? '-100%'
-                      : '-50%',
-              } as CSSProperties
-            }
-            className="absolute bottom-0 left-[var(--roll)] flex translate-x-[var(--tx)] flex-col items-center"
+            style={{ '--roll': `${rollValue}%` } as CSSProperties}
+            className="absolute bottom-0 left-[var(--roll)] flex -translate-x-1/2 flex-col items-center"
           >
             <div
               className={cn(
                 'flex items-center justify-center rounded-[9px] p-1',
-                lastRoll.isWin
+                isWin
                   ? 'bg-dice-tooltip-win'
                   : 'bg-gradient-to-r from-brand-btn-gradient-to/40 via-destructive/40 to-brand-btn-gradient-to/40 backdrop-blur-sm'
               )}
@@ -50,35 +47,34 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
               <div
                 className={cn(
                   'flex items-center justify-center rounded-[6px] px-2 py-2 font-outfit text-sm font-semibold text-brand-text-white',
-                  lastRoll.isWin ? 'bg-dice-tooltip-win-inner' : 'bg-bg-page'
+                  isWin ? 'bg-dice-tooltip-win-inner' : 'bg-bg-page'
                 )}
               >
-                {lastRoll.value.toFixed(ROLL_DECIMALS)}
+                {rollValue.toFixed(DICE_VERIFY_ROLL_DECIMALS)}
               </div>
             </div>
             <div
               className={cn(
                 'h-0 w-0 border-x-[6px] border-x-transparent border-t-[8px]',
-                lastRoll.isWin ? 'border-t-dice-tooltip-win' : 'border-t-destructive/40'
+                isWin ? 'border-t-dice-tooltip-win' : 'border-t-destructive/40'
               )}
             />
           </div>
         )}
       </div>
-
       <div
         style={{ '--tp': `${thumbPct}%` } as CSSProperties}
         className="flex h-12 w-full items-center rounded-xl border-[6px] border-brand-border bg-bg-primary px-4"
       >
         <SliderPrimitive.Root
           value={rollover}
-          min={MIN_ROLLOVER}
-          max={MAX_ROLLOVER}
-          step={STEP}
+          min={DICE_VERIFY_MIN_ROLLOVER}
+          max={DICE_VERIFY_MAX_ROLLOVER}
+          step={DICE_VERIFY_STEP}
           thumbAlignment="edge"
           onValueChange={(val) => {
             const next = Array.isArray(val) ? val[0] : val;
-            if (typeof next === 'number') onRolloverChange(next);
+            if (typeof next === 'number') setRollover(next);
           }}
           className="w-full"
         >
@@ -98,9 +94,8 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
           </SliderPrimitive.Control>
         </SliderPrimitive.Root>
       </div>
-
       <div className="flex w-full items-start justify-between px-4">
-        {TICK_MARKS.map((val) => (
+        {DICE_VERIFY_TICK_MARKS.map((val) => (
           <div key={val} className="flex flex-col items-center gap-0.5">
             <div className="h-0 w-0 border-x-[6px] border-x-transparent border-t-[11px] border-t-brand-border" />
             <span className="font-outfit text-xs font-semibold text-brand-text-white/95">
