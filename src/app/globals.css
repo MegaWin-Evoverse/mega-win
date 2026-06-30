@@ -605,12 +605,51 @@
 }
 
 :fullscreen .games-shell {
-  height: 100%;
+  position: fixed;
+  inset: 0;
   overflow: hidden;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:fullscreen .games-shell > *:not(:has(.game-settings-bar)) {
+  flex: 1;
+  min-height: 0;
+}
+
+:fullscreen .games-shell > *:has(.game-settings-bar) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
   padding-bottom: 0;
 }
 
-:fullscreen .game-settings-bar ~ * {
+:fullscreen .games-shell > *:has(.game-settings-bar) > *:not(.game-settings-bar) {
+  flex: 1;
+  min-height: 0;
+}
+
+:fullscreen .game-settings-bar {
+  flex-shrink: 0;
+}
+
+:fullscreen .game-page > *:not(.game-settings-bar):first-child {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:fullscreen .game-layout {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+:fullscreen .games-shell .game-settings-bar ~ * {
   display: none;
 }
 
