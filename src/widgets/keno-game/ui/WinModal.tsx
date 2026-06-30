@@ -3,7 +3,8 @@ import { Trophy } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import coinIcon from '@/shared/assets/icons/coin.svg';
 import coin1Icon from '@/shared/assets/icons/coin-1.svg';
-import { LABELS, MULTIPLIER_DECIMALS, BET_DECIMALS } from '../model/constants';
+import { AnimatedNumber } from '@/shared/ui/AnimatedNumber';
+import { LABELS, MULTIPLIER_DECIMALS } from '../model/constants';
 
 interface Props {
   multiplier: number;
@@ -26,7 +27,7 @@ export function WinModal({ multiplier, betAmount, matchCount, onPlayAgain }: Pro
         <div className="flex items-center justify-center gap-8 border-t border-border bg-secondary/50 px-6 py-4">
           <div className="flex items-center gap-1.5">
             <Image src={coinIcon} alt={LABELS.WIN_COIN_ALT} width={20} height={20} />
-            <span className="font-medium text-foreground">{betAmount.toFixed(BET_DECIMALS)}</span>
+            <AnimatedNumber value={betAmount} className="font-medium text-foreground" />
           </div>
 
           <div className="flex items-center gap-1.5">

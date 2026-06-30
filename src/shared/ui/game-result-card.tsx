@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { Trophy } from 'lucide-react';
-
 import { cn } from '@/shared/lib/cn';
 import coinIcon from '@/shared/assets/icons/coin.svg';
+import { AnimatedNumber } from '@/shared/ui/AnimatedNumber';
 
 const COIN_ICON_SRC = coinIcon;
 const COIN_ICON_SIZE = 16;
@@ -36,13 +36,13 @@ interface Props {
   variant: ResultVariant;
   multiplier: number;
   payout: string;
-  resultValue: number;
+  resultValue?: number;
   className?: string;
 }
 
 export function GameResultCard({ variant, multiplier, payout, resultValue, className }: Props) {
   const multiplierLabel = `${multiplier.toFixed(RESULT_DECIMAL_PLACES)}${MULTIPLIER_SUFFIX}`;
-  const payoutLabel = parseFloat(payout).toFixed(RESULT_DECIMAL_PLACES);
+  const payoutValue = parseFloat(payout);
 
   return (
     <div className={cn('flex w-[190px] flex-col overflow-hidden rounded-[12px]', className)}>
@@ -66,15 +66,18 @@ export function GameResultCard({ variant, multiplier, payout, resultValue, class
             alt=""
             aria-hidden
           />
-          <span className="font-outfit text-base font-semibold text-brand-text-white">
-            {payoutLabel}
-          </span>
+          <AnimatedNumber
+            value={payoutValue}
+            className="font-outfit text-base font-semibold text-brand-text-white"
+          />
         </div>
-        <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-brand-btn-gradient-to">
-          <span className="font-outfit text-sm font-semibold text-brand-text-white">
-            {resultValue}
-          </span>
-        </div>
+        {resultValue !== undefined && (
+          <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-brand-btn-gradient-to">
+            <span className="font-outfit text-sm font-semibold text-brand-text-white">
+              {resultValue}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
