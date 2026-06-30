@@ -75,9 +75,14 @@ export const CASINO_CONNECTIONS_SECTION_TITLE = 'Casino Connections';
 
 export const CONNECTION_ICON_SRC = {
   discord: '/discord-icon.svg',
+  kick: '/kick-icon.webp',
+  google: '/google-icon.svg',
   steam: '/steam-icon.svg',
   degencity: '/degencity-icon.svg',
 } as const;
+
+export const CONNECTION_AUTH_INPUT_CLASS =
+  'border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200';
 
 export const CONNECTION_STATUS_DISCONNECTED = 'Not connected';
 
