@@ -7,7 +7,7 @@ import {
   type GameControlsState,
 } from '@/entities/game';
 import { usePlinkoGame } from '@/features/plinko-bet';
-import { PlinkoBoard } from '@/widgets/plinko-board';
+import { PlinkoBoard, PlinkoResultOverlay } from '@/widgets/plinko-board';
 import { ControlPanel } from '@/widgets/control-panel';
 import { GameSettingsBar } from '@/widgets/game-settings-bar';
 import { BetsStory } from '@/entities/bets-story';
@@ -19,8 +19,17 @@ function selectBoard(state: GameControlsState) {
 
 export function PlinkoGame() {
   const { rows, risk } = useGameControlsStore(useShallow(selectBoard));
-  const { placeBet, drops, history, onDropLanded, isBetting, isAutoRunning, autoBetLabel } =
-    usePlinkoGame();
+  const {
+    placeBet,
+    drops,
+    history,
+    onDropLanded,
+    isBetting,
+    isAutoRunning,
+    autoBetLabel,
+    result,
+    dismissResult,
+  } = usePlinkoGame();
   const multipliers = PLINKO_MULTIPLIERS[risk][rows];
 
   return (
@@ -44,6 +53,7 @@ export function PlinkoGame() {
             history={history}
             onDropLanded={onDropLanded}
           />
+          <PlinkoResultOverlay result={result} onDismiss={dismissResult} />
         </div>
       </RevealOnScroll>
       <GameSettingsBar game={GAME.PLINKO} className="mt-1" />

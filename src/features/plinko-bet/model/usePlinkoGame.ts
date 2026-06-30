@@ -6,7 +6,7 @@ import { useGameControlsStore, type GameControlsState } from '@/entities/game';
 import { useUserQuery, BALANCE_TYPE, type User } from '@/entities/user';
 import { usePlacePlinkoBetMutation } from './usePlacePlinkoBetMutation';
 import { PLINKO_BET_ERROR_MESSAGE, PLINKO_HISTORY_LIMIT, PLINKO_LABELS } from './constants';
-import type { PlinkoDrop, PlinkoHistoryEntry } from './types';
+import type { PlinkoDrop, PlinkoHistoryEntry, PlinkoResult } from './types';
 
 interface AutoBetProgress {
   current: number;
@@ -22,6 +22,8 @@ interface UsePlinkoGameReturn {
   isBetting: boolean;
   isAutoRunning: boolean;
   autoBetLabel?: string;
+  result: PlinkoResult | null;
+  dismissResult: () => void;
 }
 
 function selectControls(state: GameControlsState) {
@@ -65,6 +67,7 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
   const [history, setHistory] = useState<PlinkoHistoryEntry[]>([]);
   const [isAutoRunning, setIsAutoRunning] = useState(false);
   const [autoBetProgress, setAutoBetProgress] = useState<AutoBetProgress | null>(null);
+  const [result, setResult] = useState<PlinkoResult | null>(null);
 
   const remainingRef = useRef(0);
   const autoRunningRef = useRef(false);
@@ -83,6 +86,8 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
     setIsAutoRunning(false);
     setAutoBetProgress(null);
   }, []);
+
+  const dismissResult = useCallback(() => setResult(null), []);
 
   const onBetSuccess = useCallback((drop: PlinkoDrop) => {
     setDrops((prev) => [...prev, drop]);
@@ -143,6 +148,9 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
           tier: landed.tier,
         };
         setHistory((prev) => [entry, ...prev].slice(0, PLINKO_HISTORY_LIMIT));
+        if (!autoRunningRef.current) {
+          setResult({ multiplier: landed.multiplier, payout });
+        }
       }
       setDrops((prev) => prev.filter((drop) => drop.id !== id));
       netProfitRef.current += payout - lastBetSizeRef.current;
@@ -180,5 +188,7 @@ export function usePlinkoGame(): UsePlinkoGameReturn {
     isBetting: isPending || isAutoRunning,
     isAutoRunning,
     autoBetLabel,
+    result,
+    dismissResult,
   };
 }
