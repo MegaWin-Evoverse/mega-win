@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar';
 import { Tabs, TabsContent } from '@/shared/ui/tabs';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/shared/ui/select';
+import { Card } from '@/shared/ui/card';
 import { GAME_POINT_ICON } from '@/shared/config';
 import { Button } from '@/shared/ui/button';
 import { ResetPasswordModal } from '@/features/reset-password';
@@ -30,7 +31,10 @@ export function UserProfileWindow() {
 
   return (
     <div className="mx-auto flex w-full max-w-[1017px] flex-col mb-20 max-md:mb-4">
-      <div className="mt-4 md:mt-8 flex items-center justify-between gap-3 rounded-xl bg-bg-primary p-4 md:p-8">
+      <Card
+        variant="profile"
+        className="mt-4 md:mt-8 flex items-center justify-between gap-3 p-4 md:p-8"
+      >
         <div className="flex items-center gap-4">
           <Avatar className="size-[60px] md:size-[90px]">
             <AvatarImage src={user.profileImgUrl} alt={user.username} />
@@ -77,7 +81,7 @@ export function UserProfileWindow() {
             Reset Password
           </Button>
         </div>
-      </div>
+      </Card>
       <Tabs value={activeTab} onValueChange={onTabChange} className="mt-5">
         <div className="sm:hidden px-4">
           <Select value={activeTab} onValueChange={onTabChange}>

@@ -3,6 +3,7 @@ import { useState, type ReactElement } from 'react';
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
+import { Card } from '@/shared/ui/card';
 import {
   CONNECTIONS_TITLE,
   CASINO_CONNECTIONS_SECTION_TITLE,
@@ -75,6 +76,9 @@ function ProviderIcon({ iconKey }: { iconKey: IconKey }) {
   return null;
 }
 
+const AUTH_INPUT_CLASS =
+  'border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200';
+
 interface Props {
   iconKey: SocialIconKey;
   name: string;
@@ -94,7 +98,7 @@ function ConnectionCard({ iconKey, name, description }: Props) {
         </div>
         <span className="text-xs text-text-secondary">{description}</span>
       </div>
-      <Button variant="default" size="sm" className="shrink-0">
+      <Button variant="tab-active" size="sm" className="shrink-0 px-5">
         {CONNECTION_CONNECT_LABEL}
       </Button>
     </div>
@@ -104,50 +108,60 @@ function ConnectionCard({ iconKey, name, description }: Props) {
 export function ConnectionsTab() {
   const [degenCityUsername, setDegenCityUsername] = useState('');
   return (
-    <div className="flex flex-col gap-8">
-      <section className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
+      <section className="flex flex-col gap-3">
         <h3 className="text-xl font-bold text-foreground">{CONNECTIONS_TITLE}</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {SOCIAL_CONNECTIONS.map((provider) => (
-            <ConnectionCard
-              key={provider.key}
-              iconKey={provider.key}
-              name={provider.name}
-              description={provider.description}
-            />
-          ))}
-        </div>
-      </section>
-      <section className="flex flex-col gap-4">
-        <h3 className="text-xl font-bold text-foreground">{CASINO_CONNECTIONS_SECTION_TITLE}</h3>
-        <div className="flex flex-wrap items-start gap-4 rounded-xl bg-page-bg p-4">
-          <ProviderIcon iconKey="degencity" />
-          <div className="flex flex-1 flex-col gap-0.5 min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-foreground">
-                {DEGENCITY_CONNECTION.name}
-              </span>
-              <span className="text-xs font-medium text-destructive">
-                {CONNECTION_STATUS_DISCONNECTED}
-              </span>
-            </div>
-            <span className="text-xs text-text-secondary">{DEGENCITY_CONNECTION.description}</span>
-          </div>
-          <div className="flex flex-col gap-1 min-w-[220px]">
-            <span className="text-xs text-text-secondary">{DEGENCITY_USERNAME_LABEL}</span>
-            <div className="flex items-center gap-2">
-              <Input
-                value={degenCityUsername}
-                onChange={(e) => setDegenCityUsername(e.target.value)}
-                placeholder={DEGENCITY_USERNAME_PLACEHOLDER}
-                className="h-9 text-sm"
+        <Card variant="profile" className="p-4 md:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {SOCIAL_CONNECTIONS.map((provider) => (
+              <ConnectionCard
+                key={provider.key}
+                iconKey={provider.key}
+                name={provider.name}
+                description={provider.description}
               />
-              <Button variant="ghost" size="sm" className="shrink-0 text-brand-green-to">
-                {DEGENCITY_APPLY_LABEL}
-              </Button>
+            ))}
+          </div>
+        </Card>
+      </section>
+      <section className="flex flex-col gap-3">
+        <h3 className="text-xl font-bold text-foreground">{CASINO_CONNECTIONS_SECTION_TITLE}</h3>
+        <Card variant="profile" className="p-4 md:p-6">
+          <div className="flex items-center gap-4 rounded-xl bg-page-bg p-4">
+            <ProviderIcon iconKey="degencity" />
+            <div className="flex flex-1 flex-col gap-0.5 min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-foreground">
+                  {DEGENCITY_CONNECTION.name}
+                </span>
+                <span className="text-xs font-medium text-destructive">
+                  {CONNECTION_STATUS_DISCONNECTED}
+                </span>
+              </div>
+              <span className="text-xs text-text-secondary">
+                {DEGENCITY_CONNECTION.description}
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 shrink-0 min-w-[200px]">
+              <span className="text-xs text-text-secondary">{DEGENCITY_USERNAME_LABEL}</span>
+              <div className="relative flex items-center">
+                <Input
+                  value={degenCityUsername}
+                  onChange={(e) => setDegenCityUsername(e.target.value)}
+                  placeholder={DEGENCITY_USERNAME_PLACEHOLDER}
+                  className={`h-9 pr-16 text-sm ${AUTH_INPUT_CLASS}`}
+                />
+                <Button
+                  variant="ghost"
+                  size="none"
+                  className="absolute right-2 text-brand-green-to text-sm font-medium hover:bg-transparent"
+                >
+                  {DEGENCITY_APPLY_LABEL}
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </Card>
       </section>
     </div>
   );

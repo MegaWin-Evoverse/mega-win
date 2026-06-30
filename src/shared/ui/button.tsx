@@ -26,6 +26,8 @@ const buttonVariants = cva(
           'bg-border-default hover:bg-border-default/80 border-0 active:not-aria-[haspopup]:translate-y-px transition-all font-outfit text-base font-semibold text-brand-text-white rounded-lg',
         'action-muted':
           'btn-action-secondary hover:brightness-110 active:not-aria-[haspopup]:translate-y-px transition-all font-outfit text-lg font-medium text-brand-text-white rounded-lg',
+        'tab-active':
+          'game-tab-active text-brand-text-white hover:brightness-110 active:brightness-95 border-0',
       },
       size: {
         default:
