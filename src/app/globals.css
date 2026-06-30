@@ -590,6 +590,30 @@
   background-size: cover;
 }
 
+:fullscreen .app-header,
+:fullscreen .app-footer,
+:fullscreen .app-bottom-nav,
+:fullscreen [data-slot="sidebar-wrapper"] {
+  display: none;
+}
+
+:fullscreen .app-shell {
+  height: 100dvh;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+:fullscreen .games-shell {
+  height: 100%;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+:fullscreen .game-settings-bar ~ * {
+  display: none;
+}
+
 .games-hero-glow {
   background: linear-gradient(180deg,
       rgba(108, 31, 178, 0.1) 0%,
