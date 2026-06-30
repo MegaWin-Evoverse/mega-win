@@ -9,7 +9,7 @@ interface Props {
 
 export function Stats({ multiplierDisplay, rolloverDisplay, chanceDisplay }: Props) {
   return (
-    <div className="flex w-full items-center gap-[34px] rounded-lg bg-gradient-to-b from-brand-border/40 to-brand-btn-gradient-to/40 px-3 py-5">
+    <div className="flex w-full items-center gap-2 rounded-lg bg-gradient-to-b from-brand-border/40 to-brand-btn-gradient-to/40 px-3 py-5 lg:gap-[34px]">
       <div className="flex flex-1 flex-col gap-2">
         <span className="font-outfit text-base font-medium text-brand-text-white">
           {LABELS.MULTIPLIER}

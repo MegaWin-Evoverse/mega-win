@@ -26,6 +26,7 @@ function selectControls(state: GameControlsState) {
     applyBet: state.applyBet,
     applyWin: state.applyWin,
     setBalance: state.setBalance,
+    setNumberOfBets: state.setNumberOfBets,
   };
 }
 
@@ -51,6 +52,7 @@ export function useDiceGame(): UseDiceGameResult {
     applyBet,
     applyWin,
     setBalance,
+    setNumberOfBets,
   } = useGameControlsStore(useShallow(selectControls));
   const { data: user } = useUserQuery();
 
@@ -64,6 +66,7 @@ export function useDiceGame(): UseDiceGameResult {
   const netProfitRef = useRef(0);
   const lastBetSizeRef = useRef(0);
   const rolloverRef = useRef(rollover);
+  const initialBetsRef = useRef('');
 
   const gamePointsBalance = getGamePointsBalance(user);
 
@@ -81,7 +84,8 @@ export function useDiceGame(): UseDiceGameResult {
     autoRunningRef.current = false;
     remainingRef.current = 0;
     setIsAutoRunning(false);
-  }, []);
+    setNumberOfBets(initialBetsRef.current);
+  }, [setNumberOfBets]);
 
   const chance = 100 - rollover;
   const multiplier = chance > 0 ? (HOUSE_EDGE * 100) / chance : 0;
@@ -115,7 +119,13 @@ export function useDiceGame(): UseDiceGameResult {
 
       remainingRef.current--;
 
-      if (remainingRef.current <= 0 || hitProfit || hitLoss) {
+      const shouldStop = remainingRef.current <= 0 || hitProfit || hitLoss;
+
+      if (!shouldStop && Number.isFinite(remainingRef.current)) {
+        setNumberOfBets(String(remainingRef.current));
+      }
+
+      if (shouldStop) {
         stop();
         return;
       }
@@ -155,6 +165,7 @@ export function useDiceGame(): UseDiceGameResult {
 
     const parsed = parseInt(numberOfBets, 10);
     const totalBets = Number.isFinite(parsed) && parsed > 0 ? parsed : Number.POSITIVE_INFINITY;
+    initialBetsRef.current = numberOfBets;
     remainingRef.current = totalBets;
     netProfitRef.current = 0;
     autoRunningRef.current = true;

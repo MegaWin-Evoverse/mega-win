@@ -2,7 +2,14 @@
 import type { CSSProperties } from 'react';
 import { Slider as SliderPrimitive } from '@base-ui/react/slider';
 import { cn } from '@/shared/lib/cn';
-import { MIN_ROLLOVER, MAX_ROLLOVER, STEP, TICK_MARKS, ROLL_DECIMALS } from '../model/constants';
+import {
+  MIN_ROLLOVER,
+  MAX_ROLLOVER,
+  STEP,
+  TICK_MARKS,
+  ROLL_DECIMALS,
+  TOOLTIP_EDGE_THRESHOLD,
+} from '../model/constants';
 import type { RollEntry } from '../model/types';
 
 interface Props {
@@ -19,8 +26,18 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
       <div className="relative h-[53px] w-full">
         {lastRoll && (
           <div
-            style={{ '--roll': `${lastRoll.value}%` } as CSSProperties}
-            className="absolute bottom-0 left-[var(--roll)] flex -translate-x-1/2 flex-col items-center"
+            style={
+              {
+                '--roll': `${lastRoll.value}%`,
+                '--tx':
+                  lastRoll.value < TOOLTIP_EDGE_THRESHOLD
+                    ? '0%'
+                    : lastRoll.value > 100 - TOOLTIP_EDGE_THRESHOLD
+                      ? '-100%'
+                      : '-50%',
+              } as CSSProperties
+            }
+            className="absolute bottom-0 left-[var(--roll)] flex translate-x-[var(--tx)] flex-col items-center"
           >
             <div
               className={cn(

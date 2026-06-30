@@ -23,7 +23,7 @@ export function DicePageClient() {
     <div className="game-page mx-auto flex w-full max-w-[1017px] flex-col px-4 py-6 lg:px-6">
       <RevealOnScroll
         triggerOn="mount"
-        className="game-layout flex w-full flex-col overflow-hidden lg:flex-row lg:rounded-[16px]"
+        className="game-layout flex w-full flex-col-reverse overflow-hidden lg:flex-row lg:rounded-[16px]"
       >
         <ControlPanel game={GAME.DICE} onBet={handleBet} isAutoRunning={isAutoRunning} />
         <DiceGame
