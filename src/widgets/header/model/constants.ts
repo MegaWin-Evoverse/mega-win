@@ -1,6 +1,6 @@
 import { Link2, Archive, Shield } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { ROUTES } from '@/shared/config';
+import { ROUTES, PROFILE_TAB_QUERY_KEY, PROFILE_TAB_QUERY } from '@/shared/config';
 
 export interface UserMenuItem {
   label: string;
@@ -8,28 +8,20 @@ export interface UserMenuItem {
   icon: LucideIcon;
 }
 
-const TAB_QUERY_KEY = 'tab';
-
-const PROFILE_TAB_QUERY = {
-  CONNECTIONS: 'connections',
-  BETS_HISTORY: 'bets-history',
-  SEED_HISTORY: 'seed-history',
-} as const;
-
 export const USER_MENU_ITEMS: UserMenuItem[] = [
   {
     label: 'Connections',
-    href: `${ROUTES.PROFILE}?${TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.CONNECTIONS}`,
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.CONNECTIONS}`,
     icon: Link2,
   },
   {
     label: 'Bets History',
-    href: `${ROUTES.PROFILE}?${TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.BETS_HISTORY}`,
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.BETS_HISTORY}`,
     icon: Archive,
   },
   {
     label: 'Seed History',
-    href: `${ROUTES.PROFILE}?${TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.SEED_HISTORY}`,
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.SEED_HISTORY}`,
     icon: Shield,
   },
 ];

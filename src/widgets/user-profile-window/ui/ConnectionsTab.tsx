@@ -87,13 +87,13 @@ function ProviderIcon({ iconKey }: { iconKey: IconKey }) {
   return null;
 }
 
-interface ConnectionCardProps {
+interface Props {
   iconKey: SocialIconKey;
   name: string;
   description: string;
 }
 
-function ConnectionCard({ iconKey, name, description }: ConnectionCardProps) {
+function ConnectionCard({ iconKey, name, description }: Props) {
   return (
     <div className="flex items-center gap-4 rounded-xl bg-page-bg p-4">
       <ProviderIcon iconKey={iconKey} />

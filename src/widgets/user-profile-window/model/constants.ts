@@ -15,12 +15,7 @@ export const TAB_LABELS: Record<ProfileWindowTab, string> = {
   connections: 'Connections',
 };
 
-export const TAB_LIST: ProfileWindowTab[] = [
-  'profile',
-  'bets-history',
-  'seed-history',
-  'connections',
-];
+export const TAB_LIST = Object.values(PROFILE_WINDOW_TABS) as ProfileWindowTab[];
 
 export const SECTION_LABELS = {
   PROFILE: 'Profile',
