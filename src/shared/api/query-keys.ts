@@ -14,6 +14,7 @@ export const QUERY_KEYS = {
   fairnessSeed: ['fairness-seed'],
   rewards: (params: string) => ['rewards', params],
   seedHistory: (page: number) => ['seed-history', page],
+  reward: (id: string) => ['reward', id],
 } as const;
 
 export const DAILY_CLAIM_QUERY_KEYS = {

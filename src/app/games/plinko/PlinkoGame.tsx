@@ -11,6 +11,7 @@ import { PlinkoBoard } from '@/widgets/plinko-board';
 import { ControlPanel } from '@/widgets/control-panel';
 import { GameSettingsBar } from '@/widgets/game-settings-bar';
 import { BetsStory } from '@/entities/bets-story';
+import { RevealOnScroll } from '@/shared/ui/RevealOnScroll';
 
 function selectBoard(state: GameControlsState) {
   return { rows: state.rows, risk: state.risk };
@@ -24,7 +25,10 @@ export function PlinkoGame() {
 
   return (
     <div className="mx-auto flex w-full max-w-[1017px] flex-col">
-      <div className="flex w-full flex-col-reverse items-stretch overflow-hidden rounded-2xl pt-4 lg:flex-row lg:pt-10">
+      <RevealOnScroll
+        triggerOn="mount"
+        className="flex w-full flex-col-reverse items-stretch overflow-hidden rounded-2xl pt-4 lg:flex-row lg:pt-10"
+      >
         <ControlPanel
           game={GAME.PLINKO}
           onBet={placeBet}
@@ -41,11 +45,11 @@ export function PlinkoGame() {
             onDropLanded={onDropLanded}
           />
         </div>
-      </div>
+      </RevealOnScroll>
       <GameSettingsBar game={GAME.PLINKO} className="mt-1" />
-      <div className="mt-10">
+      <RevealOnScroll className="mt-10 w-full">
         <BetsStory />
-      </div>
+      </RevealOnScroll>
     </div>
   );
 }

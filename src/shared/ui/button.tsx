@@ -28,6 +28,8 @@ const buttonVariants = cva(
           'btn-action-secondary hover:brightness-110 active:not-aria-[haspopup]:translate-y-px transition-all font-outfit text-lg font-medium text-brand-text-white rounded-lg',
         'tab-active':
           'game-tab-active text-brand-text-white hover:brightness-110 active:brightness-95 border-0',
+        neutral:
+          'h-12 px-6 gap-2 bg-gradient-to-b from-auth-surface to-auth-surface-light border border-auth-surface font-outfit font-medium text-lg leading-6 text-brand-text-white hover:brightness-110 active:not-aria-[haspopup]:translate-y-px',
       },
       size: {
         default:
