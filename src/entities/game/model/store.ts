@@ -21,7 +21,9 @@ export interface GameControlsState {
   selectedChip: string | null;
   placedBet: number;
   onWinMode: string;
+  onWinIncrease: string;
   onLossMode: string;
+  onLossIncrease: string;
   stopOnProfit: string;
   stopOnLoss: string;
   isBetActive: boolean;
@@ -41,6 +43,21 @@ export interface GameControlsState {
   setNumberOfBets: (value: string) => void;
   setInfinity: () => void;
   decrementNumberOfBets: () => void;
+  setOnWinMode: (mode: string) => void;
+  setOnWinIncrease: (value: string) => void;
+  setOnLossMode: (mode: string) => void;
+  setOnLossIncrease: (value: string) => void;
+  setStopOnProfit: (value: string) => void;
+  setStopOnLoss: (value: string) => void;
+  applyAutoBetConfig: (config: {
+    onWinMode: string;
+    onWinIncrease: string;
+    onLossMode: string;
+    onLossIncrease: string;
+    stopOnProfit: string;
+    stopOnLoss: string;
+  }) => void;
+  resetAutoBetConfig: () => void;
   selectChip: (chip: string) => void;
   clearTable: () => void;
   undo: () => void;
@@ -57,7 +74,9 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   selectedChip: null,
   placedBet: 0,
   onWinMode: GAME_CONTROLS_DEFAULTS.ON_WIN,
+  onWinIncrease: GAME_CONTROLS_DEFAULTS.ON_WIN_INCREASE,
   onLossMode: GAME_CONTROLS_DEFAULTS.ON_LOSS,
+  onLossIncrease: GAME_CONTROLS_DEFAULTS.ON_LOSS_INCREASE,
   stopOnProfit: GAME_CONTROLS_DEFAULTS.STOP_ON_PROFIT,
   stopOnLoss: GAME_CONTROLS_DEFAULTS.STOP_ON_LOSS,
   isBetActive: false,
@@ -105,6 +124,22 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
       if (isNaN(current) || current <= 1)
         return { numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS };
       return { numberOfBets: String(current - 1) };
+    }),
+  setOnWinMode: (onWinMode) => set({ onWinMode }),
+  setOnWinIncrease: (onWinIncrease) => set({ onWinIncrease }),
+  setOnLossMode: (onLossMode) => set({ onLossMode }),
+  setOnLossIncrease: (onLossIncrease) => set({ onLossIncrease }),
+  setStopOnProfit: (stopOnProfit) => set({ stopOnProfit }),
+  setStopOnLoss: (stopOnLoss) => set({ stopOnLoss }),
+  applyAutoBetConfig: (config) => set(config),
+  resetAutoBetConfig: () =>
+    set({
+      onWinMode: GAME_CONTROLS_DEFAULTS.ON_WIN,
+      onWinIncrease: GAME_CONTROLS_DEFAULTS.ON_WIN_INCREASE,
+      onLossMode: GAME_CONTROLS_DEFAULTS.ON_LOSS,
+      onLossIncrease: GAME_CONTROLS_DEFAULTS.ON_LOSS_INCREASE,
+      stopOnProfit: GAME_CONTROLS_DEFAULTS.STOP_ON_PROFIT,
+      stopOnLoss: GAME_CONTROLS_DEFAULTS.STOP_ON_LOSS,
     }),
   selectChip: (chip) =>
     set((state) => ({ selectedChip: state.selectedChip === chip ? null : chip })),

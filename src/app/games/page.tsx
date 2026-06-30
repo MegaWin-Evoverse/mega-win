@@ -20,7 +20,7 @@ export default function GamesPage() {
           <GameCardsGrid columns={2} variant="wide" />
         </RevealOnScroll>
         <RevealOnScroll className="w-full">
-          <BetsStory showLiveTitle />
+          <BetsStory />
         </RevealOnScroll>
         <RevealOnScroll className="w-full">
           <FAQ />

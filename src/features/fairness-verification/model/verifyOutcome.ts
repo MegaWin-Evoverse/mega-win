@@ -1,4 +1,6 @@
 const ROULETTE_POCKET_COUNT = 37;
+const DICE_ROLL_SCALE = 100;
+const DICE_ROLL_DECIMALS = 2;
 const FLOAT_BYTE_COUNT = 4;
 const BYTE_BASE = 256;
 const KENO_TOTAL_NUMBERS = 40;
@@ -63,6 +65,19 @@ export async function computeKenoOutcome(
   }
 
   return numbers.slice(0, KENO_DRAWN_COUNT);
+}
+
+export async function computeDiceOutcome(
+  clientSeed: string,
+  serverSeed: string,
+  nonce: string
+): Promise<number> {
+  const hex = await hmacSha256Hex(serverSeed, `${clientSeed}:${nonce}:0`);
+  const bytes = (hex.match(/.{2}/g) ?? [])
+    .slice(0, FLOAT_BYTE_COUNT)
+    .map((byte) => parseInt(byte, 16));
+  const float = bytesToFloat(bytes);
+  return parseFloat((float * DICE_ROLL_SCALE).toFixed(DICE_ROLL_DECIMALS));
 }
 
 export async function computePlinkoOutcome(
