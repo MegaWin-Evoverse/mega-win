@@ -73,6 +73,12 @@ export const CONNECTIONS_TITLE = 'Connections';
 
 export const CASINO_CONNECTIONS_SECTION_TITLE = 'Casino Connections';
 
+export const CONNECTION_ICON_SRC = {
+  discord: '/discord-icon.svg',
+  steam: '/steam-icon.svg',
+  degencity: '/degencity-icon.svg',
+} as const;
+
 export const CONNECTION_STATUS_DISCONNECTED = 'Not connected';
 
 export const CONNECTION_CONNECT_LABEL = 'Connect';

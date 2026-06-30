@@ -13,6 +13,7 @@ import {
   DEGENCITY_APPLY_LABEL,
   SOCIAL_CONNECTIONS,
   DEGENCITY_CONNECTION,
+  CONNECTION_ICON_SRC,
 } from '../model/constants';
 
 function KickIcon({ className }: { className?: string }) {
@@ -47,32 +48,19 @@ function GoogleIcon({ className }: { className?: string }) {
   );
 }
 
-function SteamIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="20" fill="#1B2838" />
-      <path
-        d="M24 8c-8.8 0-16 7.2-16 16 0 6.2 3.6 11.7 8.8 14.4l2.8-6.8C18 31 17 29.1 17 27c0-3.9 3.1-7 7-7s7 3.1 7 7-3.1 7-7 7h-.5l-2.8 6.8c.8.1 1.5.2 2.3.2 8.8 0 16-7.2 16-16S32.8 8 24 8zm-8 18c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"
-        fill="#8F98A0"
-      />
-      <circle cx="16" cy="22" r="2.5" fill="#00ADEE" />
-    </svg>
-  );
-}
-
 type SocialIconKey = (typeof SOCIAL_CONNECTIONS)[number]['key'];
 type IconKey = SocialIconKey | typeof DEGENCITY_CONNECTION.key;
 type IconComponent = ({ className }: { className?: string }) => ReactElement;
 
 const IMAGE_ICON_SRC: Partial<Record<IconKey, string>> = {
-  discord: '/discord-logo-1.svg',
-  degencity: '/degencity.svg',
+  discord: CONNECTION_ICON_SRC.discord,
+  steam: CONNECTION_ICON_SRC.steam,
+  degencity: CONNECTION_ICON_SRC.degencity,
 };
 
 const SVG_ICON_MAP: Partial<Record<IconKey, IconComponent>> = {
   kick: KickIcon,
   google: GoogleIcon,
-  steam: SteamIcon,
 };
 
 function ProviderIcon({ iconKey }: { iconKey: IconKey }) {
