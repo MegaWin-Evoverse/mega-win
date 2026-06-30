@@ -129,22 +129,24 @@ export function ConnectionsTab() {
       <section className="flex flex-col gap-3">
         <h3 className="text-xl font-bold text-foreground">{CASINO_CONNECTIONS_SECTION_TITLE}</h3>
         <Card variant="profile" className="p-4 md:p-6">
-          <div className="flex items-center gap-4 rounded-xl bg-page-bg p-4">
-            <ProviderIcon iconKey="degencity" />
-            <div className="flex flex-1 flex-col gap-0.5 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-foreground">
-                  {DEGENCITY_CONNECTION.name}
-                </span>
-                <span className="text-xs font-medium text-destructive">
-                  {CONNECTION_STATUS_DISCONNECTED}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-xl bg-page-bg p-4">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <ProviderIcon iconKey="degencity" />
+              <div className="flex flex-col gap-0.5 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground">
+                    {DEGENCITY_CONNECTION.name}
+                  </span>
+                  <span className="text-xs font-medium text-destructive">
+                    {CONNECTION_STATUS_DISCONNECTED}
+                  </span>
+                </div>
+                <span className="text-xs text-text-secondary">
+                  {DEGENCITY_CONNECTION.description}
                 </span>
               </div>
-              <span className="text-xs text-text-secondary">
-                {DEGENCITY_CONNECTION.description}
-              </span>
             </div>
-            <div className="flex flex-col gap-1 shrink-0 min-w-[200px]">
+            <div className="flex flex-col gap-1 sm:shrink-0 sm:min-w-[200px]">
               <span className="text-xs text-text-secondary">{DEGENCITY_USERNAME_LABEL}</span>
               <div className="relative flex items-center">
                 <Input
