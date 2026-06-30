@@ -29,7 +29,7 @@ export function KenoGame({
   onNumberToggle,
 }: Props) {
   return (
-    <div className="relative isolate flex w-full flex-col items-center justify-center gap-4 overflow-hidden bg-bg-primary p-4 lg:gap-8 lg:rounded-[0_16px_16px_0] lg:p-8">
+    <div className="relative isolate flex w-full flex-col items-center justify-center gap-4 overflow-hidden bg-bg-primary p-4 xl:gap-8 xl:rounded-[0_16px_16px_0] xl:p-8">
       <div
         className="pointer-events-none absolute bottom-[-146px] left-1/2 h-[153px] w-[725px] -translate-x-1/2 bg-keno-glow blur-[300px]"
         aria-hidden="true"

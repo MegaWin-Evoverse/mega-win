@@ -121,8 +121,7 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
     set((state) => {
       if (state.numberOfBets === GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS) return {};
       const current = parseInt(state.numberOfBets, 10);
-      if (isNaN(current) || current <= 1)
-        return { numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS };
+      if (isNaN(current) || current <= 1) return { numberOfBets: '0' };
       return { numberOfBets: String(current - 1) };
     }),
   setOnWinMode: (onWinMode) => set({ onWinMode }),

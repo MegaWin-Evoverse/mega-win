@@ -38,19 +38,6 @@ export const CELL_STATE_CLASSES: Record<CellState, string> = {
     'bg-gradient-to-b from-brand-border to-brand-btn-gradient-to border border-destructive text-destructive',
 };
 
-export const PAYOUT_COLS: Readonly<Record<number, string>> = {
-  2: 'grid-cols-2',
-  3: 'grid-cols-3',
-  4: 'grid-cols-4',
-  5: 'grid-cols-5',
-  6: 'grid-cols-6',
-  7: 'grid-cols-7',
-  8: 'grid-cols-8',
-  9: 'grid-cols-9',
-  10: 'grid-cols-10',
-  11: 'grid-cols-11',
-} as const;
-
 export const PAYOUTS_BY_RISK: Readonly<Record<Risk, readonly number[]>> = {
   classic: [0, 0, 0, 1.4, 2.25, 4.5, 8, 17, 50, 80, 100],
   low: [0, 0, 1.1, 1.2, 1.3, 1.8, 3.5, 13, 50, 250, 1000],

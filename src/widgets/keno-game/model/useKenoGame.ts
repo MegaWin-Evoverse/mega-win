@@ -322,9 +322,7 @@ export function useKenoGame(): UseKenoGameResult {
 
         if (next.has(number)) {
           next.delete(number);
-        }
-
-        if (next.size < MAX_PICKS) {
+        } else if (next.size < MAX_PICKS) {
           next.add(number);
         }
 

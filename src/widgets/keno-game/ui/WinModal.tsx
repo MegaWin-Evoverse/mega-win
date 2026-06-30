@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { Trophy } from 'lucide-react';
-import { Button } from '@/shared/ui/button';
 import coinIcon from '@/shared/assets/icons/coin.svg';
 import coin1Icon from '@/shared/assets/icons/coin-1.svg';
 import { LABELS, MULTIPLIER_DECIMALS, BET_DECIMALS } from '../model/constants';
@@ -15,7 +14,7 @@ export function WinModal({ multiplier, betAmount, matchCount }: Props) {
   return (
     <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl backdrop-blur-sm bg-background/60 z-10">
       <div className="overflow-hidden rounded-xl bg-card shadow-2xl min-w-56">
-        <div className="flex items-center justify-center gap-2 px-4 py-3 h-[52px] self-stretch bg-gradient-to-b from-[#0A271A] to-[#39B17D] border border-[rgba(63,74,89,0.5)] rounded-t-xl">
+        <div className="flex items-center justify-center gap-2 px-4 py-3 h-[52px] self-stretch result-header-win border border-keno-cell-border rounded-t-xl">
           <div className="flex items-center gap-1.5 px-4 py-1 w-24 h-7 rounded-2xl">
             <Trophy className="size-5 text-white" aria-label={LABELS.WIN_TROPHY_ARIA} />
             <span className="text-base font-semibold font-heading text-white">
