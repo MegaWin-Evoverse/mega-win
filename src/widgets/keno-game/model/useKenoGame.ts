@@ -1,11 +1,12 @@
 'use client';
-
 import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
+import { useQueryClient } from '@tanstack/react-query';
 import { useGameControlsStore, RISK, RISK_API_MAP, selectIsAutoMode } from '@/entities/game';
 import { useUserQuery } from '@/entities/user';
 import { useTurboModeStore } from '@/features/game-settings';
+import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
 import {
   MAX_PICKS,
@@ -62,6 +63,7 @@ export function useKenoGame(): UseKenoGameResult {
   const { data: user } = useUserQuery();
   const gamePointsBalance = getGamePointsBalance(user);
   const turboMode = useTurboModeStore((state) => state.turboMode);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (gamePointsBalance !== null) {
@@ -152,6 +154,7 @@ export function useKenoGame(): UseKenoGameResult {
       function finalize() {
         setIsRevealing(false);
         setGameResult(response.multiplier > 0 ? 'win' : 'lose');
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
 
         if (!isAutoRunningRef.current) return;
 
