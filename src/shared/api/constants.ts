@@ -6,3 +6,9 @@ export const AUTH_PATHS = [
   '/api/auth/register',
   '/api/auth/verify-email',
 ] as const;
+
+export const USER_PATHS = {
+  ME: '/api/user/query/me',
+  UPDATE_INFO: '/api/user/command/update/user-info',
+  UPDATE_PASSWORD: '/api/user/command/update/password',
+} as const;

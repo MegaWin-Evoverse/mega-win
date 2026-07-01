@@ -1,4 +1,5 @@
 export { ROUTES } from './routes';
+export { PROFILE_TAB_QUERY_KEY, PROFILE_TAB_QUERY } from './profile-tabs';
 export {
   BUTTON_LABELS,
   FOOTER_ABOUT_LINKS,

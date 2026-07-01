@@ -14,6 +14,7 @@ const cardVariants = cva('', {
         'rounded-xl bg-promo-gradient border-promo-red shadow-promo-inset opacity-85 p-5 relative overflow-hidden select-none isolate',
       gettingStarted:
         'flex flex-col overflow-hidden rounded-xl border border-gs-card-border bg-gs-content select-none',
+      profile: 'rounded-xl bg-bg-primary',
     },
   },
   defaultVariants: {

@@ -57,21 +57,13 @@ export function SettingsPopover({
           <span className="font-outfit font-medium text-sm text-brand-text-white">
             {GAME_SETTINGS_LABELS.turboMode}
           </span>
-          <Switch
-            checked={turboMode}
-            onCheckedChange={setTurboMode}
-            className="data-checked:bg-brand-green-to data-unchecked:bg-surface-toggle border border-transparent data-unchecked:border-border-control/40 [&_[data-slot=switch-thumb]]:bg-white"
-          />
+          <Switch checked={turboMode} onCheckedChange={setTurboMode} />
         </div>
         <div className="flex flex-row justify-between items-center w-full px-1">
           <span className="font-outfit font-medium text-sm text-brand-text-white">
             {GAME_SETTINGS_LABELS.maxBet}
           </span>
-          <Switch
-            checked={maxBet}
-            onCheckedChange={setMaxBet}
-            className="data-checked:bg-brand-green-to data-unchecked:bg-surface-toggle border border-transparent data-unchecked:border-border-control/40 [&_[data-slot=switch-thumb]]:bg-white"
-          />
+          <Switch checked={maxBet} onCheckedChange={setMaxBet} />
         </div>
         <div className="flex flex-row items-center gap-3 w-full px-1 pt-1 border-t border-border/10">
           <Volume2 className="w-5 h-5 text-brand-text-light shrink-0" />

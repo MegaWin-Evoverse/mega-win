@@ -1,31 +1,33 @@
 import Image from 'next/image';
-import { COIN_ICON } from '@/shared/config';
-import { STAT_CARD_IMAGE } from '../model/constants';
+import type { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
 
 interface Props {
   label: string;
   value: string;
+  backgroundSrc: string;
+  pointIcon: typeof COIN_ICON | typeof GAME_POINT_ICON;
 }
 
-export function StatCard({ label, value }: Props) {
+export function StatCard({ label, value, backgroundSrc, pointIcon }: Props) {
   return (
-    <div className="relative flex items-center gap-4 overflow-hidden rounded-xl bg-bg-primary px-4 py-3 flex-1">
+    <div className="relative flex flex-1 items-center overflow-hidden rounded-xl bg-bg-primary px-4 py-3">
       <Image
-        src={STAT_CARD_IMAGE.SRC}
-        alt={STAT_CARD_IMAGE.ALT}
-        width={STAT_CARD_IMAGE.WIDTH}
-        height={STAT_CARD_IMAGE.HEIGHT}
-        className="shrink-0 object-contain"
+        src={backgroundSrc}
+        alt=""
+        width={160}
+        height={78}
+        className="absolute inset-y-0 left-0 h-full w-[160px] object-cover object-left"
         aria-hidden
+        priority
       />
-      <div className="flex flex-col gap-1">
+      <div className="relative flex flex-col gap-1">
         <span className="text-sm text-text-secondary">{label}</span>
         <div className="flex items-center gap-1.5">
           <Image
-            src={COIN_ICON.SRC}
-            alt={COIN_ICON.ALT}
-            width={COIN_ICON.SIZE_SUMMARY}
-            height={COIN_ICON.SIZE_SUMMARY}
+            src={pointIcon.SRC}
+            alt={pointIcon.ALT}
+            width={pointIcon.SIZE_SUMMARY}
+            height={pointIcon.SIZE_SUMMARY}
           />
           <span className="text-base font-semibold text-foreground">{value}</span>
         </div>

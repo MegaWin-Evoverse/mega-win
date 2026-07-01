@@ -1,6 +1,6 @@
-import { Link2, ShoppingCart, Archive, Users, Shield } from 'lucide-react';
+import { Link2, Archive, Shield } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { ROUTES } from '@/shared/config';
+import { ROUTES, PROFILE_TAB_QUERY_KEY, PROFILE_TAB_QUERY } from '@/shared/config';
 
 export interface UserMenuItem {
   label: string;
@@ -9,11 +9,21 @@ export interface UserMenuItem {
 }
 
 export const USER_MENU_ITEMS: UserMenuItem[] = [
-  { label: 'Connections', href: ROUTES.CONNECTIONS, icon: Link2 },
-  { label: 'Points Shop', href: ROUTES.POINTSHOP, icon: ShoppingCart },
-  { label: 'Bets History', href: ROUTES.BETS_HISTORY, icon: Archive },
-  { label: 'Affiliates', href: ROUTES.AFFILIATES, icon: Users },
-  { label: 'Seed history', href: ROUTES.SEED_HISTORY, icon: Shield },
+  {
+    label: 'Connections',
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.CONNECTIONS}`,
+    icon: Link2,
+  },
+  {
+    label: 'Bets History',
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.BETS_HISTORY}`,
+    icon: Archive,
+  },
+  {
+    label: 'Seed History',
+    href: `${ROUTES.PROFILE}?${PROFILE_TAB_QUERY_KEY}=${PROFILE_TAB_QUERY.SEED_HISTORY}`,
+    icon: Shield,
+  },
 ];
 
 export const PROFILE_LABEL = 'Profile';
