@@ -84,7 +84,12 @@ export function UserProfileWindow() {
       </Card>
       <Tabs value={activeTab} onValueChange={onTabChange} className="mt-5">
         <div className="sm:hidden px-4">
-          <Select value={activeTab} onValueChange={onTabChange}>
+          <Select
+            value={activeTab}
+            onValueChange={(value) => {
+              if (value) onTabChange(value);
+            }}
+          >
             <SelectTrigger className="data-[size=default]:h-[42px] w-full rounded-xl border-auth-surface bg-bg-primary px-4 font-outfit text-sm text-foreground focus-visible:border-button-brand-bg-dark focus-visible:ring-0">
               <SelectValue />
             </SelectTrigger>
