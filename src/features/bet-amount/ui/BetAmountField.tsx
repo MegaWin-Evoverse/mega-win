@@ -11,8 +11,16 @@ interface Props {
 }
 
 export function BetAmountField({ className }: Props) {
-  const { betAmount, balance, setBetAmount, onBetBlur, betHalf, betDouble, betMax } =
-    useBetAmount();
+  const {
+    betAmount,
+    balance,
+    isInputDisabled,
+    setBetAmount,
+    onBetBlur,
+    betHalf,
+    betDouble,
+    betMax,
+  } = useBetAmount();
 
   return (
     <div className={cn('flex w-full flex-col gap-2', className)}>
@@ -26,10 +34,18 @@ export function BetAmountField({ className }: Props) {
         value={betAmount}
         onValueChange={setBetAmount}
         onBlur={onBetBlur}
+        disabled={isInputDisabled}
         iconSrc={GAME_POINT_ICON.SRC}
         iconAlt={GAME_POINT_ICON.ALT}
         iconSize={GAME_POINT_ICON.SIZE_INPUT}
-        trailing={<QuickBetButtons onBetHalf={betHalf} onBetDouble={betDouble} onBetMax={betMax} />}
+        trailing={
+          <QuickBetButtons
+            onBetHalf={betHalf}
+            onBetDouble={betDouble}
+            onBetMax={betMax}
+            disabled={isInputDisabled}
+          />
+        }
       />
     </div>
   );

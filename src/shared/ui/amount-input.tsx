@@ -10,6 +10,7 @@ interface Props {
   onBlur?: () => void;
   inputMode?: 'decimal' | 'numeric';
   readOnly?: boolean;
+  disabled?: boolean;
   iconSrc?: StaticImageData;
   iconAlt?: string;
   iconSize?: number;
@@ -23,6 +24,7 @@ export function AmountInput({
   onBlur,
   inputMode = 'decimal',
   readOnly = false,
+  disabled = false,
   iconSrc,
   iconAlt = '',
   iconSize = 16,
@@ -41,7 +43,8 @@ export function AmountInput({
     <div
       className={cn(
         'flex h-11 items-center justify-between gap-2 rounded-lg border border-border-default bg-border-default/25 px-3 transition-colors duration-200',
-        !readOnly && 'focus-within:border-button-brand-bg-dark',
+        !readOnly && !disabled && 'focus-within:border-button-brand-bg-dark',
+        disabled && 'cursor-not-allowed opacity-50',
         className
       )}
     >
@@ -53,10 +56,10 @@ export function AmountInput({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={onBlur}
-          readOnly={readOnly}
+          readOnly={readOnly || disabled}
           className={cn(
             'h-auto border-0 bg-transparent p-1 font-outfit text-sm text-brand-text-light shadow-none focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent',
-            readOnly && 'pointer-events-none select-none'
+            (readOnly || disabled) && 'pointer-events-none select-none'
           )}
         />
       </div>
