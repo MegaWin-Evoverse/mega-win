@@ -9,6 +9,7 @@ import {
   type ComponentProps,
   type CSSProperties,
 } from 'react';
+import { usePathname } from 'next/navigation';
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -66,6 +67,13 @@ function SidebarProvider({
 }) {
   const { isSmallMobile, isMobile, isTablet } = useIsMobile();
   const [openMobile, setOpenMobile] = useState(false);
+  const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpenMobile(false);
+  }
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
