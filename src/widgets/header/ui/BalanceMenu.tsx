@@ -7,13 +7,13 @@ import { Button } from '@/shared/ui/button';
 import { Separator } from '@/shared/ui/separator';
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
 import { BALANCE_TYPE, type UserBalance } from '@/entities/user';
+import { AnimatedNumber } from '@/shared/ui/AnimatedNumber';
 import {
   BALANCE_HEADER,
   EXCHANGE_LABEL,
   GAME_POINTS_LABEL,
   WATCH_POINTS_LABEL,
 } from '../model/constants';
-import { formatBalance } from '../model/formatBalance';
 
 interface Props {
   balances: UserBalance[];
@@ -37,9 +37,10 @@ export function BalanceMenu({ balances }: Props) {
           height={20}
           className="header-balance-coin-shadow size-5 shrink-0"
         />
-        <span className="truncate text-base font-normal leading-5 text-brand-text-white">
-          {formatBalance(gamePoints)}
-        </span>
+        <AnimatedNumber
+          value={Number(gamePoints)}
+          className="truncate text-base font-normal leading-5 text-brand-text-white"
+        />
         <Separator orientation="vertical" className="h-5 shrink-0" />
         <Image
           src={COIN_ICON.SRC}
@@ -49,9 +50,10 @@ export function BalanceMenu({ balances }: Props) {
           height={20}
           className="header-balance-coin-shadow size-5 shrink-0"
         />
-        <span className="truncate text-base font-normal leading-5 text-brand-text-white">
-          {formatBalance(watchPoints)}
-        </span>
+        <AnimatedNumber
+          value={Number(watchPoints)}
+          className="truncate text-base font-normal leading-5 text-brand-text-white"
+        />
         {isOpen ? (
           <ChevronUp className="size-4 shrink-0" />
         ) : (
@@ -76,7 +78,7 @@ export function BalanceMenu({ balances }: Props) {
               <span className="text-sm">{GAME_POINTS_LABEL}</span>
               <Info className="size-3 text-muted-foreground" />
             </div>
-            <span className="text-sm font-medium">{formatBalance(gamePoints)}</span>
+            <AnimatedNumber value={Number(gamePoints)} className="text-sm font-medium" />
           </div>
           <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
@@ -91,7 +93,7 @@ export function BalanceMenu({ balances }: Props) {
               <span className="text-sm">{WATCH_POINTS_LABEL}</span>
               <Info className="size-3 text-muted-foreground" />
             </div>
-            <span className="text-sm font-medium">{formatBalance(watchPoints)}</span>
+            <AnimatedNumber value={Number(watchPoints)} className="text-sm font-medium" />
           </div>
         </div>
 

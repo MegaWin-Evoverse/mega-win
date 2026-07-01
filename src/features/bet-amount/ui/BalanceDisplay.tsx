@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { formatAmount } from '@/shared/lib/formatAmount';
 import { GAME_POINT_ICON } from '@/shared/config';
+import { AnimatedNumber } from '@/shared/ui/AnimatedNumber';
 
 interface Props {
   balance: number;
@@ -15,7 +15,7 @@ export function BalanceDisplay({ balance }: Props) {
         width={GAME_POINT_ICON.SIZE_BALANCE}
         height={GAME_POINT_ICON.SIZE_BALANCE}
       />
-      <span className="font-outfit text-base text-brand-text-white">{formatAmount(balance)}</span>
+      <AnimatedNumber value={balance} className="font-outfit text-base text-brand-text-white" />
     </div>
   );
 }
