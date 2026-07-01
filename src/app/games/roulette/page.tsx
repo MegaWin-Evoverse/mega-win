@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function RouletteRoute() {
   return (
     <div className="game-page flex flex-col items-center px-4 py-6 lg:px-6">
-      <RevealOnScroll triggerOn="mount" className="w-full">
+      <RevealOnScroll triggerOn="mount" className="w-full flex flex-col">
         <GameLayout
           controls={<RouletteControls />}
           gameField={
