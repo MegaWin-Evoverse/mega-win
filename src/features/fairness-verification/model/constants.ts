@@ -27,6 +27,27 @@ export const DEFAULT_VERIFY_RISK = RISK.LOW;
 
 export const LOADING_PLACEHOLDER = 'Loading...';
 
+export const KENO_VERIFY_TOTAL = 40;
+
+export const KENO_VERIFY_NUMBERS = Array.from({ length: KENO_VERIFY_TOTAL }, (_, i) => i + 1);
+
+export const KENO_VERIFY_CELL_CLASSES = {
+  idle: 'bg-gradient-to-b from-brand-border to-brand-btn-gradient-to border border-keno-cell-border text-brand-text-white/40',
+  drawn:
+    'bg-gradient-to-b from-brand-border to-brand-btn-gradient-to border border-destructive text-destructive',
+} as const;
+export const DICE_VERIFY_MIN_ROLLOVER = 2;
+
+export const DICE_VERIFY_MAX_ROLLOVER = 98;
+
+export const DICE_VERIFY_DEFAULT_ROLLOVER = 50;
+
+export const DICE_VERIFY_STEP = 0.5;
+
+export const DICE_VERIFY_TICK_MARKS = [2, 25, 50, 75, 100] as const;
+
+export const DICE_VERIFY_ROLL_DECIMALS = 2;
+
 export const GAME_LABELS: Record<Game, string> = {
   [GAME.DICE]: 'Dice',
   [GAME.KENO]: 'Keno',

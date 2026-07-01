@@ -1,27 +1,29 @@
-import { useState, useCallback, useRef, useEffect, type RefObject } from 'react';
+import { useState, useCallback, useRef, type RefCallback } from 'react';
 
 interface UseSidebarMenuReturn {
   isGamesOpen: boolean;
   onGamesToggle: () => void;
-  gamesContentRef: RefObject<HTMLDivElement | null>;
+  gamesContentRef: RefCallback<HTMLDivElement>;
   gamesContentHeight: number;
 }
 
 export function useSidebarMenu(): UseSidebarMenuReturn {
   const [isGamesOpen, setIsGamesOpen] = useState(false);
   const [gamesContentHeight, setGamesContentHeight] = useState(0);
-  const gamesContentRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<ResizeObserver | null>(null);
   const onGamesToggle = useCallback(() => setIsGamesOpen((prev) => !prev), []);
 
-  useEffect(() => {
-    const element = gamesContentRef.current;
-    if (!element) return undefined;
-
-    const resizeObserver = new ResizeObserver((entries) => {
+  const gamesContentRef = useCallback((element: HTMLDivElement | null) => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+    if (!element) return;
+    const observer = new ResizeObserver((entries) => {
       setGamesContentHeight(entries[0].contentRect.height);
     });
-    resizeObserver.observe(element);
-    return () => resizeObserver.disconnect();
+    observer.observe(element);
+    observerRef.current = observer;
   }, []);
 
   return { isGamesOpen, onGamesToggle, gamesContentRef, gamesContentHeight };

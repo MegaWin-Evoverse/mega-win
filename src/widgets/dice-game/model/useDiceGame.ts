@@ -1,7 +1,8 @@
 'use client';
-import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { useGameControlsStore } from '@/entities/game';
+import { useGameControlsStore, selectIsAutoMode, type GameControlsState } from '@/entities/game';
+import { useUserQuery } from '@/entities/user';
 import {
   DEFAULT_ROLLOVER,
   HOUSE_EDGE,
@@ -13,6 +14,21 @@ import {
 } from './constants';
 import type { RollEntry } from './types';
 import { useDiceBetMutation } from './useDiceBetMutation';
+import { getGamePointsBalance } from './getGamePointsBalance';
+
+function selectControls(state: GameControlsState) {
+  return {
+    betAmount: state.betAmount,
+    isAutoMode: selectIsAutoMode(state),
+    numberOfBets: state.numberOfBets,
+    stopOnProfit: state.stopOnProfit,
+    stopOnLoss: state.stopOnLoss,
+    applyBet: state.applyBet,
+    applyWin: state.applyWin,
+    setBalance: state.setBalance,
+    setNumberOfBets: state.setNumberOfBets,
+  };
+}
 
 interface UseDiceGameResult {
   rollover: number;
@@ -21,22 +37,55 @@ interface UseDiceGameResult {
   multiplierDisplay: string;
   rolloverDisplay: string;
   chanceDisplay: string;
+  isAutoRunning: boolean;
   handleRolloverChange: (value: number) => void;
-  handleRoll: () => void;
+  handleBet: () => void;
 }
 
 export function useDiceGame(): UseDiceGameResult {
-  const { storeBetAmount, setBetCallback } = useGameControlsStore(
-    useShallow((state) => ({
-      storeBetAmount: state.betAmount,
-      setBetCallback: state.setBetCallback,
-    }))
-  );
+  const {
+    betAmount,
+    isAutoMode,
+    numberOfBets,
+    stopOnProfit,
+    stopOnLoss,
+    applyBet,
+    applyWin,
+    setBalance,
+    setNumberOfBets,
+  } = useGameControlsStore(useShallow(selectControls));
+  const { data: user } = useUserQuery();
 
   const [rollover, setRollover] = useState(DEFAULT_ROLLOVER);
   const [history, setHistory] = useState<RollEntry[]>([]);
   const [lastRoll, setLastRoll] = useState<RollEntry | null>(null);
-  const handleRollRef = useRef<() => void>(() => {});
+  const [isAutoRunning, setIsAutoRunning] = useState(false);
+
+  const remainingRef = useRef(0);
+  const autoRunningRef = useRef(false);
+  const netProfitRef = useRef(0);
+  const lastBetSizeRef = useRef(0);
+  const rolloverRef = useRef(rollover);
+  const initialBetsRef = useRef('');
+
+  const gamePointsBalance = getGamePointsBalance(user);
+
+  useEffect(() => {
+    rolloverRef.current = rollover;
+  }, [rollover]);
+
+  useEffect(() => {
+    if (gamePointsBalance !== null) {
+      setBalance(gamePointsBalance);
+    }
+  }, [gamePointsBalance, setBalance]);
+
+  const stop = useCallback(() => {
+    autoRunningRef.current = false;
+    remainingRef.current = 0;
+    setIsAutoRunning(false);
+    setNumberOfBets(initialBetsRef.current);
+  }, [setNumberOfBets]);
 
   const chance = 100 - rollover;
   const multiplier = chance > 0 ? (HOUSE_EDGE * 100) / chance : 0;
@@ -44,32 +93,95 @@ export function useDiceGame(): UseDiceGameResult {
   const rolloverDisplay = useMemo(() => rollover.toFixed(STATS_DECIMALS), [rollover]);
   const chanceDisplay = useMemo(() => chance.toFixed(CHANCE_DECIMALS), [chance]);
 
-  const { mutate, isPending } = useDiceBetMutation((entry) => {
-    setLastRoll(entry);
-    setHistory((prev) => [entry, ...prev].slice(0, MAX_HISTORY));
+  const placeOne = useCallback(() => {
+    const betSize = parseFloat(betAmount);
+    if (!Number.isFinite(betSize) || betSize <= 0) return false;
+    lastBetSizeRef.current = betSize;
+    applyBet(betSize);
+    return true;
+  }, [betAmount, applyBet]);
+
+  const { mutate } = useDiceBetMutation({
+    onSuccess: (response) => {
+      const entry: RollEntry = { value: response.randomValue, isWin: response.didWin };
+      setLastRoll(entry);
+      setHistory((prev) => [entry, ...prev].slice(0, MAX_HISTORY));
+      applyWin(parseFloat(response.payout));
+
+      if (!autoRunningRef.current) return;
+
+      netProfitRef.current += parseFloat(response.payout) - lastBetSizeRef.current;
+
+      const profitStop = parseFloat(stopOnProfit) || 0;
+      const lossStop = parseFloat(stopOnLoss) || 0;
+      const hitProfit = profitStop > 0 && netProfitRef.current >= profitStop;
+      const hitLoss = lossStop > 0 && -netProfitRef.current >= lossStop;
+
+      remainingRef.current--;
+
+      const shouldStop = remainingRef.current <= 0 || hitProfit || hitLoss;
+
+      if (!shouldStop && Number.isFinite(remainingRef.current)) {
+        setNumberOfBets(String(remainingRef.current));
+      }
+
+      if (shouldStop) {
+        stop();
+        return;
+      }
+
+      if (!placeOne()) {
+        stop();
+        return;
+      }
+
+      mutate({
+        betSize: lastBetSizeRef.current.toFixed(BET_DECIMALS),
+        threshold: rolloverRef.current,
+        above: ROLL_ABOVE,
+      });
+    },
+    onError: () => {
+      applyWin(lastBetSizeRef.current);
+      if (autoRunningRef.current) stop();
+    },
   });
 
-  const handleRoll = useCallback(() => {
-    if (isPending) return;
-    const betSize = parseFloat(storeBetAmount);
-    if (isNaN(betSize)) return;
+  const handleBet = useCallback(() => {
+    if (!isAutoMode) {
+      if (!placeOne()) return;
+      mutate({
+        betSize: lastBetSizeRef.current.toFixed(BET_DECIMALS),
+        threshold: rolloverRef.current,
+        above: ROLL_ABOVE,
+      });
+      return;
+    }
+
+    if (autoRunningRef.current) {
+      stop();
+      return;
+    }
+
+    const parsed = parseInt(numberOfBets, 10);
+    const totalBets = Number.isFinite(parsed) && parsed > 0 ? parsed : Number.POSITIVE_INFINITY;
+    initialBetsRef.current = numberOfBets;
+    remainingRef.current = totalBets;
+    netProfitRef.current = 0;
+    autoRunningRef.current = true;
+    setIsAutoRunning(true);
+
+    if (!placeOne()) {
+      stop();
+      return;
+    }
 
     mutate({
-      betSize: betSize.toFixed(BET_DECIMALS),
-      threshold: rollover,
+      betSize: lastBetSizeRef.current.toFixed(BET_DECIMALS),
+      threshold: rolloverRef.current,
       above: ROLL_ABOVE,
     });
-  }, [isPending, mutate, storeBetAmount, rollover]);
-
-  useLayoutEffect(() => {
-    handleRollRef.current = handleRoll;
-  });
-
-  useEffect(() => {
-    const stableCallback = () => handleRollRef.current();
-    setBetCallback(stableCallback);
-    return () => setBetCallback(null);
-  }, [setBetCallback]);
+  }, [isAutoMode, numberOfBets, placeOne, mutate, stop]);
 
   const handleRolloverChange = useCallback((value: number) => {
     setRollover(value);
@@ -82,7 +194,8 @@ export function useDiceGame(): UseDiceGameResult {
     multiplierDisplay,
     rolloverDisplay,
     chanceDisplay,
+    isAutoRunning,
     handleRolloverChange,
-    handleRoll,
+    handleBet,
   };
 }

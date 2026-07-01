@@ -8,6 +8,8 @@ import { useVerifyOutcome } from '../model/useVerifyOutcome';
 import type { VerifyFormState } from '../model/useVerifyForm';
 import { FairnessRouletteBoard } from './FairnessRouletteBoard';
 import { FairnessPlinkoPreview } from './FairnessPlinkoPreview';
+import { FairnessKenoPreview } from './FairnessKenoPreview';
+import { FairnessDicePreview } from './FairnessDicePreview';
 
 type Props = VerifyFormState;
 
@@ -30,8 +32,22 @@ export function FairnessVerifyTab({
   return (
     <div className="flex flex-col gap-4 animate-in fade-in duration-200">
       <div className="flex flex-col gap-3 w-full">
+        {selectedVerifyGame === GAME.DICE && (
+          <FairnessDicePreview
+            clientSeed={verifyClientSeed}
+            serverSeed={verifyServerSeed}
+            nonce={verifyNonce}
+          />
+        )}
         {selectedVerifyGame === GAME.ROULETTE && (
           <FairnessRouletteBoard winningNumber={winningNumber} />
+        )}
+        {selectedVerifyGame === GAME.KENO && (
+          <FairnessKenoPreview
+            clientSeed={verifyClientSeed}
+            serverSeed={verifyServerSeed}
+            nonce={verifyNonce}
+          />
         )}
         {selectedVerifyGame === GAME.PLINKO && (
           <FairnessPlinkoPreview

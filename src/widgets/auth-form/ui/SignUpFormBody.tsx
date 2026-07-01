@@ -3,13 +3,12 @@ import { useState } from 'react';
 import { useSignUp } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
-import { Recaptcha } from '@/shared/ui/recaptcha';
 import { Checkbox } from '@/shared/ui/checkbox';
 import { FieldError } from '@/shared/ui/field-error';
 import { BUTTON_TEXT } from '../model/constants';
 
 export function SignUpFormBody() {
-  const { errors, register, onSubmit, isPending, recaptchaKey, setRecaptchaToken } = useSignUp();
+  const { errors, register, onSubmit, isPending } = useSignUp();
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
   const canSubmit = isTermsAccepted && isAgeConfirmed;
@@ -80,7 +79,6 @@ export function SignUpFormBody() {
           </label>
         </div>
       </div>
-      <Recaptcha key={recaptchaKey} onChange={setRecaptchaToken} />
       <Button
         className="h-[48px] w-full rounded-[8px] border-0 bg-auth-btn-primary text-lg font-medium text-auth-btn-text hover:bg-auth-btn-primary hover:opacity-90"
         type="submit"

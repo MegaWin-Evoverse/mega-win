@@ -1,22 +1,31 @@
 'use client';
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+
+import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { playSound } from '@/shared/lib/playSound';
 import { useShallow } from 'zustand/react/shallow';
-import { useGameControlsStore, RISK, RISK_API_MAP } from '@/entities/game';
+import { useGameControlsStore, RISK, RISK_API_MAP, selectIsAutoMode } from '@/entities/game';
+import { useUserQuery } from '@/entities/user';
+import { useTurboModeStore } from '@/features/game-settings';
+import { getTurboValue } from '@/shared/lib/getTurboValue';
 import {
   MAX_PICKS,
   MIN_PICKS,
+  NUMBERS,
   PAYOUTS_BY_RISK,
   PICK_CHANCES,
   REVEAL_DELAY_MS,
   RESULT_DELAY_MS,
   POCKET_SOUND_DELAY_MS,
+  AUTO_PICK_DELAY_MS,
+  AUTO_BET_DELAY_MS,
+  AUTO_BET_DELAY_TURBO_MS,
   BET_DECIMALS,
   LABELS,
 } from './constants';
 import type { GamePhase, CellState, GameResult } from './types';
 import { useKenoBetMutation } from '../api/useKenoBetMutation';
+import { getGamePointsBalance } from './getGamePointsBalance';
 
 interface UseKenoGameResult {
   phase: GamePhase;
@@ -26,19 +35,41 @@ interface UseKenoGameResult {
   currentChances: readonly number[];
   betAmount: number;
   isRevealing: boolean;
+  isAutoRunning: boolean;
   getCellState: (n: number) => CellState;
   handleNumberToggle: (n: number) => void;
   handlePlay: () => void;
   handleReset: () => void;
+  handleAutoPick: () => void;
 }
 
 export function useKenoGame(): UseKenoGameResult {
-  const { storeBetAmount, storeRisk } = useGameControlsStore(
+  const {
+    storeBetAmount,
+    storeRisk,
+    isAutoMode,
+    storeNumberOfBets,
+    storeDecrementNumberOfBets,
+    setBalance,
+  } = useGameControlsStore(
     useShallow((state) => ({
       storeBetAmount: state.betAmount,
       storeRisk: state.risk,
+      isAutoMode: selectIsAutoMode(state),
+      storeNumberOfBets: state.numberOfBets,
+      storeDecrementNumberOfBets: state.decrementNumberOfBets,
+      setBalance: state.setBalance,
     }))
   );
+  const { data: user } = useUserQuery();
+  const gamePointsBalance = getGamePointsBalance(user);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
+
+  useEffect(() => {
+    if (gamePointsBalance !== null) {
+      setBalance(gamePointsBalance);
+    }
+  }, [gamePointsBalance, setBalance]);
 
   const [gameResult, setGameResult] = useState<GameResult>('idle');
   const [serverMultiplier, setServerMultiplier] = useState<number>(0);
@@ -46,7 +77,12 @@ export function useKenoGame(): UseKenoGameResult {
   const [allDrawnNumbers, setAllDrawnNumbers] = useState<Set<number>>(new Set());
   const [revealedNumbers, setRevealedNumbers] = useState<Set<number>>(new Set());
   const [isRevealing, setIsRevealing] = useState<boolean>(false);
+  const [isAutoRunning, setIsAutoRunning] = useState<boolean>(false);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const autoPickTimeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const isAutoRunningRef = useRef<boolean>(false);
+  const remainingBetsRef = useRef<number>(0);
+  const autoBetNextTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const selectedCount = selectedNumbers.size;
 
@@ -60,8 +96,12 @@ export function useKenoGame(): UseKenoGameResult {
           : 'pick';
 
   const currentPayouts = useMemo<readonly number[]>(() => {
-    if (selectedCount < MIN_PICKS) return [];
+    if (selectedCount < MIN_PICKS) {
+      return [];
+    }
+
     const risk = storeRisk ?? RISK.CLASSIC;
+
     return PAYOUTS_BY_RISK[risk].slice(0, selectedCount + 1);
   }, [selectedCount, storeRisk]);
 
@@ -71,16 +111,36 @@ export function useKenoGame(): UseKenoGameResult {
   );
 
   const matchCount = useMemo<number>(() => {
-    if (gameResult === 'idle') return 0;
+    if (gameResult === 'idle') {
+      return 0;
+    }
+
     let count = 0;
-    selectedNumbers.forEach((n) => {
-      if (allDrawnNumbers.has(n)) count++;
+
+    selectedNumbers.forEach((number) => {
+      if (allDrawnNumbers.has(number)) {
+        count++;
+      }
     });
+
     return count;
   }, [gameResult, selectedNumbers, allDrawnNumbers]);
 
   const winMultiplier = gameResult === 'idle' ? 0 : serverMultiplier;
   const betAmount = parseFloat(storeBetAmount) || 0;
+  const fireBetRef = useRef<() => void>(() => {});
+
+  const stopAutoBet = useCallback(() => {
+    isAutoRunningRef.current = false;
+
+    setIsAutoRunning(false);
+
+    if (autoBetNextTimeoutRef.current !== null) {
+      clearTimeout(autoBetNextTimeoutRef.current);
+
+      autoBetNextTimeoutRef.current = null;
+    }
+  }, []);
 
   const { mutate, isPending } = useKenoBetMutation({
     onSuccess: (response) => {
@@ -91,12 +151,45 @@ export function useKenoGame(): UseKenoGameResult {
       setRevealedNumbers(new Set());
       setServerMultiplier(response.multiplier);
 
+      function finalize() {
+        setIsRevealing(false);
+        setGameResult(response.multiplier > 0 ? 'win' : 'lose');
+
+        if (!isAutoRunningRef.current) return;
+
+        storeDecrementNumberOfBets();
+        remainingBetsRef.current--;
+
+        if (remainingBetsRef.current <= 0) {
+          isAutoRunningRef.current = false;
+          setIsAutoRunning(false);
+          return;
+        }
+
+        autoBetNextTimeoutRef.current = setTimeout(
+          () => {
+            autoBetNextTimeoutRef.current = null;
+            if (isAutoRunningRef.current) {
+              fireBetRef.current();
+            }
+          },
+          getTurboValue(turboMode, AUTO_BET_DELAY_MS, AUTO_BET_DELAY_TURBO_MS)
+        );
+      }
+
+      if (turboMode) {
+        setRevealedNumbers(drawn);
+        finalize();
+        return;
+      }
+
       drawnArray.forEach((n: number, i: number) => {
         const timeout = setTimeout(
           () => {
             setRevealedNumbers((prev) => {
               const next = new Set(prev);
               next.add(n);
+
               return next;
             });
             playSound('revealed');
@@ -116,21 +209,72 @@ export function useKenoGame(): UseKenoGameResult {
         },
         (drawnArray.length + 1) * REVEAL_DELAY_MS + RESULT_DELAY_MS
       );
-
       timeoutsRef.current.push(finalTimeout);
     },
     onError: () => {
       setIsRevealing(false);
+
+      if (isAutoRunningRef.current) {
+        isAutoRunningRef.current = false;
+
+        setIsAutoRunning(false);
+      }
+
       toast.error(LABELS.BET_ERROR);
     },
   });
 
+  useLayoutEffect(() => {
+    fireBetRef.current = () => {
+      if (selectedNumbers.size < MIN_PICKS || !Number.isFinite(parseFloat(storeBetAmount))) {
+        isAutoRunningRef.current = false;
+        setIsAutoRunning(false);
+
+        return;
+      }
+
+      setGameResult('idle');
+      setServerMultiplier(0);
+      setAllDrawnNumbers(new Set());
+      setRevealedNumbers(new Set());
+      setIsRevealing(true);
+
+      mutate({
+        betSize: parseFloat(storeBetAmount).toFixed(BET_DECIMALS),
+        risk: RISK_API_MAP[storeRisk ?? RISK.CLASSIC],
+        selected: Array.from(selectedNumbers).map((n) => n - 1),
+      });
+    };
+  });
+
   const handlePlay = useCallback(() => {
+    if (isAutoMode) {
+      if (isAutoRunning) {
+        stopAutoBet();
+
+        return;
+      }
+
+      if (selectedNumbers.size < MIN_PICKS || !Number.isFinite(parseFloat(storeBetAmount))) {
+        return;
+      }
+
+      autoPickTimeoutsRef.current.forEach(clearTimeout);
+      autoPickTimeoutsRef.current = [];
+      const count = parseInt(storeNumberOfBets, 10);
+      remainingBetsRef.current = count > 0 ? count : Infinity;
+      isAutoRunningRef.current = true;
+
+      setIsAutoRunning(true);
+      fireBetRef.current();
+
+      return;
+    }
+
     if (
       selectedNumbers.size < MIN_PICKS ||
       isRevealing ||
       isPending ||
-      gameResult !== 'idle' ||
       !Number.isFinite(parseFloat(storeBetAmount))
     ) {
       return;
@@ -138,6 +282,15 @@ export function useKenoGame(): UseKenoGameResult {
 
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
+    autoPickTimeoutsRef.current.forEach(clearTimeout);
+    autoPickTimeoutsRef.current = [];
+
+    if (gameResult !== 'idle') {
+      setGameResult('idle');
+      setServerMultiplier(0);
+      setAllDrawnNumbers(new Set());
+      setRevealedNumbers(new Set());
+    }
 
     playSound('bet');
     setIsRevealing(true);
@@ -147,20 +300,43 @@ export function useKenoGame(): UseKenoGameResult {
       risk: RISK_API_MAP[storeRisk ?? RISK.CLASSIC],
       selected: Array.from(selectedNumbers).map((n) => n - 1),
     });
-  }, [selectedNumbers, isRevealing, isPending, gameResult, mutate, storeBetAmount, storeRisk]);
+  }, [
+    isAutoMode,
+    isAutoRunning,
+    selectedNumbers,
+    isRevealing,
+    isPending,
+    gameResult,
+    mutate,
+    storeBetAmount,
+    storeRisk,
+    storeNumberOfBets,
+    stopAutoBet,
+  ]);
 
   const handleNumberToggle = useCallback(
-    (n: number) => {
-      if (gameResult !== 'idle' || isRevealing) return;
+    (number: number) => {
+      if (isRevealing) {
+        return;
+      }
+
+      if (gameResult !== 'idle') {
+        setGameResult('idle');
+        setServerMultiplier(0);
+        setAllDrawnNumbers(new Set());
+        setRevealedNumbers(new Set());
+      }
+
       setSelectedNumbers((prev) => {
         const next = new Set(prev);
-        if (next.has(n)) {
-          next.delete(n);
+        if (next.has(number)) {
+          next.delete(number);
           playSound('selected');
         } else if (next.size < MAX_PICKS) {
-          next.add(n);
+          next.add(number);
           playSound('selected');
         }
+
         return next;
       });
     },
@@ -168,19 +344,61 @@ export function useKenoGame(): UseKenoGameResult {
   );
 
   const handleReset = useCallback(() => {
+    stopAutoBet();
+
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
+
+    autoPickTimeoutsRef.current.forEach(clearTimeout);
+    autoPickTimeoutsRef.current = [];
+
     setGameResult('idle');
     setServerMultiplier(0);
     setSelectedNumbers(new Set());
     setAllDrawnNumbers(new Set());
     setRevealedNumbers(new Set());
     setIsRevealing(false);
-  }, []);
+  }, [stopAutoBet]);
+
+  const handleAutoPick = useCallback(() => {
+    if (isRevealing) return;
+
+    autoPickTimeoutsRef.current.forEach(clearTimeout);
+    autoPickTimeoutsRef.current = [];
+    const shuffled = [...NUMBERS].sort(() => Math.random() - 0.5).slice(0, MAX_PICKS);
+
+    setGameResult('idle');
+    setServerMultiplier(0);
+    setAllDrawnNumbers(new Set());
+    setRevealedNumbers(new Set());
+    setSelectedNumbers(new Set());
+
+    shuffled.forEach((n, i) => {
+      const timeout = setTimeout(
+        () => {
+          setSelectedNumbers((prev) => {
+            const next = new Set(prev);
+
+            next.add(n);
+
+            return next;
+          });
+        },
+        (i + 1) * AUTO_PICK_DELAY_MS
+      );
+
+      autoPickTimeoutsRef.current.push(timeout);
+    });
+  }, [isRevealing]);
 
   useEffect(() => {
     return () => {
       timeoutsRef.current.forEach(clearTimeout);
+      autoPickTimeoutsRef.current.forEach(clearTimeout);
+
+      if (autoBetNextTimeoutRef.current !== null) {
+        clearTimeout(autoBetNextTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -189,11 +407,22 @@ export function useKenoGame(): UseKenoGameResult {
       if (!isRevealing && gameResult === 'idle') {
         return selectedNumbers.has(number) ? 'selected' : 'idle';
       }
+
       const isSelected = selectedNumbers.has(number);
       const isRevealed = revealedNumbers.has(number);
-      if (isSelected && isRevealed) return 'hit';
-      if (isSelected) return isRevealing ? 'selected' : 'miss';
-      if (isRevealed) return 'drawn';
+
+      if (isSelected && isRevealed) {
+        return 'hit';
+      }
+
+      if (isSelected) {
+        return isRevealing ? 'selected' : 'miss';
+      }
+
+      if (isRevealed) {
+        return 'drawn';
+      }
+
       return 'idle';
     },
     [isRevealing, gameResult, selectedNumbers, revealedNumbers]
@@ -207,9 +436,11 @@ export function useKenoGame(): UseKenoGameResult {
     currentChances,
     betAmount,
     isRevealing,
+    isAutoRunning,
     getCellState,
     handleNumberToggle,
     handlePlay,
     handleReset,
+    handleAutoPick,
   };
 }

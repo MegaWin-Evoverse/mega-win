@@ -1,10 +1,12 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useGameControlsStore } from '@/entities/game';
 import { playSound, type SoundName } from '@/shared/lib/playSound';
+import { useUserQuery } from '@/entities/user';
 
 interface UseBetAmountReturn {
   betAmount: string;
   balance: number;
+  isInputDisabled: boolean;
   setBetAmount: (value: string) => void;
   onBetBlur: () => void;
   betHalf: () => void;
@@ -33,6 +35,9 @@ export function useBetAmount(quickBetSound: SoundName = 'tick'): UseBetAmountRet
     }))
   );
 
+  const { data: user } = useUserQuery();
+  const isAuthenticated = user !== undefined;
+
   function betHalf() {
     playSound(quickBetSound);
     betHalfStore();
@@ -48,5 +53,14 @@ export function useBetAmount(quickBetSound: SoundName = 'tick'): UseBetAmountRet
     betMaxStore();
   }
 
-  return { betAmount, balance, setBetAmount, onBetBlur, betHalf, betDouble, betMax };
+  return {
+    betAmount,
+    balance,
+    setBetAmount,
+    onBetBlur,
+    betHalf,
+    betDouble,
+    betMax,
+    isInputDisabled: !isAuthenticated,
+  };
 }

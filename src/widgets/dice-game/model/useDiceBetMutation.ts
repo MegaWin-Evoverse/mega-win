@@ -2,22 +2,29 @@
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { LABELS } from './constants';
-import type { RollEntry, DiceBetPayload } from './types';
+import type { DiceBetPayload, DiceBetResponse } from './types';
 import { diceBet } from '../api/diceBet';
+
+interface UseDiceBetMutationConfig {
+  onSuccess: (response: DiceBetResponse) => void;
+  onError: () => void;
+}
 
 interface UseDiceBetMutationResult {
   mutate: (payload: DiceBetPayload) => void;
   isPending: boolean;
 }
 
-export function useDiceBetMutation(onEntry: (entry: RollEntry) => void): UseDiceBetMutationResult {
+export function useDiceBetMutation({
+  onSuccess,
+  onError,
+}: UseDiceBetMutationConfig): UseDiceBetMutationResult {
   const { mutate, isPending } = useMutation({
     mutationFn: diceBet,
-    onSuccess: (response) => {
-      onEntry({ value: response.randomValue, isWin: response.didWin });
-    },
+    onSuccess,
     onError: () => {
       toast.error(LABELS.BET_ERROR);
+      onError();
     },
   });
 

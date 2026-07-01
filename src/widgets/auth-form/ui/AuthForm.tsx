@@ -10,6 +10,7 @@ import { Logo } from '@/shared/ui/logo';
 import { AUTH_TABS } from '../model/constants';
 import { SignInFormBody } from './SignInFormBody';
 import { SignUpFormBody } from './SignUpFormBody';
+import { SocialAuthButtons } from './SocialAuthButtons';
 import { VerifyEmailForm } from './VerifyEmailForm';
 import type { AuthTab } from '../model/types';
 
@@ -77,6 +78,7 @@ export function AuthForm() {
                   {activeTab === 'sign-up' && <SignUpFormBody />}
                 </div>
               </div>
+              <SocialAuthButtons />
             </div>
           </div>
         )}

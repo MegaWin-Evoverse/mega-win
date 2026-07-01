@@ -202,6 +202,7 @@
   --brand-text-light: #c7cbd4;
   --brand-text-muted: #566374;
   --brand-text-white: #fdfdfd;
+  --brand-red: oklch(0.577 0.245 27.325);
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
   --daily-claimer-bg: #09110e;
@@ -590,6 +591,69 @@
   background-size: cover;
 }
 
+:fullscreen .app-header,
+:fullscreen .app-footer,
+:fullscreen .app-bottom-nav,
+:fullscreen [data-slot="sidebar"] {
+  display: none;
+}
+
+:fullscreen .app-shell {
+  height: 100dvh;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+:fullscreen .games-shell {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:fullscreen .games-shell > *:not(:has(.game-settings-bar)) {
+  flex: 1;
+  min-height: 0;
+}
+
+:fullscreen .games-shell > *:has(.game-settings-bar) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+:fullscreen .games-shell > *:has(.game-settings-bar) > *:not(.game-settings-bar) {
+  flex: 1;
+  min-height: 0;
+}
+
+:fullscreen .game-settings-bar {
+  flex-shrink: 0;
+}
+
+:fullscreen .game-page > *:not(.game-settings-bar):first-child {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:fullscreen .game-layout {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+:fullscreen .games-shell .game-settings-bar ~ * {
+  display: none;
+}
+
 .games-hero-glow {
   background: linear-gradient(180deg,
       rgba(108, 31, 178, 0.1) 0%,
@@ -783,7 +847,7 @@ html:fullscreen .games-shell {
 
 html:fullscreen .game-page {
   min-height: 100vh;
-  height: auto;
+  height: 100dvh;
   padding: 0;
   align-items: stretch;
 }

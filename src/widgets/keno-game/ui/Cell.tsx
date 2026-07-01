@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
+import { useTurboModeStore } from '@/features/game-settings';
 import type { CellState } from '../model/types';
 import { CELL_STATE_CLASSES } from '../model/constants';
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export function Cell({ number, state, onSelect }: Props) {
+  const turboMode = useTurboModeStore((state) => state.turboMode);
   const isInteractive = state === 'idle' || state === 'selected';
 
   return (
@@ -22,9 +24,9 @@ export function Cell({ number, state, onSelect }: Props) {
       aria-label={`Number ${number}`}
       aria-pressed={state === 'selected' || state === 'hit'}
       className={cn(
-        'relative aspect-square w-full rounded-xl font-outfit text-xl font-semibold transition-all disabled:opacity-100 disabled:pointer-events-none',
+        'relative aspect-square w-full rounded-lg font-outfit text-sm font-semibold transition-all disabled:opacity-100 disabled:pointer-events-none lg:rounded-xl lg:text-xl',
         CELL_STATE_CLASSES[state],
-        state === 'drawn' && 'animate-in fade-in zoom-in-95 duration-200'
+        state === 'drawn' && !turboMode && 'animate-in fade-in zoom-in-95 duration-200'
       )}
     >
       {state === 'drawn' && (
