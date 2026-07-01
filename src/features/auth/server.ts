@@ -43,13 +43,11 @@ export async function proxyAuthRequest({
   passthrough = false,
 }: ProxyAuthRequestParams): Promise<NextResponse> {
   const body = await request.json();
-  const recaptchaToken = request.headers.get('recaptcha-token');
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(recaptchaToken && { 'recaptcha-token': recaptchaToken }),
     },
     body: JSON.stringify(body),
   });

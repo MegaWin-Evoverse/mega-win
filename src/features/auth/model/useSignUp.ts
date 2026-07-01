@@ -5,13 +5,11 @@ import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { ERROR_MESSAGE, PATHS, RECAPTCHA_ERROR } from './constants';
-import { useRecaptcha } from './useRecaptcha';
+import { ERROR_MESSAGE, PATHS } from './constants';
 import { api } from '@/shared/api/client';
 import type { AuthResponse, SignUpSchema } from './types';
 
 export function useSignUp() {
-  const { recaptchaToken, setRecaptchaToken, recaptchaKey, resetRecaptcha } = useRecaptcha();
   const setVerificationToken = useAuthStore((state) => state.setVerificationToken);
   const setEmail = useAuthStore((state) => state.setEmail);
 
@@ -29,12 +27,12 @@ export function useSignUp() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: SignUpSchema & { recaptchaToken: string }) => {
-      const response = await api.post<AuthResponse>(
-        PATHS['sign-up'],
-        { username: data.username, email: data.email, password: data.password },
-        { headers: { 'recaptcha-token': data.recaptchaToken } }
-      );
+    mutationFn: async (data: SignUpSchema) => {
+      const response = await api.post<AuthResponse>(PATHS['sign-up'], {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      });
       return response.data;
     },
     onSuccess: (result, data) => {
@@ -47,17 +45,12 @@ export function useSignUp() {
       if (isAxiosError(error)) {
         toast.error(error.response?.data?.error ?? ERROR_MESSAGE['sign-up']);
       }
-      resetRecaptcha();
     },
   });
 
   const onSubmit = handleSubmit((data) => {
-    if (!recaptchaToken) {
-      toast.error(RECAPTCHA_ERROR);
-      return;
-    }
-    mutate({ ...data, recaptchaToken });
+    mutate(data);
   });
 
-  return { errors, register, onSubmit, isPending, recaptchaKey, setRecaptchaToken };
+  return { errors, register, onSubmit, isPending };
 }
