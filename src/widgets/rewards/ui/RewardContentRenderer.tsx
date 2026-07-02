@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { sanitizeHtml } from '@/shared/lib';
 import type { EditorJSBlock } from '../model/types';
 
 interface Props {
@@ -40,7 +41,7 @@ export function RewardContentRenderer({ blocks }: Props) {
             <p
               key={block.id}
               className={`text-base text-brand-text-light leading-6 ${alignClass}`}
-              dangerouslySetInnerHTML={{ __html: block.data.text }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(block.data.text) }}
             />
           );
         }
@@ -52,7 +53,7 @@ export function RewardContentRenderer({ blocks }: Props) {
             <Tag
               key={block.id}
               className={`${sizeClass} text-brand-text-white ${alignClass}`}
-              dangerouslySetInnerHTML={{ __html: block.data.text }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(block.data.text) }}
             />
           );
         }
@@ -69,7 +70,7 @@ export function RewardContentRenderer({ blocks }: Props) {
                 <li
                   key={idx}
                   className="text-base text-brand-text-light leading-6"
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }}
                 />
               ))}
             </ListTag>
