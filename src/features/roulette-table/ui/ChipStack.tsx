@@ -2,12 +2,9 @@ import type { CSSProperties } from 'react';
 import { getChipStripe, type ChipNominal } from '@/entities/game';
 import { decomposeIntoChips } from '../model/chipStack';
 
-// Most chips to render in one stack; greedy decomposition keeps this small in practice.
 const MAX_VISIBLE_CHIPS = 5;
 const CHIP_K_THRESHOLD = 1000;
 
-// decomposeIntoChips only ever returns denominations derived from CHIP_NOMINALS,
-// so the formatted value is always a valid ChipNominal.
 function formatChipValue(denomination: number): ChipNominal {
   if (denomination >= CHIP_K_THRESHOLD) {
     return `${denomination / CHIP_K_THRESHOLD}K` as ChipNominal;
@@ -71,13 +68,12 @@ export function ChipStack({ amount }: Props) {
 
   return (
     <div className="pointer-events-none absolute inset-0">
-      {/* Each higher chip is later in the DOM, so it paints on top of the one below it. */}
       <div className="absolute top-1/2 left-1/2 aspect-square w-[12cqw] sm:w-[4.4cqw] -translate-x-1/2 -translate-y-1/2">
         {chips.map((denomination, i) => (
           <div
             key={i}
             style={{ '--chip-index': i } as CSSProperties}
-            className="absolute inset-x-0 bottom-[calc(var(--chip-index)*25%)] aspect-square rounded-full border border-black/10 shadow-[0_2px_4px_rgba(0,0,0,0.4)]"
+            className="absolute inset-x-0 bottom-[calc(var(--chip-index)*25%)] aspect-square rounded-full border border-border/10 shadow-chip"
           >
             <MiniChip denomination={denomination} />
           </div>

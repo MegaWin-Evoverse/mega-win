@@ -251,9 +251,10 @@
   --chip-active-glow: oklch(0.7 0.15 162);
   --button-brand-bg-disabled: oklch(0.34 0.025 255 / 0.502);
   /* Roulette betting table */
-  --roulette-red: oklch(0.577 0.245 27.325); /* #DC2626 */
-  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5); /* rgba(63,74,89,0.5) */
+  --roulette-red: oklch(0.577 0.245 27.325);
+  --roulette-cell-border: oklch(0.395 0.022 254 / 0.5);
   --roulette-chip-glow: oklch(1 0 0 / 0.4);
+  --chip-stack-shadow: 0 2px 4px oklch(0 0 0 / 0.4);
   --plinko-multiplier-text: oklch(0.18 0.03 268);
   --plinko-red-from: oklch(0.62 0.22 25);
   --plinko-red-to: oklch(0.4 0.16 25);
@@ -325,6 +326,10 @@
 
 @utility bg-auth-btn-primary {
   background: linear-gradient(180deg, var(--brand-green-from) 0%, var(--brand-green-to) 100%);
+}
+
+@utility shadow-chip {
+  box-shadow: var(--chip-stack-shadow);
 }
 
 @keyframes plinko-bucket-land {
