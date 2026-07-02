@@ -84,7 +84,7 @@ export function PointsExchangeModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[calc(100%-32px)] max-w-[500px] bg-bg-primary border-auth-surface p-6 sm:p-8"
+        className="w-[calc(100%-32px)] max-w-[560px] bg-bg-primary border-auth-surface p-6 sm:p-8"
       >
         <Button
           type="button"
@@ -103,15 +103,15 @@ export function PointsExchangeModal({
             alt="Points Exchange"
             width={120}
             height={120}
-            className="mb-4"
+            className="mb-2"
           />
 
           <DialogTitle className="text-xl font-bold mb-2">Points exchange</DialogTitle>
-          <DialogDescription className="text-center text-auth-text-secondary text-sm mb-8 max-w-[340px]">
+          <DialogDescription className="text-center text-auth-text-secondary text-sm mb-5 max-w-[340px]">
             Convert your Watch Points into Game Points to earn rewards and enhance your gameplay.
           </DialogDescription>
 
-          <div className="flex items-center justify-center gap-4 bg-auth-surface rounded-xl py-3 px-4 w-full mb-8">
+          <div className="flex items-center justify-center gap-4 bg-auth-surface rounded-xl py-3 px-4 w-full mb-5">
             <div className="flex items-center gap-2">
               <Image src={COIN_ICON.SRC} alt="Watch Point" width={20} height={20} />
               <span className="text-sm font-semibold">
@@ -127,7 +127,7 @@ export function PointsExchangeModal({
             </div>
           </div>
 
-          <div className="w-full flex flex-col gap-6 mb-8">
+          <div className="w-full flex flex-col gap-4 mb-6">
             <div className="flex flex-col gap-2">
               <span className="text-sm font-medium text-auth-text-secondary">You give</span>
               <Controller
