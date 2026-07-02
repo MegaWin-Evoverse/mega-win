@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { DataTable, DATA_TABLE_ROW_CLASS } from '@/shared/ui/data-table';
 import { TableCell, TableRow } from '@/shared/ui/table';
-import { COIN_ICON } from '@/shared/config';
+import { CoinAmount } from '@/shared/ui/coin-amount';
 import { formatAmount } from '@/shared/lib/formatAmount';
 import { formatMultiplier } from '../model/formatMultiplier';
 import { BETS_TABLE_COLUMNS, CELL_CLASS, DATE_FORMAT, HEAD_CLASS } from '../model/constants';
@@ -40,17 +39,11 @@ export function HistoryTable({ bets, user }: Props) {
           </TableCell>
           <TableCell className={CELL_CLASS}>{bet.gameName}</TableCell>
           <TableCell className={CELL_CLASS}>
-            <div className="flex items-center gap-1.5">
-              <Image src={COIN_ICON.SRC} alt="" width={14} height={14} aria-hidden />
-              <span>${formatAmount(Number(bet.betSize))}</span>
-            </div>
+            <CoinAmount value={formatAmount(Number(bet.betSize))} />
           </TableCell>
           <TableCell className={CELL_CLASS}>{formatMultiplier(bet.betSize, bet.payout)}</TableCell>
           <TableCell className={CELL_CLASS}>
-            <div className="flex items-center gap-1.5">
-              <Image src={COIN_ICON.SRC} alt="" width={14} height={14} aria-hidden />
-              <span>${formatAmount(Number(bet.payout))}</span>
-            </div>
+            <CoinAmount value={formatAmount(Number(bet.payout))} />
           </TableCell>
           <TableCell className={CELL_CLASS}>
             {DATE_FORMAT.format(new Date(bet.settledAt))}
