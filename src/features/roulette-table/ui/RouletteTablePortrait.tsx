@@ -9,8 +9,8 @@ import {
 } from '@/features/roulette-controls';
 import { ROULETTE_ROWS, getNumberColor } from '../model/rouletteLayout';
 import type { BettingTableHandlers } from '../model/useBettingTable';
+import { TableActions, TABLE_ACTIONS } from '@/features/table-actions';
 import { BettingCell } from './BettingCell';
-import { TableActions } from './TableActions';
 
 // Literal row-start classes (rows 2..13 host the 12 number rows) so Tailwind's JIT
 // can statically detect them — interpolated class names would not be generated.
@@ -190,6 +190,7 @@ export function RouletteTablePortrait({
       {/* Erase / Undo, aligned with the 2:1 row under the side columns */}
       <div className="col-start-1 col-end-3 row-start-14 grid grid-cols-2 gap-[0.8cqw]">
         <TableActions
+          variant={TABLE_ACTIONS.ROULETTE_TABLE}
           onClearTable={clearTable}
           onUndo={undo}
           buttonClassName="rounded-[1cqw] aspect-[58/40]"

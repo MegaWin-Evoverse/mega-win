@@ -1,6 +1,7 @@
 export const TABLE_ACTIONS = {
   KENO: 'keno',
   ROULETTE: 'roulette',
+  ROULETTE_TABLE: 'roulette-table',
 } as const;
 
 export type TableActionsVariant = (typeof TABLE_ACTIONS)[keyof typeof TABLE_ACTIONS];
