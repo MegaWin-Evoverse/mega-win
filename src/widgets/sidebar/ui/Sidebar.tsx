@@ -12,17 +12,9 @@ import { SidebarHeaderSection } from './SidebarHeaderSection';
 import { SidebarMenuSection } from './SidebarMenuSection';
 import { SidebarFooterSection } from './SidebarFooterSection';
 
-interface Props extends ComponentProps<typeof BaseSidebar> {
-  onSupportClick?: () => void;
-}
+type Props = ComponentProps<typeof BaseSidebar>;
 
-export function Sidebar({
-  className,
-  children,
-  collapsible = 'icon',
-  onSupportClick,
-  ...props
-}: Props) {
+export function Sidebar({ className, children, collapsible = 'icon', ...props }: Props) {
   const { state } = useSidebar();
   const isCollapsed = state === 'collapsed';
 
@@ -41,7 +33,7 @@ export function Sidebar({
         <SidebarMenuSection isCollapsed={isCollapsed} />
         {children}
       </SidebarContent>
-      <SidebarFooterSection isCollapsed={isCollapsed} onSupportClick={onSupportClick} />
+      <SidebarFooterSection isCollapsed={isCollapsed} />
       <SidebarRail />
     </BaseSidebar>
   );

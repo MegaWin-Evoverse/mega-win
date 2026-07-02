@@ -9,11 +9,9 @@ export const BUTTON_LABELS = {
 } as const;
 
 export const FOOTER_ABOUT_LINKS = [
-  { label: 'Pointshop', href: '/pointshop' },
   { label: 'Leaderboard', href: '/leaderboard' },
   { label: 'Games', href: '/games' },
   { label: 'Rewards', href: '/rewards' },
-  { label: 'Bonuses', href: '/bonuses' },
 ] as const;
 
 export const SOCIAL_LINKS = [

@@ -1,15 +1,5 @@
 import type { ComponentProps } from 'react';
-import {
-  ShoppingCart,
-  Trophy,
-  Gamepad2,
-  Star,
-  Gift,
-  Crown,
-  Dices,
-  Disc,
-  type LucideProps,
-} from 'lucide-react';
+import { Home, Trophy, Gamepad2, Star, Dices, type LucideProps } from 'lucide-react';
 import type { IconName } from '../model/menu';
 import { PlinkoIcon } from './PlinkoIcon';
 import { RouletteIcon } from './RouletteIcon';
@@ -26,20 +16,14 @@ export function MenuIcon({ name, ...props }: Props) {
   };
 
   switch (name) {
-    case 'pointshop':
-      return <ShoppingCart {...iconProps} />;
+    case 'home':
+      return <Home {...iconProps} />;
     case 'leaderboard':
       return <Trophy {...iconProps} />;
     case 'games':
       return <Gamepad2 {...iconProps} />;
     case 'rewards':
       return <Star {...iconProps} />;
-    case 'bonuses':
-      return <Gift {...iconProps} />;
-    case 'wheel':
-      return <Disc {...iconProps} />;
-    case 'winners':
-      return <Crown {...iconProps} />;
     case 'roulette':
       return <RouletteIcon {...props} />;
     case 'keno':
