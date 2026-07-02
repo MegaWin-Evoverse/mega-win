@@ -4,7 +4,6 @@ import { useUserQuery } from '@/entities/user';
 
 interface UseBetAmountReturn {
   betAmount: string;
-  balance: number;
   isInputDisabled: boolean;
   setBetAmount: (value: string) => void;
   onBetBlur: () => void;
@@ -20,7 +19,6 @@ export function useBetAmount(): UseBetAmountReturn {
   const storeValues = useGameControlsStore(
     useShallow((state) => ({
       betAmount: state.betAmount,
-      balance: state.balance,
       setBetAmount: state.setBetAmount,
       onBetBlur: state.normalizeBetAmount,
       betHalf: state.betHalf,
