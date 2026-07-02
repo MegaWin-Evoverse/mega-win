@@ -16,8 +16,8 @@ interface Props {
   setTurboMode: (val: boolean) => void;
   maxBet: boolean;
   setMaxBet: (val: boolean) => void;
-  volume: number[];
-  setVolume: (val: number[]) => void;
+  volume: number;
+  setVolume: (val: number) => void;
 }
 
 export function SettingsPopover({
@@ -68,9 +68,10 @@ export function SettingsPopover({
         <div className="flex flex-row items-center gap-3 w-full px-1 pt-1 border-t border-border/10">
           <Volume2 className="w-5 h-5 text-brand-text-light shrink-0" />
           <Slider
-            value={volume}
+            value={[volume]}
             onValueChange={(val) => {
-              setVolume(Array.isArray(val) ? [...val] : [val]);
+              const first = Array.isArray(val) ? val[0] : val;
+              setVolume(first ?? VOLUME_MIN);
             }}
             min={VOLUME_MIN}
             max={VOLUME_MAX}

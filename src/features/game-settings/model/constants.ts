@@ -4,7 +4,6 @@ import type { RuleStep } from './types';
 export const VOLUME_MIN = 0;
 export const VOLUME_MAX = 100;
 export const VOLUME_STEP = 1;
-export const DEFAULT_VOLUME = 75;
 
 export const GAME_SETTINGS_LABELS = {
   fullscreen: 'Fullscreen',
