@@ -1,4 +1,4 @@
-import type { StepCardData } from '../model/types';
+import type { StepCardData } from './types';
 
 export const GETTING_STARTED_CONSTANTS = {
   SECTION_TITLE: 'How to get started?',

@@ -4,7 +4,7 @@ import { Copy } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import type { StepCardData } from '../model/types';
-import { GETTING_STARTED_CONSTANTS } from '../config/constants';
+import { GETTING_STARTED_CONSTANTS } from '../model/constants';
 import { useCopyPromoCode } from '../model/useCopyPromoCode';
 import { StepCardMedia } from './StepCardMedia';
 

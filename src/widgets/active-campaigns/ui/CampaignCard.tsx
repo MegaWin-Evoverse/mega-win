@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Card } from '@/shared/ui/card';
 import { useCampaignCard } from '../model/useCampaignCard';
-import { type CampaignCardData, CAMPAIGN_CONSTANTS, CAMPAIGN_IDS } from '../config/constants';
+import { type CampaignCardData, CAMPAIGN_CONSTANTS, CAMPAIGN_IDS } from '../model/constants';
 import { cn } from '@/shared/lib/cn';
 import { CampaignPromoBlock } from './CampaignPromoBlock';
 import { CampaignLogoBlock } from './CampaignLogoBlock';
