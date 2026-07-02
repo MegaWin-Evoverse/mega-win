@@ -2,20 +2,14 @@
 
 import Image from 'next/image';
 import { X } from 'lucide-react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { Controller } from 'react-hook-form';
 
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/shared/ui/dialog';
 import { Button } from '@/shared/ui/button';
 import { AmountInput } from '@/shared/ui/amount-input';
 import { FieldError } from '@/shared/ui/field-error';
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
-import { QUERY_KEYS } from '@/shared/api/query-keys';
-
-import { exchangeWatchToGame } from '../api/exchangeApi';
+import { usePointsExchange } from '../model/usePointsExchange';
 
 interface Props {
   open: boolean;
@@ -30,61 +24,25 @@ export function PointsExchangeModal({
   watchPointsBalance,
   gamePointsBalance,
 }: Props) {
-  const schema = z.object({
-    amount: z
-      .string()
-      .refine((val) => {
-        const num = Number(val);
-        return !isNaN(num) && num > 0;
-      }, 'Please enter a valid amount')
-      .refine((val) => {
-        const num = Number(val);
-        return num <= Number(watchPointsBalance);
-      }, 'Insufficient Watch Points'),
+  const { form, onSubmit, isPending } = usePointsExchange({
+    watchPointsBalance,
+    onSuccessCallback: () => onOpenChange(false),
   });
-
-  type FormValues = z.infer<typeof schema>;
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
     watch,
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { amount: '' },
-    mode: 'onSubmit',
-  });
+  } = form;
 
   const amount = watch('amount');
-  const queryClient = useQueryClient();
-
-  const { mutate: exchange, isPending } = useMutation({
-    mutationFn: (exchangeAmount: string) => exchangeWatchToGame({ amount: exchangeAmount }),
-    onSuccess: () => {
-      toast.success('Points exchanged successfully');
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
-      onOpenChange(false);
-      reset();
-    },
-    onError: (error: unknown) => {
-      const err = error as { response?: { data?: { message?: string | string[] } } };
-      const msg = err?.response?.data?.message;
-      const errorMsg = Array.isArray(msg) ? msg.join(', ') : msg || 'Failed to exchange points';
-      toast.error(errorMsg);
-    },
-  });
-
-  const onSubmit = (data: FormValues) => {
-    exchange(data.amount);
-  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[calc(100%-32px)] sm:max-w-[540px] md:max-w-[640px] lg:max-w-[720px] bg-bg-primary border-auth-surface p-6 sm:p-8"
+        className="w-[calc(100%-32px)] sm:w-[540px] md:w-[640px] lg:w-[720px] max-w-none bg-bg-primary border-auth-surface p-6 sm:p-8"
       >
         <Button
           type="button"
