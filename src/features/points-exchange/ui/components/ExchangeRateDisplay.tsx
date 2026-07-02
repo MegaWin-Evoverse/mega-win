@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
-
 import { EXCHANGE_UI_TEXT } from '../../model/constants';
 
 export function ExchangeRateDisplay() {
