@@ -1,6 +1,6 @@
 'use client';
-import { cn } from '@/shared/lib/cn';
 import { AmountInput } from '@/shared/ui/amount-input';
+import { LabeledField } from '@/shared/ui/labeled-field';
 import { GAME_PANEL_LABELS, GAME_POINT_ICON } from '@/shared/config';
 import type { SoundName } from '@/shared/lib/playSound';
 import { useBetAmount } from '../model/useBetAmount';
@@ -16,10 +16,11 @@ export function BetAmountField({ className, quickBetSound }: Props) {
     useBetAmount(quickBetSound);
 
   return (
-    <div className={cn('flex w-full flex-col gap-2', className)}>
-      <span className="font-outfit text-base font-medium text-brand-text-white">
-        {GAME_PANEL_LABELS.BET_AMOUNT}
-      </span>
+    <LabeledField
+      label={GAME_PANEL_LABELS.BET_AMOUNT}
+      labelClassName="text-base font-medium text-brand-text-white"
+      className={className}
+    >
       <AmountInput
         value={betAmount}
         onValueChange={setBetAmount}
@@ -37,6 +38,6 @@ export function BetAmountField({ className, quickBetSound }: Props) {
           />
         }
       />
-    </div>
+    </LabeledField>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { AmountInput } from '@/shared/ui/amount-input';
+import { LabeledField } from '@/shared/ui/labeled-field';
 import { COIN_ICON } from '@/shared/config';
 import { useProfitOnWin } from '../model/useProfitOnWin';
 import { PROFIT_ON_WIN_LABEL } from '../model/constants';
@@ -14,10 +15,10 @@ export function ProfitOnWinField({ className }: Props) {
 
   return (
     <CollapsibleSection isOpen={!isAutoMode} className={className} openClassName="lg:mt-4">
-      <div className="flex w-full flex-col gap-2">
-        <span className="font-outfit text-base font-medium text-brand-text-white">
-          {PROFIT_ON_WIN_LABEL}
-        </span>
+      <LabeledField
+        label={PROFIT_ON_WIN_LABEL}
+        labelClassName="text-base font-medium text-brand-text-white"
+      >
         <AmountInput
           value={profitOnWin}
           readOnly
@@ -25,7 +26,7 @@ export function ProfitOnWinField({ className }: Props) {
           iconAlt={COIN_ICON.ALT}
           iconSize={COIN_ICON.SIZE_INPUT}
         />
-      </div>
+      </LabeledField>
     </CollapsibleSection>
   );
 }
