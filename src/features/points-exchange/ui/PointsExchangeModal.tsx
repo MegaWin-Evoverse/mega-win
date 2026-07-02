@@ -84,7 +84,7 @@ export function PointsExchangeModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[calc(100%-32px)] max-w-[720px] bg-bg-primary border-auth-surface p-6 sm:p-8"
+        className="w-[calc(100%-32px)] sm:w-[540px] md:w-[640px] lg:w-[720px] max-w-none bg-bg-primary border-auth-surface p-6 sm:p-8"
       >
         <Button
           type="button"
