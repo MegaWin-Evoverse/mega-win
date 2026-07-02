@@ -1,20 +1,23 @@
-import { toast } from 'sonner';
-import { CAMPAIGN_CONSTANTS } from './constants';
+import { useCallback } from 'react';
+import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard';
+import { CLIPBOARD_MESSAGES, COPY_ICON_RESET_MS } from '@/shared/config';
 
 interface UseCampaignCardResult {
   handleCopy: () => Promise<void>;
+  isCopied: boolean;
 }
 
 export function useCampaignCard(promoCode?: string): UseCampaignCardResult {
-  const handleCopy = async () => {
-    if (!promoCode) return;
-    try {
-      await navigator.clipboard.writeText(promoCode);
-      toast.success(CAMPAIGN_CONSTANTS.TOAST_COPY_SUCCESS);
-    } catch {
-      toast.error(CAMPAIGN_CONSTANTS.TOAST_COPY_ERROR);
-    }
-  };
+  const { copiedKey, copy } = useCopyToClipboard({
+    successMessage: CLIPBOARD_MESSAGES.PROMO_COPY_SUCCESS,
+    errorMessage: CLIPBOARD_MESSAGES.PROMO_COPY_ERROR,
+    resetMs: COPY_ICON_RESET_MS,
+  });
 
-  return { handleCopy };
+  const handleCopy = useCallback(async () => {
+    if (!promoCode) return;
+    await copy(promoCode, promoCode);
+  }, [promoCode, copy]);
+
+  return { handleCopy, isCopied: copiedKey === promoCode };
 }
