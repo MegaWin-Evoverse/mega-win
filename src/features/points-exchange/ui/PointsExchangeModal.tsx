@@ -1,14 +1,17 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/shared/ui/dialog';
 import { Button } from '@/shared/ui/button';
 import { AmountInput } from '@/shared/ui/amount-input';
+import { FieldError } from '@/shared/ui/field-error';
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
 
@@ -27,7 +30,34 @@ export function PointsExchangeModal({
   watchPointsBalance,
   gamePointsBalance,
 }: Props) {
-  const [amount, setAmount] = useState('');
+  const schema = z.object({
+    amount: z
+      .string()
+      .refine((val) => {
+        const num = Number(val);
+        return !isNaN(num) && num > 0;
+      }, 'Please enter a valid amount')
+      .refine((val) => {
+        const num = Number(val);
+        return num <= Number(watchPointsBalance);
+      }, 'Insufficient Watch Points'),
+  });
+
+  type FormValues = z.infer<typeof schema>;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { amount: '' },
+    mode: 'onSubmit',
+  });
+
+  const amount = watch('amount');
   const queryClient = useQueryClient();
 
   const { mutate: exchange, isPending } = useMutation({
@@ -36,7 +66,7 @@ export function PointsExchangeModal({
       toast.success('Points exchanged successfully');
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
       onOpenChange(false);
-      setAmount('');
+      reset();
     },
     onError: (error: unknown) => {
       const err = error as { response?: { data?: { message?: string } } };
@@ -44,17 +74,8 @@ export function PointsExchangeModal({
     },
   });
 
-  const handleConfirm = () => {
-    const numAmount = Number(amount);
-    if (!numAmount || numAmount <= 0) {
-      toast.error('Please enter a valid amount');
-      return;
-    }
-    if (numAmount > Number(watchPointsBalance)) {
-      toast.error('Insufficient Watch Points');
-      return;
-    }
-    exchange(numAmount);
+  const onSubmit = (data: FormValues) => {
+    exchange(Number(data.amount));
   };
 
   return (
@@ -74,7 +95,7 @@ export function PointsExchangeModal({
           <X className="size-[20px]" />
         </Button>
 
-        <div className="flex flex-col items-center">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
           <Image
             src="/two-coins.webp"
             alt="Points Exchange"
@@ -107,20 +128,26 @@ export function PointsExchangeModal({
           <div className="w-full flex flex-col gap-6 mb-8">
             <div className="flex flex-col gap-2">
               <span className="text-sm font-medium text-auth-text-secondary">You give</span>
-              <AmountInput
-                value={amount}
-                onValueChange={setAmount}
-                iconSrc={COIN_ICON.SRC}
-                inputMode="numeric"
-                trailing={
-                  <div className="flex items-center gap-1.5 px-2 py-1 bg-border-default/25 rounded-md text-xs text-auth-text-secondary">
-                    Balance <Image src={COIN_ICON.SRC} alt="" width={12} height={12} />{' '}
-                    <span className="text-white font-medium">
-                      {Number(watchPointsBalance).toLocaleString()}
-                    </span>
-                  </div>
-                }
+              <Controller
+                name="amount"
+                control={control}
+                render={({ field }) => (
+                  <AmountInput
+                    {...field}
+                    iconSrc={COIN_ICON.SRC}
+                    inputMode="numeric"
+                    trailing={
+                      <div className="flex items-center gap-1.5 px-2 py-1 bg-border-default/25 rounded-md text-xs text-auth-text-secondary">
+                        Balance <Image src={COIN_ICON.SRC} alt="" width={12} height={12} />{' '}
+                        <span className="text-white font-medium">
+                          {Number(watchPointsBalance).toLocaleString()}
+                        </span>
+                      </div>
+                    }
+                  />
+                )}
               />
+              {errors.amount && <FieldError message={errors.amount.message} />}
             </div>
 
             <div className="flex flex-col gap-2">
@@ -142,14 +169,13 @@ export function PointsExchangeModal({
           </div>
 
           <Button
+            type="submit"
             className="w-full h-12 text-base font-bold"
-            onClick={handleConfirm}
-            isLoading={isPending}
-            disabled={!amount || Number(amount) <= 0}
+            disabled={isPending || !amount || Number(amount) <= 0}
           >
-            Confirm
+            {isPending ? 'Confirming...' : 'Confirm'}
           </Button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
