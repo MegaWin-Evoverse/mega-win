@@ -42,7 +42,12 @@ export function ExchangeFormFields({
               trailing={
                 <div className="flex items-center gap-1.5 px-2 py-1 bg-border-default/25 rounded-md text-xs text-auth-text-secondary">
                   {EXCHANGE_UI_TEXT.BALANCE_LABEL}{' '}
-                  <Image src={COIN_ICON.SRC} alt="" width={12} height={12} />{' '}
+                  <Image
+                    src={COIN_ICON.SRC}
+                    alt={EXCHANGE_UI_TEXT.WATCH_POINT_NAME}
+                    width={12}
+                    height={12}
+                  />{' '}
                   <span className="text-white font-medium">
                     {Number(watchPointsBalance).toLocaleString()}
                   </span>
@@ -67,7 +72,12 @@ export function ExchangeFormFields({
           trailing={
             <div className="flex items-center gap-1.5 px-2 py-1 bg-border-default/25 rounded-md text-xs text-auth-text-secondary">
               {EXCHANGE_UI_TEXT.BALANCE_LABEL}{' '}
-              <Image src={GAME_POINT_ICON.SRC} alt="" width={12} height={12} />{' '}
+              <Image
+                src={GAME_POINT_ICON.SRC}
+                alt={EXCHANGE_UI_TEXT.GAME_POINT_NAME}
+                width={12}
+                height={12}
+              />{' '}
               <span className="text-white font-medium">
                 {Number(gamePointsBalance).toLocaleString()}
               </span>

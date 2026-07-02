@@ -22,8 +22,8 @@ interface Props {
 }
 
 export function BalanceMenu({ balances }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isExchangeModalOpen, setIsExchangeModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isExchangeModalOpen, setIsExchangeModalOpen] = useState<boolean>(false);
   const gamePoints =
     balances.find((balance) => balance.balanceType === BALANCE_TYPE.GAME_POINTS)?.value ?? '0';
   const watchPoints =
@@ -34,8 +34,7 @@ export function BalanceMenu({ balances }: Props) {
       <DropdownMenuTrigger className="flex h-10 min-w-0 items-center gap-3 rounded-sm bg-header-balance-bg px-3 py-2 outline-none cursor-pointer">
         <Image
           src={GAME_POINT_ICON.SRC}
-          alt=""
-          aria-hidden
+          alt={GAME_POINTS_LABEL}
           width={20}
           height={20}
           className="header-balance-coin-shadow size-5 shrink-0"
@@ -47,8 +46,7 @@ export function BalanceMenu({ balances }: Props) {
         <Separator orientation="vertical" className="h-5 shrink-0" />
         <Image
           src={COIN_ICON.SRC}
-          alt=""
-          aria-hidden
+          alt={WATCH_POINTS_LABEL}
           width={20}
           height={20}
           className="header-balance-coin-shadow size-5 shrink-0"
@@ -72,8 +70,7 @@ export function BalanceMenu({ balances }: Props) {
             <div className="flex items-center gap-2">
               <Image
                 src={GAME_POINT_ICON.SRC}
-                alt=""
-                aria-hidden
+                alt={GAME_POINTS_LABEL}
                 width={16}
                 height={16}
                 className="size-4"
@@ -87,8 +84,7 @@ export function BalanceMenu({ balances }: Props) {
             <div className="flex items-center gap-2">
               <Image
                 src={COIN_ICON.SRC}
-                alt=""
-                aria-hidden
+                alt={WATCH_POINTS_LABEL}
                 width={16}
                 height={16}
                 className="size-4"
