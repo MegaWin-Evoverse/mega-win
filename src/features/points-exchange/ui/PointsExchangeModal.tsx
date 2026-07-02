@@ -111,15 +111,15 @@ export function PointsExchangeModal({
             Convert your Watch Points into Game Points to earn rewards and enhance your gameplay.
           </DialogDescription>
 
-          <div className="flex items-center justify-center gap-4 bg-auth-surface rounded-xl py-3 px-4 w-full mb-5">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-4 w-full mb-5">
+            <div className="flex flex-1 items-center justify-center gap-2 h-11 rounded-lg border border-border-default bg-border-default/25 px-4">
               <Image src={COIN_ICON.SRC} alt="Watch Point" width={20} height={20} />
               <span className="text-sm font-semibold">
                 1 <span className="text-auth-text-secondary font-normal">Watch point</span>
               </span>
             </div>
-            <span className="font-bold text-lg">=</span>
-            <div className="flex items-center gap-2">
+            <span className="font-bold text-lg text-auth-text-secondary">=</span>
+            <div className="flex flex-1 items-center justify-center gap-2 h-11 rounded-lg border border-border-default bg-border-default/25 px-4">
               <Image src={GAME_POINT_ICON.SRC} alt="Game Point" width={20} height={20} />
               <span className="text-sm font-semibold">
                 1 <span className="text-auth-text-secondary font-normal">Game point</span>
