@@ -1,5 +1,5 @@
 import { ROUTES } from '@/shared/config';
-import type { LeaderCardData, LeaderboardDecoration } from './types';
+import type { LeaderboardDecoration } from './types';
 
 export const LEADERBOARD_CONSTANTS = {
   SECTION_TITLE: 'Monthly Leaderboard',
@@ -26,38 +26,33 @@ export const LEADERBOARD_BACKDROP = {
 
 export const LEADERBOARD_ROUTE = ROUTES.LEADERBOARD;
 
-export const LEADERBOARD_PLAYERS: readonly LeaderCardData[] = [
-  {
-    id: 'leader-2',
-    username: 'Username',
-    wageredAmount: '1,234.567',
-    rewardAmount: '1,500.00',
-    avatarSrc: '/monthly-leaderboard/avatar-2.webp',
-    rankIconSrc: '/monthly-leaderboard/rank-2.webp',
-    champIconSrc: '/monthly-leaderboard/champ-2.svg',
-    rank: 2,
-  },
-  {
-    id: 'leader-1',
-    username: 'Username',
-    wageredAmount: '1,234.567',
-    rewardAmount: '1,500.00',
-    avatarSrc: '/monthly-leaderboard/avatar-1.webp',
-    rankIconSrc: '/monthly-leaderboard/rank-1.webp',
-    champIconSrc: '/monthly-leaderboard/champ-1.svg',
-    rank: 1,
-  },
-  {
-    id: 'leader-3',
-    username: 'Username',
-    wageredAmount: '1,234.567',
-    rewardAmount: '1,500.00',
-    avatarSrc: '/monthly-leaderboard/avatar-3.webp',
-    rankIconSrc: '/monthly-leaderboard/rank-3.webp',
-    champIconSrc: '/monthly-leaderboard/champ-3.svg',
-    rank: 3,
-  },
+export const PODIUM_ORDER = [2, 1, 3] as const;
+
+export const PODIUM_CLASSES = [
+  'order-2 sm:order-1 sm:translate-y-2',
+  'order-1 sm:order-2 sm:-translate-y-6 z-20',
+  'order-3 sm:order-3 sm:translate-y-4',
 ] as const;
+
+export const PODIUM_AVATAR_SRC: Record<1 | 2 | 3, string> = {
+  1: '/monthly-leaderboard/avatar-1.webp',
+  2: '/monthly-leaderboard/avatar-2.webp',
+  3: '/monthly-leaderboard/avatar-3.webp',
+};
+
+export const PODIUM_RANK_ICON_SRC: Record<1 | 2 | 3, string> = {
+  1: '/monthly-leaderboard/rank-1.webp',
+  2: '/monthly-leaderboard/rank-2.webp',
+  3: '/monthly-leaderboard/rank-3.webp',
+};
+
+export const PODIUM_CHAMP_ICON_SRC: Record<1 | 2 | 3, string> = {
+  1: '/monthly-leaderboard/champ-1.svg',
+  2: '/monthly-leaderboard/champ-2.svg',
+  3: '/monthly-leaderboard/champ-3.svg',
+};
+
+export const TOP_3_THRESHOLD = 3;
 
 export const LEADERBOARD_DECORATIONS: readonly LeaderboardDecoration[] = [
   {

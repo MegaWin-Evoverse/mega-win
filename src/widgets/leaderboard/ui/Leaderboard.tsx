@@ -11,7 +11,7 @@ import {
 } from '../model/constants';
 import { useLeaderboard } from '../model/useLeaderboard';
 import { Podium } from './Podium';
-import { EmptyState } from './EmptyState';
+import { EmptyState } from '@/shared/ui/empty-state';
 import { Countdown } from './Countdown';
 import { Table } from './Table';
 import { CompetitionRules } from './CompetitionRules';
