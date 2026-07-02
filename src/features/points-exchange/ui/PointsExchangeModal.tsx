@@ -174,7 +174,9 @@ export function PointsExchangeModal({
 
           <Button
             type="submit"
-            className="w-full h-12 text-base font-bold"
+            variant="main"
+            size="play"
+            className="w-full"
             disabled={isPending || !amount || Number(amount) <= 0}
           >
             {isPending ? 'Confirming...' : 'Confirm'}
