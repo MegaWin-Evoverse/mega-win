@@ -5,7 +5,7 @@ export const LEADERBOARD_CONSTANTS = {
   SECTION_TITLE: 'Monthly Leaderboard',
   SECTION_DESCRIPTION:
     'Players who wager using code MEGAWIN on DegenCity are automatically entered',
-  SECTION_ARIA_LABEL: 'Monthly Leaderboard promotions',
+  SECTION_ARIA_LABEL: 'Monthly bonus buy competition leaderboard',
   WAGERED_LABEL: 'Wagered',
   VIEW_ALL_BUTTON: 'View all',
   AVATAR_ALT_PREFIX: 'Avatar of ',
@@ -53,6 +53,7 @@ export const PODIUM_CHAMP_ICON_SRC: Record<1 | 2 | 3, string> = {
 };
 
 export const TOP_3_THRESHOLD = 3;
+export const LEADERBOARD_CARD_ID_PREFIX = 'leader-';
 
 export const LEADERBOARD_DECORATIONS: readonly LeaderboardDecoration[] = [
   {

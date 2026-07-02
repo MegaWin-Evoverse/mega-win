@@ -1,6 +1,7 @@
 import { api } from '@/shared/api/client';
 import { isAxiosError } from 'axios';
 import type { LeaderboardData } from '@/shared/api/types/leaderboard';
+import { LEADERBOARD_PATH } from '@/shared/api/constants';
 
 interface GetLeaderboardParams {
   month: string;
@@ -18,7 +19,7 @@ export async function getLeaderboard({
   take = DEFAULT_TAKE,
 }: GetLeaderboardParams): Promise<LeaderboardData> {
   try {
-    const { data } = await api.get<LeaderboardData>(`/api/leaderboard/${month}`, {
+    const { data } = await api.get<LeaderboardData>(`${LEADERBOARD_PATH}/${month}`, {
       params: { page, take },
     });
 

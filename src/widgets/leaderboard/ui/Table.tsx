@@ -17,7 +17,7 @@ import {
   LEADERBOARD_LABELS,
   LEADERBOARD_SIZES,
 } from '../model/constants';
-import type { LeaderboardParticipant } from '../model/types';
+import type { LeaderboardParticipant } from '@/shared/api/types/leaderboard';
 
 interface Props {
   rows: LeaderboardParticipant[];

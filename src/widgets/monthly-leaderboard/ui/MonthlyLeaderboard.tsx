@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function MonthlyLeaderboard({ className }: Props) {
-  const { cards, isLoading, isEmpty } = useMonthlyLeaderboard();
+  const { cards, isEmpty } = useMonthlyLeaderboard();
 
   return (
     <section
@@ -54,24 +54,25 @@ export function MonthlyLeaderboard({ className }: Props) {
             <LeaderboardCard key={card.id} card={card} className={PODIUM_CLASSES[idx]} />
           ))
         )}
-        {LEADERBOARD_DECORATIONS.map((decoration) => (
-          <div
-            key={decoration.id}
-            className={cn(
-              'absolute pointer-events-none select-none z-0 hidden xl:block opacity-95',
-              decoration.wrapperClass
-            )}
-          >
-            <Image
-              src={decoration.src}
-              alt=""
-              width={decoration.width}
-              height={decoration.height}
-              className={cn('object-contain', decoration.imageClass)}
-              priority
-            />
-          </div>
-        ))}
+        {!isEmpty &&
+          LEADERBOARD_DECORATIONS.map((decoration) => (
+            <div
+              key={decoration.id}
+              className={cn(
+                'absolute pointer-events-none select-none z-0 hidden xl:block opacity-95',
+                decoration.wrapperClass
+              )}
+            >
+              <Image
+                src={decoration.src}
+                alt=""
+                width={decoration.width}
+                height={decoration.height}
+                className={cn('object-contain', decoration.imageClass)}
+                priority
+              />
+            </div>
+          ))}
       </div>
       <div className="flex justify-center w-full mt-10 xl:mt-8 z-10 relative">
         <Link

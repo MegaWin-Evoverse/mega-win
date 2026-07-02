@@ -1,5 +1,6 @@
 import { PODIUM_CLASSES, PODIUM_ORDER } from '../model/constants';
-import type { LeaderboardParticipant, PodiumParticipant } from '../model/types';
+import type { PodiumParticipant } from '../model/types';
+import type { LeaderboardParticipant } from '@/shared/api/types/leaderboard';
 import { PodiumCard } from './PodiumCard';
 
 interface Props {

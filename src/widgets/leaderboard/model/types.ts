@@ -1,8 +1,4 @@
-export type {
-  LeaderboardParticipant,
-  LeaderboardParticipantsPage,
-  LeaderboardData,
-} from '@/shared/api/types/leaderboard';
+import type { LeaderboardParticipant } from '@/shared/api/types/leaderboard';
 
 export type PodiumPosition = 1 | 2 | 3;
 
