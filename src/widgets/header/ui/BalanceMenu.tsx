@@ -15,12 +15,15 @@ import {
   WATCH_POINTS_LABEL,
 } from '../model/constants';
 
+import { PointsExchangeModal } from '@/features/points-exchange';
+
 interface Props {
   balances: UserBalance[];
 }
 
 export function BalanceMenu({ balances }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExchangeModalOpen, setIsExchangeModalOpen] = useState(false);
   const gamePoints =
     balances.find((balance) => balance.balanceType === BALANCE_TYPE.GAME_POINTS)?.value ?? '0';
   const watchPoints =
@@ -97,13 +100,26 @@ export function BalanceMenu({ balances }: Props) {
           </div>
         </div>
 
-        <Button variant="outline" className="group mt-3 h-auto w-full py-4">
+        <Button
+          variant="outline"
+          className="group mt-3 h-auto w-full py-4"
+          onClick={() => {
+            setIsOpen(false);
+            setIsExchangeModalOpen(true);
+          }}
+        >
           <span className="flex items-center gap-2 transition-all duration-500 ease-out group-hover:translate-x-2">
             <RefreshCw className="size-4" />
             {EXCHANGE_LABEL}
           </span>
         </Button>
       </DropdownMenuContent>
+      <PointsExchangeModal
+        open={isExchangeModalOpen}
+        onOpenChange={setIsExchangeModalOpen}
+        watchPointsBalance={watchPoints}
+        gamePointsBalance={gamePoints}
+      />
     </DropdownMenu>
   );
 }
