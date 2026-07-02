@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
 import { playSound } from '@/shared/lib/playSound';
 import { useGameControlsStore, selectIsAutoMode } from '@/entities/game';
+import { useUserQuery, BALANCE_TYPE, type User } from '@/entities/user';
 import { useTurboModeStore } from '@/features/game-settings';
 import {
   AUTO_BET_DELAY_MS,
@@ -16,14 +17,29 @@ import {
   ROULETTE_BET_PATH,
   ROULETTE_LABELS,
 } from './constants';
+import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { buildBetParams } from './buildBetParams';
 import type { BetResponse } from './types';
 import { useRouletteConfig } from './useRouletteConfig';
 import { useRouletteStore } from './rouletteStore';
 
+function getGamePointsBalance(user: User | undefined): number | null {
+  const gamePoints = user?.userBalances.find((b) => b.balanceType === BALANCE_TYPE.GAME_POINTS);
+  if (!gamePoints) return null;
+  return Number.parseFloat(gamePoints.value) || 0;
+}
+
 export function useRouletteBet() {
   const isAutoMode = useGameControlsStore(selectIsAutoMode);
   const numberOfBets = useGameControlsStore((state) => state.numberOfBets);
+  const setBalance = useGameControlsStore((state) => state.setBalance);
+  const { data: user } = useUserQuery();
+  const gamePointsBalance = getGamePointsBalance(user);
+
+  useEffect(() => {
+    if (gamePointsBalance !== null) setBalance(gamePointsBalance);
+  }, [gamePointsBalance, setBalance]);
+
   const placedBets = useRouletteStore((state) => state.placedBets);
   const placedBet = useRouletteStore((state) => state.placedBet);
   const betResult = useRouletteStore((state) => state.betResult);
@@ -40,6 +56,7 @@ export function useRouletteBet() {
   const startAutoBet = useRouletteStore((state) => state.startAutoBet);
   const turboMode = useTurboModeStore((state) => state.turboMode);
   const { minBet, maxBet } = useRouletteConfig();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -61,6 +78,7 @@ export function useRouletteBet() {
         position: data.randomPosition,
       });
       setSpinning(false);
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
     },
     onError: (error) => {
       setSpinning(false);

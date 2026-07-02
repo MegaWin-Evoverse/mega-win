@@ -12,6 +12,8 @@ export const LIVE_TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky'];
 
 export const BETS_STORY_LIVE_TITLE = 'Bet Live';
 
+export const BETS_STORY_STALE_TIME = 0;
+
 export const COLUMN_HEADERS = {
   USER: 'User',
   GAME: 'Game',

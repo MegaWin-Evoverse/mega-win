@@ -36,6 +36,7 @@ export function DailyClaimerCard({
         alt=""
         aria-hidden
         unoptimized
+        priority
         className="absolute -bottom-[9px] -right-[29px]"
       />
       <p className="absolute left-3 top-3 w-[100px] font-outfit text-base font-semibold leading-5 text-brand-text-white">

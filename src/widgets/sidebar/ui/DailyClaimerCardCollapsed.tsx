@@ -15,6 +15,7 @@ export function DailyClaimerCardCollapsed() {
         src="/image-2423.webp"
         fill
         unoptimized
+        priority
         alt="Daily Claimer"
         className="object-contain"
       />
