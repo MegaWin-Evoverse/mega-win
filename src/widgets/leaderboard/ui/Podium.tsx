@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function Podium({ top3 }: Props) {
-  const ordered = PODIUM_ORDER.map((pos) => top3.find((p) => p.position === pos)).filter(
+  const ordered = PODIUM_ORDER.map((pos) => top3.find((p) => Number(p.position) === pos)).filter(
     (p): p is PodiumParticipant => p !== undefined
   );
 

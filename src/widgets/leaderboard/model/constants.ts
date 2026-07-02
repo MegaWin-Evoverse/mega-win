@@ -4,6 +4,8 @@ import askIcon from '../assets/icons/ask.svg';
 export const LEADERBOARD_LABELS = {
   TITLE: "The Mega Win's End of Month Bonus Buy Competition!",
   SUBTITLE: 'Be a Top 1000 player in January and win a live Bonus Buy with Mega Win',
+  EMPTY_TITLE: 'No participants yet',
+  EMPTY_SUBTITLE: 'Be the first to join the competition and claim the top spot!',
   WAGERED: 'WAGERED',
   JOIN_BUTTON: 'Join the leaderboard',
   SHOW_MORE_BUTTON: 'Show more',

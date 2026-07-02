@@ -16,9 +16,9 @@ export function useLeaderboard() {
     queryFn: () => getLeaderboard({ month }),
   });
 
-  const allParticipants = data?.participants.data ?? [];
-  const top3 = allParticipants.filter((p) => p.position <= TOP_3_THRESHOLD);
-  const tableRows = allParticipants.filter((p) => p.position > TOP_3_THRESHOLD);
+  const allParticipants = data?.participants?.data ?? [];
+  const top3 = allParticipants.filter((p) => Number(p.position) <= TOP_3_THRESHOLD);
+  const tableRows = allParticipants.filter((p) => Number(p.position) > TOP_3_THRESHOLD);
   const visibleRows = tableRows.slice(0, visibleCount);
   const hasMore = visibleCount < tableRows.length;
 
