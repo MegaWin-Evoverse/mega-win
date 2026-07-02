@@ -61,7 +61,7 @@ export function PointsExchangeModal({
   const queryClient = useQueryClient();
 
   const { mutate: exchange, isPending } = useMutation({
-    mutationFn: (exchangeAmount: number) => exchangeWatchToGame({ amount: exchangeAmount }),
+    mutationFn: (exchangeAmount: string) => exchangeWatchToGame({ amount: exchangeAmount }),
     onSuccess: () => {
       toast.success('Points exchanged successfully');
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
@@ -69,13 +69,15 @@ export function PointsExchangeModal({
       reset();
     },
     onError: (error: unknown) => {
-      const err = error as { response?: { data?: { message?: string } } };
-      toast.error(err?.response?.data?.message || 'Failed to exchange points');
+      const err = error as { response?: { data?: { message?: string | string[] } } };
+      const msg = err?.response?.data?.message;
+      const errorMsg = Array.isArray(msg) ? msg.join(', ') : msg || 'Failed to exchange points';
+      toast.error(errorMsg);
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    exchange(Number(data.amount));
+    exchange(data.amount);
   };
 
   return (
@@ -133,7 +135,9 @@ export function PointsExchangeModal({
                 control={control}
                 render={({ field }) => (
                   <AmountInput
-                    {...field}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    onBlur={field.onBlur}
                     iconSrc={COIN_ICON.SRC}
                     inputMode="numeric"
                     trailing={
