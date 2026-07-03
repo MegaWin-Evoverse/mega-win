@@ -2,6 +2,7 @@
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
 import { Button } from '@/shared/ui/button';
 import { AmountInput } from '@/shared/ui/amount-input';
+import { LabeledField } from '@/shared/ui/labeled-field';
 import { GAME_PANEL_LABELS } from '@/shared/config';
 import { useAutoBet } from '../model/useAutoBet';
 
@@ -14,10 +15,10 @@ export function NumberOfBetsField({ className }: Props) {
 
   return (
     <CollapsibleSection isOpen={isAutoMode} className={className} openClassName="lg:mt-4">
-      <div className="flex w-full flex-col gap-2">
-        <span className="font-outfit text-sm font-medium text-brand-text-light/80">
-          {GAME_PANEL_LABELS.NUMBER_OF_BETS}
-        </span>
+      <LabeledField
+        label={GAME_PANEL_LABELS.NUMBER_OF_BETS}
+        labelClassName="text-sm font-medium text-brand-text-light/80"
+      >
         <AmountInput
           value={numberOfBets}
           onValueChange={onNumberOfBetsChange}
@@ -34,7 +35,7 @@ export function NumberOfBetsField({ className }: Props) {
             </Button>
           }
         />
-      </div>
+      </LabeledField>
     </CollapsibleSection>
   );
 }
