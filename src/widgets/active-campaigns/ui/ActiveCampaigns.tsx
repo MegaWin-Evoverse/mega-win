@@ -1,5 +1,5 @@
 import { CampaignCard } from './CampaignCard';
-import { CAMPAIGN_CARDS, CAMPAIGN_CONSTANTS } from '../config/constants';
+import { CAMPAIGN_CARDS, CAMPAIGN_CONSTANTS } from '../model/constants';
 import { cn } from '@/shared/lib/cn';
 
 interface Props {

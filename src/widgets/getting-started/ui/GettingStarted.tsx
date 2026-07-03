@@ -1,7 +1,7 @@
 import { Star } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
 import { SectionTitle } from '@/shared/ui/section-title';
-import { GETTING_STARTED_STEPS, GETTING_STARTED_CONSTANTS } from '../config/constants';
+import { GETTING_STARTED_STEPS, GETTING_STARTED_CONSTANTS } from '../model/constants';
 import { StepCard } from './StepCard';
 
 interface Props {

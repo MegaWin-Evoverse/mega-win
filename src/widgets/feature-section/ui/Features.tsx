@@ -1,6 +1,6 @@
 import { SectionTitle } from '@/shared/ui/section-title';
 import { cn } from '@/shared/lib/cn';
-import { FEATURE_CARDS } from '../config/constants';
+import { FEATURE_CARDS } from '../model/constants';
 import { FeatureCard } from './FeatureCard';
 import crownIcon from '../assets/icons/crown.svg';
 

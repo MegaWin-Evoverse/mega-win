@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { toast } from 'sonner';
-import { GETTING_STARTED_CONSTANTS } from '../config/constants';
+import { GETTING_STARTED_CONSTANTS } from './constants';
 
 interface UseCopyPromoCodeResult {
   handleCopy: () => Promise<void>;

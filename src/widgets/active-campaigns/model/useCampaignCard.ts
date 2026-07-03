@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { CAMPAIGN_CONSTANTS } from '../config/constants';
+import { CAMPAIGN_CONSTANTS } from './constants';
 
 interface UseCampaignCardResult {
   handleCopy: () => Promise<void>;
