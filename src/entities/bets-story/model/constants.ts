@@ -11,6 +11,7 @@ export const TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky', 'my'];
 export const LIVE_TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky'];
 
 export const BETS_STORY_LIVE_TITLE = 'Bet Live';
+export const BETS_STORY_EMPTY_MESSAGE = 'No bets yet';
 
 export const BETS_STORY_STALE_TIME = 0;
 
