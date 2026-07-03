@@ -2,16 +2,18 @@
 import { cn } from '@/shared/lib/cn';
 import { AmountInput } from '@/shared/ui/amount-input';
 import { GAME_PANEL_LABELS, GAME_POINT_ICON } from '@/shared/config';
+import type { SoundName } from '@/shared/lib/playSound';
 import { useBetAmount } from '../model/useBetAmount';
 import { QuickBetButtons } from './QuickBetButtons';
 
 interface Props {
   className?: string;
+  quickBetSound?: SoundName;
 }
 
-export function BetAmountField({ className }: Props) {
-  const { betAmount, isInputDisabled, setBetAmount, onBetBlur, betHalf, betDouble, betMax } =
-    useBetAmount();
+export function BetAmountField({ className, quickBetSound }: Props) {
+  const { betAmount, setBetAmount, onBetBlur, betHalf, betDouble, betMax, isInputDisabled } =
+    useBetAmount(quickBetSound);
 
   return (
     <div className={cn('flex w-full flex-col gap-2', className)}>

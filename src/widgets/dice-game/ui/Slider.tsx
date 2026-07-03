@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'react';
 import { Slider as SliderPrimitive } from '@base-ui/react/slider';
 import { cn } from '@/shared/lib/cn';
+import { playSound } from '@/shared/lib/playSound';
 import {
   MIN_ROLLOVER,
   MAX_ROLLOVER,
@@ -78,7 +79,10 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
           thumbAlignment="edge"
           onValueChange={(val) => {
             const next = Array.isArray(val) ? val[0] : val;
-            if (typeof next === 'number') onRolloverChange(next);
+            if (typeof next === 'number') {
+              playSound('tick');
+              onRolloverChange(next);
+            }
           }}
           className="w-full"
         >

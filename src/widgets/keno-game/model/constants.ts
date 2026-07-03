@@ -12,6 +12,7 @@ export const MULTIPLIER_DECIMALS = 2;
 export const BET_DECIMALS = 2;
 export const REVEAL_DELAY_MS = 80;
 export const RESULT_DELAY_MS = 400;
+export const POCKET_SOUND_DELAY_MS = 600;
 export const AUTO_PICK_DELAY_MS = 100;
 export const AUTO_BET_DELAY_MS = 1500;
 export const AUTO_BET_DELAY_TURBO_MS = 400;

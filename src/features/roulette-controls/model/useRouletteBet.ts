@@ -4,6 +4,7 @@ import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
+import { playSound } from '@/shared/lib/playSound';
 import { useGameControlsStore, selectIsAutoMode } from '@/entities/game';
 import { useUserQuery, BALANCE_TYPE, type User } from '@/entities/user';
 import { useTurboModeStore } from '@/features/game-settings';
@@ -67,6 +68,7 @@ export function useRouletteBet() {
       setBetResult(null);
       setPendingBetResult(null);
       setSpinning(true);
+      playSound('roulette');
     },
     onSuccess: (data) => {
       setLastResult(data.randomPosition);
@@ -107,6 +109,7 @@ export function useRouletteBet() {
 
   function placeBet() {
     if (!validateBet()) return;
+    playSound('bet');
     mutate();
   }
 

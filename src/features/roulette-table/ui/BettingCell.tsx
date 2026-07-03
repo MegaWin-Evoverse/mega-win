@@ -1,6 +1,7 @@
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import type { PlacedBet } from '@/features/roulette-controls';
+import { playSound } from '@/shared/lib/playSound';
 import { ChipStack } from './ChipStack';
 
 export type BettingCellColor = 'red' | 'black' | 'green' | 'dark';
@@ -34,7 +35,10 @@ export function BettingCell({
     <Button
       variant="ghost"
       size="none"
-      onClick={onClick}
+      onClick={() => {
+        playSound('tick');
+        onClick();
+      }}
       aria-label={ariaLabel ?? `Bet on ${label}`}
       className={cn(
         'relative flex items-center justify-center font-outfit text-[min(14px,2.2cqw)] font-semibold text-brand-text-white transition-all duration-150 select-none cursor-pointer',

@@ -45,7 +45,12 @@ export function ControlPanel({
       )}
     >
       <ManualAutoTabs />
-      {config.showBetAmount && <BetAmountField className={config.classNames.betAmountField} />}
+      {config.showBetAmount && (
+        <BetAmountField
+          className={config.classNames.betAmountField}
+          quickBetSound={config.quickBetSound}
+        />
+      )}
       {config.showChips && (
         <ChipValueSummary className={config.classNames.betSummary} placedBet={placedBet} />
       )}
