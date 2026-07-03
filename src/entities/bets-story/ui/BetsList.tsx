@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import { DataTable, DATA_TABLE_ROW_CLASS } from '@/shared/ui/data-table';
 import { TableCell, TableRow } from '@/shared/ui/table';
+import { CoinAmount } from '@/shared/ui/coin-amount';
 import { GAME_POINT_ICON } from '@/shared/config';
 import { COLUMN_HEADERS } from '../model/constants';
 import type { Bet } from '../model/types';
@@ -41,17 +41,11 @@ export function BetsList({ bets, className }: Props) {
           </TableCell>
           <TableCell className={CELL_CLASS}>{bet.gameName}</TableCell>
           <TableCell className={CELL_CLASS}>
-            <div className="flex items-center gap-1.5">
-              <Image src={GAME_POINT_ICON.SRC} width={16} height={16} alt="" aria-hidden />
-              <span>${bet.betSize}</span>
-            </div>
+            <CoinAmount icon={GAME_POINT_ICON} size={16} value={bet.betSize} />
           </TableCell>
           <TableCell className={CELL_CLASS}>x{bet.multiplier}</TableCell>
           <TableCell className={CELL_CLASS}>
-            <div className="flex items-center gap-1.5">
-              <Image src={GAME_POINT_ICON.SRC} width={16} height={16} alt="" aria-hidden />
-              <span>${bet.payout}</span>
-            </div>
+            <CoinAmount icon={GAME_POINT_ICON} size={16} value={bet.payout} />
           </TableCell>
         </TableRow>
       ))}
