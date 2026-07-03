@@ -1,16 +1,13 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/shared/lib/cn';
-import { EmptyState } from '@/shared/ui/empty-state';
 import {
   LEADERBOARD_CONSTANTS,
+  LEADERBOARD_PLAYERS,
   LEADERBOARD_DECORATIONS,
   LEADERBOARD_BACKDROP,
   LEADERBOARD_ROUTE,
-  PODIUM_CLASSES,
 } from '../model/constants';
-import { useMonthlyLeaderboard } from '../model/useMonthlyLeaderboard';
 import { LeaderboardCard } from './LeaderboardCard';
 
 interface Props {
@@ -18,8 +15,6 @@ interface Props {
 }
 
 export function MonthlyLeaderboard({ className }: Props) {
-  const { cards, isEmpty } = useMonthlyLeaderboard();
-
   return (
     <section
       aria-label={LEADERBOARD_CONSTANTS.SECTION_ARIA_LABEL}
@@ -47,32 +42,36 @@ export function MonthlyLeaderboard({ className }: Props) {
         </p>
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-4 xl:gap-8 w-full max-w-[1000px] mx-auto z-10 relative">
-        {isEmpty ? (
-          <EmptyState className="max-w-[800px] h-[300px] sm:h-[340px]" />
-        ) : (
-          cards.map((card, idx) => (
-            <LeaderboardCard key={card.id} card={card} className={PODIUM_CLASSES[idx]} />
-          ))
-        )}
-        {!isEmpty &&
-          LEADERBOARD_DECORATIONS.map((decoration) => (
-            <div
-              key={decoration.id}
-              className={cn(
-                'absolute pointer-events-none select-none z-0 hidden xl:block opacity-95',
-                decoration.wrapperClass
-              )}
-            >
-              <Image
-                src={decoration.src}
-                alt=""
-                width={decoration.width}
-                height={decoration.height}
-                className={cn('object-contain', decoration.imageClass)}
-                priority
-              />
-            </div>
-          ))}
+        <LeaderboardCard
+          card={LEADERBOARD_PLAYERS[0]}
+          className="order-2 sm:order-1 sm:translate-y-2"
+        />
+        <LeaderboardCard
+          card={LEADERBOARD_PLAYERS[1]}
+          className="order-1 sm:order-2 sm:-translate-y-6 z-20"
+        />
+        <LeaderboardCard
+          card={LEADERBOARD_PLAYERS[2]}
+          className="order-3 sm:order-3 sm:translate-y-4"
+        />
+        {LEADERBOARD_DECORATIONS.map((decoration) => (
+          <div
+            key={decoration.id}
+            className={cn(
+              'absolute pointer-events-none select-none z-0 hidden xl:block opacity-95',
+              decoration.wrapperClass
+            )}
+          >
+            <Image
+              src={decoration.src}
+              alt=""
+              width={decoration.width}
+              height={decoration.height}
+              className={cn('object-contain', decoration.imageClass)}
+              priority
+            />
+          </div>
+        ))}
       </div>
       <div className="flex justify-center w-full mt-10 xl:mt-8 z-10 relative">
         <Link

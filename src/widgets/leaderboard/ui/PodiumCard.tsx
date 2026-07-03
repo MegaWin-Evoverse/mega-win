@@ -17,7 +17,7 @@ interface Props {
 
 export function PodiumCard({ participant, className }: Props) {
   const { username, usdWager, prizeValue, position: pos } = participant;
-  const isFirst = Number(pos) === 1;
+  const isFirst = pos === 1;
 
   return (
     <div

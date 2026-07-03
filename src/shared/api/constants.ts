@@ -12,5 +12,3 @@ export const USER_PATHS = {
   UPDATE_INFO: '/api/user/command/update/user-info',
   UPDATE_PASSWORD: '/api/user/command/update/password',
 } as const;
-
-export const LEADERBOARD_PATH = '/api/leaderboard';

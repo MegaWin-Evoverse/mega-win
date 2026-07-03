@@ -1,6 +1,5 @@
 import { PODIUM_CLASSES, PODIUM_ORDER } from '../model/constants';
-import type { PodiumParticipant } from '../model/types';
-import type { LeaderboardParticipant } from '@/shared/api/types/leaderboard';
+import type { LeaderboardParticipant, PodiumParticipant } from '../model/types';
 import { PodiumCard } from './PodiumCard';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 export function Podium({ top3 }: Props) {
-  const ordered = PODIUM_ORDER.map((pos) => top3.find((p) => Number(p.position) === pos)).filter(
+  const ordered = PODIUM_ORDER.map((pos) => top3.find((p) => p.position === pos)).filter(
     (p): p is PodiumParticipant => p !== undefined
   );
 
