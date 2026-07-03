@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
 import { LOGOUT_PATH } from '@/shared/api/constants';
+import { ROUTES } from '@/shared/config/routes';
 import { LOGOUT_ERROR } from './constants';
 
 interface UseUserPanelResult {
@@ -21,6 +22,7 @@ export function useUserPanel(): UseUserPanelResult {
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: QUERY_KEYS.currentUser });
       queryClient.clear();
+      router.push(ROUTES.HOME);
       router.refresh();
     },
     onError: () => {
