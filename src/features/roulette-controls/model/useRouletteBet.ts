@@ -79,6 +79,7 @@ export function useRouletteBet() {
       });
       setSpinning(false);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.betStoryAll });
     },
     onError: (error) => {
       setSpinning(false);

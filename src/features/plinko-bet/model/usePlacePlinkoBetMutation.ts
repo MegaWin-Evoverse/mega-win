@@ -44,6 +44,7 @@ export function usePlacePlinkoBetMutation({
         tier: getMultiplierColorTier(bucket, bucketCount),
       });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.betStoryAll });
     },
     onError: () => {
       onBetError();

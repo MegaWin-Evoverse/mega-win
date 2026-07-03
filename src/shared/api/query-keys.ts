@@ -8,6 +8,7 @@ export const ROULETTE_CONFIG_QUERY_KEYS = {
 
 export const QUERY_KEYS = {
   betStory: (path: string) => ['bets-story', path],
+  betStoryAll: ['bets-story'],
   currentUser: ['current-user'],
   myBets: (params: { page: number }) => ['my-bets', params],
   leaderboard: (month: string) => ['leaderboard', month],

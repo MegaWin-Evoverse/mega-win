@@ -157,6 +157,7 @@ export function useKenoGame(): UseKenoGameResult {
         setIsRevealing(false);
         setGameResult(response.multiplier > 0 ? 'win' : 'lose');
         queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEYS.betStoryAll });
 
         if (!isAutoRunningRef.current) return;
 
