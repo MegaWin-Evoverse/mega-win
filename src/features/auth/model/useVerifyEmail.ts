@@ -1,16 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useController, useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { verifyEmailSchema } from './schema';
 import { useAuthStore } from './authStore';
-import { PATHS, VERIFY_EMAIL_ERROR, VERIFY_EMAIL_FIELDS } from './constants';
+import { PATHS, SUCCESS_MESSAGE, VERIFY_EMAIL_ERROR, VERIFY_EMAIL_FIELDS } from './constants';
 import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
+import { QUERY_KEYS } from '@/shared/api/query-keys';
 
 export function useVerifyEmail() {
+  const queryClient = useQueryClient();
   const verificationToken = useAuthStore((state) => state.verificationToken);
   const clearVerificationToken = useAuthStore((state) => state.clearVerificationToken);
+  const closeAuthForm = useAuthStore((state) => state.closeAuthForm);
 
   const {
     handleSubmit,
@@ -33,6 +36,9 @@ export function useVerifyEmail() {
     },
     onSuccess: () => {
       clearVerificationToken();
+      closeAuthForm();
+      toast.success(SUCCESS_MESSAGE['verify-email']);
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
     },
     onError: () => {
       toast.error(VERIFY_EMAIL_ERROR);

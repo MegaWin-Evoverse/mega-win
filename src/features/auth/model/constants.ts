@@ -13,6 +13,7 @@ export const VERIFY_EMAIL_ERROR = 'Invalid or expired verification code';
 
 export const SUCCESS_MESSAGE = {
   'sign-in': 'Welcome back!',
+  'verify-email': 'Email verified successfully!',
 } as const;
 
 export const VERIFY_EMAIL_FIELDS = {
