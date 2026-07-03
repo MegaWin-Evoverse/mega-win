@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import setCookieParser from 'set-cookie-parser';
+import { SESSION_HINT_COOKIE } from '@/shared/api/constants';
 import { ACCESS_TOKEN_MAX_AGE, REFRESH_TOKEN_MAX_AGE } from './model/constants';
 
 const COOKIE_CONFIG = {
@@ -25,6 +26,17 @@ export function applyAuthCookies(response: NextResponse, backendHeaders: Headers
       httpOnly: true,
       maxAge: cookie.maxAge ?? COOKIE_CONFIG[name].maxAge,
       path: COOKIE_CONFIG[name].path,
+      sameSite: 'strict',
+      secure,
+    });
+  }
+
+  const hasRefreshToken = cookies.some((cookie) => cookie.name === 'refresh_token');
+
+  if (hasRefreshToken) {
+    response.cookies.set(SESSION_HINT_COOKIE, '1', {
+      maxAge: REFRESH_TOKEN_MAX_AGE,
+      path: '/',
       sameSite: 'strict',
       secure,
     });
