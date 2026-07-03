@@ -16,7 +16,6 @@ interface UseBetAmountReturn {
 export function useBetAmount(quickBetSound: SoundName = 'tick'): UseBetAmountReturn {
   const {
     betAmount,
-    balance,
     setBetAmount,
     onBetBlur,
     betHalf: betHalfStore,
@@ -53,7 +52,6 @@ export function useBetAmount(quickBetSound: SoundName = 'tick'): UseBetAmountRet
 
   return {
     betAmount,
-    balance,
     setBetAmount,
     onBetBlur,
     betHalf,
