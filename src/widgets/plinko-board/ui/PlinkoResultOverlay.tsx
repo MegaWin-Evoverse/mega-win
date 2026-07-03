@@ -1,6 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { GameResultCard, getResultVariant } from '@/shared/ui/game-result-card';
+import { ResultOverlay } from '@/shared/ui/result-overlay';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
 import { useTurboModeStore } from '@/features/game-settings';
 import type { PlinkoResult } from '@/features/plinko-bet';
@@ -28,12 +29,12 @@ export function PlinkoResultOverlay({ result, onDismiss }: Props) {
   if (!result) return null;
 
   return (
-    <div className="absolute inset-0 z-10 flex items-center justify-center bg-page-bg/40 backdrop-blur-md">
+    <ResultOverlay>
       <GameResultCard
         variant={getResultVariant(result.multiplier)}
         multiplier={result.multiplier}
         payout={String(result.payout)}
       />
-    </div>
+    </ResultOverlay>
   );
 }
