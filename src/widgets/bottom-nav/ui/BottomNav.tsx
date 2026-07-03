@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bell, User as ProfileIcon } from 'lucide-react';
+import { User as ProfileIcon } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { BurgerIcon } from '@/shared/ui/burger-icon';
@@ -34,16 +34,6 @@ export function BottomNav() {
       >
         <BurgerIcon className="w-5 h-5" />
         <span className="text-xs">{BOTTOM_NAV_LABELS.MENU}</span>
-      </Button>
-      <Button
-        variant="ghost"
-        size="none"
-        disabled
-        className="flex flex-col items-center justify-center gap-1 h-full flex-1 rounded-none text-brand-text-white"
-        aria-label={BOTTOM_NAV_LABELS.NOTIFICATIONS}
-      >
-        <Bell className="w-5 h-5" />
-        <span className="text-xs">{BOTTOM_NAV_LABELS.NOTIFICATIONS}</span>
       </Button>
       <Link
         href={ROUTES.PROFILE}
