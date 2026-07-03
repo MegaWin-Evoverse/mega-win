@@ -16,7 +16,7 @@ export function VerifyEmailForm({ email }: Props) {
     useVerifyEmail();
 
   return (
-    <div className="relative flex w-full flex-col items-center bg-bg-primary rounded-xl p-[24px] sm:p-[40px]">
+    <div className="relative flex w-full flex-col items-center bg-bg-primary rounded-xl p-[16px] min-[460px]:p-[24px] lg:p-[40px]">
       <Button
         type="button"
         variant="ghost"
@@ -38,12 +38,12 @@ export function VerifyEmailForm({ email }: Props) {
         </p>
         <div className="mb-[8px] flex w-full justify-center">
           <InputOTP maxLength={OTP_LENGTH} value={code} onChange={handleCodeChange}>
-            <InputOTPGroup className="gap-[8px]">
+            <InputOTPGroup className="gap-[6px] min-[460px]:gap-[8px]">
               {Array.from({ length: OTP_LENGTH }).map((_, i) => (
                 <InputOTPSlot
                   key={i}
                   index={i}
-                  className="size-[56px] rounded-[10px] border border-auth-surface bg-auth-bg text-lg font-medium text-auth-text first:rounded-l-[10px] last:rounded-r-[10px] data-[active=true]:border-button-brand-bg-dark data-[active=true]:ring-0"
+                  className="size-[36px] min-[460px]:size-[56px] rounded-[10px] border border-auth-surface bg-auth-bg text-base min-[460px]:text-lg font-medium text-auth-text first:rounded-l-[10px] last:rounded-r-[10px] data-[active=true]:border-button-brand-bg-dark data-[active=true]:ring-0"
                 />
               ))}
             </InputOTPGroup>
