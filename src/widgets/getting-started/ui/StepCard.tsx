@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Copy } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import type { StepCardData } from '../model/types';
@@ -24,7 +24,7 @@ export function StepCard({ card }: Props) {
     href,
     decorations,
   } = card;
-  const { handleCopy } = useCopyPromoCode(promoCode);
+  const { handleCopy, isCopied } = useCopyPromoCode(promoCode);
 
   return (
     <Card variant="gettingStarted" className="min-w-[285px] w-full flex-1">
@@ -44,7 +44,7 @@ export function StepCard({ card }: Props) {
               className="flex w-fit items-center gap-1 font-outfit text-base font-semibold text-brand-green-to hover:opacity-85 cursor-pointer"
             >
               <span>{promoCode}</span>
-              <Copy className="h-4 w-4" />
+              {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             </Button>
           )}
           {promoNote && (

@@ -16,8 +16,6 @@ export const CAMPAIGN_IDS = {
 } as const;
 
 export const CAMPAIGN_CONSTANTS = {
-  TOAST_COPY_SUCCESS: 'Promo code copied successfully!',
-  TOAST_COPY_ERROR: 'Failed to copy promo code.',
   CLOCK_ICON_ALT: 'Remaining time clock icon',
   COPY_ICON_ALT: 'Copy promo code to clipboard',
   LOGO_ALT: 'Degencity Logo',

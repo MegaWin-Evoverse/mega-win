@@ -1,21 +1,23 @@
 import { useCallback } from 'react';
-import { toast } from 'sonner';
-import { GETTING_STARTED_CONSTANTS } from './constants';
+import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard';
+import { CLIPBOARD_MESSAGES, COPY_ICON_RESET_MS } from '@/shared/config';
 
 interface UseCopyPromoCodeResult {
   handleCopy: () => Promise<void>;
+  isCopied: boolean;
 }
 
 export function useCopyPromoCode(promoCode?: string): UseCopyPromoCodeResult {
+  const { copiedKey, copy } = useCopyToClipboard({
+    successMessage: CLIPBOARD_MESSAGES.PROMO_COPY_SUCCESS,
+    errorMessage: CLIPBOARD_MESSAGES.PROMO_COPY_ERROR,
+    resetMs: COPY_ICON_RESET_MS,
+  });
+
   const handleCopy = useCallback(async () => {
     if (!promoCode) return;
-    try {
-      await navigator.clipboard.writeText(promoCode);
-      toast.success(GETTING_STARTED_CONSTANTS.TOAST_COPY_SUCCESS);
-    } catch {
-      toast.error(GETTING_STARTED_CONSTANTS.TOAST_COPY_ERROR);
-    }
-  }, [promoCode]);
+    await copy(promoCode, promoCode);
+  }, [promoCode, copy]);
 
-  return { handleCopy };
+  return { handleCopy, isCopied: copiedKey === promoCode };
 }
