@@ -1,5 +1,5 @@
 'use client';
-import { Trash2, Undo2 } from 'lucide-react';
+import { Eraser, Trash2, Undo2 } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { CollapsibleSection } from '@/shared/ui/collapsible-section';
@@ -9,12 +9,20 @@ import { useTableActions } from '../model/useTableActions';
 interface Props {
   variant: TableActionsVariant;
   className?: string;
+  buttonClassName?: string;
   onClearTable?: () => void;
   onUndo?: () => void;
   onAutoPick?: () => void;
 }
 
-export function TableActions({ variant, className, onClearTable, onUndo, onAutoPick }: Props) {
+export function TableActions({
+  variant,
+  className,
+  buttonClassName,
+  onClearTable,
+  onUndo,
+  onAutoPick,
+}: Props) {
   const {
     clearTable: storeClearTable,
     autoPick: storeAutoPick,
@@ -24,6 +32,31 @@ export function TableActions({ variant, className, onClearTable, onUndo, onAutoP
   const clearTable = onClearTable ?? storeClearTable;
   const undo = onUndo ?? storeUndo;
   const autoPick = onAutoPick ?? storeAutoPick;
+
+  if (variant === TABLE_ACTIONS.ROULETTE_TABLE) {
+    return (
+      <>
+        <Button
+          variant="action-muted"
+          size="none"
+          onClick={clearTable}
+          aria-label={TABLE_ACTIONS_LABELS.CLEAR}
+          className={cn('flex items-center justify-center text-brand-green-to', buttonClassName)}
+        >
+          <Eraser className="size-[min(20px,4cqw)]" />
+        </Button>
+        <Button
+          variant="action-muted"
+          size="none"
+          onClick={undo}
+          aria-label={TABLE_ACTIONS_LABELS.UNDO}
+          className={cn('flex items-center justify-center text-brand-green-to', buttonClassName)}
+        >
+          <Undo2 className="size-[min(20px,4cqw)]" />
+        </Button>
+      </>
+    );
+  }
 
   if (variant === TABLE_ACTIONS.ROULETTE) {
     return (

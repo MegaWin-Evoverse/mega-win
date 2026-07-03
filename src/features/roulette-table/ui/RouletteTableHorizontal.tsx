@@ -9,8 +9,8 @@ import {
 } from '@/features/roulette-controls';
 import { ROULETTE_ROWS, getNumberColor } from '../model/rouletteLayout';
 import type { BettingTableHandlers } from '../model/useBettingTable';
+import { TableActions, TABLE_ACTIONS } from '@/features/table-actions';
 import { BettingCell } from './BettingCell';
-import { TableActions } from './TableActions';
 
 const COLUMN_KEYS: Array<'TOP' | 'MIDDLE' | 'BOTTOM'> = [COLUMN.TOP, COLUMN.MIDDLE, COLUMN.BOTTOM];
 
@@ -144,6 +144,7 @@ export function RouletteTableHorizontal({
             className="aspect-[101.67/46] min-w-0 flex-1 rounded-[0.64cqw]"
           />
           <TableActions
+            variant={TABLE_ACTIONS.ROULETTE_TABLE}
             onClearTable={clearTable}
             onUndo={undo}
             buttonClassName="aspect-[101.67/46] min-w-0 flex-1 rounded-[0.64cqw] lg:hidden"
