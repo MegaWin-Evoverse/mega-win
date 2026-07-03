@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/table';
+import { DataTable, DATA_TABLE_ROW_CLASS } from '@/shared/ui/data-table';
+import { TableCell, TableRow } from '@/shared/ui/table';
 import {
   CELL_CLASS,
   HEAD_CLASS,
@@ -29,39 +30,37 @@ export function SeedHistoryTable({ seeds }: Props) {
   }
 
   return (
-    <Table>
-      <TableHeader className="[&_tr]:border-0">
-        <TableRow className="border-0 hover:bg-transparent">
-          <TableHead className={HEAD_CLASS}>{SEED_TABLE_COLUMNS.CLIENT_SEED}</TableHead>
-          <TableHead className={HEAD_CLASS}>{SEED_TABLE_COLUMNS.SERVER_SEED}</TableHead>
-          <TableHead className={HEAD_CLASS}>{SEED_TABLE_COLUMNS.NONCE}</TableHead>
-          <TableHead className={HEAD_CLASS}>{SEED_TABLE_COLUMNS.DATE}</TableHead>
+    <DataTable
+      columns={[
+        SEED_TABLE_COLUMNS.CLIENT_SEED,
+        SEED_TABLE_COLUMNS.SERVER_SEED,
+        SEED_TABLE_COLUMNS.NONCE,
+        SEED_TABLE_COLUMNS.DATE,
+      ]}
+      headClassName={HEAD_CLASS}
+    >
+      {seeds.map((seed) => (
+        <TableRow key={seed.id} className={DATA_TABLE_ROW_CLASS}>
+          <SeedHistoryCell
+            seed={seed.clientSeed}
+            copyKey={`${seed.id}-client`}
+            copiedKey={copiedKey}
+            ariaLabel="Copy client seed"
+            onCopy={handleCopy}
+          />
+          <SeedHistoryCell
+            seed={seed.serverSeed}
+            copyKey={`${seed.id}-server`}
+            copiedKey={copiedKey}
+            ariaLabel="Copy server seed"
+            onCopy={handleCopy}
+          />
+          <TableCell className={CELL_CLASS}>{seed.nonce}</TableCell>
+          <TableCell className={CELL_CLASS}>
+            {SEED_DATE_FORMAT.format(new Date(seed.createdAt))}
+          </TableCell>
         </TableRow>
-      </TableHeader>
-      <TableBody className="[&_tr:last-child]:border-0">
-        {seeds.map((seed) => (
-          <TableRow key={seed.id} className="border-0 odd:bg-bg-primary">
-            <SeedHistoryCell
-              seed={seed.clientSeed}
-              copyKey={`${seed.id}-client`}
-              copiedKey={copiedKey}
-              ariaLabel="Copy client seed"
-              onCopy={handleCopy}
-            />
-            <SeedHistoryCell
-              seed={seed.serverSeed}
-              copyKey={`${seed.id}-server`}
-              copiedKey={copiedKey}
-              ariaLabel="Copy server seed"
-              onCopy={handleCopy}
-            />
-            <TableCell className={CELL_CLASS}>{seed.nonce}</TableCell>
-            <TableCell className={CELL_CLASS}>
-              {SEED_DATE_FORMAT.format(new Date(seed.createdAt))}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+      ))}
+    </DataTable>
   );
 }
