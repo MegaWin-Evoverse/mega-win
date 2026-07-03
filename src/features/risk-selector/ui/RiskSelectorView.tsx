@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
+import { LabeledField } from '@/shared/ui/labeled-field';
 import type { Risk, RiskOption } from '@/entities/game';
 import { RISK_CLASSNAMES } from '../model/constants';
 
@@ -22,8 +23,7 @@ export function RiskSelectorView({
   className,
 }: Props) {
   return (
-    <div className={cn('flex w-full flex-col gap-2', className)}>
-      <span className={cn('font-outfit', labelClassName)}>{label}</span>
+    <LabeledField label={label} labelClassName={labelClassName} className={className}>
       <div className="flex w-full gap-2">
         {options.map((option) => {
           const isActive = risk === option.value;
@@ -46,6 +46,6 @@ export function RiskSelectorView({
           );
         })}
       </div>
-    </div>
+    </LabeledField>
   );
 }
