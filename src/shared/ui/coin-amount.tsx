@@ -1,11 +1,14 @@
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { COIN_ICON as DEFAULT_COIN_ICON } from '@/shared/config';
-import type { COIN_ICON } from '@/shared/config';
 import { cn } from '@/shared/lib/cn';
+
+interface CoinIcon {
+  SRC: StaticImageData;
+}
 
 interface Props {
   value: string | number;
-  icon?: typeof COIN_ICON;
+  icon?: CoinIcon;
   size?: number;
   className?: string;
 }
