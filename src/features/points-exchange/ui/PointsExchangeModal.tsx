@@ -36,7 +36,7 @@ export function PointsExchangeModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-[calc(100%-32px)] sm:w-[540px] md:w-[640px] lg:w-[720px] max-w-none bg-bg-primary border-auth-surface p-6 sm:p-8"
+        className="w-[calc(100%-32px)] md:w-[700px] max-w-none sm:max-w-none md:max-w-none bg-bg-primary border-auth-surface p-6 sm:p-10"
       >
         <Button
           type="button"
@@ -57,7 +57,7 @@ export function PointsExchangeModal({
             className="mb-2"
           />
           <DialogTitle className="text-xl font-bold mb-2">{EXCHANGE_UI_TEXT.TITLE}</DialogTitle>
-          <DialogDescription className="text-center text-auth-text-secondary text-sm mb-5 max-w-[340px]">
+          <DialogDescription className="text-center text-auth-text-secondary text-sm mb-5 max-w-[480px]">
             {EXCHANGE_UI_TEXT.DESCRIPTION}
           </DialogDescription>
           <ExchangeRateDisplay />
