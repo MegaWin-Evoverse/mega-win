@@ -40,7 +40,7 @@ export function FairnessSeedsTab({
         />
       </div>
       <div className="flex flex-col gap-3 w-full">
-        <h3 className="font-outfit font-semibold text-lg leading-5 text-[#FDFDFD]">
+        <h3 className="font-outfit font-semibold text-lg leading-5 text-brand-text-white">
           {FAIRNESS_LABELS.rotateSeedPair}
         </h3>
         <div className="flex flex-col gap-3 w-full">
@@ -60,7 +60,7 @@ export function FairnessSeedsTab({
               size="none"
               disabled={isFairnessLoading}
               onClick={rotateSeeds}
-              className="flex h-11 w-22 items-center justify-center rounded-lg border border-[#1B1F26] bg-gradient-to-b from-[#1B1F26] to-[#2B303B] hover:brightness-110 active:scale-95 disabled:opacity-50 transition-all font-outfit font-medium text-base text-[#FDFDFD] cursor-pointer"
+              className="flex h-11 w-22 items-center justify-center rounded-lg border border-border-default bg-gradient-to-b from-border-default to-brand-btn-gradient-to hover:brightness-110 active:scale-95 disabled:opacity-50 transition-all font-outfit font-medium text-base text-brand-text-white cursor-pointer"
             >
               {isFairnessLoading ? FAIRNESS_LABELS.wait : FAIRNESS_LABELS.change}
             </Button>
