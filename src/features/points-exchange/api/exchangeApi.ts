@@ -1,6 +1,6 @@
 import { api } from '@/shared/api/client';
 
-export const POINTS_EXCHANGE_PATH = '/api/balance/watch-to-game';
+const POINTS_EXCHANGE_PATH = '/api/balance/watch-to-game';
 
 export interface ExchangePayload {
   amount: string;

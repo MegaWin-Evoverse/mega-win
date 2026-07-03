@@ -14,7 +14,6 @@ import {
   GAME_POINTS_LABEL,
   WATCH_POINTS_LABEL,
 } from '../model/constants';
-
 import { PointsExchangeModal } from '@/features/points-exchange';
 
 interface Props {
@@ -30,7 +29,7 @@ export function BalanceMenu({ balances }: Props) {
     balances.find((balance) => balance.balanceType === BALANCE_TYPE.WATCH_POINTS)?.value ?? '0';
 
   return (
-    <DropdownMenu onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger className="flex h-10 min-w-0 items-center gap-3 rounded-sm bg-header-balance-bg px-3 py-2 outline-none cursor-pointer">
         <Image
           src={GAME_POINT_ICON.SRC}
@@ -61,16 +60,15 @@ export function BalanceMenu({ balances }: Props) {
           <ChevronDown className="size-4 shrink-0" />
         )}
       </DropdownMenuTrigger>
-
       <DropdownMenuContent align="start" className="w-72 p-4">
         <p className="mb-3 text-sm font-semibold">{BALANCE_HEADER}</p>
-
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-lg bg-auth-surface p-3">
             <div className="flex items-center gap-2">
               <Image
                 src={GAME_POINT_ICON.SRC}
-                alt={GAME_POINTS_LABEL}
+                alt=""
+                aria-hidden
                 width={16}
                 height={16}
                 className="size-4"
@@ -84,7 +82,8 @@ export function BalanceMenu({ balances }: Props) {
             <div className="flex items-center gap-2">
               <Image
                 src={COIN_ICON.SRC}
-                alt={WATCH_POINTS_LABEL}
+                alt=""
+                aria-hidden
                 width={16}
                 height={16}
                 className="size-4"
@@ -95,7 +94,6 @@ export function BalanceMenu({ balances }: Props) {
             <AnimatedNumber value={Number(watchPoints)} className="text-sm font-medium" />
           </div>
         </div>
-
         <Button
           variant="outline"
           className="group mt-3 h-auto w-full py-4"

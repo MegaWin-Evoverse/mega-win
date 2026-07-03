@@ -10,7 +10,6 @@ export const EXCHANGE_UI_TEXT = {
   DESCRIPTION:
     'Convert your Watch Points into Game Points to earn rewards and enhance your gameplay.',
   CLOSE_ARIA_LABEL: 'Close form',
-  IMAGE_ALT: 'Points Exchange',
   WATCH_POINT_NAME: 'Watch point',
   WATCH_POINT_ALT: 'Watch Point',
   GAME_POINT_NAME: 'Game point',
@@ -24,4 +23,15 @@ export const EXCHANGE_UI_TEXT = {
 
 export const EXCHANGE_FORM_FIELDS = {
   AMOUNT: 'amount',
+} as const;
+
+export const EXCHANGE_IMAGE = {
+  SRC: '/two-coins.webp',
+  ALT: 'Points Exchange',
+  SIZE: 120,
+} as const;
+
+export const EXCHANGE_RATE = {
+  WATCH: 1,
+  GAME: 1,
 } as const;

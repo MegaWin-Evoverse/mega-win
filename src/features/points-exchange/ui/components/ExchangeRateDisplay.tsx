@@ -1,7 +1,6 @@
 import Image from 'next/image';
-
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
-import { EXCHANGE_UI_TEXT } from '../../model/constants';
+import { EXCHANGE_UI_TEXT, EXCHANGE_RATE } from '../../model/constants';
 
 export function ExchangeRateDisplay() {
   return (
@@ -15,7 +14,7 @@ export function ExchangeRateDisplay() {
           className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
         />
         <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">
-          1{' '}
+          {EXCHANGE_RATE.WATCH}{' '}
           <span className="text-auth-text-secondary font-normal">
             {EXCHANGE_UI_TEXT.WATCH_POINT_NAME}
           </span>
@@ -31,7 +30,7 @@ export function ExchangeRateDisplay() {
           className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
         />
         <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">
-          1{' '}
+          {EXCHANGE_RATE.GAME}{' '}
           <span className="text-auth-text-secondary font-normal">
             {EXCHANGE_UI_TEXT.GAME_POINT_NAME}
           </span>

@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
-
 import { QUERY_KEYS } from '@/shared/api/query-keys';
-
 import { exchangeWatchToGame } from './exchangeApi';
 import { EXCHANGE_MESSAGES } from '../model/constants';
 
@@ -20,9 +19,8 @@ export function useExchangeMutation({ onSuccessCallback }: UseExchangeMutationOp
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
       onSuccessCallback?.();
     },
-    onError: (error: unknown) => {
-      const err = error as { response?: { data?: { message?: string | string[] } } };
-      const msg = err?.response?.data?.message;
+    onError: (error) => {
+      const msg = isAxiosError(error) ? error.response?.data?.message : undefined;
       const errorMsg = Array.isArray(msg) ? msg.join(', ') : msg || EXCHANGE_MESSAGES.ERROR_GENERIC;
       toast.error(errorMsg);
     },

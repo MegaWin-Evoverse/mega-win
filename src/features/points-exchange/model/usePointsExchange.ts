@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { useExchangeMutation } from '../api/useExchangeMutation';
-import { getPointsExchangeSchema, type PointsExchangeFormValues } from './schema';
+import { getPointsExchangeSchema, type PointsExchangeFormValues } from './schemas';
+import { EXCHANGE_FORM_FIELDS } from './constants';
 
 interface UsePointsExchangeProps {
   watchPointsBalance: string;
@@ -32,9 +32,14 @@ export function usePointsExchange({
     exchange(data.amount);
   };
 
+  const amount = form.watch(EXCHANGE_FORM_FIELDS.AMOUNT);
+  const canSubmit = !isPending && Number(amount) > 0;
+
   return {
     form,
     onSubmit,
     isPending,
+    amount,
+    canSubmit,
   };
 }

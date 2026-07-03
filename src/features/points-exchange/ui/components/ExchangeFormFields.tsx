@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import { Controller, type Control, type FieldErrors } from 'react-hook-form';
-
 import { AmountInput } from '@/shared/ui/amount-input';
 import { FieldError } from '@/shared/ui/field-error';
 import { COIN_ICON, GAME_POINT_ICON } from '@/shared/config';
-
 import { EXCHANGE_UI_TEXT, EXCHANGE_FORM_FIELDS } from '../../model/constants';
-import type { PointsExchangeFormValues } from '../../model/schema';
+import type { PointsExchangeFormValues } from '../../model/schemas';
 
 interface Props {
   control: Control<PointsExchangeFormValues>;
@@ -48,7 +46,7 @@ export function ExchangeFormFields({
                     width={12}
                     height={12}
                   />{' '}
-                  <span className="text-white font-medium">
+                  <span className="text-brand-text-white font-medium">
                     {Number(watchPointsBalance).toLocaleString()}
                   </span>
                 </div>
@@ -60,7 +58,6 @@ export function ExchangeFormFields({
           <FieldError message={errors[EXCHANGE_FORM_FIELDS.AMOUNT]?.message} />
         )}
       </div>
-
       <div className="flex flex-col gap-2">
         <span className="text-sm font-medium text-auth-text-secondary">
           {EXCHANGE_UI_TEXT.YOU_RECEIVE_LABEL}
@@ -78,7 +75,7 @@ export function ExchangeFormFields({
                 width={12}
                 height={12}
               />{' '}
-              <span className="text-white font-medium">
+              <span className="text-brand-text-white font-medium">
                 {Number(gamePointsBalance).toLocaleString()}
               </span>
             </div>
