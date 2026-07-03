@@ -44,7 +44,7 @@ export function CampaignPromoBlock({
           {endTimeString.split(CAMPAIGN_CONSTANTS.SPLIT_DELIMITER).map((part, index) => {
             if (part === CAMPAIGN_CONSTANTS.COLON_CHAR) {
               return (
-                <span key={index} className="text-gray-500 font-semibold mx-0.5">
+                <span key={index} className="text-brand-text-muted font-semibold mx-0.5">
                   {CAMPAIGN_CONSTANTS.COLON_CHAR}
                 </span>
               );
