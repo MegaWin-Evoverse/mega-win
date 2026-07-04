@@ -17,6 +17,7 @@ export function Providers({ children }: Props) {
         defaultOptions: {
           queries: {
             staleTime: Infinity,
+            refetchOnWindowFocus: false,
           },
         },
       })
