@@ -1,7 +1,7 @@
 'use client';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useCountdown } from '../model/useCountdown';
-import { COUNTDOWN_UNITS, LEADERBOARD_LABELS } from '../model/constants';
+import { COUNTDOWN_UNITS, LEADERBOARD_LABELS, COUNTDOWN_PLACEHOLDER } from '../model/constants';
 
 interface Props {
   endDate: Date;
@@ -9,6 +9,12 @@ interface Props {
 
 export function Countdown({ endDate }: Props) {
   const countdown = useCountdown(endDate);
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-6 w-full max-w-72 rounded-[18px] bg-gradient-to-b from-auth-surface-dim to-auth-surface-light-dim">
@@ -25,7 +31,7 @@ export function Countdown({ endDate }: Props) {
             )}
             <div className="flex flex-col items-center justify-center px-4 py-2 gap-1 bg-leaderboard-reward-bg rounded-lg">
               <span className="font-outfit font-semibold text-sm leading-[18px] text-brand-text-white">
-                {countdown[key]}
+                {mounted ? countdown[key] : COUNTDOWN_PLACEHOLDER}
               </span>
               <span className="font-outfit font-semibold text-xs leading-4 text-brand-text-muted">
                 {label}

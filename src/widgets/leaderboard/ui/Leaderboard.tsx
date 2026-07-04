@@ -11,6 +11,7 @@ import {
 } from '../model/constants';
 import { useLeaderboard } from '../model/useLeaderboard';
 import { Podium } from './Podium';
+import { PodiumSkeleton } from './PodiumSkeleton';
 import { EmptyState } from './EmptyState';
 import { Countdown } from './Countdown';
 import { Table } from './Table';
@@ -77,10 +78,12 @@ export function Leaderboard({ className }: Props) {
             {LEADERBOARD_LABELS.SUBTITLE}
           </p>
         </div>
-        {top3.length > 0 ? (
+        {isLoading ? (
+          <PodiumSkeleton />
+        ) : top3.length > 0 ? (
           <Podium top3={top3} />
         ) : (
-          !isLoading && <EmptyState className="max-w-[800px] z-10 relative" />
+          <EmptyState className="max-w-[800px] z-10 relative" />
         )}
         <div className="flex flex-col items-center gap-4 sm:gap-6 z-10 relative mt-8 sm:mt-12 xl:mt-16 w-full">
           <Countdown endDate={endDate} />

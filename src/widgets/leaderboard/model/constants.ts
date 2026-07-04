@@ -62,6 +62,10 @@ export const ROWS_PER_LOAD = 10;
 
 export const TOP_3_THRESHOLD = 3;
 
+export const PODIUM_SKELETON_COUNT = 3;
+
+export const COUNTDOWN_PLACEHOLDER = '00';
+
 export const COUNTDOWN_UNITS = [
   { key: 'days', label: LEADERBOARD_LABELS.COUNTDOWN_D },
   { key: 'hours', label: LEADERBOARD_LABELS.COUNTDOWN_H },
