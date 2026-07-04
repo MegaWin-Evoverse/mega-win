@@ -9,19 +9,20 @@ interface Props {
 
 export function MultiplierRow({ multipliers, landedBucket }: Props) {
   return (
-    <div className="flex w-full items-center justify-center gap-1.5 px-4">
+    <div className="flex w-full items-center justify-center gap-px px-0.5 sm:gap-1.5 sm:px-4">
       {multipliers.map((value, index) => {
         const isLanded = landedBucket?.bucket === index;
         return (
           <span
             key={isLanded ? `${index}-${landedBucket.hitAt}` : `${index}-${value}`}
             className={cn(
-              'flex h-[30px] min-w-0 flex-1 items-center justify-center rounded-lg px-1 text-[11px] font-semibold uppercase text-plinko-multiplier-text truncate',
+              'flex h-[20px] min-w-0 flex-1 items-center justify-center rounded-md px-0 text-[7px] font-semibold uppercase text-plinko-multiplier-text truncate sm:h-[30px] sm:rounded-lg sm:px-1 sm:text-[11px]',
               TIER_BG_CLASS[getMultiplierColorTier(index, multipliers.length)],
               isLanded && 'animate-plinko-bucket-land'
             )}
           >
-            {value}x
+            {value}
+            <span className="hidden sm:inline">x</span>
           </span>
         );
       })}
