@@ -1,4 +1,4 @@
-import type { CountdownValues, RulesItem } from './types';
+import type { RulesItem } from './types';
 import askIcon from '../assets/icons/ask.svg';
 
 export const LEADERBOARD_LABELS = {
@@ -72,13 +72,6 @@ export const PODIUM_CLASSES = [
   'order-1 sm:order-2 sm:-translate-y-6 z-20',
   'order-3 sm:order-3 sm:translate-y-4',
 ] as const;
-
-export const INITIAL_VALUES: CountdownValues = {
-  days: '00',
-  hours: '00',
-  minutes: '00',
-  seconds: '00',
-};
 
 export const COMPETITION_RULES_CONSTANTS = {
   SECTION_TITLE: 'Competition Rules & Eligibility',

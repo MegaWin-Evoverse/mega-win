@@ -5,11 +5,6 @@ export const AUTO_BET_MODE = {
 
 export type AutoBetMode = (typeof AUTO_BET_MODE)[keyof typeof AUTO_BET_MODE];
 
-export const AUTO_BET_MODE_ITEMS = [
-  { value: AUTO_BET_MODE.RESET, label: AUTO_BET_MODE.RESET },
-  { value: AUTO_BET_MODE.INCREASE, label: AUTO_BET_MODE.INCREASE },
-] as const;
-
 export const AUTO_BET_LABELS = {
   ON_WIN: 'On Win',
   ON_LOSS: 'On Loss',

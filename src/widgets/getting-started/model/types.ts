@@ -1,11 +1,11 @@
-export type StepMediaVariant = 'degencity' | 'discord' | 'connect';
+type StepMediaVariant = 'degencity' | 'discord' | 'connect';
 
-export interface DescriptionSegment {
+interface DescriptionSegment {
   text: string;
   accent?: boolean;
 }
 
-export interface StepDecoration {
+interface StepDecoration {
   src: string;
   width: number;
   height: number;

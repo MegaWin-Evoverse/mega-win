@@ -10,7 +10,7 @@ export type IconName =
   | 'plinko'
   | 'dice';
 
-export interface SidebarSubItem {
+interface SidebarSubItem {
   label: string;
   href: string;
   iconName: IconName;

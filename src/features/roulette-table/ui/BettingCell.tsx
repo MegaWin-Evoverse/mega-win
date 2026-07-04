@@ -4,7 +4,7 @@ import type { PlacedBet } from '@/features/roulette-controls';
 import { playSound } from '@/shared/lib/playSound';
 import { ChipStack } from './ChipStack';
 
-export type BettingCellColor = 'red' | 'black' | 'green' | 'dark';
+type BettingCellColor = 'red' | 'black' | 'green' | 'dark';
 
 interface Props {
   label: string | number;

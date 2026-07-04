@@ -3,7 +3,7 @@ export const WHEEL_NUMBERS = [
   31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
 ];
 
-export const POCKET_COUNT = 37;
+const POCKET_COUNT = 37;
 export const POCKET_ANGLE_DEG = 360 / POCKET_COUNT;
 export const FULL_TURN_DEG = 360;
 
