@@ -7,6 +7,7 @@ import { PATHS, VERIFY_EMAIL_ERROR, VERIFY_EMAIL_FIELDS } from './constants';
 import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
+import { getApiErrorMessage } from '@/shared/lib/getApiErrorMessage';
 
 export function useVerifyEmail() {
   const verificationToken = useAuthStore((state) => state.verificationToken);
@@ -34,8 +35,8 @@ export function useVerifyEmail() {
     onSuccess: () => {
       clearVerificationToken();
     },
-    onError: () => {
-      toast.error(VERIFY_EMAIL_ERROR);
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error, VERIFY_EMAIL_ERROR));
     },
   });
 

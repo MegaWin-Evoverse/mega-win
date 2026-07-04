@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { signUpSchema } from './schema';
 import { useAuthStore } from './authStore';
 import { ERROR_MESSAGE, PATHS } from './constants';
 import { api } from '@/shared/api/client';
+import { getApiErrorMessage } from '@/shared/lib/getApiErrorMessage';
 import type { AuthResponse, SignUpSchema } from './types';
 
 export function useSignUp() {
@@ -42,9 +42,7 @@ export function useSignUp() {
       }
     },
     onError: (error) => {
-      if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error ?? ERROR_MESSAGE['sign-up']);
-      }
+      toast.error(getApiErrorMessage(error, ERROR_MESSAGE['sign-up']));
     },
   });
 
