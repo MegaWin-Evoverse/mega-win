@@ -1,3 +1,5 @@
+import { EXTERNAL_LINKS, ROUTES } from '@/shared/config';
+
 export interface CampaignCardData {
   id: string;
   variant: 'promoPurple' | 'promoRed';
@@ -8,6 +10,9 @@ export interface CampaignCardData {
   endTimeString: string;
   logoSrc?: string;
   bgImageSrc: string;
+  actionLabel: string;
+  actionHref: string;
+  isExternalAction: boolean;
 }
 
 export const CAMPAIGN_IDS = {
@@ -25,6 +30,11 @@ export const CAMPAIGN_CONSTANTS = {
   COLON_CHAR: ':',
 } as const;
 
+export const CAMPAIGN_ACTION_LABELS = {
+  PLAY_NOW: 'Play Now',
+  VIEW_LEADERBOARD: 'View Leaderboard',
+} as const;
+
 export const CAMPAIGN_CARDS: readonly CampaignCardData[] = [
   {
     id: CAMPAIGN_IDS.FORTUNE_BONUS,
@@ -35,6 +45,9 @@ export const CAMPAIGN_CARDS: readonly CampaignCardData[] = [
     useCodeLabel: 'Use code:',
     endTimeString: '2d : 15h : 35m',
     bgImageSrc: '/bonuses-cards/fortune-bg.webp',
+    actionLabel: CAMPAIGN_ACTION_LABELS.PLAY_NOW,
+    actionHref: EXTERNAL_LINKS.DEGENCITY,
+    isExternalAction: true,
   },
   {
     id: CAMPAIGN_IDS.MONTHLY_COMPETITION,
@@ -43,5 +56,8 @@ export const CAMPAIGN_CARDS: readonly CampaignCardData[] = [
     title: 'Competition',
     endTimeString: '2d : 15h : 35m',
     bgImageSrc: '/bonuses-cards/competition-bg.webp',
+    actionLabel: CAMPAIGN_ACTION_LABELS.VIEW_LEADERBOARD,
+    actionHref: ROUTES.LEADERBOARD,
+    isExternalAction: false,
   },
 ] as const;

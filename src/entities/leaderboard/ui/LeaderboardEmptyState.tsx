@@ -1,11 +1,11 @@
 import { cn } from '@/shared/lib/cn';
-import { LEADERBOARD_LABELS } from '../model/constants';
+import { PODIUM_LABELS } from '../model/constants';
 
 interface Props {
   className?: string;
 }
 
-export function EmptyState({ className }: Props) {
+export function LeaderboardEmptyState({ className }: Props) {
   return (
     <div
       className={cn(
@@ -14,10 +14,10 @@ export function EmptyState({ className }: Props) {
       )}
     >
       <h3 className="font-outfit font-bold text-xl sm:text-2xl text-brand-text-white mb-3">
-        {LEADERBOARD_LABELS.EMPTY_STATE_TITLE}
+        {PODIUM_LABELS.EMPTY_STATE_TITLE}
       </h3>
       <p className="font-outfit text-sm sm:text-base text-brand-text-light max-w-[400px]">
-        {LEADERBOARD_LABELS.EMPTY_STATE_MESSAGE}
+        {PODIUM_LABELS.EMPTY_STATE_MESSAGE}
       </p>
     </div>
   );

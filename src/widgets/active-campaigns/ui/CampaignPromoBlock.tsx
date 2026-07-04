@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { Clock, Copy, Check } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { CAMPAIGN_CONSTANTS } from '../model/constants';
@@ -11,6 +12,9 @@ interface Props {
   isFortuneBonus: boolean;
   isCopied: boolean;
   onCopy: () => Promise<void>;
+  actionLabel: string;
+  actionHref: string;
+  isExternalAction: boolean;
 }
 
 export function CampaignPromoBlock({
@@ -20,6 +24,9 @@ export function CampaignPromoBlock({
   isFortuneBonus,
   isCopied,
   onCopy,
+  actionLabel,
+  actionHref,
+  isExternalAction,
 }: Props) {
   return (
     <div className="flex flex-col items-start gap-3 w-full">
@@ -44,24 +51,43 @@ export function CampaignPromoBlock({
           </Button>
         </div>
       )}
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-brand-btn-gradient-to/50 rounded-lg backdrop-blur-sm">
-        <Clock className={cn('w-4 h-4', isFortuneBonus ? 'text-promo-purple' : 'text-promo-red')} />
-        <span className="font-outfit font-medium text-sm text-brand-text-light flex items-center gap-0.5">
-          {endTimeString.split(CAMPAIGN_CONSTANTS.SPLIT_DELIMITER).map((part, index) => {
-            if (part === CAMPAIGN_CONSTANTS.COLON_CHAR) {
+      <div className="flex items-center justify-between gap-3 w-full">
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-brand-btn-gradient-to/50 rounded-lg backdrop-blur-sm">
+          <Clock
+            className={cn('w-4 h-4', isFortuneBonus ? 'text-promo-purple' : 'text-promo-red')}
+          />
+          <span className="font-outfit font-medium text-sm text-brand-text-light flex items-center gap-0.5">
+            {endTimeString.split(CAMPAIGN_CONSTANTS.SPLIT_DELIMITER).map((part, index) => {
+              if (part === CAMPAIGN_CONSTANTS.COLON_CHAR) {
+                return (
+                  <span key={index} className="text-brand-text-muted font-semibold mx-0.5">
+                    {CAMPAIGN_CONSTANTS.COLON_CHAR}
+                  </span>
+                );
+              }
               return (
-                <span key={index} className="text-brand-text-muted font-semibold mx-0.5">
-                  {CAMPAIGN_CONSTANTS.COLON_CHAR}
+                <span key={index} className="text-brand-text-light">
+                  {part}
                 </span>
               );
-            }
-            return (
-              <span key={index} className="text-brand-text-light">
-                {part}
-              </span>
-            );
-          })}
-        </span>
+            })}
+          </span>
+        </div>
+        <Button
+          variant={isFortuneBonus ? 'promo-purple' : 'promo-red'}
+          size="none"
+          nativeButton={false}
+          className="h-10 px-5 text-sm"
+          render={
+            isExternalAction ? (
+              <a href={actionHref} target="_blank" rel="noopener noreferrer" />
+            ) : (
+              <Link href={actionHref} />
+            )
+          }
+        >
+          {actionLabel}
+        </Button>
       </div>
     </div>
   );

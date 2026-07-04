@@ -8,7 +8,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/80',
-        main: 'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
+        main: 'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark hover:brightness-120 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
         'main-stop':
           'bg-brand-red text-brand-text-white hover:brightness-105 active:brightness-95 font-outfit font-medium text-base leading-5 tracking-normal shadow-sm disabled:bg-none disabled:bg-btn-disabled-bg/50 disabled:text-brand-text-muted disabled:border-0 disabled:opacity-100 disabled:pointer-events-none',
         outline:
@@ -30,6 +30,10 @@ const buttonVariants = cva(
           'game-tab-active text-brand-text-white hover:brightness-110 active:brightness-95 border-0',
         neutral:
           'h-12 px-6 gap-2 bg-gradient-to-b from-auth-surface to-auth-surface-light border border-auth-surface font-outfit font-medium text-lg leading-6 text-brand-text-white hover:brightness-110 active:not-aria-[haspopup]:translate-y-px',
+        'promo-purple':
+          'bg-promo-purple text-brand-text-white hover:brightness-110 active:brightness-95 font-outfit font-semibold',
+        'promo-red':
+          'bg-promo-red text-brand-text-white hover:brightness-110 active:brightness-95 font-outfit font-semibold',
       },
       size: {
         default:

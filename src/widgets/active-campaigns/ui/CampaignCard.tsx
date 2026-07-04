@@ -22,6 +22,9 @@ export function CampaignCard({ card }: Props) {
     endTimeString,
     logoSrc,
     bgImageSrc,
+    actionLabel,
+    actionHref,
+    isExternalAction,
   } = card;
   const { handleCopy, isCopied } = useCampaignCard(promoCode);
 
@@ -56,6 +59,9 @@ export function CampaignCard({ card }: Props) {
           isFortuneBonus={isFortuneBonus}
           isCopied={isCopied}
           onCopy={handleCopy}
+          actionLabel={actionLabel}
+          actionHref={actionHref}
+          isExternalAction={isExternalAction}
         />
       </div>
       {logoSrc && <CampaignLogoBlock logoSrc={logoSrc} logoAlt={CAMPAIGN_CONSTANTS.LOGO_ALT} />}

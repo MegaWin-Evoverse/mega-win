@@ -12,6 +12,8 @@ interface StepDecoration {
   className: string;
 }
 
+export type StepAction = { type: 'external-link'; href: string } | { type: 'connect-account' };
+
 export interface StepCardData {
   id: string;
   mediaVariant: StepMediaVariant;
@@ -21,6 +23,6 @@ export interface StepCardData {
   promoCode?: string;
   promoNote?: string;
   buttonLabel: string;
-  href: string;
+  action: StepAction;
   decorations: readonly StepDecoration[];
 }

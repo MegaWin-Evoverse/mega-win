@@ -1,3 +1,4 @@
+import { EXTERNAL_LINKS } from '@/shared/config';
 import type { BetsSortKey, CryptoWalletKey, ProfileWindowTab } from './types';
 import { User as UserIcon, History, KeyRound, Link2 } from 'lucide-react';
 
@@ -94,17 +95,25 @@ export const SOCIAL_CONNECTIONS = [
     key: 'discord' as const,
     name: 'Discord',
     description: 'Connect Discord to unlock community features',
+    connectHref: EXTERNAL_LINKS.DISCORD,
   },
-  { key: 'kick' as const, name: 'Kick', description: 'Connect Kick to unlock community features' },
+  {
+    key: 'kick' as const,
+    name: 'Kick',
+    description: 'Connect Kick to unlock community features',
+    connectHref: EXTERNAL_LINKS.KICK,
+  },
   {
     key: 'google' as const,
     name: 'Google',
     description: 'Connect Google to unlock account sign-in options',
+    connectHref: EXTERNAL_LINKS.GOOGLE,
   },
   {
     key: 'steam' as const,
     name: 'Steam',
     description: 'Connect Steam to unlock account sign-in options',
+    connectHref: EXTERNAL_LINKS.STEAM,
   },
 ] as const;
 

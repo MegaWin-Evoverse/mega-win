@@ -11,13 +11,13 @@ import { Button } from '@/shared/ui/button';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { formatAmount } from '@/shared/lib/formatAmount';
 import { COIN_ICON } from '@/shared/config';
+import type { LeaderboardParticipant } from '@/entities/leaderboard';
 import {
   DEFAULT_AVATAR_SRC,
   INITIAL_VISIBLE_ROWS,
   LEADERBOARD_LABELS,
   LEADERBOARD_SIZES,
 } from '../model/constants';
-import type { LeaderboardParticipant } from '../model/types';
 
 interface Props {
   rows: LeaderboardParticipant[];
