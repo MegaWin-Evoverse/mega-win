@@ -4,10 +4,7 @@ import { Button } from '@/shared/ui/button';
 import { BUTTON_LABELS } from '@/shared/config';
 import { useIsMobile } from '@/shared/hooks/useIsMobile';
 import { useUserQuery } from '@/entities/user';
-
-interface Props {
-  onRegisterClick?: () => void;
-}
+import { useAuthStore } from '@/features/auth';
 
 const HERO_TITLE = 'WELCOME TO THE MEGA WIN';
 const HERO_DESCRIPTION = 'Discover exciting games, earn rewards, and enjoy exclusive bonuses!';
@@ -15,9 +12,10 @@ const HERO_DESCRIPTION = 'Discover exciting games, earn rewards, and enjoy exclu
 const ARIA_HERO_SECTION = 'Hero banner';
 const ARIA_REGISTER_BUTTON = 'Register for an account';
 
-export function Hero({ onRegisterClick }: Props) {
+export function Hero() {
   const { isMobile } = useIsMobile();
   const { data: user, isPending: isUserPending } = useUserQuery();
+  const openAuthForm = useAuthStore((state) => state.openAuthForm);
   const canShowRegisterButton = !user && !isUserPending;
   return (
     <section
@@ -38,7 +36,7 @@ export function Hero({ onRegisterClick }: Props) {
           <Button
             variant="main"
             size="none"
-            onClick={onRegisterClick}
+            onClick={() => openAuthForm('sign-up')}
             aria-label={ARIA_REGISTER_BUTTON}
             className="w-[140px] h-12 rounded-lg text-lg flex items-center justify-center font-outfit font-medium text-brand-dark"
           >
