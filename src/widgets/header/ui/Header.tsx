@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { XIcon } from 'lucide-react';
+import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { BurgerIcon } from '@/shared/ui/burger-icon';
 import { Logo } from '@/shared/ui/logo';
@@ -38,11 +39,25 @@ export function Header() {
             onClick={toggleSidebar}
             aria-label={ARIA_LABEL_MENU_BUTTON}
           >
-            {isSmallMobile && openMobile ? (
-              <XIcon className="w-6 h-6" />
-            ) : (
-              <BurgerIcon className="w-7 h-7" />
-            )}
+            <span className="relative flex items-center justify-center w-7 h-7">
+              <BurgerIcon
+                className={cn(
+                  'absolute w-7 h-7 transition-all duration-200 ease-out',
+                  isSmallMobile && openMobile
+                    ? 'rotate-90 scale-75 opacity-0'
+                    : 'rotate-0 scale-100 opacity-100'
+                )}
+              />
+              <XIcon
+                strokeWidth={3}
+                className={cn(
+                  'absolute w-6 h-6 transition-all duration-200 ease-out',
+                  isSmallMobile && openMobile
+                    ? 'rotate-0 scale-100 opacity-100'
+                    : '-rotate-90 scale-75 opacity-0'
+                )}
+              />
+            </span>
           </Button>
         ) : null}
         <Link href={ROUTES.HOME} aria-label={ARIA_LABEL_LOGO_LINK} className="flex shrink-0">
