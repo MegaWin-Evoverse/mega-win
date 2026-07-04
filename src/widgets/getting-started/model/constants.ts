@@ -86,7 +86,7 @@ export const GETTING_STARTED_STEPS: readonly StepCardData[] = [
     title: 'Connect your account',
     description: [
       { text: 'Link your Discord to your ' },
-      { text: 'thedoctor.net', accent: true },
+      { text: 'megawin.com', accent: true },
       { text: ' profile' },
     ],
     buttonLabel: 'Connect Account',

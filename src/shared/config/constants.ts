@@ -23,7 +23,7 @@ export const SOCIAL_LINKS = [
 ] as const;
 
 export const COPYRIGHT_TEXT =
-  'Copyright © 2025 www.thedoctor.com is owned and operated by Wild Technology Ltd. registration number: 3-102-898807 registered address: San Rafael,Edificio, Fuentecantos, San Jose, Costa Rica and is licensed and regulated by the Government of the Autonomous Island of Anjouan, Union of Comoros and operates under License No. ALSI-132405034-FI3';
+  'Copyright © 2025 www.megawin.com is owned and operated by Wild Technology Ltd. registration number: 3-102-898807 registered address: San Rafael,Edificio, Fuentecantos, San Jose, Costa Rica and is licensed and regulated by the Government of the Autonomous Island of Anjouan, Union of Comoros and operates under License No. ALSI-132405034-FI3';
 
 export const FOOTER_HEADERS = {
   ABOUT: 'ABOUT',

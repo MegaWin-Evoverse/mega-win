@@ -1,7 +1,7 @@
 import { TotalRewardsCounter } from './TotalRewardsCounter';
 
 const TITLE_TEXT = 'TOTAL REWARDS GIVEN BACK!';
-const SUBTITLE_TEXT = 'to The Doctors community!';
+const SUBTITLE_TEXT = 'to the Mega Win community!';
 const ARIA_REGION_LABEL = 'Total rewards summary';
 
 export function TotalRewards() {
