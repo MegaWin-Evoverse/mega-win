@@ -5,6 +5,7 @@ import { TooltipProvider } from '@/shared/ui/tooltip';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { useUserQuery } from '@/entities/user';
+import { QUERY_STALE_TIME_MS } from '@/shared/config';
 
 interface Props {
   children: ReactNode;
@@ -16,7 +17,7 @@ export function Providers({ children }: Props) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: Infinity,
+            staleTime: QUERY_STALE_TIME_MS,
             refetchOnWindowFocus: false,
           },
         },

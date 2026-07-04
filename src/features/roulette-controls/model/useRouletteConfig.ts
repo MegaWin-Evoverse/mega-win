@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/shared/api/client';
 import { ROULETTE_CONFIG_QUERY_KEYS } from '@/shared/api/query-keys';
+import { QUERY_STALE_TIME_MS } from '@/shared/config';
 
 const ROULETTE_CONFIG_PATH = '/api/games/house/roulette/config';
 
@@ -23,7 +24,7 @@ export function useRouletteConfig() {
   const { data } = useQuery({
     queryKey: ROULETTE_CONFIG_QUERY_KEYS.config,
     queryFn: fetchRouletteConfig,
-    staleTime: Infinity,
+    staleTime: QUERY_STALE_TIME_MS,
   });
 
   return {
