@@ -33,8 +33,6 @@ export function AuthForm() {
         <DialogDescription className="sr-only">Sign in or create an account</DialogDescription>
         {verificationToken ? (
           <VerifyEmailForm email={email} />
-        ) : isForgotPasswordOpen ? (
-          <ForgotPasswordForm />
         ) : (
           <div className="flex w-full overflow-hidden bg-bg-primary rounded-xl">
             <div className="relative hidden w-[420px] lg:flex flex-col items-center justify-start p-[40px] shrink-0 border-r border-auth-surface overflow-hidden">
@@ -67,22 +65,28 @@ export function AuthForm() {
               >
                 <X className="size-[20px]" />
               </Button>
-              <div className="w-full">
-                <SegmentedTabs
-                  items={AUTH_TABS}
-                  value={activeTab}
-                  onValueChange={setActiveTab}
-                  className="mb-[20px] h-[60px] bg-auth-bg p-[8px]"
-                />
-                <div
-                  key={activeTab}
-                  className="w-full animate-in fade-in zoom-in-95 duration-300 ease-out"
-                >
-                  {activeTab === 'sign-in' && <SignInFormBody />}
-                  {activeTab === 'sign-up' && <SignUpFormBody />}
-                </div>
-              </div>
-              <SocialAuthButtons />
+              {isForgotPasswordOpen ? (
+                <ForgotPasswordForm />
+              ) : (
+                <>
+                  <div className="w-full">
+                    <SegmentedTabs
+                      items={AUTH_TABS}
+                      value={activeTab}
+                      onValueChange={setActiveTab}
+                      className="mb-[20px] h-[60px] bg-auth-bg p-[8px]"
+                    />
+                    <div
+                      key={activeTab}
+                      className="w-full animate-in fade-in zoom-in-95 duration-300 ease-out"
+                    >
+                      {activeTab === 'sign-in' && <SignInFormBody />}
+                      {activeTab === 'sign-up' && <SignUpFormBody />}
+                    </div>
+                  </div>
+                  <SocialAuthButtons />
+                </>
+              )}
             </div>
           </div>
         )}

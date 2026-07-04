@@ -1,5 +1,4 @@
 'use client';
-import { X } from 'lucide-react';
 import { useAuthStore } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
@@ -14,22 +13,11 @@ import {
 } from '../model/constants';
 
 export function ForgotPasswordForm() {
-  const closeAuthForm = useAuthStore((state) => state.closeAuthForm);
   const closeForgotPassword = useAuthStore((state) => state.closeForgotPassword);
   const { errors, register, onSubmit, isPending, isSuccess } = useForgotPassword();
 
   return (
-    <div className="relative flex w-full flex-col bg-bg-primary rounded-xl p-[24px] sm:p-[40px]">
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        onClick={closeAuthForm}
-        className="absolute right-[20px] top-[20px] size-[20px] text-auth-text-secondary hover:bg-transparent hover:text-auth-text z-20"
-        aria-label="Close form"
-      >
-        <X className="size-[20px]" />
-      </Button>
+    <div className="w-full">
       <Button
         type="button"
         variant="ghost"

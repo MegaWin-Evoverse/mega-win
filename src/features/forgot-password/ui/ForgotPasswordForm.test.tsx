@@ -9,7 +9,6 @@ jest.mock('../api/forgotPasswordApi', () => ({ forgotPasswordApi: jest.fn() }));
 
 const mockUseAuthStore = useAuthStore as unknown as jest.Mock;
 const mockForgotPasswordApi = forgotPasswordApi as jest.Mock;
-const mockCloseAuthForm = jest.fn();
 const mockCloseForgotPassword = jest.fn();
 
 function renderForgotPasswordForm() {
@@ -24,9 +23,8 @@ function renderForgotPasswordForm() {
 describe('ForgotPasswordForm', () => {
   beforeEach(() => {
     mockUseAuthStore.mockImplementation((selector) =>
-      selector({ closeAuthForm: mockCloseAuthForm, closeForgotPassword: mockCloseForgotPassword })
+      selector({ closeForgotPassword: mockCloseForgotPassword })
     );
-    mockCloseAuthForm.mockReset();
     mockCloseForgotPassword.mockReset();
     mockForgotPasswordApi.mockReset();
   });
