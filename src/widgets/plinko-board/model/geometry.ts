@@ -1,6 +1,6 @@
 import { BOARD } from './constants';
 
-export interface Point {
+interface Point {
   x: number;
   y: number;
 }

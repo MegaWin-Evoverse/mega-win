@@ -10,7 +10,14 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettierConfig,
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', '.worktrees/**']),
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    '.worktrees/**',
+    '.claude/worktrees/**',
+  ]),
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {

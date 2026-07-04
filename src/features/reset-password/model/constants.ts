@@ -5,8 +5,6 @@ export const RESET_PASSWORD_DESC =
 
 export const RESET_PASSWORD_BTN = 'Reset Password';
 
-export const OPEN_RESET_PASSWORD_LABEL = 'Reset Password';
-
 export const TOAST_SUCCESS = 'Password updated successfully';
 export const TOAST_ERROR = 'Failed to reset password. Check your current password.';
 

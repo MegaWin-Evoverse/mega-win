@@ -3,11 +3,9 @@ import type { CellState } from './types';
 
 export const KENO_BET_ENDPOINT = '/api/games/house/keno/bet';
 
-export const TOTAL_NUMBERS = 40;
-export const DRAWN_COUNT = 20;
+const TOTAL_NUMBERS = 40;
 export const MAX_PICKS = 10;
 export const MIN_PICKS = 1;
-export const DEFAULT_BET = 100;
 export const MULTIPLIER_DECIMALS = 2;
 export const BET_DECIMALS = 2;
 export const REVEAL_DELAY_MS = 80;

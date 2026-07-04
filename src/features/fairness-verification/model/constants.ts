@@ -27,7 +27,7 @@ export const DEFAULT_VERIFY_RISK = RISK.LOW;
 
 export const LOADING_PLACEHOLDER = 'Loading...';
 
-export const KENO_VERIFY_TOTAL = 40;
+const KENO_VERIFY_TOTAL = 40;
 
 export const KENO_VERIFY_NUMBERS = Array.from({ length: KENO_VERIFY_TOTAL }, (_, i) => i + 1);
 

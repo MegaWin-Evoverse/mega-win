@@ -23,7 +23,7 @@ export function CampaignCard({ card }: Props) {
     logoSrc,
     bgImageSrc,
   } = card;
-  const { handleCopy } = useCampaignCard(promoCode);
+  const { handleCopy, isCopied } = useCampaignCard(promoCode);
 
   const isFortuneBonus = id === CAMPAIGN_IDS.FORTUNE_BONUS;
 
@@ -54,6 +54,7 @@ export function CampaignCard({ card }: Props) {
           useCodeLabel={useCodeLabel}
           endTimeString={endTimeString}
           isFortuneBonus={isFortuneBonus}
+          isCopied={isCopied}
           onCopy={handleCopy}
         />
       </div>

@@ -8,6 +8,7 @@ import type { VerifyEmailSchema } from './types';
 import { toast } from 'sonner';
 import { api } from '@/shared/api/client';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
+import { getApiErrorMessage } from '@/shared/lib/getApiErrorMessage';
 
 export function useVerifyEmail() {
   const queryClient = useQueryClient();
@@ -40,8 +41,8 @@ export function useVerifyEmail() {
       toast.success(SUCCESS_MESSAGE['verify-email']);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
     },
-    onError: () => {
-      toast.error(VERIFY_EMAIL_ERROR);
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error, VERIFY_EMAIL_ERROR));
     },
   });
 

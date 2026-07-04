@@ -66,7 +66,8 @@ export function ProfileTab({ user }: Props) {
               onChange={(e) => onUsernameChange(e.target.value)}
               onBlur={onUsernameBlur}
               onKeyDown={(e) => e.key === 'Enter' && onUsernameBlur()}
-              className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pr-9 transition-colors duration-200 focus-visible:border-button-brand-bg-dark focus-visible:ring-0 read-only:cursor-default read-only:focus-visible:border-auth-surface"
+              variant="brand"
+              className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pr-9 read-only:cursor-default read-only:focus-visible:border-auth-surface"
             />
             <Button
               variant="ghost"

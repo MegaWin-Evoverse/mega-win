@@ -23,7 +23,8 @@ export function PasswordField({ id, placeholder, error, registration }: Props) {
           id={id}
           type={isVisible ? 'text' : 'password'}
           placeholder={placeholder}
-          className="h-9 sm:h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pr-10 text-sm focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-9 sm:h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pr-10 text-sm"
           {...registration}
         />
         <Button

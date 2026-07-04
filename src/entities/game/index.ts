@@ -14,7 +14,6 @@ export {
   CHIP_STRIPES,
   getChipStripe,
   GAME_CONTROLS_DEFAULTS,
-  MULTIPLIER_TIER,
   type MultiplierTier,
   TIER_BG_CLASS,
 } from './model/constants';

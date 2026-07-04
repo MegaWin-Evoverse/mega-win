@@ -1,5 +1,5 @@
 'use client';
-import { Clock, Copy } from 'lucide-react';
+import { Clock, Copy, Check } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { CAMPAIGN_CONSTANTS } from '../model/constants';
 import { cn } from '@/shared/lib/cn';
@@ -9,6 +9,7 @@ interface Props {
   useCodeLabel?: string;
   endTimeString: string;
   isFortuneBonus: boolean;
+  isCopied: boolean;
   onCopy: () => Promise<void>;
 }
 
@@ -17,6 +18,7 @@ export function CampaignPromoBlock({
   useCodeLabel,
   endTimeString,
   isFortuneBonus,
+  isCopied,
   onCopy,
 }: Props) {
   return (
@@ -34,7 +36,11 @@ export function CampaignPromoBlock({
             className="flex items-center gap-1 font-outfit font-semibold text-base text-promo-purple hover:opacity-85 cursor-pointer"
           >
             <span>{promoCode}</span>
-            <Copy className="w-4 h-4 text-promo-purple" />
+            {isCopied ? (
+              <Check className="w-4 h-4 text-brand-green-to" />
+            ) : (
+              <Copy className="w-4 h-4 text-promo-purple" />
+            )}
           </Button>
         </div>
       )}

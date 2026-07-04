@@ -27,38 +27,38 @@ export interface HistoryEntry {
   position: number;
 }
 
-export interface StraightValue {
+interface StraightValue {
   straightNumber: number;
   amount: string;
 }
 
-export interface HalfValue {
+interface HalfValue {
   half: string;
   amount: string;
 }
 
-export interface ParityValue {
+interface ParityValue {
   parity: string;
   amount: string;
 }
 
-export interface ColorValue {
+interface ColorValue {
   color: string;
   amount: string;
 }
 
-export interface ColumnValue {
+interface ColumnValue {
   column: string;
   amount: string;
 }
 
-export interface DozenValue {
+interface DozenValue {
   dozen: string;
   amount: string;
 }
 
 // Bet types the backend accepts but the table UI does not yet place — always sent empty.
-export interface UnsupportedBetValue {
+interface UnsupportedBetValue {
   amount: string;
 }
 

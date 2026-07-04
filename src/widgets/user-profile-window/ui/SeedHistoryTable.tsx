@@ -1,7 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { DataTable, DATA_TABLE_ROW_CLASS } from '@/shared/ui/data-table';
 import { TableCell, TableRow } from '@/shared/ui/table';
+import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard';
 import {
   CELL_CLASS,
   HEAD_CLASS,
@@ -17,17 +18,14 @@ interface Props {
 }
 
 export function SeedHistoryTable({ seeds }: Props) {
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const { copiedKey, copy } = useCopyToClipboard({ resetMs: SEED_COPY_RESET_MS });
 
-  async function handleCopy(value: string, key: string) {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopiedKey(key);
-      setTimeout(() => setCopiedKey(null), SEED_COPY_RESET_MS);
-    } catch (error) {
-      console.error('Failed to copy seed to clipboard:', error);
-    }
-  }
+  const handleCopy = useCallback(
+    async (value: string, key: string) => {
+      await copy(value, key);
+    },
+    [copy]
+  );
 
   return (
     <DataTable

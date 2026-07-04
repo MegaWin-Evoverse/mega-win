@@ -1,3 +1,4 @@
+import { QUERY_STALE_TIME_MS } from '@/shared/config';
 import type { Path } from './types';
 
 export const TAB_LABELS: Record<Path, string> = {
@@ -8,12 +9,11 @@ export const TAB_LABELS: Record<Path, string> = {
 } as const;
 
 export const TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky', 'my'];
-export const LIVE_TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky'];
 
 export const BETS_STORY_LIVE_TITLE = 'Bet Live';
 export const BETS_STORY_EMPTY_MESSAGE = 'No bets yet';
 
-export const BETS_STORY_STALE_TIME = 0;
+export const BETS_STORY_STALE_TIME = QUERY_STALE_TIME_MS;
 
 export const COLUMN_HEADERS = {
   USER: 'User',

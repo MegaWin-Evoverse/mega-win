@@ -4,8 +4,6 @@ export const GETTING_STARTED_CONSTANTS = {
   SECTION_TITLE: 'How to get started?',
   SECTION_ARIA_LABEL: 'How to get started',
   COPY_ICON_ALT: 'Copy promo code to clipboard',
-  TOAST_COPY_SUCCESS: 'Promo code copied successfully!',
-  TOAST_COPY_ERROR: 'Failed to copy promo code.',
   DECORATION_ALT: '',
 } as const;
 

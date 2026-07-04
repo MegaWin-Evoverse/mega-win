@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
+import { getApiErrorMessage } from '@/shared/lib/getApiErrorMessage';
 import { signInSchema } from './schema';
 import { useAuthStore } from './authStore';
 import { ERROR_MESSAGE, PATHS, SUCCESS_MESSAGE } from './constants';
@@ -40,9 +40,7 @@ export function useSignIn() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
     },
     onError: (error) => {
-      if (isAxiosError(error)) {
-        toast.error(error.response?.data?.error ?? ERROR_MESSAGE['sign-in']);
-      }
+      toast.error(getApiErrorMessage(error, ERROR_MESSAGE['sign-in']));
     },
   });
 

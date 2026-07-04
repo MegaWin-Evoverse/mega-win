@@ -23,7 +23,11 @@ export function SeedHistoryCell({ seed, copyKey, copiedKey, ariaLabel, onCopy }:
           onClick={() => onCopy(seed, copyKey)}
           className="shrink-0 p-0.5 text-muted-foreground hover:text-foreground"
         >
-          {copiedKey === copyKey ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+          {copiedKey === copyKey ? (
+            <Check className="size-3.5 text-brand-green-to" />
+          ) : (
+            <Copy className="size-3.5" />
+          )}
         </Button>
       </div>
     </TableCell>

@@ -18,7 +18,7 @@ function pegGlowKey(row: number, col: number): string {
   return `${row}-${col}`;
 }
 
-export function drawPegBounce(
+function drawPegBounce(
   ctx: CanvasRenderingContext2D,
   layout: BoardLayout,
   x: number,
@@ -65,7 +65,7 @@ export function drawPegs(
   ctx.shadowBlur = 0;
 }
 
-export function drawBallTrail(
+function drawBallTrail(
   ctx: CanvasRenderingContext2D,
   layout: BoardLayout,
   x: number,

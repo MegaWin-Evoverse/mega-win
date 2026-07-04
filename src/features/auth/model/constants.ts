@@ -1,3 +1,5 @@
+export const AUTH_TAB_DEFAULT = 'sign-in' as const;
+
 export const PATHS = {
   'sign-up': '/api/auth/register',
   'sign-in': '/api/auth/login',
