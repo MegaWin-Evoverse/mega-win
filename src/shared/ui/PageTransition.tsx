@@ -21,7 +21,7 @@ export function PageTransition({ children }: Props) {
 }
 
 function TransitionShell({ children }: Props) {
-  const [isIntroDone, setIsIntroDone] = useState(false);
+  const [isIntroDone, setIsIntroDone] = useState<boolean>(false);
 
   return (
     <div className="flex-1 flex flex-col">
