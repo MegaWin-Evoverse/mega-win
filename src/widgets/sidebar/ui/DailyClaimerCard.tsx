@@ -20,7 +20,7 @@ export function DailyClaimerCard({
   onAction,
 }: Props) {
   return (
-    <Card className="daily-claimer-card relative h-[124px] w-[195px] flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] py-0 ring-0">
+    <Card className="daily-claimer-card relative h-[124px] w-full flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] py-0 ring-0 sm:w-[195px]">
       <Image
         src="/daily-claimer-bg.webp"
         fill
