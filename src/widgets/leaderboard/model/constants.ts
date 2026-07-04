@@ -22,6 +22,8 @@ export const LEADERBOARD_LABELS = {
   COUNTDOWN_M: 'M',
   COUNTDOWN_S: 'S',
   NO_PRIZE: '—',
+  EMPTY_STATE_TITLE: 'No participants yet',
+  EMPTY_STATE_MESSAGE: 'Be the first to join the competition and claim the top spot!',
 } as const;
 
 export const PODIUM_ORDER = [2, 1, 3] as const;
@@ -59,6 +61,10 @@ export const INITIAL_VISIBLE_ROWS = 10;
 export const ROWS_PER_LOAD = 10;
 
 export const TOP_3_THRESHOLD = 3;
+
+export const PODIUM_SKELETON_COUNT = 3;
+
+export const COUNTDOWN_PLACEHOLDER = '00';
 
 export const COUNTDOWN_UNITS = [
   { key: 'days', label: LEADERBOARD_LABELS.COUNTDOWN_D },
