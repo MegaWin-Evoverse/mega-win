@@ -20,24 +20,19 @@ export function DailyClaimerCard({
   onAction,
 }: Props) {
   return (
-    <Card className="daily-claimer-card relative h-[124px] w-[195px] flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] bg-daily-claimer-bg py-0 ring-0">
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-[115px] h-[43px] w-[318px] -translate-x-1/2 bg-daily-claimer-glow blur-[69px]"
-      />
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 h-7 w-[calc(100%+7px)] bg-gradient-to-t from-daily-claimer-overlay to-transparent"
-      />
+    <Card className="daily-claimer-card relative h-[124px] w-[195px] flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] py-0 ring-0">
       <Image
-        src="/daily-claimer-chest.webp"
-        width={111}
-        height={118}
+        src="/daily-claimer-bg.webp"
+        fill
         alt=""
         aria-hidden
         unoptimized
         priority
-        className="absolute -bottom-[9px] -right-[29px]"
+        className="object-cover"
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 h-7 w-[calc(100%+7px)] bg-gradient-to-t from-daily-claimer-overlay to-transparent"
       />
       <p className="absolute left-3 top-3 w-[100px] font-outfit text-base font-semibold leading-5 text-brand-text-white">
         DAILY CLAIMER!
