@@ -1,3 +1,4 @@
+import { EXTERNAL_LINKS } from '@/shared/config';
 import type { StepCardData } from './types';
 
 export const GETTING_STARTED_CONSTANTS = {
@@ -5,6 +6,11 @@ export const GETTING_STARTED_CONSTANTS = {
   SECTION_ARIA_LABEL: 'How to get started',
   COPY_ICON_ALT: 'Copy promo code to clipboard',
   DECORATION_ALT: '',
+} as const;
+
+export const STEP_ACTION_TYPE = {
+  EXTERNAL_LINK: 'external-link',
+  CONNECT_ACCOUNT: 'connect-account',
 } as const;
 
 export const GETTING_STARTED_STEPS: readonly StepCardData[] = [
@@ -16,7 +22,7 @@ export const GETTING_STARTED_STEPS: readonly StepCardData[] = [
     promoCode: 'MEGAWIN',
     promoNote: 'Please clear your browser cache and/or cookies before creating your account.',
     buttonLabel: 'Register',
-    href: '#',
+    action: { type: STEP_ACTION_TYPE.EXTERNAL_LINK, href: EXTERNAL_LINKS.DEGENCITY },
     decorations: [
       {
         src: '/getting-started/degencity-art.svg',
@@ -50,7 +56,7 @@ export const GETTING_STARTED_STEPS: readonly StepCardData[] = [
       { text: 'Announcements', accent: true },
     ],
     buttonLabel: 'Join Discord',
-    href: '#',
+    action: { type: STEP_ACTION_TYPE.EXTERNAL_LINK, href: EXTERNAL_LINKS.DISCORD },
     decorations: [
       {
         src: '/getting-started/discord-home.webp',
@@ -90,7 +96,7 @@ export const GETTING_STARTED_STEPS: readonly StepCardData[] = [
       { text: ' profile' },
     ],
     buttonLabel: 'Connect Account',
-    href: '#',
+    action: { type: STEP_ACTION_TYPE.CONNECT_ACCOUNT },
     decorations: [
       {
         src: '/getting-started/connect-art-1.svg',

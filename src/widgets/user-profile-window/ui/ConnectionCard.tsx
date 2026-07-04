@@ -9,9 +9,10 @@ interface Props {
   iconKey: SocialConnectionKey;
   name: string;
   description: string;
+  connectHref: string;
 }
 
-export function ConnectionCard({ iconKey, name, description }: Props) {
+export function ConnectionCard({ iconKey, name, description, connectHref }: Props) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-xl bg-page-bg p-4">
       <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -26,7 +27,13 @@ export function ConnectionCard({ iconKey, name, description }: Props) {
           <span className="text-xs text-text-secondary">{description}</span>
         </div>
       </div>
-      <Button variant="tab-active" size="sm" className="w-full sm:w-auto sm:shrink-0 px-5">
+      <Button
+        variant="tab-active"
+        size="sm"
+        nativeButton={false}
+        render={<a href={connectHref} target="_blank" rel="noopener noreferrer" />}
+        className="w-full sm:w-auto sm:shrink-0 px-5"
+      >
         {CONNECTION_CONNECT_LABEL}
       </Button>
     </div>

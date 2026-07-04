@@ -9,10 +9,8 @@ import {
   PODIUM_ROCKET_SRC,
   LEADERBOARD_DECOR_SIZES,
 } from '../model/constants';
+import { Podium, PodiumSkeleton, LeaderboardEmptyState } from '@/entities/leaderboard';
 import { useLeaderboard } from '../model/useLeaderboard';
-import { Podium } from './Podium';
-import { PodiumSkeleton } from './PodiumSkeleton';
-import { EmptyState } from './EmptyState';
 import { Countdown } from './Countdown';
 import { Table } from './Table';
 import { CompetitionRules } from './CompetitionRules';
@@ -83,7 +81,7 @@ export function Leaderboard({ className }: Props) {
         ) : top3.length > 0 ? (
           <Podium top3={top3} />
         ) : (
-          <EmptyState className="max-w-[800px] z-10 relative" />
+          <LeaderboardEmptyState className="max-w-[800px] z-10 relative" />
         )}
         <div className="flex flex-col items-center gap-4 sm:gap-6 z-10 relative mt-8 sm:mt-12 xl:mt-16 w-full">
           <Countdown endDate={endDate} />

@@ -20,6 +20,7 @@ export function ConnectionsTab() {
                 iconKey={provider.key}
                 name={provider.name}
                 description={provider.description}
+                connectHref={provider.connectHref}
               />
             ))}
           </div>

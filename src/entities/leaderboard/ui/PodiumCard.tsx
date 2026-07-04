@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { cn } from '@/shared/lib/cn';
 import { formatAmount } from '@/shared/lib/formatAmount';
 import {
-  LEADERBOARD_LABELS,
-  LEADERBOARD_SIZES,
+  PODIUM_LABELS,
+  PODIUM_SIZES,
   PODIUM_AVATAR_SRC,
   PODIUM_RANK_ICON_SRC,
   PODIUM_CHAMP_ICON_SRC,
@@ -34,8 +34,8 @@ export function PodiumCard({ participant, className }: Props) {
           <Image
             src={PODIUM_AVATAR_SRC[pos]}
             alt={username}
-            width={LEADERBOARD_SIZES.AVATAR}
-            height={LEADERBOARD_SIZES.AVATAR}
+            width={PODIUM_SIZES.AVATAR}
+            height={PODIUM_SIZES.AVATAR}
             className="rounded-full object-cover w-full h-full"
             priority
           />
@@ -44,8 +44,8 @@ export function PodiumCard({ participant, className }: Props) {
           <Image
             src={PODIUM_RANK_ICON_SRC[pos]}
             alt={`Rank ${pos}`}
-            width={LEADERBOARD_SIZES.RANK_ICON}
-            height={LEADERBOARD_SIZES.RANK_ICON}
+            width={PODIUM_SIZES.RANK_ICON}
+            height={PODIUM_SIZES.RANK_ICON}
             className="object-contain"
             priority
           />
@@ -56,7 +56,7 @@ export function PodiumCard({ participant, className }: Props) {
       </h4>
       <div className="flex flex-col items-center gap-1 w-full">
         <span className="font-outfit font-light text-sm text-brand-text-light uppercase tracking-wider">
-          {LEADERBOARD_LABELS.WAGERED}
+          {PODIUM_LABELS.WAGERED}
         </span>
         <div className="flex items-center justify-center gap-1.5">
           <span className="w-5 h-5 rounded-full bg-leaderboard-dollar text-brand-text-white flex items-center justify-center font-bold text-xs select-none">
@@ -72,8 +72,8 @@ export function PodiumCard({ participant, className }: Props) {
           <Image
             src={PODIUM_CHAMP_ICON_SRC[pos]}
             alt="Prize trophy"
-            width={LEADERBOARD_SIZES.CHAMP_ICON}
-            height={LEADERBOARD_SIZES.CHAMP_ICON}
+            width={PODIUM_SIZES.CHAMP_ICON}
+            height={PODIUM_SIZES.CHAMP_ICON}
             className="object-contain"
             priority
           />

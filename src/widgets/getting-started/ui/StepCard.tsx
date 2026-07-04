@@ -1,16 +1,19 @@
 'use client';
-import Link from 'next/link';
 import { Copy, Check } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import type { StepCardData } from '../model/types';
-import { GETTING_STARTED_CONSTANTS } from '../model/constants';
+import { GETTING_STARTED_CONSTANTS, STEP_ACTION_TYPE } from '../model/constants';
 import { useCopyPromoCode } from '../model/useCopyPromoCode';
+import { useConnectAccountAction } from '../model/useConnectAccountAction';
 import { StepCardMedia } from './StepCardMedia';
 
 interface Props {
   card: StepCardData;
 }
+
+const STEP_BUTTON_CLASS =
+  'flex h-12 w-full items-center justify-center rounded-lg font-outfit text-lg font-medium';
 
 export function StepCard({ card }: Props) {
   const {
@@ -21,10 +24,11 @@ export function StepCard({ card }: Props) {
     promoCode,
     promoNote,
     buttonLabel,
-    href,
+    action,
     decorations,
   } = card;
   const { handleCopy, isCopied } = useCopyPromoCode(promoCode);
+  const { onConnectAccount } = useConnectAccountAction();
 
   return (
     <Card variant="gettingStarted" className="min-w-[285px] w-full flex-1">
@@ -60,15 +64,26 @@ export function StepCard({ card }: Props) {
             </p>
           )}
         </div>
-        <Button
-          variant="main"
-          size="none"
-          nativeButton={false}
-          render={<Link href={href} />}
-          className="flex h-12 w-full items-center justify-center rounded-lg font-outfit text-lg font-medium"
-        >
-          {buttonLabel}
-        </Button>
+        {action.type === STEP_ACTION_TYPE.EXTERNAL_LINK ? (
+          <Button
+            variant="main"
+            size="none"
+            nativeButton={false}
+            render={<a href={action.href} target="_blank" rel="noopener noreferrer" />}
+            className={STEP_BUTTON_CLASS}
+          >
+            {buttonLabel}
+          </Button>
+        ) : (
+          <Button
+            variant="main"
+            size="none"
+            onClick={onConnectAccount}
+            className={STEP_BUTTON_CLASS}
+          >
+            {buttonLabel}
+          </Button>
+        )}
       </div>
     </Card>
   );
