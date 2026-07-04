@@ -22,6 +22,8 @@ export const LEADERBOARD_LABELS = {
   COUNTDOWN_M: 'M',
   COUNTDOWN_S: 'S',
   NO_PRIZE: '—',
+  EMPTY_STATE_TITLE: 'No participants yet',
+  EMPTY_STATE_MESSAGE: 'Be the first to join the competition and claim the top spot!',
 } as const;
 
 export const PODIUM_ORDER = [2, 1, 3] as const;
