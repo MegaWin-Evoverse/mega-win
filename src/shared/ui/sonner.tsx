@@ -12,6 +12,7 @@ import {
 const Toaster = ({ ...props }: ToasterProps) => (
   <Sonner
     className="toaster group"
+    richColors
     icons={{
       success: <CircleCheckIcon className="size-5" />,
       info: <InfoIcon className="size-5" />,
@@ -20,18 +21,10 @@ const Toaster = ({ ...props }: ToasterProps) => (
       loading: <Loader2Icon className="size-5 animate-spin" />,
     }}
     toastOptions={{
-      unstyled: true,
       classNames: {
-        toast:
-          'flex items-center gap-3 w-full rounded-xl border p-4 text-base font-outfit font-medium shadow-lg',
-        default: 'bg-popover text-popover-foreground border-border',
-        success:
-          'bg-gradient-to-b from-brand-green-from to-brand-green-to text-brand-dark border-transparent',
-        error: 'bg-destructive text-brand-text-white border-transparent',
-        warning: 'bg-popover text-popover-foreground border-border',
-        info: 'bg-popover text-popover-foreground border-border',
-        title: 'font-semibold',
-        description: 'opacity-90 text-sm',
+        toast: '!p-4 !gap-3 !text-base !font-outfit !font-medium !shadow-lg',
+        title: '!font-semibold',
+        description: '!opacity-90 !text-sm',
       },
     }}
     style={
@@ -40,6 +33,12 @@ const Toaster = ({ ...props }: ToasterProps) => (
         '--normal-text': 'var(--popover-foreground)',
         '--normal-border': 'var(--border)',
         '--border-radius': 'var(--radius-xl)',
+        '--success-bg': 'linear-gradient(180deg, var(--brand-green-from), var(--brand-green-to))',
+        '--success-text': 'var(--brand-dark)',
+        '--success-border': 'transparent',
+        '--error-bg': 'var(--destructive)',
+        '--error-text': 'var(--brand-text-white)',
+        '--error-border': 'transparent',
       } as CSSProperties
     }
     {...props}
