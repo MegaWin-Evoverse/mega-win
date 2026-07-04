@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useAuthStore } from '@/features/auth';
+import { ForgotPasswordForm } from '@/features/forgot-password';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Button } from '@/shared/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/shared/ui/dialog';
@@ -18,6 +19,7 @@ export function AuthForm() {
   const [activeTab, setActiveTab] = useState<AuthTab>('sign-in');
   const isAuthFormOpen = useAuthStore((state) => state.isAuthFormOpen);
   const verificationToken = useAuthStore((state) => state.verificationToken);
+  const isForgotPasswordOpen = useAuthStore((state) => state.isForgotPasswordOpen);
   const email = useAuthStore((state) => state.email);
   const closeAuthForm = useAuthStore((state) => state.closeAuthForm);
 
@@ -31,6 +33,8 @@ export function AuthForm() {
         <DialogDescription className="sr-only">Sign in or create an account</DialogDescription>
         {verificationToken ? (
           <VerifyEmailForm email={email} />
+        ) : isForgotPasswordOpen ? (
+          <ForgotPasswordForm />
         ) : (
           <div className="flex w-full overflow-hidden bg-bg-primary rounded-xl">
             <div className="relative hidden w-[420px] lg:flex flex-col items-center justify-start p-[40px] shrink-0 border-r border-auth-surface overflow-hidden">
