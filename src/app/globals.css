@@ -98,8 +98,6 @@
   --color-bg-primary: var(--bg-primary);
   --color-bg-primary-hover: var(--bg-primary-hover);
   --color-border-default: var(--border-default);
-  --color-daily-claimer-bg: var(--daily-claimer-bg);
-  --color-daily-claimer-glow: var(--daily-claimer-glow);
   --color-daily-claimer-overlay: var(--daily-claimer-overlay-from);
   --color-text-brand: var(--text-brand);
   --color-text-secondary: var(--text-secondary);
@@ -180,10 +178,8 @@
   --brand-red: oklch(0.577 0.245 27.325);
   --text-brand: var(--brand-green-to);
   --text-secondary: var(--brand-text-light);
-  --daily-claimer-bg: #09110e;
   --daily-claimer-shadow-color: #08923a;
   --daily-claimer-inset-light: rgba(211, 255, 243, 0.1);
-  --daily-claimer-glow: #1dba4b;
   --daily-claimer-overlay-from: #0e3c1e;
   --total-rewards-glow: #040f06;
   --feature-overlay: #131517;

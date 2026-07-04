@@ -179,7 +179,7 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
 }) {
-  const { isMobile, isTablet, state, openMobile, setOpenMobile } = useSidebar();
+  const { isSmallMobile, isMobile, isTablet, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === 'none') {
     return (
@@ -204,7 +204,13 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="data-[side=left]:w-(--sidebar-width) data-[side=right]:w-(--sidebar-width) data-[side=left]:sm:max-w-(--sidebar-width) data-[side=right]:sm:max-w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          overlayClassName="top-16"
+          className={cn(
+            'bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden data-[side=left]:top-16 data-[side=left]:bottom-0 data-[side=left]:h-auto data-[side=right]:top-16 data-[side=right]:bottom-0 data-[side=right]:h-auto',
+            isSmallMobile
+              ? 'data-[side=left]:w-full data-[side=right]:w-full'
+              : 'data-[side=left]:w-(--sidebar-width) data-[side=right]:w-(--sidebar-width) data-[side=left]:sm:max-w-(--sidebar-width) data-[side=right]:sm:max-w-(--sidebar-width)'
+          )}
           side={side}
         >
           <SheetHeader className="sr-only">

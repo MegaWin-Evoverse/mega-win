@@ -15,7 +15,7 @@ import { SidebarFooterSection } from './SidebarFooterSection';
 type Props = ComponentProps<typeof BaseSidebar>;
 
 export function Sidebar({ className, children, collapsible = 'icon', ...props }: Props) {
-  const { state } = useSidebar();
+  const { state, isSmallMobile } = useSidebar();
   const isCollapsed = state === 'collapsed';
 
   return (
@@ -27,7 +27,7 @@ export function Sidebar({ className, children, collapsible = 'icon', ...props }:
       )}
       {...props}
     >
-      <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />
+      {!isSmallMobile && <SidebarTrigger className="absolute left-full top-6 ml-2 z-50" />}
       <SidebarContent>
         <SidebarHeaderSection />
         <SidebarMenuSection isCollapsed={isCollapsed} />
