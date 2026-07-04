@@ -37,7 +37,10 @@ export function HistoryFilter({ activeGame, onGameChange }: Props) {
             if (value) onGameChange(value);
           }}
         >
-          <SelectTrigger className="data-[size=default]:h-[42px] w-full rounded-[8px] border-auth-surface bg-auth-bg px-3 text-sm text-foreground focus-visible:border-button-brand-bg-dark focus-visible:ring-0 [&_[data-slot=select-value]]:flex [&_[data-slot=select-value]]:items-center [&_[data-slot=select-value]]:gap-2">
+          <SelectTrigger
+            variant="brand"
+            className="data-[size=default]:h-[42px] w-full rounded-[8px] border-auth-surface bg-auth-bg px-3 text-sm text-foreground [&_[data-slot=select-value]]:flex [&_[data-slot=select-value]]:items-center [&_[data-slot=select-value]]:gap-2"
+          >
             <SelectValue>
               {activeFilter && (
                 <>

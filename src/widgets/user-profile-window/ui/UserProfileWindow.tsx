@@ -90,7 +90,10 @@ export function UserProfileWindow() {
               if (value) onTabChange(value);
             }}
           >
-            <SelectTrigger className="data-[size=default]:h-[42px] w-full rounded-xl border-auth-surface bg-bg-primary px-4 font-outfit text-sm text-foreground focus-visible:border-button-brand-bg-dark focus-visible:ring-0">
+            <SelectTrigger
+              variant="brand"
+              className="data-[size=default]:h-[42px] w-full rounded-xl border-auth-surface bg-bg-primary px-4 font-outfit text-sm text-foreground"
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
