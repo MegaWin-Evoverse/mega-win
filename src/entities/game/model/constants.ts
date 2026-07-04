@@ -36,7 +36,7 @@ export const PLINKO_RISK_OPTIONS: readonly RiskOption[] = [
 
 export const PLINKO_ROWS = {
   MIN: 8,
-  MAX: 16,
+  MAX: 14,
   DEFAULT: 8,
   STEP: 1,
 } as const;

@@ -29,11 +29,6 @@ export interface PlinkoHistoryEntry {
   tier: MultiplierTier;
 }
 
-export interface PlinkoResult {
-  multiplier: number;
-  payout: number;
-}
-
 export interface PlacePlinkoBetArgs {
   betSize: number;
   rows: number;

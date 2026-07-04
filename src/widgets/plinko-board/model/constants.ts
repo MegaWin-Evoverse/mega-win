@@ -41,9 +41,6 @@ export const SOLVER = {
   START_JITTER_RATIO: 1.2,
 } as const;
 
-export const RESULT_OVERLAY_DURATION_MS = 2000;
-export const RESULT_OVERLAY_DURATION_TURBO_MS = 700;
-
 export const CSS_VAR = {
   PEG: '--plinko-peg',
   PEG_GLOW: '--plinko-peg-glow',
