@@ -3,7 +3,7 @@ export const BALANCE_TYPE = {
   WATCH_POINTS: 'WATCH_POINTS',
 } as const;
 
-export type BalanceType = (typeof BALANCE_TYPE)[keyof typeof BALANCE_TYPE];
+type BalanceType = (typeof BALANCE_TYPE)[keyof typeof BALANCE_TYPE];
 
 export interface UserBalance {
   value: string;

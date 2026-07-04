@@ -54,10 +54,6 @@ export const WALLET_SAVE_ARIA = 'Save wallet address';
 
 export const WALLET_CANCEL_ARIA = 'Cancel editing';
 
-export const DIALOG_TITLE = 'User Profile';
-
-export const DIALOG_DESCRIPTION = 'Manage your profile settings and preferences';
-
 export const STAT_CARD_BACKGROUND = {
   WAGERED: '/total-rewards/wagered.webp',
   POINTS_SPENT: '/total-rewards/points.webp',
@@ -123,9 +119,9 @@ export const SEARCH_PLACEHOLDER = 'Enter text';
 
 export const SORT_LABEL = 'Sort by:';
 
-export const SORT_DATE_LABEL = 'Date';
+const SORT_DATE_LABEL = 'Date';
 
-export const SORT_WIN_LABEL = 'Win';
+const SORT_WIN_LABEL = 'Win';
 
 export const SORT_DEFAULT: BetsSortKey = 'date';
 

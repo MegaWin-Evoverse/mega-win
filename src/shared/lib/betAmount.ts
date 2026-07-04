@@ -1,6 +1,6 @@
 import { BET_AMOUNT_DECIMALS, BET_AMOUNT_STEP } from '@/shared/config';
 
-export function toBetText(value: number): string {
+function toBetText(value: number): string {
   return value.toFixed(BET_AMOUNT_DECIMALS);
 }
 

@@ -77,7 +77,7 @@ interface ActionButtonBlock {
 
 export type EditorJSBlock = ParagraphBlock | HeaderBlock | ListBlock | ActionButtonBlock;
 
-export interface EditorJSContent {
+interface EditorJSContent {
   time: number;
   blocks: EditorJSBlock[];
   version: string;
