@@ -11,6 +11,8 @@ import {
 } from '../model/constants';
 import { useLeaderboard } from '../model/useLeaderboard';
 import { Podium } from './Podium';
+import { PodiumSkeleton } from './PodiumSkeleton';
+import { EmptyState } from './EmptyState';
 import { Countdown } from './Countdown';
 import { Table } from './Table';
 import { CompetitionRules } from './CompetitionRules';
@@ -21,6 +23,7 @@ interface Props {
 
 export function Leaderboard({ className }: Props) {
   const { top3, visibleRows, hasMore, loadMore, isLoading, endDate } = useLeaderboard();
+  const hasData = top3.length > 0;
 
   return (
     <main
@@ -36,33 +39,37 @@ export function Leaderboard({ className }: Props) {
         <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden rounded-2xl">
           <Image src={LEADERBOARD_BG_SRC} alt="" fill className="object-cover" priority />
         </div>
-        <div className="absolute left-5 top-[33%] pointer-events-none select-none z-[5] hidden xl:block rotate-[180deg]">
-          <Image
-            src={PODIUM_CHIPS_SRC}
-            alt=""
-            width={LEADERBOARD_DECOR_SIZES.CHIPS_WIDTH}
-            height={LEADERBOARD_DECOR_SIZES.CHIPS_HEIGHT}
-            className="object-contain"
-          />
-        </div>
-        <div className="absolute -right-5 top-[25%] pointer-events-none select-none z-[4] hidden xl:block">
-          <Image
-            src={PODIUM_ROCKET_SRC}
-            alt=""
-            width={LEADERBOARD_DECOR_SIZES.ROCKET_WIDTH}
-            height={LEADERBOARD_DECOR_SIZES.ROCKET_HEIGHT}
-            className="object-contain"
-          />
-        </div>
-        <div className="absolute right-5 top-[40%] pointer-events-none select-none z-[5] hidden xl:block">
-          <Image
-            src={PODIUM_CHIPS_SRC}
-            alt=""
-            width={LEADERBOARD_DECOR_SIZES.CHIPS_WIDTH}
-            height={LEADERBOARD_DECOR_SIZES.CHIPS_HEIGHT}
-            className="object-contain"
-          />
-        </div>
+        {hasData && (
+          <>
+            <div className="absolute left-5 top-[33%] pointer-events-none select-none z-[5] hidden xl:block rotate-[180deg]">
+              <Image
+                src={PODIUM_CHIPS_SRC}
+                alt=""
+                width={LEADERBOARD_DECOR_SIZES.CHIPS_WIDTH}
+                height={LEADERBOARD_DECOR_SIZES.CHIPS_HEIGHT}
+                className="object-contain"
+              />
+            </div>
+            <div className="absolute -right-5 top-[25%] pointer-events-none select-none z-[4] hidden xl:block">
+              <Image
+                src={PODIUM_ROCKET_SRC}
+                alt=""
+                width={LEADERBOARD_DECOR_SIZES.ROCKET_WIDTH}
+                height={LEADERBOARD_DECOR_SIZES.ROCKET_HEIGHT}
+                className="object-contain"
+              />
+            </div>
+            <div className="absolute right-5 top-[40%] pointer-events-none select-none z-[5] hidden xl:block">
+              <Image
+                src={PODIUM_CHIPS_SRC}
+                alt=""
+                width={LEADERBOARD_DECOR_SIZES.CHIPS_WIDTH}
+                height={LEADERBOARD_DECOR_SIZES.CHIPS_HEIGHT}
+                className="object-contain"
+              />
+            </div>
+          </>
+        )}
         <div className="flex flex-col items-center text-center z-10 relative mb-6 sm:mb-10 xl:mb-14 max-w-[800px] mx-auto gap-3">
           <h1 className="font-outfit font-black text-2xl sm:text-3xl xl:text-5xl text-brand-text-white uppercase tracking-tight">
             {LEADERBOARD_LABELS.TITLE}
@@ -71,7 +78,13 @@ export function Leaderboard({ className }: Props) {
             {LEADERBOARD_LABELS.SUBTITLE}
           </p>
         </div>
-        <Podium top3={top3} />
+        {isLoading ? (
+          <PodiumSkeleton />
+        ) : top3.length > 0 ? (
+          <Podium top3={top3} />
+        ) : (
+          <EmptyState className="max-w-[800px] z-10 relative" />
+        )}
         <div className="flex flex-col items-center gap-4 sm:gap-6 z-10 relative mt-8 sm:mt-12 xl:mt-16 w-full">
           <Countdown endDate={endDate} />
           <div className="flex items-center p-3 gap-[10px] w-full max-w-[890px] rounded-lg bg-leaderboard-disclaimer-bg">
