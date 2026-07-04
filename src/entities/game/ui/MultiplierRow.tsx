@@ -21,8 +21,7 @@ export function MultiplierRow({ multipliers, landedBucket }: Props) {
               isLanded && 'animate-plinko-bucket-land'
             )}
           >
-            {value}
-            <span className="hidden sm:inline">x</span>
+            {value}x
           </span>
         );
       })}

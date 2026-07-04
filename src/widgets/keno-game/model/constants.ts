@@ -19,9 +19,6 @@ export const LABELS = {
   SELECT_PROMPT: 'Select numbers 1-10 to start',
   PLAY: 'Play',
   PLAY_AGAIN: 'Play Again',
-  WIN_TROPHY_ARIA: 'Win',
-  WIN_COIN_ALT: 'Bet amount',
-  WIN_MATCHES_ALT: 'Matches',
   BET_ERROR: 'Failed to place bet. Please try again.',
 } as const;
 

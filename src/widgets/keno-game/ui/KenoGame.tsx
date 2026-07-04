@@ -2,7 +2,7 @@
 
 import { Board } from './Board';
 import { Payout } from './Payout';
-import { WinModal } from './WinModal';
+import { KenoResultOverlay } from './KenoResultOverlay';
 import type { GamePhase, CellState } from '../model/types';
 import { LABELS } from '../model/constants';
 
@@ -50,7 +50,11 @@ export function KenoGame({
         />
       )}
       {phase === 'win' && (
-        <WinModal multiplier={winMultiplier} betAmount={betAmount} matchCount={matchCount} />
+        <KenoResultOverlay
+          multiplier={winMultiplier}
+          betAmount={betAmount}
+          matchCount={matchCount}
+        />
       )}
     </div>
   );
