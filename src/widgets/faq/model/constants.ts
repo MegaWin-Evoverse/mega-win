@@ -14,7 +14,7 @@ export const FAQ_ITEMS: readonly FAQItem[] = [
     id: 'faq-1',
     question: 'What are rewards?',
     answer:
-      'Rewards are limited-time campaigns, bonuses, and giveaways from TheDoctor for the community. Each card on this page is a separate campaign with its own terms and prizes.',
+      'Rewards are limited-time campaigns, bonuses, and giveaways from Mega Win for the community. Each card on this page is a separate campaign with its own terms and prizes.',
   },
   {
     id: 'faq-2',
@@ -26,7 +26,7 @@ export const FAQ_ITEMS: readonly FAQItem[] = [
     id: 'faq-3',
     question: 'Who can participate?',
     answer:
-      'Most rewards require a DegenCity account registered under code THEDOCTOR and a linked Discord. Each campaign lists its own conditions, and entries go through eligibility checks before fulfillment.',
+      'Most rewards require a DegenCity account registered under code MEGAWIN and a linked Discord. Each campaign lists its own conditions, and entries go through eligibility checks before fulfillment.',
   },
   {
     id: 'faq-4',

@@ -92,13 +92,13 @@ export const COMPETITION_RULES_ITEMS: readonly RulesItem[] = [
     id: 'rule-1',
     question: 'How does the Leaderboard work?',
     answer:
-      'Players are ranked by their total wagered amount on DegenCity under code THEDOCTOR during the current month. The leaderboard resets at the end of each month (UTC), and the top players win prizes, including a live Bonus Buy with TheDoctor.',
+      'Players are ranked by their total wagered amount on DegenCity under code MEGAWIN during the current month. The leaderboard resets at the end of each month (UTC), and the top players win prizes, including a live Bonus Buy with Mega Win.',
   },
   {
     id: 'rule-2',
     question: 'Who is eligible?',
     answer:
-      'Only registered players wagering with code THEDOCTOR are ranked. Make sure your DegenCity and Discord accounts are connected on your thedoctor.net profile.',
+      'Only registered players wagering with code MEGAWIN are ranked. Make sure your DegenCity and Discord accounts are connected on your megawin.com profile.',
   },
   {
     id: 'rule-3',
@@ -116,13 +116,13 @@ export const COMPETITION_RULES_ITEMS: readonly RulesItem[] = [
     id: 'rule-5',
     question: 'How are prizes paid out?',
     answer:
-      'Prize details are shown on the leaderboard page or announced through official TheDoctor channels. Winners may need to complete verification or follow claim instructions before prizes are sent.',
+      'Prize details are shown on the leaderboard page or announced through official Mega Win channels. Winners may need to complete verification or follow claim instructions before prizes are sent.',
   },
   {
     id: 'rule-6',
     question: 'What should I do if my leaderboard position looks wrong?',
     answer:
-      'First, wait for the next leaderboard update because data may not be real-time. If the issue remains, contact TheDoctor support or the official Discord with your username and relevant campaign details so the team can review it.',
+      'First, wait for the next leaderboard update because data may not be real-time. If the issue remains, contact Mega Win support or the official Discord with your username and relevant campaign details so the team can review it.',
   },
 ] as const;
 
