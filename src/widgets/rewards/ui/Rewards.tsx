@@ -33,7 +33,7 @@ export function Rewards() {
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder={REWARDS_LABELS.SEARCH_PLACEHOLDER}
-            className="h-12 pl-11 bg-brand-bg border-brand-border/30 text-brand-text-white placeholder:text-brand-text-muted rounded-xl focus-visible:border-brand-border"
+            className="h-12 pl-11 bg-brand-bg border-brand-border/30 text-brand-text-white placeholder:text-brand-text-muted rounded-xl focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
           />
         </div>
         <Select value={sort} onValueChange={onSortChange} items={SORT_OPTIONS}>
