@@ -27,7 +27,7 @@ export function CompetitionRules() {
             value={item.id}
             className="bg-bg-primary rounded-[12px] border-none flex flex-col hover:bg-bg-primary-hover transition-colors duration-200"
           >
-            <AccordionTrigger className="w-full flex items-center justify-between font-outfit text-base font-semibold leading-5 text-brand-text-white hover:no-underline select-none [&_svg]:text-brand-text-light transition-colors px-4 pt-5 pb-5 aria-expanded:pb-2">
+            <AccordionTrigger className="w-full flex items-center justify-between font-outfit text-base font-semibold leading-5 text-brand-text-white hover:no-underline select-none [&_svg]:text-brand-text-light transition-colors px-4 py-5">
               {item.question}
             </AccordionTrigger>
             <AccordionContent className="font-outfit text-sm font-normal text-brand-text-light leading-[18px] pl-4 pr-8 pt-2 pb-5">
