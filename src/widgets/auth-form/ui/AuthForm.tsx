@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useAuthStore } from '@/features/auth';
@@ -13,10 +12,10 @@ import { SignInFormBody } from './SignInFormBody';
 import { SignUpFormBody } from './SignUpFormBody';
 import { SocialAuthButtons } from './SocialAuthButtons';
 import { VerifyEmailForm } from './VerifyEmailForm';
-import type { AuthTab } from '../model/types';
 
 export function AuthForm() {
-  const [activeTab, setActiveTab] = useState<AuthTab>('sign-in');
+  const activeTab = useAuthStore((state) => state.authTab);
+  const setActiveTab = useAuthStore((state) => state.setAuthTab);
   const isAuthFormOpen = useAuthStore((state) => state.isAuthFormOpen);
   const verificationToken = useAuthStore((state) => state.verificationToken);
   const isForgotPasswordOpen = useAuthStore((state) => state.isForgotPasswordOpen);

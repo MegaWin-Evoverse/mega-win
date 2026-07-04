@@ -12,19 +12,33 @@ import {
 const Toaster = ({ ...props }: ToasterProps) => (
   <Sonner
     className="toaster group"
+    richColors
     icons={{
-      success: <CircleCheckIcon className="size-4" />,
-      info: <InfoIcon className="size-4" />,
-      warning: <TriangleAlertIcon className="size-4" />,
-      error: <OctagonXIcon className="size-4" />,
-      loading: <Loader2Icon className="size-4 animate-spin" />,
+      success: <CircleCheckIcon className="size-5" />,
+      info: <InfoIcon className="size-5" />,
+      warning: <TriangleAlertIcon className="size-5" />,
+      error: <OctagonXIcon className="size-5" />,
+      loading: <Loader2Icon className="size-5 animate-spin" />,
+    }}
+    toastOptions={{
+      classNames: {
+        toast: '!p-4 !gap-3 !text-base !font-outfit !font-medium !shadow-lg',
+        title: '!font-semibold',
+        description: '!opacity-90 !text-sm',
+      },
     }}
     style={
       {
         '--normal-bg': 'var(--popover)',
         '--normal-text': 'var(--popover-foreground)',
         '--normal-border': 'var(--border)',
-        '--border-radius': 'var(--radius)',
+        '--border-radius': 'var(--radius-xl)',
+        '--success-bg': 'linear-gradient(180deg, var(--brand-green-from), var(--brand-green-to))',
+        '--success-text': 'var(--brand-dark)',
+        '--success-border': 'transparent',
+        '--error-bg': 'var(--destructive)',
+        '--error-text': 'var(--brand-text-white)',
+        '--error-border': 'transparent',
       } as CSSProperties
     }
     {...props}

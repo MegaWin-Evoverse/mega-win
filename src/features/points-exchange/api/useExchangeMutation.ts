@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 import { QUERY_KEYS } from '@/shared/api/query-keys';
+import { getApiErrorMessage } from '@/shared/lib/getApiErrorMessage';
 import { exchangeWatchToGame } from './exchangeApi';
 import { EXCHANGE_MESSAGES } from '../model/constants';
 
@@ -20,9 +20,7 @@ export function useExchangeMutation({ onSuccessCallback }: UseExchangeMutationOp
       onSuccessCallback?.();
     },
     onError: (error) => {
-      const msg = isAxiosError(error) ? error.response?.data?.message : undefined;
-      const errorMsg = Array.isArray(msg) ? msg.join(', ') : msg || EXCHANGE_MESSAGES.ERROR_GENERIC;
-      toast.error(errorMsg);
+      toast.error(getApiErrorMessage(error, EXCHANGE_MESSAGES.ERROR_GENERIC));
     },
   });
 }
