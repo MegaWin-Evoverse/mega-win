@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useAuthStore } from '@/features/auth';
+import { ForgotPasswordForm } from '@/features/forgot-password';
 import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Button } from '@/shared/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/shared/ui/dialog';
@@ -18,6 +19,7 @@ export function AuthForm() {
   const [activeTab, setActiveTab] = useState<AuthTab>('sign-in');
   const isAuthFormOpen = useAuthStore((state) => state.isAuthFormOpen);
   const verificationToken = useAuthStore((state) => state.verificationToken);
+  const isForgotPasswordOpen = useAuthStore((state) => state.isForgotPasswordOpen);
   const email = useAuthStore((state) => state.email);
   const closeAuthForm = useAuthStore((state) => state.closeAuthForm);
 
@@ -63,22 +65,28 @@ export function AuthForm() {
               >
                 <X className="size-[20px]" />
               </Button>
-              <div className="w-full">
-                <SegmentedTabs
-                  items={AUTH_TABS}
-                  value={activeTab}
-                  onValueChange={setActiveTab}
-                  className="mb-[20px] h-[60px] bg-auth-bg p-[8px]"
-                />
-                <div
-                  key={activeTab}
-                  className="w-full animate-in fade-in zoom-in-95 duration-300 ease-out"
-                >
-                  {activeTab === 'sign-in' && <SignInFormBody />}
-                  {activeTab === 'sign-up' && <SignUpFormBody />}
-                </div>
-              </div>
-              <SocialAuthButtons />
+              {isForgotPasswordOpen ? (
+                <ForgotPasswordForm />
+              ) : (
+                <>
+                  <div className="w-full">
+                    <SegmentedTabs
+                      items={AUTH_TABS}
+                      value={activeTab}
+                      onValueChange={setActiveTab}
+                      className="mb-[20px] h-[60px] bg-auth-bg p-[8px]"
+                    />
+                    <div
+                      key={activeTab}
+                      className="w-full animate-in fade-in zoom-in-95 duration-300 ease-out"
+                    >
+                      {activeTab === 'sign-in' && <SignInFormBody />}
+                      {activeTab === 'sign-up' && <SignUpFormBody />}
+                    </div>
+                  </div>
+                  <SocialAuthButtons />
+                </>
+              )}
             </div>
           </div>
         )}
