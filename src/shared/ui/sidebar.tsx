@@ -10,7 +10,6 @@ import {
   type CSSProperties,
 } from 'react';
 import { usePathname } from 'next/navigation';
-import { XIcon } from 'lucide-react';
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -218,17 +217,6 @@ function Sidebar({
             <SheetTitle>Sidebar</SheetTitle>
             <SheetDescription>Displays the mobile sidebar.</SheetDescription>
           </SheetHeader>
-          {isSmallMobile && (
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => setOpenMobile(false)}
-              aria-label="Close menu"
-              className="absolute left-3 top-3 z-50"
-            >
-              <XIcon />
-            </Button>
-          )}
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>

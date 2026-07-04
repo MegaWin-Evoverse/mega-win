@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { XIcon } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { BurgerIcon } from '@/shared/ui/burger-icon';
 import { Logo } from '@/shared/ui/logo';
@@ -17,7 +18,7 @@ const ARIA_LABEL_LOGO_LINK = 'Go to homepage';
 const ARIA_LABEL_MENU_BUTTON = 'Toggle navigation menu';
 
 export function Header() {
-  const { toggleSidebar, isSmallMobile, isMobile, isTablet } = useSidebar();
+  const { toggleSidebar, isSmallMobile, isMobile, isTablet, openMobile } = useSidebar();
   const openAuthForm = useAuthStore((state) => state.openAuthForm);
   const { data: user, isPending: isUserPending } = useUserQuery();
   const isMobileOrTablet = isMobile || isTablet;
@@ -29,7 +30,7 @@ export function Header() {
       className="app-header fixed top-0 left-0 w-full h-16 bg-brand-bg border-b border-brand-border pl-[22px] pr-8 py-3 flex items-center justify-between gap-[15px] z-50 shrink-0"
     >
       <div className="flex items-center gap-2 shrink-0">
-        {isMobileOrTablet && (!isSmallMobile || !user) && (
+        {(isMobileOrTablet && (!isSmallMobile || !user)) || (isSmallMobile && openMobile) ? (
           <Button
             variant="ghost"
             size="none"
@@ -37,9 +38,13 @@ export function Header() {
             onClick={toggleSidebar}
             aria-label={ARIA_LABEL_MENU_BUTTON}
           >
-            <BurgerIcon className="w-7 h-7" />
+            {isSmallMobile && openMobile ? (
+              <XIcon className="w-6 h-6" />
+            ) : (
+              <BurgerIcon className="w-7 h-7" />
+            )}
           </Button>
-        )}
+        ) : null}
         <Link href={ROUTES.HOME} aria-label={ARIA_LABEL_LOGO_LINK} className="flex shrink-0">
           <Logo />
         </Link>
