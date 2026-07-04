@@ -30,10 +30,11 @@ export function Rewards() {
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-brand-text-muted pointer-events-none" />
           <Input
+            variant="brand"
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder={REWARDS_LABELS.SEARCH_PLACEHOLDER}
-            className="h-12 pl-11 bg-brand-bg border-brand-border/30 text-brand-text-white placeholder:text-brand-text-muted rounded-xl focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+            className="h-12 pl-11 bg-brand-bg border-brand-border/30 text-brand-text-white placeholder:text-brand-text-muted rounded-xl"
           />
         </div>
         <Select value={sort} onValueChange={onSortChange} items={SORT_OPTIONS}>

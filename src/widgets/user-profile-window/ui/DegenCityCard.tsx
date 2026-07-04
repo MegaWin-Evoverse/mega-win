@@ -35,6 +35,7 @@ export function DegenCityCard() {
         <span className="text-xs text-text-secondary">{DEGENCITY_USERNAME_LABEL}</span>
         <div className="relative flex items-center">
           <Input
+            variant="brand"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder={DEGENCITY_USERNAME_PLACEHOLDER}

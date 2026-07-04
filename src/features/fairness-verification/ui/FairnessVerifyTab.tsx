@@ -92,9 +92,10 @@ export function FairnessVerifyTab({
           </span>
           <Input
             type="text"
+            variant="brand"
             value={verifyClientSeed}
             onChange={(e: ChangeEvent<HTMLInputElement>) => onClientSeedChange(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0"
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light"
             placeholder={FAIRNESS_LABELS.placeholderClientSeed}
           />
         </div>
@@ -104,9 +105,10 @@ export function FairnessVerifyTab({
           </span>
           <Input
             type="text"
+            variant="brand"
             value={verifyServerSeed}
             onChange={(e: ChangeEvent<HTMLInputElement>) => onServerSeedChange(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0"
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light"
             placeholder={FAIRNESS_LABELS.placeholderServerSeed}
           />
         </div>
@@ -116,9 +118,10 @@ export function FairnessVerifyTab({
           </span>
           <Input
             type="number"
+            variant="brand"
             value={verifyNonce}
             onChange={(e: ChangeEvent<HTMLInputElement>) => onNonceChange(e.target.value)}
-            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light focus-visible:border-button-brand-bg-dark focus-visible:ring-0 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            className="h-11 px-3 bg-bg-primary border-border-default rounded-lg font-outfit text-sm text-brand-text-light [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             placeholder={FAIRNESS_LABELS.placeholderNonce}
           />
         </div>
