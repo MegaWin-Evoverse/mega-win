@@ -27,6 +27,7 @@ export function useDiceBetMutation({
     onSuccess: (response) => {
       onSuccess(response);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.currentUser });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.betStoryAll });
     },
     onError: () => {
       toast.error(LABELS.BET_ERROR);

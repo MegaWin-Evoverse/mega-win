@@ -10,6 +10,9 @@ export const TAB_LABELS: Record<Path, string> = {
 
 export const TAB_PATHS: Path[] = ['latest', 'high-rollers', 'lucky', 'my'];
 
+export const BETS_STORY_LIVE_TITLE = 'Bet Live';
+export const BETS_STORY_EMPTY_MESSAGE = 'No bets yet';
+
 export const BETS_STORY_STALE_TIME = QUERY_STALE_TIME_MS;
 
 export const COLUMN_HEADERS = {

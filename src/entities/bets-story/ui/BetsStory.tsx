@@ -6,7 +6,7 @@ import { SegmentedTabs } from '@/shared/ui/segmented-tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 import { BetsList } from './BetsList';
 import { useBetsStoryQuery } from '@/entities/bets-story/model/useBetsStoryQuery';
-import { TAB_LABELS, TAB_PATHS } from '../model/constants';
+import { BETS_STORY_EMPTY_MESSAGE, TAB_LABELS, TAB_PATHS } from '../model/constants';
 import type { Path } from '../model/types';
 
 interface Props {
@@ -43,7 +43,13 @@ export function BetsStory({ className }: Props) {
           </SelectContent>
         </Select>
       </div>
-      <BetsList key={activePath} bets={bets} className="animate-in fade-in-0 duration-300" />
+      {bets.length > 0 ? (
+        <BetsList key={activePath} bets={bets} className="animate-in fade-in-0 duration-300" />
+      ) : (
+        <div className="py-12 text-center text-sm text-muted-foreground">
+          {BETS_STORY_EMPTY_MESSAGE}
+        </div>
+      )}
     </div>
   );
 }

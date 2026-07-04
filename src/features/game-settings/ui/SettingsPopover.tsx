@@ -48,7 +48,7 @@ export function SettingsPopover({
             onOpenChange(false);
             onOpenRules();
           }}
-          className="flex w-full h-11 items-center justify-center gap-2 rounded-xl bg-brand-green-to hover:bg-brand-green-to/90 text-bg-primary font-outfit font-semibold text-sm transition-colors cursor-pointer"
+          className="flex w-full h-11 items-center justify-center gap-2 rounded-xl bg-brand-green-to hover:bg-brand-green-to/90 dark:hover:bg-brand-green-to/90 text-bg-primary font-outfit font-semibold text-sm transition-colors cursor-pointer"
         >
           <FileText className="w-5 h-5 text-bg-primary" />
           {GAME_SETTINGS_LABELS.gameRules}

@@ -38,7 +38,7 @@ export function Slider({ rollover, lastRoll, onRolloverChange }: Props) {
                       : '-50%',
               } as CSSProperties
             }
-            className="absolute bottom-0 left-[var(--roll)] flex translate-x-[var(--tx)] flex-col items-center"
+            className="absolute bottom-0 left-[var(--roll)] flex translate-x-[var(--tx)] flex-col items-center transition-[left,translate] duration-300 ease-out"
           >
             <div
               className={cn(

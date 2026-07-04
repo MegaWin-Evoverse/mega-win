@@ -3,6 +3,7 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useGameControlsStore, selectIsAutoMode, type GameControlsState } from '@/entities/game';
 import { useUserQuery } from '@/entities/user';
+import { playSound } from '@/shared/lib/playSound';
 import {
   DEFAULT_ROLLOVER,
   HOUSE_EDGE,
@@ -107,6 +108,7 @@ export function useDiceGame(): UseDiceGameResult {
       setLastRoll(entry);
       setHistory((prev) => [entry, ...prev].slice(0, MAX_HISTORY));
       applyWin(parseFloat(response.payout));
+      playSound('match');
 
       if (!autoRunningRef.current) return;
 

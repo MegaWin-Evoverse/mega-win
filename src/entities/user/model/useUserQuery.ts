@@ -8,5 +8,6 @@ export function useUserQuery() {
     queryKey: QUERY_KEYS.currentUser,
     queryFn: getUser,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 }

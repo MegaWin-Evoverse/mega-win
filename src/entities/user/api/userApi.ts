@@ -1,8 +1,14 @@
 import { api } from '@/shared/api/client';
-import { USER_PATHS } from '@/shared/api/constants';
+import { SESSION_HINT_COOKIE, USER_PATHS } from '@/shared/api/constants';
+import { getCookie } from '@/shared/lib/getCookie';
+import { NO_SESSION_ERROR } from '../model/constants';
 import type { User } from '../model/types';
 
 export async function getUser(): Promise<User> {
+  if (!getCookie(SESSION_HINT_COOKIE)) {
+    throw new Error(NO_SESSION_ERROR);
+  }
+
   const { data } = await api.get<User>(USER_PATHS.ME);
 
   return data;
