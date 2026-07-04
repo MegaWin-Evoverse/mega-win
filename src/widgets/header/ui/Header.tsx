@@ -39,10 +39,10 @@ export function Header() {
             onClick={toggleSidebar}
             aria-label={ARIA_LABEL_MENU_BUTTON}
           >
-            <span className="relative flex items-center justify-center w-7 h-7">
+            <span className="relative flex items-center justify-center w-8 h-8">
               <BurgerIcon
                 className={cn(
-                  'absolute w-7 h-7 transition-all duration-200 ease-out',
+                  'absolute w-7 h-7 transition-all duration-700 ease-out',
                   isSmallMobile && openMobile
                     ? 'rotate-90 scale-75 opacity-0'
                     : 'rotate-0 scale-100 opacity-100'
@@ -51,7 +51,7 @@ export function Header() {
               <XIcon
                 strokeWidth={3}
                 className={cn(
-                  'absolute w-6 h-6 transition-all duration-200 ease-out',
+                  'absolute w-8 h-8 transition-all duration-700 ease-out',
                   isSmallMobile && openMobile
                     ? 'rotate-0 scale-100 opacity-100'
                     : '-rotate-90 scale-75 opacity-0'
