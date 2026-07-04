@@ -10,6 +10,7 @@ import {
   type CSSProperties,
 } from 'react';
 import { usePathname } from 'next/navigation';
+import { XIcon } from 'lucide-react';
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -204,13 +205,29 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="data-[side=left]:w-(--sidebar-width) data-[side=right]:w-(--sidebar-width) data-[side=left]:sm:max-w-(--sidebar-width) data-[side=right]:sm:max-w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          className={cn(
+            'bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden',
+            isMobile
+              ? 'data-[side=left]:w-full data-[side=right]:w-full'
+              : 'data-[side=left]:w-(--sidebar-width) data-[side=right]:w-(--sidebar-width) data-[side=left]:sm:max-w-(--sidebar-width) data-[side=right]:sm:max-w-(--sidebar-width)'
+          )}
           side={side}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
             <SheetDescription>Displays the mobile sidebar.</SheetDescription>
           </SheetHeader>
+          {isMobile && (
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setOpenMobile(false)}
+              aria-label="Close menu"
+              className="absolute left-3 top-3 z-50"
+            >
+              <XIcon />
+            </Button>
+          )}
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
