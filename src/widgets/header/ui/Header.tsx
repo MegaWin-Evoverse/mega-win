@@ -56,7 +56,7 @@ export function Header() {
         ) : (
           <Button
             variant="main"
-            onClick={openAuthForm}
+            onClick={() => openAuthForm()}
             aria-label={ARIA_LABEL_BUTTON}
             className="w-[120px] h-10 py-3 px-4 rounded-lg flex items-center justify-center gap-2"
           >
