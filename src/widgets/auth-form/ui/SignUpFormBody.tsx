@@ -23,7 +23,8 @@ export function SignUpFormBody() {
           id="username"
           placeholder="Enter your username"
           type="text"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('username')}
         />
         {errors.username && <FieldError message={errors.username.message} />}
@@ -36,7 +37,8 @@ export function SignUpFormBody() {
           id="email"
           placeholder="Enter your email"
           type="email"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('email')}
         />
         {errors.email && <FieldError message={errors.email.message} />}
@@ -49,7 +51,8 @@ export function SignUpFormBody() {
           id="password"
           placeholder="Enter your password"
           type="password"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('password')}
         />
         {errors.password && <FieldError message={errors.password.message} />}

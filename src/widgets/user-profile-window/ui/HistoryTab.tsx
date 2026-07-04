@@ -48,7 +48,8 @@ export function HistoryTab({ user }: Props) {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
           <Input
-            className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pl-9 focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+            variant="brand"
+            className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pl-9"
             placeholder={SEARCH_PLACEHOLDER}
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}

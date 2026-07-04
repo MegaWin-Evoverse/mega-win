@@ -20,7 +20,8 @@ export function SignInFormBody() {
           id="email"
           placeholder="Enter your email"
           type="email"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('email')}
         />
         {errors.email && <FieldError message={errors.email.message} />}
@@ -33,7 +34,8 @@ export function SignInFormBody() {
           id="password"
           placeholder="Enter your password"
           type="password"
-          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+          variant="brand"
+          className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
           {...register('password')}
         />
         {errors.password && <FieldError message={errors.password.message} />}

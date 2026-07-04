@@ -44,7 +44,8 @@ export function CryptoWalletInput({
       </div>
       <div className="relative flex-1">
         <Input
-          className="h-11 rounded-l-none rounded-r-lg border-auth-surface bg-auth-bg px-3 pr-9 font-outfit text-sm transition-colors duration-200 focus-visible:ring-0 focus-visible:border-button-brand-bg-dark read-only:cursor-default read-only:focus-visible:border-auth-surface"
+          variant="brand"
+          className="h-11 rounded-l-none rounded-r-lg border-auth-surface bg-auth-bg px-3 pr-9 font-outfit text-sm read-only:cursor-default read-only:focus-visible:border-auth-surface"
           placeholder={placeholder}
           value={isEditing ? draftValue : (savedValue ?? '')}
           readOnly={!isEditing}

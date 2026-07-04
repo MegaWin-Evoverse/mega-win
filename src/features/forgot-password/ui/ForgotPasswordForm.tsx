@@ -43,7 +43,8 @@ export function ForgotPasswordForm() {
             id="forgot-password-email"
             placeholder="Enter your email"
             type="email"
-            className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg focus-visible:ring-0 focus-visible:border-button-brand-bg-dark transition-colors duration-200"
+            variant="brand"
+            className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg"
             {...register('email')}
           />
           {errors.email && <FieldError message={errors.email.message} />}
