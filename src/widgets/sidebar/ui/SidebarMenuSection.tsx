@@ -19,13 +19,13 @@ interface Props {
   isCollapsed: boolean;
 }
 
-const MENU_BTN_BASE =
+export const MENU_BTN_BASE =
   'group/menu-btn sidebar-menu-btn-custom text-brand-text-white font-outfit font-medium text-base lining-nums proportional-nums transition-all duration-200 w-full';
 
 const MENU_BTN_COLLAPSED =
   'group-data-[collapsible=icon]:size-auto! flex items-center justify-center p-0 group-data-[collapsible=icon]:p-0! h-[52px] group-data-[collapsible=icon]:h-[52px]!';
 
-const MENU_BTN_CONTENT =
+export const MENU_BTN_CONTENT =
   'flex items-center gap-2 transition-transform duration-500 ease-out group-hover/menu-btn:translate-x-2';
 
 const SUB_MENU_LINK =

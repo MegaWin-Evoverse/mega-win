@@ -1,15 +1,29 @@
+'use client';
 import Link from 'next/link';
-import { Headset } from 'lucide-react';
+import { Headset, LogOut } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
-import { SidebarFooter } from '@/shared/ui/sidebar';
+import {
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  useSidebar,
+} from '@/shared/ui/sidebar';
 import { ROUTES } from '@/shared/config';
+import { useUserQuery } from '@/entities/user';
+import { useLogout } from '@/features/auth';
 import { SIDEBAR_FOOTER_LABELS } from '../model/constants';
+import { MENU_BTN_BASE, MENU_BTN_CONTENT } from './SidebarMenuSection';
 
 interface Props {
   isCollapsed: boolean;
 }
 
 export function SidebarFooterSection({ isCollapsed }: Props) {
+  const { isSmallMobile } = useSidebar();
+  const { data: user } = useUserQuery();
+  const { logout, isLoggingOut } = useLogout();
+
   return (
     <SidebarFooter className="border-t border-border-default p-0">
       <Link
@@ -27,6 +41,23 @@ export function SidebarFooterSection({ isCollapsed }: Props) {
           </span>
         )}
       </Link>
+      {isSmallMobile && user && (
+        <SidebarMenu className="w-full px-4 py-2">
+          <SidebarMenuItem className="w-full">
+            <SidebarMenuButton
+              onClick={() => logout()}
+              disabled={isLoggingOut}
+              aria-label={SIDEBAR_FOOTER_LABELS.LOGOUT}
+              className={cn(MENU_BTN_BASE, 'h-11 px-4 py-3 flex items-center')}
+            >
+              <div className={MENU_BTN_CONTENT}>
+                <LogOut className="flex-shrink-0" />
+                <span>{SIDEBAR_FOOTER_LABELS.LOGOUT}</span>
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      )}
     </SidebarFooter>
   );
 }

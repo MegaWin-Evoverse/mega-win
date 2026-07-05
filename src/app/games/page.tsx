@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function GamesPage() {
   return (
-    <main className="flex-1 flex flex-col w-full overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full overflow-x-clip">
       <RevealOnScroll triggerOn="mount" className="w-full">
         <GamesHero />
       </RevealOnScroll>

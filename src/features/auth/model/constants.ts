@@ -22,6 +22,8 @@ export const VERIFY_EMAIL_FIELDS = {
   code: 'code',
 } as const;
 
+export const LOGOUT_ERROR = 'Failed to log out';
+
 export const ACCESS_TOKEN_MAX_AGE = 600;
 
 export const REFRESH_TOKEN_MAX_AGE = 259_200;
