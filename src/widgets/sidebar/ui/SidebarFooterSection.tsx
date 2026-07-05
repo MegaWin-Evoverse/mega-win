@@ -42,7 +42,7 @@ export function SidebarFooterSection({ isCollapsed }: Props) {
         )}
       </Link>
       {isSmallMobile && user && (
-        <SidebarMenu className="w-full px-4 py-2">
+        <SidebarMenu className="w-full px-4 pt-2 pb-4">
           <SidebarMenuItem className="w-full">
             <SidebarMenuButton
               onClick={() => logout()}
