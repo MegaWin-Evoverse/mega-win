@@ -10,7 +10,7 @@ import { RevealOnScroll } from '@/shared/ui/RevealOnScroll';
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col w-full overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full overflow-x-clip">
       <RevealOnScroll triggerOn="mount" className="w-full">
         <Hero />
       </RevealOnScroll>
