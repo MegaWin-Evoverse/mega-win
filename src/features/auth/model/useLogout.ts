@@ -8,12 +8,12 @@ import { LOGOUT_PATH } from '@/shared/api/constants';
 import { ROUTES } from '@/shared/config/routes';
 import { LOGOUT_ERROR } from './constants';
 
-interface UseUserPanelResult {
+interface UseLogoutResult {
   logout: () => void;
   isLoggingOut: boolean;
 }
 
-export function useUserPanel(): UseUserPanelResult {
+export function useLogout(): UseLogoutResult {
   const queryClient = useQueryClient();
   const router = useRouter();
 

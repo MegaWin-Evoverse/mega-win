@@ -32,4 +32,3 @@ export const BALANCE_HEADER = 'Points Balance';
 export const EXCHANGE_LABEL = 'Exchange Points';
 export const GAME_POINTS_LABEL = 'Game Points';
 export const WATCH_POINTS_LABEL = 'Watch Points';
-export const LOGOUT_ERROR = 'Failed to log out';

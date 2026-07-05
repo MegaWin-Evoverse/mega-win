@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
 } from '@/shared/ui/dropdown-menu';
 import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar';
-import { Button } from '@/shared/ui/button';
 import type { User } from '@/entities/user';
 import { ROUTES } from '@/shared/config';
 import { USER_MENU_ITEMS, LOGOUT_LABEL, PROFILE_LABEL } from '../model/constants';
@@ -59,18 +58,14 @@ export function UserMenu({ user, onLogout, isLoggingOut }: Props) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem>
-          <Button
-            variant="ghost"
-            size="none"
-            className="flex w-full items-center justify-start gap-3 px-0 py-0 h-auto text-sm font-normal"
-            onClick={onLogout}
-            disabled={isLoggingOut}
-            aria-label={LOGOUT_LABEL}
-          >
-            <LogOut className="size-4" />
-            {LOGOUT_LABEL}
-          </Button>
+        <DropdownMenuItem
+          onClick={onLogout}
+          disabled={isLoggingOut}
+          aria-label={LOGOUT_LABEL}
+          className="gap-3"
+        >
+          <LogOut className="size-4" />
+          {LOGOUT_LABEL}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

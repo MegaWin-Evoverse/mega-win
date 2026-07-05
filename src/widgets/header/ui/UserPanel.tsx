@@ -1,6 +1,6 @@
 'use client';
 import type { User } from '@/entities/user';
-import { useUserPanel } from '../model/useUserPanel';
+import { useLogout } from '@/features/auth';
 import { BalanceMenu } from './BalanceMenu';
 import { UserMenu } from './UserMenu';
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function UserPanel({ user }: Props) {
-  const { logout, isLoggingOut } = useUserPanel();
+  const { logout, isLoggingOut } = useLogout();
 
   return (
     <div className="flex min-w-0 items-center gap-2">
