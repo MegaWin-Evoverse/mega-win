@@ -16,7 +16,7 @@ export function VerifyEmailForm({ email }: Props) {
     useVerifyEmail();
 
   return (
-    <div className="relative flex w-full flex-col items-center bg-bg-primary rounded-xl p-[16px] min-[460px]:p-[24px] lg:p-[40px]">
+    <div className="relative flex w-full flex-col items-center bg-bg-primary rounded-xl px-[16px] pb-[16px] pt-[48px] min-[460px]:p-[24px] lg:p-[40px]">
       <Button
         type="button"
         variant="ghost"
