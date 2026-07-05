@@ -6,7 +6,7 @@ interface TurboModeState {
 }
 
 const useTurboModeStoreRaw = create<TurboModeState>((set) => ({
-  turboMode: true,
+  turboMode: false,
   setTurboMode: (turboMode) => set({ turboMode }),
 }));
 
