@@ -10,7 +10,7 @@ export const QUERY_KEYS = {
   betStory: (path: string) => ['bets-story', path],
   betStoryAll: ['bets-story'],
   currentUser: ['current-user'],
-  myBets: (params: { page: number }) => ['my-bets', params],
+  myBets: (params: { page: number; gameSlug?: string; sort?: string }) => ['my-bets', params],
   leaderboard: (month: string) => ['leaderboard', month],
   fairnessSeed: ['fairness-seed'],
   rewards: (params: string) => ['rewards', params],
