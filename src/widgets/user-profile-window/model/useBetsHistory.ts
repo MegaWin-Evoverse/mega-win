@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
 import { useMyBetsQuery } from '@/entities/my-bets';
-import { SORT_DEFAULT, GAME_FILTER_ALL } from './constants';
+import { SORT_DEFAULT, SORT_API_MAP, GAME_FILTER_ALL, GAME_FILTER_SLUGS } from './constants';
 import { buildPaginationPages } from './buildPaginationPages';
 import type { BetsSortKey } from './types';
 
@@ -10,27 +10,22 @@ export function useBetsHistory() {
   const [activeGame, setActiveGame] = useState(GAME_FILTER_ALL);
   const [activeSort, setActiveSort] = useState<BetsSortKey>(SORT_DEFAULT);
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: bets, isLoading: isBetsLoading } = useMyBetsQuery({ page: activePage });
+  const { data: bets, isLoading: isBetsLoading } = useMyBetsQuery({
+    page: activePage,
+    gameSlug: GAME_FILTER_SLUGS[activeGame],
+    sort: SORT_API_MAP[activeSort],
+  });
 
   const filteredBets = useMemo(() => {
     const all = bets?.data ?? [];
     const query = searchQuery.toLowerCase();
 
-    const filtered = all.filter((b) => {
-      if (activeGame !== GAME_FILTER_ALL && b.gameName !== activeGame) return false;
+    return all.filter((b) => {
       if (query && !b.gameName.toLowerCase().includes(query) && !b.betSize.includes(query))
         return false;
       return true;
     });
-
-    return [...filtered].sort((a, b) => {
-      if (activeSort === 'win') {
-        return parseFloat(b.payout) - parseFloat(a.payout);
-      }
-
-      return new Date(b.settledAt).getTime() - new Date(a.settledAt).getTime();
-    });
-  }, [bets, activeGame, activeSort, searchQuery]);
+  }, [bets, searchQuery]);
 
   const totalPages = bets?.totalPages ?? 1;
 

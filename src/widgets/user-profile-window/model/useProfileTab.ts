@@ -8,7 +8,12 @@ import { BALANCE_TYPE } from '@/entities/user';
 import type { UserCryptoAddresses, User, UpdateUserInfoPayload } from '@/entities/user';
 import type { CryptoWalletKey } from './types';
 import { getBalance } from './getBalance';
-import { WALLET_DRAFT_DEFAULTS, WALLET_UPDATE_ERROR } from './constants';
+import {
+  WALLET_DRAFT_DEFAULTS,
+  WALLET_UPDATE_ERROR,
+  USERNAME_UPDATE_ERROR,
+  USERNAME_UPDATE_SUCCESS,
+} from './constants';
 
 export function useProfileTab(user: User) {
   const queryClient = useQueryClient();
@@ -47,20 +52,30 @@ export function useProfileTab(user: User) {
     setUsernameInput(value);
   }
 
-  function onUsernameBlur() {
+  function onUsernameCancel() {
     setIsEditingUsername(false);
+    setUsernameInput(user.username);
+  }
+
+  function onUsernameSave() {
     const trimmed = usernameInput.trim();
-    if (trimmed && trimmed !== user.username) {
-      saveUserInfo(
-        { username: trimmed },
-        {
-          onError: () => {
-            setUsernameInput(user.username);
-            toast.error('Failed to update username');
-          },
-        }
-      );
+    if (!trimmed || trimmed === user.username) {
+      setIsEditingUsername(false);
+      return;
     }
+    saveUserInfo(
+      { username: trimmed },
+      {
+        onSuccess: () => {
+          setIsEditingUsername(false);
+          toast.success(USERNAME_UPDATE_SUCCESS);
+        },
+        onError: () => {
+          setUsernameInput(user.username);
+          toast.error(USERNAME_UPDATE_ERROR);
+        },
+      }
+    );
   }
 
   function onWalletEditStart(key: CryptoWalletKey) {
@@ -99,7 +114,8 @@ export function useProfileTab(user: User) {
     usernameInputRef,
     onUsernameEditStart,
     onUsernameChange,
-    onUsernameBlur,
+    onUsernameSave,
+    onUsernameCancel,
     editingWalletKey,
     walletDraftValues,
     onWalletEditStart,

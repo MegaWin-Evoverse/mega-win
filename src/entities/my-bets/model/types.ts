@@ -1,3 +1,7 @@
+import type { BETS_SORT_API } from './constants';
+
+export type BetsSortApiValue = (typeof BETS_SORT_API)[keyof typeof BETS_SORT_API];
+
 export interface MyBet {
   id: string;
   betSize: string;
@@ -18,4 +22,6 @@ export interface MyBetsResponse {
 export interface MyBetsParams {
   page: number;
   take: number;
+  gameSlug?: string;
+  sort?: BetsSortApiValue;
 }

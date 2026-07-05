@@ -1,10 +1,12 @@
 'use client';
-import { Pencil } from 'lucide-react';
+import { Pencil, Check, X } from 'lucide-react';
 import {
   SECTION_LABELS,
   USERNAME_LABEL,
   USERNAME_HINT,
   USERNAME_EDIT_ARIA,
+  USERNAME_SAVE_ARIA,
+  USERNAME_CANCEL_ARIA,
   STAT_LABELS,
   STAT_CARD_BACKGROUND,
   PRIVATE_MODE_LABEL,
@@ -36,7 +38,8 @@ export function ProfileTab({ user }: Props) {
     usernameInputRef,
     onUsernameEditStart,
     onUsernameChange,
-    onUsernameBlur,
+    onUsernameSave,
+    onUsernameCancel,
     editingWalletKey,
     walletDraftValues,
     onWalletEditStart,
@@ -64,21 +67,42 @@ export function ProfileTab({ user }: Props) {
               readOnly={!isEditingUsername}
               disabled={isSavingUsername}
               onChange={(e) => onUsernameChange(e.target.value)}
-              onBlur={onUsernameBlur}
-              onKeyDown={(e) => e.key === 'Enter' && onUsernameBlur()}
+              onKeyDown={(e) => e.key === 'Enter' && onUsernameSave()}
               variant="brand"
               className="h-[42px] rounded-[8px] border-auth-surface bg-auth-bg pr-9 read-only:cursor-default read-only:focus-visible:border-auth-surface"
             />
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label={USERNAME_EDIT_ARIA}
-              className="absolute right-3 top-1/2 -translate-y-1/2"
-              disabled={isEditingUsername || isSavingUsername}
-              onClick={onUsernameEditStart}
-            >
-              <Pencil className="size-3.5 text-muted-foreground" />
-            </Button>
+            {isEditingUsername ? (
+              <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label={USERNAME_SAVE_ARIA}
+                  disabled={isSavingUsername}
+                  onClick={onUsernameSave}
+                >
+                  <Check className="size-3.5 text-primary" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label={USERNAME_CANCEL_ARIA}
+                  disabled={isSavingUsername}
+                  onClick={onUsernameCancel}
+                >
+                  <X className="size-3.5" />
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                aria-label={USERNAME_EDIT_ARIA}
+                className="absolute right-3 top-1/2 -translate-y-1/2"
+                onClick={onUsernameEditStart}
+              >
+                <Pencil className="size-3.5 text-muted-foreground" />
+              </Button>
+            )}
           </div>
           <p className="text-xs text-muted-foreground">{USERNAME_HINT}</p>
         </div>

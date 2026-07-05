@@ -1,4 +1,6 @@
 import { EXTERNAL_LINKS } from '@/shared/config';
+import { GAME } from '@/entities/game';
+import { BETS_SORT_API, type BetsSortApiValue } from '@/entities/my-bets';
 import type { BetsSortKey, CryptoWalletKey, ProfileWindowTab } from './types';
 import { User as UserIcon, History, KeyRound, Link2 } from 'lucide-react';
 
@@ -30,6 +32,14 @@ export const USERNAME_LABEL = 'Username';
 export const USERNAME_HINT = 'Your display name visible to other users';
 
 export const USERNAME_EDIT_ARIA = 'Edit username';
+
+export const USERNAME_SAVE_ARIA = 'Save username';
+
+export const USERNAME_CANCEL_ARIA = 'Cancel editing';
+
+export const USERNAME_UPDATE_ERROR = 'Failed to update username';
+
+export const USERNAME_UPDATE_SUCCESS = 'Username updated';
 
 export const WALLET_UPDATE_ERROR = 'Failed to update wallet address';
 
@@ -138,6 +148,11 @@ export const SORT_OPTIONS: { value: BetsSortKey; label: string }[] = [
   { value: 'win', label: SORT_WIN_LABEL },
 ];
 
+export const SORT_API_MAP: Record<BetsSortKey, BetsSortApiValue> = {
+  date: BETS_SORT_API.NEWEST,
+  win: BETS_SORT_API.HIGHEST_PAYOUT,
+};
+
 export const GAME_FILTER_ALL = 'all';
 
 export const GAME_FILTERS = [
@@ -147,6 +162,13 @@ export const GAME_FILTERS = [
   { value: 'Plinko', label: 'Plinko', iconName: 'plinko' as const },
   { value: 'Dice', label: 'Dice', iconName: 'dice' as const },
 ];
+
+export const GAME_FILTER_SLUGS: Record<string, string> = {
+  Roulette: GAME.ROULETTE,
+  Keno: GAME.KENO,
+  Plinko: GAME.PLINKO,
+  Dice: GAME.DICE,
+};
 
 export const BETS_TABLE_COLUMNS = {
   USER: 'User',
