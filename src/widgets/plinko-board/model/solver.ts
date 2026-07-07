@@ -51,7 +51,7 @@ export function solveTrajectory(rows: number, targetBucket: number): SimResult {
         ) {
           shortestFullCoverageMatch = result;
         }
-      } else if (!anyMatch) {
+      } else if (!anyMatch || result.frames.length < anyMatch.frames.length) {
         anyMatch = result;
       }
     }
