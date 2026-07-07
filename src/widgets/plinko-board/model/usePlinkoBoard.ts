@@ -4,6 +4,7 @@ import { getBucketIndex, type LandedBucket } from '@/entities/game';
 import type { PlinkoDrop } from '@/features/plinko-bet';
 import { useTurboModeStore } from '@/features/game-settings';
 import { getTurboValue } from '@/shared/lib/getTurboValue';
+import { playSound } from '@/shared/lib/playSound';
 import { BOARD, CSS_VAR } from './constants';
 import { getBoardLayout, getPegPositions } from './geometry';
 import type { BallFrame, PegHit } from './physics';
@@ -117,14 +118,17 @@ export function usePlinkoBoard({
             BOARD.REPLAY_FRAMES_PER_MS,
             BOARD.REPLAY_FRAMES_PER_MS_TURBO
           );
+        let hitsThisTick = 0;
         while (
           ball.nextHitIndex < ball.pegHits.length &&
           ball.pegHits[ball.nextHitIndex].frame <= ball.frameCursor
         ) {
           const hit = ball.pegHits[ball.nextHitIndex];
           glowRef.current.set(pegGlowKey(hit.row, hit.col), now);
+          hitsThisTick += 1;
           ball.nextHitIndex += 1;
         }
+        if (hitsThisTick > 0) playSound('plinkoKnock');
 
         const lastFrameIndex = ball.frames.length - 1;
         if (ball.frameCursor >= lastFrameIndex) {

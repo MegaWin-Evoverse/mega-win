@@ -5,6 +5,7 @@ const soundFiles = {
   generic: '/sounds/generic.mp3',
   makeBet: '/sounds/make-bet.mp3',
   match: '/sounds/match.mp3',
+  plinkoKnock: '/sounds/plinko-knock.mp3',
   pocket: '/sounds/pocket.mp3',
   revealed: '/sounds/revealed.mp3',
   rolling: '/sounds/rolling.mp3',
