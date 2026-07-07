@@ -7,7 +7,7 @@ import {
   calcDoubleBet,
   calcMaxBet,
 } from '@/shared/lib/betAmount';
-import { type Risk, RISK, GAME_CONTROLS_DEFAULTS, PLINKO_ROWS } from './constants';
+import { type Risk, RISK, GAME_CONTROLS_DEFAULTS, PLINKO_ROWS, CHIP_NOMINALS } from './constants';
 
 const DIGITS_ONLY = /\D/g;
 
@@ -71,7 +71,7 @@ const useGameControlsStoreRaw = create<GameControlsState>((set, get) => ({
   risk: RISK.LOW,
   rows: PLINKO_ROWS.DEFAULT,
   numberOfBets: GAME_CONTROLS_DEFAULTS.NUMBER_OF_BETS,
-  selectedChip: null,
+  selectedChip: CHIP_NOMINALS[0],
   placedBet: 0,
   onWinMode: GAME_CONTROLS_DEFAULTS.ON_WIN,
   onWinIncrease: GAME_CONTROLS_DEFAULTS.ON_WIN_INCREASE,
