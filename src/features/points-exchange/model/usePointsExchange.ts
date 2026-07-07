@@ -1,0 +1,45 @@
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useExchangeMutation } from '../api/useExchangeMutation';
+import { getPointsExchangeSchema, type PointsExchangeFormValues } from './schemas';
+import { EXCHANGE_FORM_FIELDS } from './constants';
+
+interface UsePointsExchangeProps {
+  watchPointsBalance: string;
+  onSuccessCallback?: () => void;
+}
+
+export function usePointsExchange({
+  watchPointsBalance,
+  onSuccessCallback,
+}: UsePointsExchangeProps) {
+  const maxBalance = Number(watchPointsBalance);
+
+  const form = useForm<PointsExchangeFormValues>({
+    resolver: zodResolver(getPointsExchangeSchema(maxBalance)),
+    defaultValues: { amount: '' },
+    mode: 'onSubmit',
+  });
+
+  const { mutate: exchange, isPending } = useExchangeMutation({
+    onSuccessCallback: () => {
+      form.reset();
+      onSuccessCallback?.();
+    },
+  });
+
+  const onSubmit = (data: PointsExchangeFormValues) => {
+    exchange(data.amount);
+  };
+
+  const amount = form.watch(EXCHANGE_FORM_FIELDS.AMOUNT);
+  const canSubmit = !isPending && Number(amount) > 0;
+
+  return {
+    form,
+    onSubmit,
+    isPending,
+    amount,
+    canSubmit,
+  };
+}

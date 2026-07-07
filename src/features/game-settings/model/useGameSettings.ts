@@ -1,0 +1,57 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { useSoundStore } from '@/shared/lib/soundStore';
+import { useTurboModeStore } from './turboModeStore';
+
+export function useGameSettings() {
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isRulesOpen, setIsRulesOpen] = useState<boolean>(false);
+  const turboMode = useTurboModeStore((state) => state.turboMode);
+  const setTurboMode = useTurboModeStore((state) => state.setTurboMode);
+  const [maxBet, setMaxBet] = useState<boolean>(false);
+  const volume = useSoundStore((state) => state.volume);
+  const setVolume = useSoundStore((state) => state.setVolume);
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement
+        .requestFullscreen()
+        .then(() => {
+          setIsFullscreen(true);
+        })
+        .catch((err) => {
+          console.error('Error attempting to enable fullscreen:', err);
+        });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullscreen(false);
+      });
+    }
+  }
+
+  useEffect(() => {
+    function handleFullscreenChange() {
+      setIsFullscreen(!!document.fullscreenElement);
+    }
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  return {
+    isFullscreen,
+    toggleFullscreen,
+    isMenuOpen,
+    setIsMenuOpen,
+    isRulesOpen,
+    setIsRulesOpen,
+    turboMode,
+    setTurboMode,
+    maxBet,
+    setMaxBet,
+    volume,
+    setVolume,
+  };
+}

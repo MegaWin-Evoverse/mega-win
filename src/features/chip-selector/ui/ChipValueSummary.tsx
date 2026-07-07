@@ -1,0 +1,50 @@
+'use client';
+import Image from 'next/image';
+import { cn } from '@/shared/lib/cn';
+import { formatAmount } from '@/shared/lib/formatAmount';
+import { COIN_ICON, GAME_PANEL_LABELS } from '@/shared/config';
+import { CHIP_LABELS } from '../model/constants';
+import { useChipSelector } from '../model/useChipSelector';
+
+interface Props {
+  className?: string;
+  placedBet?: number;
+}
+
+export function ChipValueSummary({ className, placedBet: placedBetProp }: Props) {
+  const { selectedChip, placedBet: storePlacedBet } = useChipSelector();
+  const placedBet = placedBetProp ?? storePlacedBet;
+
+  return (
+    <div className={cn('flex w-full flex-col gap-4', className)}>
+      <div className="flex items-center justify-between font-outfit text-base font-medium">
+        <span className="text-brand-text-white">{CHIP_LABELS.CHIP_VALUE}</span>
+        <div className="flex items-center gap-2 text-brand-text-white">
+          <span
+            className={cn(
+              'size-2.5 rounded-full transition-colors duration-200',
+              selectedChip ? 'bg-brand-green-to' : 'bg-chip-text-muted'
+            )}
+          />
+          <span>
+            {selectedChip ? `${selectedChip} ${CHIP_LABELS.COINS}` : `0 ${CHIP_LABELS.COINS}`}
+          </span>
+        </div>
+      </div>
+      <div className="flex items-center justify-between font-outfit text-base font-medium">
+        <span className="text-brand-text-white">{GAME_PANEL_LABELS.BET_AMOUNT}</span>
+        <div className="flex items-center gap-2 text-brand-text-white">
+          <Image
+            src={COIN_ICON.SRC}
+            alt={COIN_ICON.ALT}
+            width={COIN_ICON.SIZE_BALANCE}
+            height={COIN_ICON.SIZE_BALANCE}
+          />
+          <span>
+            {formatAmount(placedBet)} {CHIP_LABELS.COINS}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
