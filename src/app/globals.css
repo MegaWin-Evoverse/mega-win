@@ -433,6 +433,15 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 100%) border-box;
 }
 
+[data-sidebar='menu-button'][data-active],
+[data-sidebar='menu-sub-button'][data-active] {
+  color: var(--brand-green-to);
+}
+
+[data-sidebar='menu-sub-button'][data-active] {
+  background: transparent;
+}
+
 .hero-banner-bg {
   background: linear-gradient(84.47deg,
       rgba(15, 22, 26, 0.94) 2.15%,
