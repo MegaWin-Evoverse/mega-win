@@ -138,7 +138,14 @@ export function simulate({ pegs, layout, rows, startX, seed }: SimulateArgs): Si
           vx += -ny * kick;
           vy += nx * kick;
           if (vy < -maxUpwardSpeed) vy = -maxUpwardSpeed;
-          if (tierBounceCount > PHYSICS.MAX_BOUNCES_PER_TIER && vy < 0) vy = 0;
+          if (tierBounceCount > PHYSICS.MAX_BOUNCES_PER_TIER) {
+            if (vy < 0) vy = 0;
+            const escapeSpeed = PHYSICS.STUCK_ESCAPE_SPEED_RATIO * layout.pitchX;
+            if (Math.abs(vx) < escapeSpeed) {
+              const escapeDirection = nx !== 0 ? Math.sign(nx) : random() < 0.5 ? -1 : 1;
+              vx = escapeDirection * escapeSpeed;
+            }
+          }
           scaleX = 1 + PHYSICS.SQUASH_FACTOR * (Math.abs(ny) - Math.abs(nx));
           scaleY = 1 + PHYSICS.SQUASH_FACTOR * (Math.abs(nx) - Math.abs(ny));
           pegHits.push({ row: nearest.row, col: nearest.col, frame: frames.length });

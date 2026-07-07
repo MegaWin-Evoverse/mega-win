@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { cn } from '@/shared/lib/cn';
+import { Button } from '@/shared/ui/button';
 import {
   SidebarGroup,
   SidebarMenu,
@@ -12,6 +13,7 @@ import {
 } from '@/shared/ui/sidebar';
 import { useSidebarMenu } from '../model/useSidebarMenu';
 import { SIDEBAR_MENU_ITEMS } from '../model/menu';
+import { SIDEBAR_MENU_LABELS } from '../model/constants';
 import { MenuIcon } from './MenuIcon';
 import { CaretIcon } from './CaretIcon';
 
@@ -32,7 +34,14 @@ const SUB_MENU_LINK =
   'flex items-center gap-2 w-full h-auto text-brand-text-white hover:text-brand-text-light py-3 pl-6 pr-3 rounded-md transition-all duration-500 ease-out hover:translate-x-2 font-outfit font-medium text-base lining-nums proportional-nums';
 
 export function SidebarMenuSection({ isCollapsed }: Props) {
-  const { isGamesOpen, onGamesToggle, gamesContentRef, gamesContentHeight } = useSidebarMenu();
+  const {
+    isGamesOpen,
+    onGamesToggle,
+    gamesContentRef,
+    gamesContentHeight,
+    isGamesActive,
+    isItemActive,
+  } = useSidebarMenu();
 
   return (
     <SidebarGroup className="mt-4 px-4 py-0 w-full">
@@ -41,8 +50,7 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
           if (item.isCollapsible) {
             return (
               <SidebarMenuItem key={item.label} className="flex flex-col w-full">
-                <SidebarMenuButton
-                  onClick={onGamesToggle}
+                <div
                   className={cn(
                     MENU_BTN_BASE,
                     isCollapsed
@@ -50,14 +58,30 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
                       : 'h-11 px-4 py-3 flex items-center justify-between'
                   )}
                 >
-                  <div className={MENU_BTN_CONTENT}>
-                    <MenuIcon name={item.iconName} className="flex-shrink-0" />
-                    {!isCollapsed && <span>{item.label}</span>}
-                  </div>
+                  <SidebarMenuButton
+                    render={<Link href={item.href} />}
+                    isActive={isGamesActive}
+                    className={cn(
+                      'h-auto bg-transparent p-0 hover:bg-transparent active:bg-transparent data-active:bg-transparent',
+                      isCollapsed ? 'flex items-center justify-center' : 'min-w-0 flex-1'
+                    )}
+                  >
+                    <div className={MENU_BTN_CONTENT}>
+                      <MenuIcon name={item.iconName} className="flex-shrink-0" />
+                      {!isCollapsed && <span>{item.label}</span>}
+                    </div>
+                  </SidebarMenuButton>
                   {!isCollapsed && (
-                    <CaretIcon isOpen={isGamesOpen} className="text-brand-text-white w-6 h-6" />
+                    <Button
+                      variant="ghost"
+                      size="icon-xs"
+                      aria-label={SIDEBAR_MENU_LABELS.GAMES_TOGGLE}
+                      onClick={onGamesToggle}
+                    >
+                      <CaretIcon isOpen={isGamesOpen} className="text-brand-text-white w-6 h-6" />
+                    </Button>
                   )}
-                </SidebarMenuButton>
+                </div>
                 {!isCollapsed && (
                   <div
                     style={{ '--games-content-height': `${gamesContentHeight}px` } as CSSProperties}
@@ -72,6 +96,7 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
                           {item.subItems.map((sub) => (
                             <SidebarMenuSubItem key={sub.label}>
                               <SidebarMenuSubButton
+                                isActive={isItemActive(sub.href)}
                                 render={<Link href={sub.href} className={SUB_MENU_LINK} />}
                               >
                                 <MenuIcon name={sub.iconName} className="h-5 w-5 flex-shrink-0" />
@@ -91,6 +116,7 @@ export function SidebarMenuSection({ isCollapsed }: Props) {
             <SidebarMenuItem key={item.label} className="w-full">
               <SidebarMenuButton
                 render={<Link href={item.href} />}
+                isActive={isItemActive(item.href)}
                 className={cn(
                   MENU_BTN_BASE,
                   isCollapsed ? MENU_BTN_COLLAPSED : 'h-11 px-4 py-3 flex items-center'
