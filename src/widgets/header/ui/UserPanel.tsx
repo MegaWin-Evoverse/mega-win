@@ -1,0 +1,20 @@
+'use client';
+import type { User } from '@/entities/user';
+import { useLogout } from '@/features/auth';
+import { BalanceMenu } from './BalanceMenu';
+import { UserMenu } from './UserMenu';
+
+interface Props {
+  user: User;
+}
+
+export function UserPanel({ user }: Props) {
+  const { logout, isLoggingOut } = useLogout();
+
+  return (
+    <div className="flex min-w-0 items-center gap-2">
+      <BalanceMenu balances={user.userBalances} />
+      <UserMenu user={user} onLogout={logout} isLoggingOut={isLoggingOut} />
+    </div>
+  );
+}

@@ -1,0 +1,87 @@
+# Layer: shared
+
+**Responsibility:** Domain-agnostic building blocks — UI components, utilities, API client, configuration.
+
+---
+
+## Structure
+
+```
+src/shared/
+  ui/             ← shadcn components (built on @base-ui/react)
+  lib/            ← utilities (cn, etc.)
+  hooks/          ← generic custom hooks
+  api/            ← axios instance and interceptors
+  config/         ← constants and app-wide configuration
+  types/          ← shared TypeScript types
+```
+
+---
+
+## ui/ — shadcn components
+
+Components are built on `@base-ui/react` and follow shadcn conventions.
+
+| Component                  | File         | Notes                         |
+| -------------------------- | ------------ | ----------------------------- |
+| `Button`                   | `button.tsx` | Variants: default, icon, etc. |
+| `Input`                    | `input.tsx`  | Text input field              |
+| `Card`                     | `card.tsx`   | Container card                |
+| `Dialog` / `DialogTrigger` | `dialog.tsx` | Modal dialog                  |
+| `Select`                   | `select.tsx` | Dropdown select               |
+
+All imported via barrel: `import { Button, Input } from '@/shared/ui'`
+
+---
+
+## lib/
+
+| File                  | Exports       | Purpose                                                   |
+| --------------------- | ------------- | --------------------------------------------------------- |
+| `cn.ts`               | `cn()`        | clsx + tailwind-merge utility for conditional class names |
+
+---
+
+## hooks/
+
+| File                  | Exports             | Purpose                                 |
+| --------------------- | ------------------- | --------------------------------------- |
+| `useIsMobile.ts`      | `useIsMobile()`     | Detects mobile viewport via media query |
+| `useNumberOfBets.ts`  | `useNumberOfBets()` | Number-of-bets input + infinity toggle  |
+
+---
+
+## api/
+
+### `client.ts` — axios instance
+
+```ts
+import api from '@/shared/api/client';
+```
+
+Exports a configured `axios` instance (`api`) with:
+
+- Base URL from environment config
+- Request/response interceptors (auth headers, error normalization)
+
+Use this instance in all feature-level API calls — do not create new axios instances elsewhere.
+
+---
+
+## config/
+
+App-wide constants and configuration types. Barrel-exported via `config/index.ts`.
+
+This is the home for **global** constants only. Slice-local constants (labels, defaults, domain enums, option lists) belong in that slice's `model/constants.ts`, not here and not in a per-slice `config/` segment.
+
+---
+
+## types/
+
+Shared TypeScript types used across layers. Do not put domain-specific types here — those belong in `entities/`.
+
+---
+
+## Dependencies
+
+`shared` does not import from any other project layer.

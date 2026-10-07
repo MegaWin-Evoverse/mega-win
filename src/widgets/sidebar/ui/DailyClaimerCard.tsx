@@ -1,0 +1,65 @@
+import Image from 'next/image';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
+import { BUTTON_LABELS, GAME_POINT_ICON } from '@/shared/config';
+import type { DailyClaimUiState } from '@/features/daily-claim';
+
+interface Props {
+  uiState: DailyClaimUiState;
+  pointsAmount: number;
+  countdownLabel: string;
+  isClaiming: boolean;
+  onAction: () => void;
+}
+
+export function DailyClaimerCard({
+  uiState,
+  pointsAmount,
+  countdownLabel,
+  isClaiming,
+  onAction,
+}: Props) {
+  return (
+    <Card className="daily-claimer-card relative h-[124px] w-full flex-none gap-0 self-stretch overflow-hidden rounded-[7.619px] py-0 ring-0 sm:w-[195px]">
+      <Image
+        src="/daily-claimer-bg.webp"
+        fill
+        alt=""
+        aria-hidden
+        unoptimized
+        priority
+        className="object-cover"
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 h-7 w-[calc(100%+7px)] bg-gradient-to-t from-daily-claimer-overlay to-transparent"
+      />
+      <p className="absolute left-3 top-3 w-[100px] font-outfit text-base font-semibold leading-5 text-brand-text-white">
+        DAILY CLAIMER!
+      </p>
+      {uiState === 'countdown' ? (
+        <span className="absolute bottom-3 left-3 font-outfit text-sm font-medium text-brand-text-white">
+          {countdownLabel}
+        </span>
+      ) : (
+        <Button
+          variant="main"
+          className="absolute bottom-3 left-3 h-8 w-24 gap-1 px-3 text-sm"
+          aria-label={uiState === 'login' ? undefined : 'Claim daily reward'}
+          disabled={isClaiming}
+          onClick={onAction}
+        >
+          {uiState === 'login' ? (
+            BUTTON_LABELS.LOG
+          ) : (
+            <>
+              {BUTTON_LABELS.CLAIM}
+              <Image src={GAME_POINT_ICON.SRC} width={14} height={14} alt="" aria-hidden />
+              <span>{pointsAmount}</span>
+            </>
+          )}
+        </Button>
+      )}
+    </Card>
+  );
+}
